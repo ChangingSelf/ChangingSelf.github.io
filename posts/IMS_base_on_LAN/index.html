@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://changingself.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。 由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【课设总结】基于LAN的即时通信软件">
+<meta property="og:url" content="https://changingself.github.io/posts/IMS_base_on_LAN/index.html">
+<meta property="og:site_name" content="憧憬少的个人博客">
+<meta property="og:description" content="本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。 由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102200520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201641.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201905.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102202345.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102151916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png">
+<meta property="article:published_time" content="2020-01-02T07:06:27.000Z">
+<meta property="article:modified_time" content="2020-03-14T03:56:45.678Z">
+<meta property="article:author" content="憧憬少">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="internet">
+<meta property="article:tag" content="tkinter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png">
+
+<link rel="canonical" href="https://changingself.github.io/posts/IMS_base_on_LAN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>【课设总结】基于LAN的即时通信软件 | 憧憬少的个人博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">憧憬少的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">少时憧憬皆似梦，来日期许莫成空</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://changingself.github.io/posts/IMS_base_on_LAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="憧憬少">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="憧憬少的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【课设总结】基于LAN的即时通信软件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-02 15:06:27" itemprop="dateCreated datePublished" datetime="2020-01-02T15:06:27+08:00">2020-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-14 11:56:45" itemprop="dateModified" datetime="2020-03-14T11:56:45+08:00">2020-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index">
+                    <span itemprop="name">过程复盘</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。</p>
+<p>由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更好维护一些，但是python写起来应该会更加轻松（个人看法）。</p>
+<p>本文基于我当时写的课设报告，在之后可能会将其中学到的知识整理成其他的博文，并在此文中列出。</p>
+<p>b站视频已上传：<a href="https://www.bilibili.com/video/av83477871/" target="_blank" rel="noopener">【课设思路分享】基于LAN的即时通讯软件</a></p>
+<p>对应github库传送门：<a href="https://github.com/ChangingSelf/simuqq" target="_blank" rel="noopener">simuqq</a></p>
+<p>比较长，配合侧边栏目录食用。</p>
+<a id="more"></a>
+
+<h1 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h1><p>程序分为服务端和客户端两部分，服务端无图形界面，客户端具有登录界面、主界面以及聊天窗口界面总共三个图形界面。</p>
+<p>先开启服务端程序，再打开客户端程序。</p>
+<p>客户端的初始界面是登陆界面，在这个界面可以输入用户名、密码，具有“登录”和“注册”两个按钮。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png" alt="客户端登录界面"></p>
+<p>在输入用户名和密码登录之后，会跳转到主页面。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102200520.png" alt="开了三个客户端登录之后的效果"></p>
+<p>主页面显示账号个人信息，以及当前在线的其他账号的用户名。用户可以双击选择当前在线的其他账号打开聊天窗口进行聊天。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201641.png" alt="打开聊天窗口进行聊天"></p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201905.png" alt="回复对方"></p>
+<p>其中一人断开连接之后：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102202345.png" alt="断开连接之后"></p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>windows10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>编辑器（没影响）</td>
+<td>visual studio code</td>
+</tr>
+<tr>
+<td>解释器</td>
+<td>python3.7.0</td>
+</tr>
+</tbody></table>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>画个用例图先：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102151916.png" alt="用例图"></p>
+<p>客户端的用例有注册、登录、连接到服务端、查看在线的其他客户端以及选择聊天对象。</p>
+<p>其中，选择聊天对象进行聊天需要先查看当前有哪些客户端在线，而在这之前需要登录。</p>
+<h1 id="代码文件结构"><a href="#代码文件结构" class="headerlink" title="代码文件结构"></a>代码文件结构</h1><ul>
+<li>client.py：客户端业务逻辑代码</li>
+<li>server.py：服务端代码</li>
+<li>gui<ul>
+<li>home_page.py：登录后跳转到的主页面</li>
+<li>login_dlg.py：登录界面</li>
+<li>chat_dlg.py：聊天界面</li>
+</ul>
+</li>
+<li>account_database.json：用于存放注册账号数据的数据文件</li>
+<li>utility.py：存放一些自己写的工具函数</li>
+</ul>
+<h1 id="概要设计及对应代码"><a href="#概要设计及对应代码" class="headerlink" title="概要设计及对应代码"></a>概要设计及对应代码</h1><p>为了方便阅读，就将代码部分与设计部分放在一起。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png" alt="类图"></p>
+<h3 id="界面类"><a href="#界面类" class="headerlink" title="界面类"></a>界面类</h3><p>图形界面使用的是python自带的tkinter模块。对每个界面，单独编写一个类，放在单独的模块中，存放在代码根目录下的gui文件夹内。而业务逻辑另外编写client类和server类。</p>
+<p>令界面与业务逻辑结合的方式是，在client类中初始化界面时，将自身的处理函数作为回调函数传入界面类中，从而使界面的组件与回调函数绑定。</p>
+<h3 id="登录界面代码示例"><a href="#登录界面代码示例" class="headerlink" title="登录界面代码示例"></a>登录界面代码示例</h3><p>因为界面不是重点，故仅放出登录界面代码，其他两个界面类类似。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">登录模块login_dlg.py</span></span><br><span class="line"><span class="string">展示登录窗口并实现登录功能</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">import</span> gui.chat_dlg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginDlg</span><span class="params">(tk.Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, loginCallback, regCallback, master=None)</span>:</span></span><br><span class="line">        super().__init__(master=master)</span><br><span class="line">        self.master = master</span><br><span class="line">        self.geometry()</span><br><span class="line">        <span class="comment"># 设置按钮回调函数</span></span><br><span class="line">        self.loginCallback = loginCallback</span><br><span class="line">        self.regCallback = regCallback</span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        self.userName = tk.StringVar()  <span class="comment"># 与文本框双向绑定</span></span><br><span class="line">        self.password = tk.StringVar()</span><br><span class="line">        <span class="comment"># self.pack()</span></span><br><span class="line">        <span class="comment"># self.grid(row=0,column=0)</span></span><br><span class="line">        self.createWidgets()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createWidgets</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 登录框架=============</span></span><br><span class="line">        loginLF = tk.LabelFrame(self, text=<span class="string">'登录'</span>)</span><br><span class="line">        loginLF.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, sticky=tk.E+tk.W)</span><br><span class="line">        self.loginLF = loginLF  <span class="comment"># 这里需要将它保存为属性，否则这个函数结束后会出问题</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用户名</span></span><br><span class="line">        self.userNameLab = tk.Label(loginLF, text=<span class="string">'用户名'</span>)</span><br><span class="line">        self.userNameLab.grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.userNameEntry = tk.Entry(loginLF, textvariable=self.userName)</span><br><span class="line">        self.userNameEntry.grid(row=<span class="number">0</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 密码框</span></span><br><span class="line">        self.passwdLab = tk.Label(loginLF, text=<span class="string">'密码'</span>)</span><br><span class="line">        self.passwdLab.grid(row=<span class="number">1</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.passwdEntry = tk.Entry(</span><br><span class="line">            loginLF, show=<span class="string">'*'</span>, textvariable=self.password)</span><br><span class="line">        self.passwdEntry.grid(row=<span class="number">1</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 登录按钮</span></span><br><span class="line">        self.loginBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">'登录'</span>, command=self.loginCallback)</span><br><span class="line">        self.loginBtn.grid(row=<span class="number">2</span>, column=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 注册按钮</span></span><br><span class="line">        self.signupBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">'注册'</span>, command=self.regCallback)</span><br><span class="line">        self.signupBtn.grid(row=<span class="number">2</span>, column=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.userName.get())</span><br><span class="line">        print(self.password.get())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">geometry</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.master.geometry(<span class="string">'300x100'</span>)<span class="comment">#用于调整窗口大小</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span><span class="comment">#用于在本模块内测试用的函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    window = tk.Tk()</span><br><span class="line">    loginDlg = LoginDlg(test2, test2, window)</span><br><span class="line">    loginDlg.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="客户端类Client"><a href="#客户端类Client" class="headerlink" title="客户端类Client"></a>客户端类Client</h3><p>客户端掌握着界面对象的引用，在初始化它们时，将自身的处理函数传入给它们，以便在触发界面事件时调用。</p>
+<p>客户端主要提供了以下方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>connect</td>
+<td>连接到服务器</td>
+</tr>
+<tr>
+<td>login</td>
+<td>登录，需要调用connect，由服务端进行合法性检测</td>
+</tr>
+<tr>
+<td>register</td>
+<td>注册，为了简化而直接由客户端写入文件</td>
+</tr>
+<tr>
+<td>send</td>
+<td>构造消息并发送给服务端</td>
+</tr>
+<tr>
+<td>recv</td>
+<td>接收消息并解析</td>
+</tr>
+</tbody></table>
+<p>为了客户端与服务端交流的便利，我自定义了消息格式，所以发送时需要封装，接收时需要解析，下文会讲。</p>
+<h3 id="服务端类Server"><a href="#服务端类Server" class="headerlink" title="服务端类Server"></a>服务端类Server</h3><p>服务端没有界面（做了就做不完了），负责接收连接以及转发客户端之间的聊天消息。ip以及端口是固定的。</p>
+<h2 id="数据文件格式"><a href="#数据文件格式" class="headerlink" title="数据文件格式"></a>数据文件格式</h2><p>已经注册的账号信息使用json文件保存（即<code>account_database.json</code>），保存格式如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"用户名1"</span>:&#123;</span><br><span class="line">        <span class="attr">"password"</span>:<span class="string">"密码1"</span>,</span><br><span class="line">        <span class="attr">"registerTime"</span>:注册时间<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"用户名2"</span>:&#123;</span><br><span class="line">        <span class="attr">"password"</span>:<span class="string">"密码2"</span>,</span><br><span class="line">        <span class="attr">"registerTime"</span>:注册时间<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用用户名作为键，每个用户对应一个密码以及一个注册时间。</p>
+<h2 id="自定义消息"><a href="#自定义消息" class="headerlink" title="自定义消息"></a>自定义消息</h2><p><strong>（这个是我自己规定的服务端和客户端之间交换信息的格式）</strong></p>
+<p>客户端不直接与另一个客户端通信，而是通过服务端转发。</p>
+<p>客户端与服务端之间发送规定格式的json字符串来交流，此字符串以下称之为“消息”，聊天的文字称作“聊天消息”。此格式解析出来是python的一个字典，也就是json里面的对象，可以方便地使用键值对来找到需要的字段值。字段如下（不是所有的字段都同时被设置）：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>当前消息类型（必选）</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>errStr</td>
+<td>错误字符串</td>
+</tr>
+<tr>
+<td>infoStr</td>
+<td>信息字符串</td>
+</tr>
+<tr>
+<td>message</td>
+<td>聊天消息</td>
+</tr>
+<tr>
+<td>data</td>
+<td>传递的数据</td>
+</tr>
+</tbody></table>
+<p>其中type字段的值以及对应的必选字段如下：</p>
+<ul>
+<li>登录login：必须设置userName和password，用于客户端发送登录请求以及服务端发送确认；</li>
+<li>数据刷新data：必须设置data，且为字典，用于服务端给客户端发送更新后的当前在线列表；</li>
+<li>聊天消息msg: 必须设置message和userName，用于客户端向另一个客户端发送聊天消息时使用，其中message是聊天消息的内容。当源客户端向服务端发送此消息时，userName是目的客户端的用户名，服务端接收到消息之后，将userName改为源客户端的用户名，然后转发消息给目的客户端；</li>
+<li>提示info: 必须设置infoStr，发送提示信息</li>
+<li>错误err:必须设置errStr，发送错误信息</li>
+</ul>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册时客户端读取数据文件并检查注册信息合法性，用户名不可重复，密码可以重复，用户名和密码都是字符串。</p>
+<p>当注册信息合法，就组装json字符串，并写入数据文件。</p>
+<p><strong>注意：这里本来应该是客户端将注册信息发送给服务端，然后服务端修改数据文件的，但是我为了防止自己写不完，就简化了这个流程</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"><span class="keyword">import</span> utility<span class="comment">#只强调一下这个是自定义模块</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="comment">#...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        注册</span></span><br><span class="line"><span class="string">        在填写了用户名和密码之后，如果信息合法，则将信息写入数据文件</span></span><br><span class="line"><span class="string">        :return: 注册成功返回0,失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">'loginDlg'</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">'loginDlg'</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'用户名不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'密码不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> open(self.dataFile, <span class="string">'a+'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">            <span class="comment"># 使用a+方式打开，防止文件内容被覆盖</span></span><br><span class="line">            fp.seek(<span class="number">0</span>)  <span class="comment"># 调整指针到开头</span></span><br><span class="line">            accountStr = fp.read()</span><br><span class="line">            <span class="keyword">if</span> accountStr == <span class="string">''</span>:</span><br><span class="line">                <span class="comment"># 如果文件内没有内容，即刚刚创建</span></span><br><span class="line">                accountData = &#123;&#125;</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 否则读取文件内容</span></span><br><span class="line">                fp.seek(<span class="number">0</span>)</span><br><span class="line">                accountData = json.loads(accountStr)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> userName <span class="keyword">in</span> accountData.keys():</span><br><span class="line">                utility.showerror(<span class="string">'该用户名已经被注册'</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 写入数据文件</span></span><br><span class="line">            accountData.update(&#123;</span><br><span class="line">                userName: &#123;</span><br><span class="line">                    <span class="string">'password'</span>: password,</span><br><span class="line">                    <span class="string">'registerTime'</span>: time.time()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            utility.showinfo(<span class="string">'注册成功！'</span>)</span><br><span class="line">            fp.seek(<span class="number">0</span>)</span><br><span class="line">            fp.truncate()  <span class="comment"># 只保留从开头到当前位置，其余删除#当前位置为开头，故为全部删除</span></span><br><span class="line">            json.dump(accountData, fp, indent=<span class="number">4</span>, separators=(<span class="string">','</span>, <span class="string">':'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>这一部分的要点在于，文件中存储的是json字符串，不能简单地添加到文件末尾，而是需要将数据先读取出来，添加完数据后，再将整个文件覆盖。</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>客户端首先尝试连接服务端，如果成功再进行下一步。</p>
+<h3 id="请求登录"><a href="#请求登录" class="headerlink" title="请求登录"></a>请求登录</h3><p>客户端向服务端发送登录请求消息，并等待服务端的确认消息。</p>
+<p><strong>登录请求消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>login</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>用户名输入框中的值</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码输入框中的值</td>
+</tr>
+</tbody></table>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendLoginData</span><span class="params">(self, userName: str, password: str)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        发送登录数据</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 构造并发送消息</span></span><br><span class="line">        accountData = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'login'</span>,</span><br><span class="line">            <span class="string">'userName'</span>: userName,</span><br><span class="line">            <span class="string">'password'</span>: password</span><br><span class="line">        &#125;</span><br><span class="line">        accountStr = utility.dumpJson(accountData)</span><br><span class="line">        self.send(accountStr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>服务端收到登录请求消息之后，检查账号信息的合法性。会向客户端回复两种消息，错误消息或者登录确认消息。</p>
+<h3 id="处理登录请求"><a href="#处理登录请求" class="headerlink" title="处理登录请求"></a>处理登录请求</h3><h4 id="登录失败"><a href="#登录失败" class="headerlink" title="登录失败"></a>登录失败</h4><p>如果账号信息错误，服务端向此客户端发送错误消息，并断开与它的连接。错误消息包含以下字段：</p>
+<p> <strong>err消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>err</td>
+</tr>
+<tr>
+<td>errStr</td>
+<td>错误信息</td>
+</tr>
+</tbody></table>
+<p>客户端收到此错误消息后，显示警告对话框，并重置socket。</p>
+<h4 id="登录成功"><a href="#登录成功" class="headerlink" title="登录成功"></a>登录成功</h4><p>若服务端检测到账号信息无误，则向此客户端发送确认消息，并将它的socket、地址以及登录时间加入到在线列表中，并向其他在线的客户端发送数据刷新消息（见下文）。</p>
+<p><strong>登录确认消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>login</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>置为空字符串</td>
+</tr>
+<tr>
+<td>password</td>
+<td>置为空字符串</td>
+</tr>
+<tr>
+<td>infoStr</td>
+<td>可选，登录成功提示</td>
+</tr>
+<tr>
+<td>data</td>
+<td>设置为当前在线账户列表</td>
+</tr>
+</tbody></table>
+<p>这是服务端处理登录请求的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">acceptLogin</span><span class="params">(self, cliSock, cliAddr)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接受已连接的客户端的登录请求</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 获取客户端提交的账号密码，客户端以json字符串的形式发送过来</span></span><br><span class="line">        loginStr = cliSock.recv(self.bufsize).decode()</span><br><span class="line">        loginDict = utility.loadJson(loginStr)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查登录消息是否正确</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(loginDict):</span><br><span class="line">            errStr = <span class="string">'数据有误，请重新连接'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查账号</span></span><br><span class="line">        cliUserName = loginDict[<span class="string">'userName'</span>]</span><br><span class="line">        cliPassword = loginDict[<span class="string">'password'</span>]</span><br><span class="line">        res = self.checkAccount(cliUserName, cliPassword)</span><br><span class="line">        <span class="keyword">if</span> res == <span class="number">-1</span>:</span><br><span class="line">            errStr = <span class="string">'账号不存在'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res == <span class="number">-2</span>:</span><br><span class="line">            errStr = <span class="string">'密码错误'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.info(<span class="string">'用户[userName=&#123;&#125;]登录成功'</span>.format(cliUserName))</span><br><span class="line">            <span class="comment"># 将新用户加入在线列表</span></span><br><span class="line">            self.onlineClients.update(&#123;</span><br><span class="line">                cliUserName: &#123;</span><br><span class="line">                    <span class="string">'socket'</span>: cliSock,  <span class="comment"># 客户端socket</span></span><br><span class="line">                    <span class="string">'address'</span>: cliAddr,  <span class="comment"># 客户端地址</span></span><br><span class="line">                    <span class="string">'loginTime'</span>: time.time()  <span class="comment"># 登录时间</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment"># 登录成功，向该客户端发送确认消息</span></span><br><span class="line">            self.sendLoginAck(cliSock)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendLoginAck</span><span class="params">(self, cliSock)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        登录成功之后向客户端发送确认消息以及当前在线客户端列表</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        curOnline = self.getCurOnline()  <span class="comment"># 获取当前在线列表</span></span><br><span class="line"></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'login'</span>,</span><br><span class="line">            <span class="string">'infoStr'</span>: <span class="string">'登录成功！'</span>,</span><br><span class="line">            <span class="string">'data'</span>: curOnline,</span><br><span class="line">            <span class="string">'userName'</span>: <span class="string">''</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        self.send(cliSock, **msgDict)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="等待确认"><a href="#等待确认" class="headerlink" title="等待确认"></a>等待确认</h3><p>发送了登录请求消息之后，客户端会等待服务端发来的登录确认消息或者错误消息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">recvLoginAck</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        等待服务端传回确认</span></span><br><span class="line"><span class="string">        :return: 成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        res = self.recv()</span><br><span class="line">        res = utility.loadJson(res)</span><br><span class="line">        <span class="comment"># 检查消息合法性</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(res):</span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> res[<span class="string">'type'</span>] == <span class="string">'err'</span>:</span><br><span class="line">            <span class="comment"># 如果收到的是服务端的错误消息</span></span><br><span class="line">            utility.showerror(res[<span class="string">'errStr'</span>])</span><br><span class="line">            self.resetSock()  <span class="comment"># 重启socket</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res[<span class="string">'type'</span>] == <span class="string">'login'</span>:</span><br><span class="line">            <span class="comment"># 登录成功，输出信息</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'infoStr'</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                utility.showinfo(res[<span class="string">'infoStr'</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                utility.showinfo(<span class="string">'登录成功'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'data'</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                self.contactList = res[<span class="string">'data'</span>][<span class="string">'curOnline'</span>]</span><br><span class="line">                self.gui[<span class="string">'homePage'</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                contactList = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不是err消息也不是确认消息，则登录失败</span></span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端登录代码"><a href="#客户端登录代码" class="headerlink" title="客户端登录代码"></a>客户端登录代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        登录</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">'loginDlg'</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">'loginDlg'</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'用户名不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'密码不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果连接成功，向服务器发送信息</span></span><br><span class="line">        res = self.connect()</span><br><span class="line">        <span class="keyword">if</span> res != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="comment"># 构造并发送消息</span></span><br><span class="line">        self.sendLoginData(userName, password)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果发送信息成功，且账号信息正确，则弹出好友列表页面</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 等待服务端的确认信息</span></span><br><span class="line">        <span class="keyword">if</span> self.recvLoginAck() == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 跳转到主页面</span></span><br><span class="line">            self.userName = userName</span><br><span class="line">            self.gotoHomePage()</span><br><span class="line">            <span class="comment"># 开启接收消息线程</span></span><br><span class="line">            self.recvThread = threading.Thread(target=self.recvLoop)</span><br><span class="line">            self.recvThread.setDaemon(<span class="literal">True</span>)</span><br><span class="line">            self.recvThread.start()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>登录的流程如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png" alt="客户端登录-活动图"></p>
+<h2 id="客户端界面跳转"><a href="#客户端界面跳转" class="headerlink" title="客户端界面跳转"></a>客户端界面跳转</h2><p>登录成功后，会从登陆界面跳转到主页面。</p>
+<p>原理是将登录界面隐藏，再显示主界面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">gotoHomePage</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        跳转到主页面</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> self.gui.keys():</span><br><span class="line">            self.gui[page].grid_forget()</span><br><span class="line"></span><br><span class="line">        self.window.title(<span class="string">'SimuQQ主页面'</span>)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].userName.set(self.userName)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].geometry()</span><br></pre></td></tr></table></figure>
+
+<p>打开聊天窗口：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">openChatWindow</span><span class="params">(self, userName)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        打开聊天窗口</span></span><br><span class="line"><span class="string">        :param userName: 聊天对象的用户名</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        self.chatWith = userName  <span class="comment"># 设置聊天对象</span></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.chatWindow.title(<span class="string">'[&#123;&#125;]向[&#123;&#125;]发起的聊天'</span>.format(self.userName, userName))</span><br><span class="line">        self.chatWindow.deiconify()</span><br><span class="line">        <span class="comment"># self.chatWindow.mainloop()</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="发送聊天消息"><a href="#发送聊天消息" class="headerlink" title="发送聊天消息"></a>发送聊天消息</h2><p>用户在客户端的在线列表中双击选择一个在线客户端，会打开对选择对象的聊天窗口。</p>
+<p>用户在输入框中输入聊天消息并点击发送按钮后，客户端将会构建并发送msg消息给服务端，该消息的内容如下：</p>
+<p><strong>msg消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>msg</td>
+</tr>
+<tr>
+<td>message</td>
+<td>需要发送给聊天对象的聊天消息</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>聊天对象的用户名</td>
+</tr>
+</tbody></table>
+<p>服务端在收到客户端的msg消息后，将userName字段修改为发送端的用户名，并转发给目的端。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">sendChatMsg</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        发送聊天消息</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 获取聊天窗口的输入框内文字</span></span><br><span class="line">        chatMsg = self.gui[<span class="string">'chatDlg'</span>].getInputContent()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 构造消息</span></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'msg'</span>,</span><br><span class="line">            <span class="string">'userName'</span>: self.chatWith,</span><br><span class="line">            <span class="string">'message'</span>: chatMsg</span><br><span class="line">        &#125;</span><br><span class="line">        msgStr = utility.dumpJson(msgDict)</span><br><span class="line">        <span class="comment"># 发送消息</span></span><br><span class="line">        self.send(msgStr)</span><br><span class="line">        <span class="comment"># 同时在自己这边显示自己说的话</span></span><br><span class="line">        <span class="comment"># 构建输出内容</span></span><br><span class="line">        outputContent = <span class="string">'[&#123;&#125;]&#123;&#125;\n&#123;&#125;'</span>.format(</span><br><span class="line">            self.userName, time.strftime(<span class="string">'%Y/%m/%d %H:%M:%S'</span>), chatMsg)</span><br><span class="line"></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].addOutputContent(outputContent)</span><br><span class="line">        <span class="comment"># 清空输入框</span></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].clearInputContent()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="客户端消息处理"><a href="#客户端消息处理" class="headerlink" title="客户端消息处理"></a>客户端消息处理</h2><p>客户端在登录成功后，开启消息接收线程，它的线程体是一个无限循环，并将其置为守护线程（Deamon Thread），在所有前台线程结束之后，消息接收线程也随之结束。</p>
+<p>在没有注意到这一点前，我调试了这个bug很久——关闭窗口会无响应，后来才知道不是tkinter的问题，而是我开的这个线程没有随之关闭。</p>
+<p>客户端主要会收到两种消息，数据刷新消息和聊天消息。同样的，这里本来还应该处理err消息以及info消息的，担心做不完就简化了。</p>
+<h3 id="数据刷新消息"><a href="#数据刷新消息" class="headerlink" title="数据刷新消息"></a>数据刷新消息</h3><p>在服务端接收一个新的连接时，或是服务端检测到一个旧有连接断开时，会向当前在线的客户端发送一个数据刷新消息，该消息包含以下字段：</p>
+<p><strong>data消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>data</td>
+</tr>
+<tr>
+<td>data</td>
+<td>当前在线账号的用户名的列表</td>
+</tr>
+</tbody></table>
+<p>客户端收到此消息时，调用界面类的对应方法刷新主页面的在线列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">recvLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接收消息的循环</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            msgStr = self.recv()</span><br><span class="line">            msgDict = utility.loadJson(msgStr)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(msgDict):</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># 如果消息不正确，忽略这个消息</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">'type'</span>] == <span class="string">'data'</span>:</span><br><span class="line">                <span class="comment"># 如果接收到数据刷新消息</span></span><br><span class="line">                self.contactList = msgDict[<span class="string">'data'</span>][<span class="string">'curOnline'</span>]</span><br><span class="line">                self.gui[<span class="string">'homePage'</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">'type'</span>] == <span class="string">'msg'</span>:</span><br><span class="line">                <span class="comment"># 如果接收到聊天消息</span></span><br><span class="line">                self.openChatWindow(msgDict[<span class="string">'userName'</span>])</span><br><span class="line">                <span class="comment"># 构建输出内容</span></span><br><span class="line">                outputContent = <span class="string">'[&#123;&#125;]&#123;&#125;\n&#123;&#125;'</span>.format(</span><br><span class="line">                    msgDict[<span class="string">'userName'</span>], time.strftime(<span class="string">'%Y/%m/%d %H:%M:%S'</span>), msgDict[<span class="string">'message'</span>])</span><br><span class="line"></span><br><span class="line">                self.gui[<span class="string">'chatDlg'</span>].addOutputContent(outputContent)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="服务端消息处理"><a href="#服务端消息处理" class="headerlink" title="服务端消息处理"></a>服务端消息处理</h2><p>接下来是比较核心的部分。</p>
+<p>在编写客户端时，为了专注于客户端的编写，对于服务端，我采用的是比较简单的无限循环：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">acceptLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接受连接的线程循环</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        刚开始的时候测试客户端用的，</span></span><br><span class="line"><span class="string">        客户端的登录测试完毕之后，将其中的代码提取出来封成另一个函数acceptLogin()，</span></span><br><span class="line"><span class="string">        供selectLoop使用</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.info(<span class="string">'正在等待新的连接'</span>)</span><br><span class="line">            <span class="comment"># 接受新的连接请求</span></span><br><span class="line">            cliSock, cliAddr = self.serSock.accept()</span><br><span class="line">            self.acceptLogin(cliSock, cliAddr)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>客户端大致成型之后，我开始编写服务端的这一部分。</p>
+<p>我想起来之前在编写c++聊天室的时候，用到了一个事件模型，可以解决以上线程循环遇到的问题。</p>
+<p>上面这个写法会出现的问题，以前我就遇到过。</p>
+<p>如果服务端想要监听多个客户端发送过来的聊天消息，第一种方法是遍历每个客户端，recv每个客户端（将客户端socket改成非阻塞的就行）；第二种方法是为每个客户端建立单独的接收消息线程。</p>
+<p>这两个方案其实都不太好。后来我找到了一个叫做事件选择模型的东西（<code>WSAEventSelect</code>），解决了一部分问题，当时知识还是太浅薄，不能完全理解那东西，所以还是写出了一堆bug。</p>
+<p>现在回想起来，python里面应该也有类似的东西吧？我就记着个select了，一搜，还真是叫做select。</p>
+<p>找到可用的资料好像并不太多，其中一个对我很有用的文章的链接是这个：<a href="https://www.jianshu.com/p/e26594304e11" target="_blank" rel="noopener">python Select模块简单使用</a></p>
+<p>后来翻了一下文档，找到了关于select的英文原版<a href="https://docs.python.org/3.7/library/select.html#select.select" target="_blank" rel="noopener">简介</a></p>
+<p><strong>我简单描述一下我在这个项目里面是如何使用select模型的：</strong></p>
+<p>设置三个需要处理消息的队列，分别存放所有的socket（包括服务端socket和客户端socket）、用于存放存在待处理消息的socket的等待队列、需要检查错误的socket的队列。</p>
+<p>select函数接收上述三个队列，并在阻塞timeout时间后返回三个队列，分别是可读取队列、可写入队列和错误队列。</p>
+<p>可读取队列中的socket是已经接收到消息的socket，即接收缓冲区中存在消息，需要处理。如果是服务端socket，表明有新的客户端连接请求到达，对连接请求进行处理；如果是客户端socket，表明有已经连接的客户端发送消息过来，先将它们放入对应的消息队列中，并将它们加入到第二个监听队列即等待消息处理的队列。</p>
+<p>可写入队列中的socket是从等待消息处理的队列中选择出目前能够接受消息、即接收缓冲区可用的socket。遍历这个队列，对其中的socket进行消息处理，处理完毕后删除它的消息队列，以及将它移出等待队列。</p>
+<p>错误队列存放从需要检查错误的socket队列中选择出的出错的socket，在本项目中将需要检查设置为存放所有socket的队列，即检查所有的socket。遍历此队列，将错误的socket移除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">selectLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        使用select函数来进行处理的循环</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        readList = [self.serSock]</span><br><span class="line">        writeList = []</span><br><span class="line">        message_dict = &#123;&#125;  <span class="comment"># 存储消息用的字典，键为socket，值为消息列表</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        logging.info(<span class="string">'服务器已经启动，正在等待客户端的连接'</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.debug(<span class="string">'循环数：'</span>+str(i))</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="comment"># select函数阻塞timeout时间，从参数的三个列表中，选择出此时可读取、可写入、出现错误的元素返回</span></span><br><span class="line">            readableList, writableList, exceptionList = select.select(</span><br><span class="line">                readList, writeList, readList, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 1. 遍历当前可读取的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> readableList:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> sock <span class="keyword">is</span> self.serSock:</span><br><span class="line">                    <span class="comment"># 如果是服务端socket，那么就是有客户端来连接了</span></span><br><span class="line">                    cliSock, cliAddr = sock.accept()</span><br><span class="line">                    <span class="keyword">if</span> self.acceptLogin(cliSock, cliAddr) == <span class="number">0</span>:</span><br><span class="line">                        <span class="comment"># 如果登录成功</span></span><br><span class="line">                        readList.append(cliSock)  <span class="comment"># 将新的客户端socket加入监听列表</span></span><br><span class="line">                        message_dict[cliSock] = []  <span class="comment"># 为新的socket创建消息列表</span></span><br><span class="line">                        self.refreshCurOnline()  <span class="comment"># 给所有在线客户端刷新在线信息</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 已连接的用户发送消息过来</span></span><br><span class="line">                    <span class="comment"># 接收一下</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        data = sock.recv(self.bufsize)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                        readList.remove(sock)</span><br><span class="line">                        <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line"></span><br><span class="line">                        logging.info(<span class="string">'客户端[userName=&#123;&#125;]断开了连接'</span>.format(</span><br><span class="line">                            self.getUserNameBySock(sock)))</span><br><span class="line">                        self.closeLink(sock)</span><br><span class="line">                    <span class="keyword">else</span>:  <span class="comment"># 如果没有出现异常，再检查是否收到空数据</span></span><br><span class="line">                        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                            <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                            readList.remove(sock)</span><br><span class="line">                            <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line">                            self.closeLink(sock)</span><br><span class="line">                            print(<span class="string">'客户端[&#123;&#125;]断开了连接'</span>.format(</span><br><span class="line">                                self.getUserNameBySock(sock)))</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="comment"># 收到老用户的消息</span></span><br><span class="line">                            dataStr = data.decode()</span><br><span class="line">                            <span class="comment"># 将消息加入对应的消息队列</span></span><br><span class="line">                            message_dict[sock].append(dataStr)</span><br><span class="line">                            writeList.append(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 2.处理待回复的消息</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> writableList:</span><br><span class="line">                <span class="keyword">while</span> len(message_dict[sock]) &gt; <span class="number">0</span>:</span><br><span class="line">                    dataStr = message_dict[sock][<span class="number">0</span>]  <span class="comment"># 取出消息队列中第一个消息</span></span><br><span class="line">                    <span class="keyword">del</span> message_dict[sock][<span class="number">0</span>]</span><br><span class="line">                    self.addressMsg(sock, dataStr)  <span class="comment"># 处理消息</span></span><br><span class="line">                    <span class="comment"># 测试代码：测试消息处理是否可用</span></span><br><span class="line">                    <span class="comment"># sock.sendall(('echo:'+dataStr).encode())</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 将消息队列中所有消息处理完毕，则将它从待回复队列中删除</span></span><br><span class="line">                writeList.remove(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 3.处理出错的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> exceptionList:</span><br><span class="line">                readList.remove(sock)</span><br></pre></td></tr></table></figure>
+
+<p>待我更加理解这个东西，可能会回来补充完善这个部分。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上便是我的计算机网络课设的核心思路以及核心代码了，其他未列出的方法，读者看方法名字大致也能猜到它们的作用，就不浪费篇幅去说了。</p>
+<p>本文耗费5个小时完成（结合课设报告）。</p>
+<p>如有错漏欢迎在下方评论区指出。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>憧憬少
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://changingself.github.io/posts/IMS_base_on_LAN/" title="【课设总结】基于LAN的即时通信软件">https://changingself.github.io/posts/IMS_base_on_LAN/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/internet/" rel="tag"># internet</a>
+              <a href="/tags/tkinter/" rel="tag"># tkinter</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/categories_description/" rel="prev" title="文章分类说明">
+      <i class="fa fa-chevron-left"></i> 文章分类说明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/git_amend_commited_info/" rel="next" title="更改git仓库已经commit的用户名和邮箱信息">
+      更改git仓库已经commit的用户名和邮箱信息 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#效果展示"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#需求分析"><span class="nav-number">3.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码文件结构"><span class="nav-number">4.</span> <span class="nav-text">代码文件结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概要设计及对应代码"><span class="nav-number">5.</span> <span class="nav-text">概要设计及对应代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">5.1.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#界面类"><span class="nav-number">5.1.1.</span> <span class="nav-text">界面类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录界面代码示例"><span class="nav-number">5.1.2.</span> <span class="nav-text">登录界面代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端类Client"><span class="nav-number">5.1.3.</span> <span class="nav-text">客户端类Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端类Server"><span class="nav-number">5.1.4.</span> <span class="nav-text">服务端类Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据文件格式"><span class="nav-number">5.2.</span> <span class="nav-text">数据文件格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义消息"><span class="nav-number">5.3.</span> <span class="nav-text">自定义消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册"><span class="nav-number">5.4.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">5.5.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求登录"><span class="nav-number">5.5.1.</span> <span class="nav-text">请求登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理登录请求"><span class="nav-number">5.5.2.</span> <span class="nav-text">处理登录请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登录失败"><span class="nav-number">5.5.2.1.</span> <span class="nav-text">登录失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录成功"><span class="nav-number">5.5.2.2.</span> <span class="nav-text">登录成功</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等待确认"><span class="nav-number">5.5.3.</span> <span class="nav-text">等待确认</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端登录代码"><span class="nav-number">5.5.4.</span> <span class="nav-text">客户端登录代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端界面跳转"><span class="nav-number">5.6.</span> <span class="nav-text">客户端界面跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送聊天消息"><span class="nav-number">5.7.</span> <span class="nav-text">发送聊天消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端消息处理"><span class="nav-number">5.8.</span> <span class="nav-text">客户端消息处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据刷新消息"><span class="nav-number">5.8.1.</span> <span class="nav-text">数据刷新消息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端消息处理"><span class="nav-number">5.9.</span> <span class="nav-text">服务端消息处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="憧憬少"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">憧憬少</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChangingSelf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChangingSelf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13290087" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;13290087" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>Bilibili</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://endlesspeak.gitee.io/" title="https:&#x2F;&#x2F;endlesspeak.gitee.io&#x2F;" rel="noopener" target="_blank">无涯</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lollipopnougat.github.io/Crepeblog/" title="https:&#x2F;&#x2F;lollipopnougat.github.io&#x2F;Crepeblog&#x2F;" rel="noopener" target="_blank">封掣</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/1625--H/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1625--H&#x2F;" rel="noopener" target="_blank">暮冥</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hanechiri.github.io/" title="https:&#x2F;&#x2F;hanechiri.github.io" rel="noopener" target="_blank">羽尘</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://1rt7cz.coding-pages.com/" title="https:&#x2F;&#x2F;1rt7cz.coding-pages.com&#x2F;" rel="noopener" target="_blank">跃东</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">憧憬少</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">44 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2c2d9b5607027ef5684f',
+      clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+      repo: 'blog-comments',
+      owner: 'ChangingSelf',
+      admin: ['ChangingSelf'],
+      id: 'f5a423ec6ec9033b21ae5e25283c7242',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":false},"log":false});</script></body>
+</html>

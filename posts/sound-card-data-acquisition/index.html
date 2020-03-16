@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://changingself.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业： 以小组为单位，写一个声卡数据采集程序，功能要求：  以曲线形式显示波形； 利用数字滤波器对数据进行平滑滤波； 对声音信号进行FFT变化，计算信号的主频。  对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。 到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，为了能够偷懒，为了让队员能够更加了解本次项目，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【作业总结】声卡数据采集及处理">
+<meta property="og:url" content="https://changingself.github.io/posts/sound-card-data-acquisition/index.html">
+<meta property="og:site_name" content="憧憬少的个人博客">
+<meta property="og:description" content="这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业： 以小组为单位，写一个声卡数据采集程序，功能要求：  以曲线形式显示波形； 利用数字滤波器对数据进行平滑滤波； 对声音信号进行FFT变化，计算信号的主频。  对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。 到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，为了能够偷懒，为了让队员能够更加了解本次项目，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308165600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308173908.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308174022.png">
+<meta property="article:published_time" content="2020-03-08T03:05:47.000Z">
+<meta property="article:modified_time" content="2020-03-14T03:56:45.682Z">
+<meta property="article:author" content="憧憬少">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="mfc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308165600.png">
+
+<link rel="canonical" href="https://changingself.github.io/posts/sound-card-data-acquisition/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>【作业总结】声卡数据采集及处理 | 憧憬少的个人博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">憧憬少的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">少时憧憬皆似梦，来日期许莫成空</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://changingself.github.io/posts/sound-card-data-acquisition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="憧憬少">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="憧憬少的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【作业总结】声卡数据采集及处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-08 11:05:47" itemprop="dateCreated datePublished" datetime="2020-03-08T11:05:47+08:00">2020-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-14 11:56:45" itemprop="dateModified" datetime="2020-03-14T11:56:45+08:00">2020-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index">
+                    <span itemprop="name">过程复盘</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业：</p>
+<p>以小组为单位，写一个声卡数据采集程序，功能要求：</p>
+<ol>
+<li>以曲线形式显示波形；</li>
+<li>利用数字滤波器对数据进行平滑滤波；</li>
+<li>对声音信号进行FFT变化，计算信号的主频。</li>
+</ol>
+<p>对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。</p>
+<p>到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，<del>为了能够偷懒，</del>为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。</p>
+<p>本文并不专业，作者本身不是控制专业，所以出现错误在所难免，<strong>本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。</strong></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="http://shanewfx.github.io/blog/2013/08/14/caprure-audio-on-windows/" target="_blank" rel="noopener">Windows上的音频采集技术</a>：采集过程整体流程说明</li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/wasapi" target="_blank" rel="noopener">About WASAPI</a>：音频API官方文档</li>
+<li><a href="https://blog.csdn.net/FunnyWhiteCat/article/details/88676119" target="_blank" rel="noopener">使用WASAPI捕获声卡音频</a>：对官方文档示例代码的改写</li>
+<li><a href="https://www.jianshu.com/p/968f684ecd83" target="_blank" rel="noopener">WASAPI 01 采集默认设备的音频</a>：对API分段解析的一篇博文</li>
+<li><a href="https://www.bilibili.com/video/av91971619" target="_blank" rel="noopener">如何对时域声音信号进行FFT变换</a>：一个B站的视频，蛮不错的，比较清晰，不过没讲FFT原理，我从中知道了FFT的输入输出分别应该是什么。</li>
+<li><a href="https://www.bilibili.com/video/av45626580/" target="_blank" rel="noopener">【算法讲堂】【电子科技大学】【ACM】快速傅里叶变换（FFT）</a>：也是B站视频，代码主要参考的是这个，不过是递归版本的。但是好理解</li>
+<li><a href="https://blog.csdn.net/enjoy_pascal/article/details/81478582" target="_blank" rel="noopener">简单易懂的FFT</a></li>
+<li><a href="https://blog.csdn.net/u011327754/article/details/80001123" target="_blank" rel="noopener">【信号处理】信号处理中的FFT后的意义及常用处理方法</a></li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>还是得写啊，我先确认一下小组成员的配置。</p>
+<p>小组总共四个人，<a href="https://github.com/ChangingSelf" target="_blank" rel="noopener">我</a>、<a href="https://github.com/EndlessPeak" target="_blank" rel="noopener">leesin</a>、<a href="https://github.com/MikoSamey" target="_blank" rel="noopener">咸鱼米</a>、<a href="https://gitee.com/jane_white" target="_blank" rel="noopener">简白</a>。</p>
+<p>我只和咸鱼米一起写过代码，大致了解她的水平。</p>
+<p>预估编程能力：我 &gt; leesin &gt; 咸鱼米 &gt; 简白；</p>
+<p>对git了解程度： 我 ≈ leesin &gt; 咸鱼米 &gt; 简白；</p>
+<h2 id="硬件配置"><a href="#硬件配置" class="headerlink" title="硬件配置"></a>硬件配置</h2><p>简白没有带电脑，无法参与编程；</p>
+<p>咸鱼米的电脑非常卡顿，存储空间也非常小，上学期写课设的时候，她甚至是把eclipse放在U盘里面打开的，不指望她能用vs。</p>
+<p>leesin的电脑应该和我相当，目前没有出现过啥问题。</p>
+<p>我的电脑以及网络应该是小组里面最好的，游戏本外加非常快的网络，看网课从来只有老师那边卡（说起这个就想起网络测控老师那边卡成壁纸的网速）</p>
+<h2 id="软件配置"><a href="#软件配置" class="headerlink" title="软件配置"></a>软件配置</h2><p>首先应该会用到windows的API，用C++比较好，组员们最熟悉的也是它（大概吧），而且课设是做个小车，曾经接触过单片机编程，知道是需要用C来编程的，java、python啥的别想用，所以最终选了C++。</p>
+<p>这次除了这上面的作业外，还有一个略简单的作业，PID控制程序，这个就用VC++6.0来写了，照顾一下没有vs的咸鱼米，正好我也在学校机房写习惯了它。</p>
+<p>但是写完PID之后，发现声卡数据采集程序要是拿VC++6.0来写，未知原因跑不通，加上调试起来确实没有vs方便，就决定这个项目还是用vs吧。</p>
+<p>IDE决定是vs，接着是协作方式的问题，果断git，平台的话，还是用国内的码云吧，毕竟要考虑网速问题。</p>
+<p>在码云上建立了私有仓库，用master-develop分支结构。</p>
+<h1 id="时间轴"><a href="#时间轴" class="headerlink" title="时间轴"></a>时间轴</h1><h2 id="周二-2020-03-03"><a href="#周二-2020-03-03" class="headerlink" title="周二-2020-03-03"></a>周二-2020-03-03</h2><p>初步了解组员情况，分析题目要求。</p>
+<p>在码云建立私有库，并邀请组员加入。PID项目初始化。</p>
+<h2 id="周三-2020-03-04"><a href="#周三-2020-03-04" class="headerlink" title="周三-2020-03-04"></a>周三-2020-03-04</h2><p>了解了一下PID算法，然后交给leesin和咸鱼米去整了。</p>
+<p>真正的难点在于声卡数据采集和处理这个项目。我们都对此非常不了解。</p>
+<h3 id="声卡数据采集"><a href="#声卡数据采集" class="headerlink" title="声卡数据采集"></a>声卡数据采集</h3><p>首先，需要采集声音信息。</p>
+<p>该如何采集？我当时想到的是，应该是有API可以调用的，但是并没有查到那种讲解API的博客，能找到的只有官方文档：<a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/wasapi" target="_blank" rel="noopener">About WASAPI</a>。</p>
+<p>在本次项目之前，我是不太喜欢读文档的，因为有很多讲解得很详细的博客，没理由去自己啃文档啊，而且一般那种时候我都是处于课设周，需要查询大量资料，没有时间去看英文文档，除非遇到看博客解决不了的问题。</p>
+<p>这次只能看了，当然，还是得配合翻译插件（chrome刚装彩云小译没几天就用上了，中英对照效果还不错）。</p>
+<blockquote>
+<p>The Windows Audio Session API (WASAPI) enables client applications to manage the flow of audio data between the application and an <a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/audio-endpoint-devices" target="_blank" rel="noopener">audio endpoint device</a>.</p>
+<p>Windows 音频会话 API (WASAPI)使客户端应用程序能够管理应用程序和音频端点设备之间的音频数据流。</p>
+<p>Header files Audioclient.h and Audiopolicy.h define the WASAPI interfaces.</p>
+<p>头文件 Audioclient.h 和 audiopolis. h 定义了 WASAPI 接口。</p>
+</blockquote>
+<p>懂了，想用这个API得先包含两个头文件，<code>Audioclient.h</code>和<code>Audiopolicy.h</code>，不过在vc++6.0我编译不了，说没有这俩文件，但是vs可以，所以后来统一用了vs。</p>
+<p>接着看后面的说明，照着做但是不行。</p>
+<p>比如，让我调用<code>IMMDevice::Activate</code>这个方法，写上去却找不到这个方法，说是<code>::</code>前面得是命名空间或者类。后来折腾了很久才发现，原来<code>IMMDevice</code>不是命名空间而是类名啊！</p>
+<p>然而我还是不太清楚如何弄出来它说的那些客户端，各种参数太多了，不知道传啥。好在后面终于找到了一些有用的资料。</p>
+<p>对于采集数据的流程和原理不是很明白，但是通过读文档以及后来找到的一些博客互相配合着理解，总算对整个流程有了一个大致的了解。</p>
+<p>流程分为以下几步（<a href="http://shanewfx.github.io/blog/2013/08/14/caprure-audio-on-windows/" target="_blank" rel="noopener">Windows上的音频采集技术</a>：采集过程整体流程说明）：</p>
+<blockquote>
+<ul>
+<li>创建多媒体设备枚举器(IMMDeviceEnumerator)</li>
+<li>通过多媒体设备枚举器获取声卡接口(IMMDevice)</li>
+<li>通过声卡接口获取声卡客户端接口(IAudioClient)</li>
+<li>通过声卡客户端接口(IAudioClient)可获取声卡输出的音频参数、初始化声卡、获取声卡输出缓冲区的大小、开启/停止对声卡输出的采集</li>
+<li>通过声卡采集客户端接口(IAudioCaptureClient)可获取采集的声卡输出数据，并对内部缓冲区进行控制</li>
+</ul>
+</blockquote>
+<hr>
+<p>由于用到的函数太多了，就只给出函数官方文档链接，以及在代码中做出简单的注释。注释内容大部分为机翻。</p>
+<p>为了清晰，没有加入错误处理的代码。</p>
+<p>下面的示例代码解析自官方的示例程序<a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/capturing-a-stream" target="_blank" rel="noopener">Capturing a Stream</a>，会有一些改动。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>最开始，得使用<code>CoInitialize</code>函数来在当前线程上初始化 COM 库（<a href="https://docs.microsoft.com/en-us/windows/win32/api/objbase/nf-objbase-coinitialize" target="_blank" rel="noopener">CoInitialize函数</a>）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CoInitialize(<span class="literal">NULL</span>);<span class="comment">//初始化com库</span></span><br></pre></td></tr></table></figure>
+
+<p>采集结束后，记得关闭</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CoUninitialize();</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建多媒体设备枚举器"><a href="#创建多媒体设备枚举器" class="headerlink" title="创建多媒体设备枚举器"></a>创建多媒体设备枚举器</h4><p>定义一些常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioClient = __uuidof(IAudioClient);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioCaptureClient = __uuidof(IAudioCaptureClient);</span><br></pre></td></tr></table></figure>
+
+<p>这些常量是这些类的UUID，总之就是用来标识这些类的。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance" target="_blank" rel="noopener">Cocreateinstance函数</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多媒体设备枚举器</span></span><br><span class="line">	IMMDeviceEnumerator *pEnumerator = <span class="literal">NULL</span>;</span><br><span class="line">	CoCreateInstance(</span><br><span class="line">		CLSID_MMDeviceEnumerator, <span class="comment">//创建与指定 CLSID (Class ID，即类标识符)关联的类的单个未初始化对象。</span></span><br><span class="line">        <span class="literal">NULL</span>,<span class="comment">//如果为 NULL，则表示该对象不是作为聚合的一部分创建的</span></span><br><span class="line">		CLSCTX_ALL,<span class="comment">//管理新创建对象的代码将在其中运行的上下文。 这些值取自枚举 CLSCTX</span></span><br><span class="line">        IID_IMMDeviceEnumerator,<span class="comment">//对用于与对象通信的接口标识符的引用</span></span><br><span class="line">		(<span class="keyword">void</span>**)&amp;pEnumerator);<span class="comment">//接收 riid 请求的接口指针的指针变量的地址。 成功返回后，* ppv 包含请求的接口指针。 失败时，* ppv 包含 NULL。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取声卡接口"><a href="#获取声卡接口" class="headerlink" title="获取声卡接口"></a>获取声卡接口</h4><p>使用刚刚获取的枚举器来获取默认音频端点设备。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdeviceenumerator-getdefaultaudioendpoint" target="_blank" rel="noopener">IMMDeviceEnumerator::GetDefaultAudioEndpoint方法</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取声卡接口</span></span><br><span class="line">	IMMDevice *pDevice = <span class="literal">NULL</span>;<span class="comment">//声卡接口</span></span><br><span class="line">	pEnumerator-&gt;GetDefaultAudioEndpoint(</span><br><span class="line">		eCapture,<span class="comment">//端点设备的数据流方向。 调用方应该将此参数设置为以下两个 EDataFlow 枚举值之一:eRender,eCapture,前者渲染，后者捕获</span></span><br><span class="line">        eConsole,<span class="comment">//端点设备的角色。 调用者应该将这个参数设置为以下 ERole 枚举值之一:eConsole,eMultimedia,eCommunications</span></span><br><span class="line">        &amp;pDevice);<span class="comment">//指向一个指针变量，该方法将默认音频端点设备的端点对象的 immmdevice 接口的地址写入该指针变量</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="设置默认音频格式"><a href="#设置默认音频格式" class="headerlink" title="设置默认音频格式"></a>设置默认音频格式</h4><p>这里用的是使用最小音频格式，也可以手动设置自己的音频格式。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmeapi/ns-mmeapi-waveformatex" target="_blank" rel="noopener">WAVEFORMATEX 结构体</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取音频格式</span></span><br><span class="line">WAVEFORMATEX *pwfx = <span class="literal">NULL</span>;</span><br><span class="line">pAudioClient-&gt;GetMixFormat(&amp;pwfx);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取声卡客户端"><a href="#获取声卡客户端" class="headerlink" title="获取声卡客户端"></a>获取声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-activate" target="_blank" rel="noopener">IMMDevice::Activate方法</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过声卡接口获取声卡客户端接口</span></span><br><span class="line">	IAudioClient *pAudioClient = <span class="literal">NULL</span>;</span><br><span class="line">	pDevice-&gt;Activate(IID_IAudioClient, CLSCTX_ALL, <span class="literal">NULL</span>, (<span class="keyword">void</span>**)&amp;pAudioClient);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="初始化声卡客户端"><a href="#初始化声卡客户端" class="headerlink" title="初始化声卡客户端"></a>初始化声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-initialize" target="_blank" rel="noopener">IAudioClient::Initialize方法</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">REFERENCE_TIME hnsRequestedDuration = REFTIMES_PER_SEC; <span class="comment">//采样持续时间，单位100纳秒</span></span><br><span class="line">pAudioClient-&gt;Initialize(</span><br><span class="line">	AUDCLNT_SHAREMODE_SHARED,<span class="comment">//与其他设备共享音频端点设备</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//选项</span></span><br><span class="line">	hnsRequestedDuration,<span class="comment">//以时间值表示的缓冲区容量</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//设备周期，共享模式下设为0</span></span><br><span class="line">	pwfx,<span class="comment">//音频格式</span></span><br><span class="line">	<span class="literal">NULL</span><span class="comment">//指向session的GUID的指针，设置为NULL表示打开一个新session</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><code>REFTIMES_PER_SEC</code>是一个宏，作为参考时间单位。100纳秒 = 1e-7秒，即这个宏定义的值。也就是说，上面的代码是采样1秒的意思。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取捕获客户端"><a href="#获取捕获客户端" class="headerlink" title="获取捕获客户端"></a>获取捕获客户端</h4><p><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudioclient-getservice" target="_blank" rel="noopener">IAudioClient::GetService方法</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取捕获客户端</span></span><br><span class="line">	IAudioCaptureClient *pCaptureClient = <span class="literal">NULL</span>;</span><br><span class="line">	hr = pAudioClient-&gt;GetService(</span><br><span class="line">        IID_IAudioCaptureClient, <span class="comment">//客户端接口ID</span></span><br><span class="line">        (<span class="keyword">void</span>**)&amp;pCaptureClient);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="启动音频流"><a href="#启动音频流" class="headerlink" title="启动音频流"></a>启动音频流</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-start" target="_blank" rel="noopener">IAudioClient::Start</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//启动音频流</span></span><br><span class="line">m_pAudioClient-&gt;Start();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="采集数据"><a href="#采集数据" class="headerlink" title="采集数据"></a>采集数据</h4><p>启动音频流之后，就可以开始捕获数据了，音频流有一个缓冲区</p>
+<p>流程如下：</p>
+<ul>
+<li>从缓冲区获取下一个数据包</li>
+<li>处理数据包</li>
+<li>释放缓冲区</li>
+<li>获取下一个数据包大小，循环直到缓冲区为空</li>
+</ul>
+<p>获取数据包大小，以确定流中是否有数据。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UINT32 packetLength = <span class="number">0</span>;<span class="comment">//数据包长度</span></span><br><span class="line">BYTE *pData = <span class="literal">NULL</span>;<span class="comment">//数据包首地址</span></span><br><span class="line">UINT32 numFramesAvailable;<span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">DWORD flags;<span class="comment">//缓冲区状态标志</span></span><br><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; recorder;<span class="comment">//用于存储数据</span></span><br><span class="line"></span><br><span class="line">pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);<span class="comment">//获取下一个数据包的大小</span></span><br></pre></td></tr></table></figure>
+
+<p>处理其中的数据。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-releasebuffer" target="_blank" rel="noopener">IAudioCaptureClient::ReleaseBuffer</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getnextpacketsize" target="_blank" rel="noopener">IAudioCaptureClient::GetNextPacketSize</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getbuffer" target="_blank" rel="noopener">IAudioCaptureClient::GetBuffer</a></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (packetLength != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获取缓冲区中的数据</span></span><br><span class="line">		pCaptureClient-&gt;GetBuffer(</span><br><span class="line">			&amp;pData,<span class="comment">//数据包指针变量的地址</span></span><br><span class="line">			&amp;numFramesAvailable, <span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">			&amp;flags, <span class="comment">//缓冲区状态标志</span></span><br><span class="line">			<span class="literal">NULL</span>,</span><br><span class="line">			<span class="literal">NULL</span></span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//判断是否静音</span></span><br><span class="line">		<span class="keyword">if</span> (flags &amp; AUDCLNT_BUFFERFLAGS_SILENT)</span><br><span class="line">		&#123;</span><br><span class="line">			pData = <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> dataSize = numFramesAvailable * <span class="number">4</span>;<span class="comment">//可用帧数*4=BYTE数</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//采集数据</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataSize; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			BYTE tem = pData[i];</span><br><span class="line">			recorder.push_back(pData[i]);<span class="comment">//添加进自己实现准备好的数据数组中</span></span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//释放缓冲区</span></span><br><span class="line">		pCaptureClient-&gt;ReleaseBuffer(numFramesAvailable);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//获取下一个数据包大小</span></span><br><span class="line">		pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当然，由于缓冲区会不断地进来数据，你可以加一个判断，读取了多少个数据包后退出循环，否则会无限循环。</p>
+<h4 id="关闭音频流"><a href="#关闭音频流" class="headerlink" title="关闭音频流"></a>关闭音频流</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pAudioClient-&gt;Stop();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="测试输出"><a href="#测试输出" class="headerlink" title="测试输出"></a>测试输出</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; recorder.<span class="built_in">size</span>(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, recorder[i]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308165600.png" alt="输出效果图"></p>
+<p>周三大概做到这里</p>
+<h2 id="周四-2020-03-05"><a href="#周四-2020-03-05" class="headerlink" title="周四-2020-03-05"></a>周四-2020-03-05</h2><p>周四主要将波形曲线画出来。</p>
+<h3 id="绘制波形"><a href="#绘制波形" class="headerlink" title="绘制波形"></a>绘制波形</h3><p>创建了一个MFC项目，并新建了一个类，主要是将上面说到的代码简单封装了一下，没有用到的暂时不显示。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CRecorder.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dshow.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winerror.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mmdeviceapi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Functiondiscoverykeys_devpkey.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audioclient.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audiopolicy.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_ON_ERROR(hres)  \</span></span><br><span class="line">              <span class="keyword">if</span> (FAILED(hres)) &#123; <span class="keyword">goto</span> Exit; &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAFE_RELEASE(punk)  \</span></span><br><span class="line">              <span class="keyword">if</span> ((punk) != <span class="literal">NULL</span>)  \</span><br><span class="line">                &#123; (punk)-&gt;Release(); (punk) = <span class="literal">NULL</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRecorder</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;BYTE&gt; m_recorder;<span class="comment">//数据记录器</span></span><br><span class="line">	IAudioClient *m_pAudioClient;<span class="comment">//声卡客户端</span></span><br><span class="line">	IAudioCaptureClient *m_pCaptureClient;<span class="comment">//捕获流客户端</span></span><br><span class="line">	WAVEFORMATEX *m_pwfx;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	CRecorder();</span><br><span class="line">    <span class="comment">//手动提取出来的代码</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;<span class="comment">//初始化</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">refreshRecorder</span><span class="params">()</span></span>;<span class="comment">//刷新采样数据</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onError</span><span class="params">(HRESULT hres)</span></span>;<span class="comment">//错误处理（也没咋用，懒得写那么多错误处理）</span></span><br><span class="line"></span><br><span class="line">	<span class="function">HRESULT <span class="title">RecordAudioStream</span><span class="params">()</span></span>;<span class="comment">//整块的示例代码，用于测试，现在不使用</span></span><br><span class="line"></span><br><span class="line">	~CRecorder();</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">drawWaveform</span><span class="params">(CDC* pDC, CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span></span>;<span class="comment">//绘制图像</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>实现部分和上面差不多就不赘述了。</p>
+<p>主要是绘制方面。</p>
+<p>第三个参数<code>vector&lt;BYTE&gt; output</code>是为了后面的滤波所准备的，是由leesin提出的改进</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> CRecorder::drawWaveform(CDC* pDC,CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//RecordAudioStream();</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">height</span> = <span class="built_in">rect</span>.Height();</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">width</span> = <span class="built_in">rect</span>.Width();</span><br><span class="line">	<span class="keyword">int</span> x_coefficient = <span class="number">5</span>;</span><br><span class="line">	<span class="comment">//int a = dataStart;</span></span><br><span class="line">	pDC -&gt; MoveTo( <span class="number">0</span>, output[dataStart] );</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = dataStart; i &lt; output.<span class="built_in">size</span>() &amp;&amp; (i-dataStart+<span class="number">1</span>)*x_coefficient &lt;= <span class="built_in">width</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pDC-&gt;LineTo((i-dataStart+<span class="number">1</span>) * x_coefficient, output[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在对话框类中获取pDC</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CsoundcarddataacquisitionDlg::drawWaveform()</span><br><span class="line">&#123;</span><br><span class="line">	m_pPanel = GetDlgItem(IDC_PANEL);<span class="comment">//获得静态窗口对象指针</span></span><br><span class="line">	<span class="comment">//清屏</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(FALSE);<span class="comment">//偷懒用的方法</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(TRUE);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件区域</span></span><br><span class="line">	CRect <span class="built_in">rect</span>;</span><br><span class="line">	m_pPanel-&gt;GetClientRect(&amp;<span class="built_in">rect</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件画笔</span></span><br><span class="line">	CDC* pDC = m_pPanel-&gt;GetDC();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//绘制原始采样数据</span></span><br><span class="line">	m_pPanel-&gt;UpdateWindow();</span><br><span class="line">	<span class="comment">//m_recorder.RecordAudioStream();</span></span><br><span class="line">	m_recorder.refreshRecorder();</span><br><span class="line">	m_recorder.drawWaveform(pDC, <span class="built_in">rect</span>,m_recorder.NoFiltering());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	ReleaseDC(pDC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; CRecorder::NoFiltering()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_recorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308173908.png" alt="第一次显示的图"></p>
+<h3 id="滤波算法"><a href="#滤波算法" class="headerlink" title="滤波算法"></a>滤波算法</h3><p>老师给了个txt，里面就是各种滤波算法，我也没啥精力去研究了，就交给leesin了，他完成得很不错，就是刚刚上面说的设计就是他整的。不过一开始用的算法效果不太好，让他继续研究。此时咸鱼米在弄vc6.0的PID那个项目，因为她没有vs。</p>
+<h2 id="周五周六-2020-03-06-07"><a href="#周五周六-2020-03-06-07" class="headerlink" title="周五周六-2020-03-06~07"></a>周五周六-2020-03-06~07</h2><p>这两天都在学习那个FFT快速傅里叶变换</p>
+<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>参考各方资料写出来这个递归版本的（迭代版本的看不懂），参考链接见本文开头。</p>
+<ul>
+<li>输入：多项式系数表示法的系数，值为时域下的幅值</li>
+<li>输出：多项式点值表示法的点（以复数表示），其模为频域下的幅值</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*FFT</span></span><br><span class="line"><span class="comment">传入的复数数组里面都是实数，含义是多项式系数表示法的系数，值为时域幅值</span></span><br><span class="line"><span class="comment">系数数组长度得是2的整数次方</span></span><br><span class="line"><span class="comment">返回值的模为频谱幅值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; CRecorder::FFT(<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="number">3.141592651</span>;</span><br><span class="line">	<span class="keyword">int</span> len = A.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (len == <span class="number">1</span>) <span class="keyword">return</span> A;<span class="comment">//递归结束条件</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A1, A2;<span class="comment">//A(x) = A1(x^2) + x * A2(x^2)</span></span><br><span class="line">	<span class="comment">//将系数分类</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">			A1.push_back(A[i]);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			A2.push_back(A[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A1 = FFT(A1);</span><br><span class="line">	A2 = FFT(A2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; Wn(<span class="built_in">cos</span>(<span class="number">2.0</span>*PI / len), <span class="built_in">sin</span>(<span class="number">2.0</span>*PI / len));<span class="comment">//len等分点的角度增量</span></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; W(<span class="number">1.0</span>, <span class="number">0.0</span>);<span class="comment">//用于遍历复平面单位圆上的len个等分点</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i * <span class="number">2</span> &lt; len; i++, W *= Wn)</span><br><span class="line">	&#123;</span><br><span class="line">		A[i] = A1[i] + W * A2[i];</span><br><span class="line">		A[i + len / <span class="number">2</span>] = A1[i] - W * A2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成之后的效果是下面这样的：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308174022.png" alt=""></p>
+<p>上图的坐标都是没有变换的，还是以左上角为原点。</p>
+<p>（未完待续）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>憧憬少
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://changingself.github.io/posts/sound-card-data-acquisition/" title="【作业总结】声卡数据采集及处理">https://changingself.github.io/posts/sound-card-data-acquisition/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cpp/" rel="tag"># cpp</a>
+              <a href="/tags/mfc/" rel="tag"># mfc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/java_simple_studentInfoSystem/" rel="prev" title="【编程练习】java简易学生管理系统">
+      <i class="fa fa-chevron-left"></i> 【编程练习】java简易学生管理系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/Reinstall_win10/" rel="next" title="记第二次重装系统">
+      记第二次重装系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件配置"><span class="nav-number">2.1.</span> <span class="nav-text">硬件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件配置"><span class="nav-number">2.2.</span> <span class="nav-text">软件配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间轴"><span class="nav-number">3.</span> <span class="nav-text">时间轴</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#周二-2020-03-03"><span class="nav-number">3.1.</span> <span class="nav-text">周二-2020-03-03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周三-2020-03-04"><span class="nav-number">3.2.</span> <span class="nav-text">周三-2020-03-04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声卡数据采集"><span class="nav-number">3.2.1.</span> <span class="nav-text">声卡数据采集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建多媒体设备枚举器"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">创建多媒体设备枚举器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取声卡接口"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">获取声卡接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置默认音频格式"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">设置默认音频格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取声卡客户端"><span class="nav-number">3.2.1.5.</span> <span class="nav-text">获取声卡客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化声卡客户端"><span class="nav-number">3.2.1.6.</span> <span class="nav-text">初始化声卡客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取捕获客户端"><span class="nav-number">3.2.1.7.</span> <span class="nav-text">获取捕获客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动音频流"><span class="nav-number">3.2.1.8.</span> <span class="nav-text">启动音频流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#采集数据"><span class="nav-number">3.2.1.9.</span> <span class="nav-text">采集数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭音频流"><span class="nav-number">3.2.1.10.</span> <span class="nav-text">关闭音频流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试输出"><span class="nav-number">3.2.1.11.</span> <span class="nav-text">测试输出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周四-2020-03-05"><span class="nav-number">3.3.</span> <span class="nav-text">周四-2020-03-05</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制波形"><span class="nav-number">3.3.1.</span> <span class="nav-text">绘制波形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滤波算法"><span class="nav-number">3.3.2.</span> <span class="nav-text">滤波算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周五周六-2020-03-06-07"><span class="nav-number">3.4.</span> <span class="nav-text">周五周六-2020-03-06~07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FFT"><span class="nav-number">3.4.1.</span> <span class="nav-text">FFT</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="憧憬少"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">憧憬少</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChangingSelf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChangingSelf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13290087" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;13290087" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>Bilibili</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://endlesspeak.gitee.io/" title="https:&#x2F;&#x2F;endlesspeak.gitee.io&#x2F;" rel="noopener" target="_blank">无涯</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lollipopnougat.github.io/Crepeblog/" title="https:&#x2F;&#x2F;lollipopnougat.github.io&#x2F;Crepeblog&#x2F;" rel="noopener" target="_blank">封掣</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/1625--H/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1625--H&#x2F;" rel="noopener" target="_blank">暮冥</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hanechiri.github.io/" title="https:&#x2F;&#x2F;hanechiri.github.io" rel="noopener" target="_blank">羽尘</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://1rt7cz.coding-pages.com/" title="https:&#x2F;&#x2F;1rt7cz.coding-pages.com&#x2F;" rel="noopener" target="_blank">跃东</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">憧憬少</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">44 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2c2d9b5607027ef5684f',
+      clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+      repo: 'blog-comments',
+      owner: 'ChangingSelf',
+      admin: ['ChangingSelf'],
+      id: 'c3f8d2f6bb12f06df5a918df7a15348f',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":false},"log":false});</script></body>
+</html>

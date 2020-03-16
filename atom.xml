@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>憧憬少的个人博客</title>
+  <icon>https://changingself.github.io/icon.png</icon>
+  <subtitle>少时憧憬皆似梦，来日期许莫成空</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://changingself.github.io/"/>
+  <updated>2020-03-14T14:09:02.268Z</updated>
+  <id>https://changingself.github.io/</id>
+  
+  <author>
+    <name>憧憬少</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记第二次重装系统</title>
+    <link href="https://changingself.github.io/posts/Reinstall_win10/"/>
+    <id>https://changingself.github.io/posts/Reinstall_win10/</id>
+    <published>2020-03-14T13:01:12.000Z</published>
+    <updated>2020-03-14T14:09:02.268Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;折腾了三个多小时终于把win10重装好了，这是我第二次自己装系统。&lt;/p&gt;
+&lt;p&gt;本文记录了我这次重装系统的过程，以及一些从中学到的新知识，供参考。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="win10" scheme="https://changingself.github.io/tags/win10/"/>
+    
+      <category term="os" scheme="https://changingself.github.io/tags/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【作业总结】声卡数据采集及处理</title>
+    <link href="https://changingself.github.io/posts/sound-card-data-acquisition/"/>
+    <id>https://changingself.github.io/posts/sound-card-data-acquisition/</id>
+    <published>2020-03-08T03:05:47.000Z</published>
+    <updated>2020-03-14T03:56:45.682Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业：&lt;/p&gt;
+&lt;p&gt;以小组为单位，写一个声卡数据采集程序，功能要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以曲线形式显示波形；&lt;/li&gt;
+&lt;li&gt;利用数字滤波器对数据进行平滑滤波；&lt;/li&gt;
+&lt;li&gt;对声音信号进行FFT变化，计算信号的主频。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。&lt;/p&gt;
+&lt;p&gt;到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，&lt;del&gt;为了能够偷懒，&lt;/del&gt;为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。&lt;/p&gt;
+&lt;p&gt;本文并不专业，作者本身不是控制专业，所以出现错误在所难免，&lt;strong&gt;本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="cpp" scheme="https://changingself.github.io/tags/cpp/"/>
+    
+      <category term="mfc" scheme="https://changingself.github.io/tags/mfc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【编程练习】java简易学生管理系统</title>
+    <link href="https://changingself.github.io/posts/java_simple_studentInfoSystem/"/>
+    <id>https://changingself.github.io/posts/java_simple_studentInfoSystem/</id>
+    <published>2020-03-03T03:11:45.000Z</published>
+    <updated>2020-03-14T03:56:45.681Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。&lt;/p&gt;
+&lt;p&gt;在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。&lt;/p&gt;
+&lt;p&gt;本文主要总结一下本练习用到的一些知识点，方便下次使用。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/fileio-exercises&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本文对应的github库&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scrapy爬虫框架（1）一个简单的可用的爬虫</title>
+    <link href="https://changingself.github.io/posts/Scrapy_spider_1/"/>
+    <id>https://changingself.github.io/posts/Scrapy_spider_1/</id>
+    <published>2020-02-18T04:22:13.000Z</published>
+    <updated>2020-03-14T03:56:45.681Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久没写爬虫了，又重新开始使用scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。&lt;/p&gt;
+&lt;p&gt;本文将初级知识点简单梳理，实现了一个HelloWorld级别的Scrapy爬虫。&lt;/p&gt;
+&lt;p&gt;本文适用于Scrapy 1.6.0，结合了自己的理解，可能理解有错误，欢迎在下面评论区指出。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;不包含安装教程。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+    
+      <category term="scrapy" scheme="https://changingself.github.io/tags/scrapy/"/>
+    
+      <category term="spider" scheme="https://changingself.github.io/tags/spider/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【编程练习】明日非舟抽卡模拟器（2）xml文件解析</title>
+    <link href="https://changingself.github.io/posts/Africanights_simu_hr_2/"/>
+    <id>https://changingself.github.io/posts/Africanights_simu_hr_2/</id>
+    <published>2020-02-04T14:24:41.000Z</published>
+    <updated>2020-03-14T03:56:45.681Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了修改与添加方便，将干员的信息放在简历类Resume中，简历信息使用xml文件存储，在启动时加载进来。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本项目连载github库地址&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+    
+      <category term="xml" scheme="https://changingself.github.io/tags/xml/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>建新hexo博客后继续更新旧hexo博客的方法</title>
+    <link href="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/"/>
+    <id>https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/</id>
+    <published>2020-01-28T04:15:33.000Z</published>
+    <updated>2020-03-14T03:56:45.680Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。&lt;/p&gt;
+&lt;p&gt;问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ERROR: Permission to HaneChiri&amp;#x2F;HaneChiri.github.io.git denied to ChangingSelf.   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fatal: Could not read from remote repository.                                         &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Please make sure you have the correct access rights                             &amp;#96;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;大意是我没有权限，也就是ssh没有配好。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://changingself.github.io/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="hexo" scheme="https://changingself.github.io/tags/hexo/"/>
+    
+      <category term="ssh" scheme="https://changingself.github.io/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</title>
+    <link href="https://changingself.github.io/posts/Africanights_simu_hr_1/"/>
+    <id>https://changingself.github.io/posts/Africanights_simu_hr_1/</id>
+    <published>2020-01-27T14:20:48.000Z</published>
+    <updated>2020-03-14T03:56:45.680Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好友封掣写了一个&lt;a href=&quot;https://github.com/lollipopnougat/arknights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;明日方舟模拟寻访&lt;/a&gt;，于是也想做一个来作为java的练手，这学期写课设的时候就体现出我平时写代码写太少了。&lt;/p&gt;
+&lt;p&gt;当然，经过这学期末的编码轰炸，我现在可不敢像以前一样没有计划地直接开始，先想好它的架构，随后再开始编写，并留下系列博文记录，供以后参考。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本项目连载github库地址&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>更改git仓库已经commit的用户名和邮箱信息</title>
+    <link href="https://changingself.github.io/posts/git_amend_commited_info/"/>
+    <id>https://changingself.github.io/posts/git_amend_commited_info/</id>
+    <published>2020-01-15T03:05:44.000Z</published>
+    <updated>2020-03-14T03:56:45.679Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;换了一个github账号，想把以前的仓库push到新的账号上，但是commit的用户名和邮箱信息还是以前的，想修改成新的用户信息。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://changingself.github.io/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="git" scheme="https://changingself.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【课设总结】基于LAN的即时通信软件</title>
+    <link href="https://changingself.github.io/posts/IMS_base_on_LAN/"/>
+    <id>https://changingself.github.io/posts/IMS_base_on_LAN/</id>
+    <published>2020-01-02T07:06:27.000Z</published>
+    <updated>2020-03-14T03:56:45.678Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。&lt;/p&gt;
+&lt;p&gt;由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更好维护一些，但是python写起来应该会更加轻松（个人看法）。&lt;/p&gt;
+&lt;p&gt;本文基于我当时写的课设报告，在之后可能会将其中学到的知识整理成其他的博文，并在此文中列出。&lt;/p&gt;
+&lt;p&gt;b站视频已上传：&lt;a href=&quot;https://www.bilibili.com/video/av83477871/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;【课设思路分享】基于LAN的即时通讯软件&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对应github库传送门：&lt;a href=&quot;https://github.com/ChangingSelf/simuqq&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;simuqq&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;比较长，配合侧边栏目录食用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+    
+      <category term="internet" scheme="https://changingself.github.io/tags/internet/"/>
+    
+      <category term="tkinter" scheme="https://changingself.github.io/tags/tkinter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章分类说明</title>
+    <link href="https://changingself.github.io/posts/categories_description/"/>
+    <id>https://changingself.github.io/posts/categories_description/</id>
+    <published>2019-12-31T12:30:06.000Z</published>
+    <updated>2020-03-14T03:56:45.678Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了对文章进行更好的管理，需要提前确定好文章的分类。将本博客内的文章分为以下七类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;过程复盘&lt;/li&gt;
+&lt;li&gt;知识整理&lt;/li&gt;
+&lt;li&gt;解决方案&lt;/li&gt;
+&lt;li&gt;算法理解&lt;/li&gt;
+&lt;li&gt;工具使用&lt;/li&gt;
+&lt;li&gt;目录索引&lt;/li&gt;
+&lt;li&gt;日志随笔&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="目录索引" scheme="https://changingself.github.io/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://changingself.github.io/posts/hello_world/"/>
+    <id>https://changingself.github.io/posts/hello_world/</id>
+    <published>2019-12-30T13:01:12.000Z</published>
+    <updated>2020-03-14T13:14:32.130Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大家好，我是憧憬少。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

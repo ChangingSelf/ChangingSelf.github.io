@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://changingself.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。 在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。 本文主要总结一下本练习用到的一些知识点，方便下次使用。 本文对应的github库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【编程练习】java简易学生管理系统">
+<meta property="og:url" content="https://changingself.github.io/posts/java_simple_studentInfoSystem/index.html">
+<meta property="og:site_name" content="憧憬少的个人博客">
+<meta property="og:description" content="上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。 在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。 本文主要总结一下本练习用到的一些知识点，方便下次使用。 本文对应的github库">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-03T03:11:45.000Z">
+<meta property="article:modified_time" content="2020-03-14T03:56:45.681Z">
+<meta property="article:author" content="憧憬少">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://changingself.github.io/posts/java_simple_studentInfoSystem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>【编程练习】java简易学生管理系统 | 憧憬少的个人博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">憧憬少的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">少时憧憬皆似梦，来日期许莫成空</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://changingself.github.io/posts/java_simple_studentInfoSystem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="憧憬少">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="憧憬少的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【编程练习】java简易学生管理系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-03 11:11:45" itemprop="dateCreated datePublished" datetime="2020-03-03T11:11:45+08:00">2020-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-14 11:56:45" itemprop="dateModified" datetime="2020-03-14T11:56:45+08:00">2020-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index">
+                    <span itemprop="name">过程复盘</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。</p>
+<p>在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。</p>
+<p>本文主要总结一下本练习用到的一些知识点，方便下次使用。</p>
+<p><a href="https://github.com/ChangingSelf/fileio-exercises" target="_blank" rel="noopener">本文对应的github库</a></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.cnblogs.com/kaml8/p/9853595.html" target="_blank" rel="noopener">java输入和输出函数</a></li>
+<li><a href="https://www.cnblogs.com/oneboi/articles/8615331.html" target="_blank" rel="noopener">java文件和文件夹的创建</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/87560794" target="_blank" rel="noopener">Java I/O包 读写文件</a>：有关各种文件流、Reader和Writer之间关系的解释</li>
+<li><a href="https://blog.csdn.net/ai_bao_zi/article/details/81097898" target="_blank" rel="noopener">java基础知识之FileInputStream流</a></li>
+<li><a href="https://www.cnblogs.com/ywzbky/p/10697414.html" target="_blank" rel="noopener">JAVA中字符流详解</a></li>
+<li><a href="https://www.jianshu.com/p/ec76c4394a00" target="_blank" rel="noopener">Java 实现文件随机读写-RandomAccessFile</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/68598753" target="_blank" rel="noopener">流-文件操作（1）-Java高级知识（4）</a>：讲了流的原理和分类</li>
+<li><a href="https://zhuanlan.zhihu.com/p/98911542" target="_blank" rel="noopener">Java语言的输入与输出与文件处理</a>：常用文件处理类的API列表</li>
+<li><a href="https://cloud.tencent.com/developer/ask/48910" target="_blank" rel="noopener">如何检查Java字符串并不是所有空白？</a></li>
+</ul>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
+<li>1.建两个文本文件</li>
+<li>2.插入学生信息</li>
+<li>3.查询学生对应的奖励</li>
+<li>4.增删改信息</li>
+</ul>
+<h2 id="文件1-学生基本信息"><a href="#文件1-学生基本信息" class="headerlink" title="文件1 学生基本信息"></a>文件1 学生基本信息</h2><table>
+<thead>
+<tr>
+<th>学号</th>
+<th>姓名</th>
+<th>性别</th>
+<th>年龄</th>
+<th>专业</th>
+<th>位置</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2017901006</td>
+<td>杨啸</td>
+<td>男</td>
+<td>21</td>
+<td>软件工程</td>
+<td>0</td>
+<td>30</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+</tr>
+</tbody></table>
+<ul>
+<li>位置：奖励文件内对应的位置</li>
+<li>长度：奖励文件内对应的奖励字段的长度</li>
+</ul>
+<h2 id="文件2-奖励"><a href="#文件2-奖励" class="headerlink" title="文件2 奖励"></a>文件2 奖励</h2><p>记录学生获得的奖励</p>
+<table>
+<thead>
+<tr>
+<th align="center">奖励</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2011校奖学金，2012国家奖学金</td>
+</tr>
+<tr>
+<td align="center">2012校优秀学生</td>
+</tr>
+</tbody></table>
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><ul>
+<li>model包<ul>
+<li>Gender枚举类：枚举值为“男”和“女”</li>
+<li>StudentInfo类：作为学生信息结点，存储学生信息的六个字段。后来写着写着觉得这个类名太长了，不该加Info后缀的，写起来怪怪的。</li>
+<li>StudentInfoSystem类：用于实现整个系统的逻辑功能，包括录入信息，查找信息，保存数据，读取数据等。</li>
+</ul>
+</li>
+<li>view包<ul>
+<li>ConsoleMenu类：控制台菜单类，作为与用户交互的界面。</li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><h2 id="Gender枚举类"><a href="#Gender枚举类" class="headerlink" title="Gender枚举类"></a>Gender枚举类</h2><p>在录入学生性别的时候，会涉及到输入什么的问题，输入0或1？输入“男”或“女”？如果用整数或者字符串都可能会产生非法数据，导致一些问题，这些问题在很久以前我拿C++写的时候就遇到过一些。</p>
+<p>最好的方式不是用布尔类型这种二值类型，而是使用枚举类型，因为有可能用到别的值，比如UNSET（未设置）。</p>
+<p>在这次练习之前，我会的java枚举大概是下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Gender &#123;</span><br><span class="line">	MALE,</span><br><span class="line">	FAMALE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如同C++枚举一样列出枚举值，然后当成常量一样使用。</p>
+<p>后面变成了这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Gender.java</span></span><br><span class="line"><span class="keyword">package</span> model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Gender &#123;</span><br><span class="line">	MALE(<span class="string">"男"</span>),</span><br><span class="line">	FAMALE(<span class="string">"女"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String m_genderString;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Gender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">		m_genderString = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getGenderString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> m_genderString;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据字符串的值返回对应的枚举值</span></span><br><span class="line"><span class="comment">	 * TODO：应该可以优化成不用手动写switch的</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> genderString</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 返回字符串对应的枚举值，找不到则返回null</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Gender <span class="title">newGender</span><span class="params">(String genderString)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (genderString) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"男"</span>:</span><br><span class="line">			<span class="keyword">return</span> Gender.MALE;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"女"</span>:</span><br><span class="line">			<span class="keyword">return</span> Gender.FAMALE;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>百度了几篇博客之后（当时没收藏，找不到了），知道了枚举类一点点原理。</p>
+<p>拿上面这个代码举例：写<code>MALE(&quot;男&quot;)</code>其实像是为Gender类的构造方法传入一个值为“男”的字符串，而默认的构造方法是没有参数的，所以你需要写一个以字符串为参数的构造方法。</p>
+<p>为了保留下这个传入的字符串，需要定义一个字符串类型的属性；为了获取它，再定义一个getter。</p>
+<p>这样做的目的是，在输出学生性别时，可以调用性别属性的<code>getGenderString()</code>方法获取对应的字符串。</p>
+<p>最下面那个<code>newGender()</code>方法则是在录入学生性别时使用。</p>
+<h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><p>java中的File类是对文件的抽象，它可以是文件，也可以是目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br></pre></td></tr></table></figure>
+
+<p>它拥有的方法主要是用于检测文件的信息的，比如它是文件还是目录，是否存在，绝对路径是什么等等，它不能直接读写文件（创建倒是可以）。</p>
+<p>读写文件得需要其他类，这一部分的类太多了，我找了挺久才找到合适的类。</p>
+<h2 id="FileOutputStream类"><a href="#FileOutputStream类" class="headerlink" title="FileOutputStream类"></a>FileOutputStream类</h2><p>首先是保存数据到文件中。用到了这个类，它是文件输出流，以字节流的形式输出到文件。意思就是给他传入的参数是字节数组而不是字符串。不过字符串转字节数组非常简单，用字符串的<code>getBytes()</code>就好。</p>
+<p>打开文件输出流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">			</span><br><span class="line">File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">			</span><br><span class="line"><span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line">			</span><br><span class="line">FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br></pre></td></tr></table></figure>
+
+<p>随后拼接好学生信息的字符串，转换为字节数组，传入即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line">infoFOS.write(infoBuf);<span class="comment">//写入文件</span></span><br></pre></td></tr></table></figure>
+
+<p>最后记得close</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">infoFOS.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="FileReader类和BufferedReader类"><a href="#FileReader类和BufferedReader类" class="headerlink" title="FileReader类和BufferedReader类"></a>FileReader类和BufferedReader类</h2><p>一行一个学生信息，所以读取时打算直接readline，需要<code>BufferedReader</code>类，进而需要<code>FileReader</code>类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">String tmpString = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为基本信息文件中保存的是奖励在奖励文件中的位置与长度，所以在读取时需要设置文件指针。</p>
+<p>这个需要用到<code>RandomAccessFile</code>类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">"r"</span>);<span class="comment">//打开随机读写</span></span><br></pre></td></tr></table></figure>
+
+<p>设置文件指针到指定位置，读取对应长度的字节。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">randomAccessFile.seek(position);</span><br><span class="line"><span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes);</span><br></pre></td></tr></table></figure>
+
+<p>写到这里我还遇到了一个问题，就是读取到字符串后，无法判断字符串是否为空，如果用<code>rewardString.equals(&quot;&quot;)</code>或者``rewardString.isEmpty()`，发现字符串的长度是和我设置的缓冲区大小有关的。虽然全部是空白，但是并不为空字符串。用长度判断也不行。</p>
+<p>后来找到了一个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br></pre></td></tr></table></figure>
+
+<p><code>trim()</code>可以去掉首尾空白，那么1024长度的空字符串就会变成0长度的普通的空字符串，就可以用刚刚的方式来判断学生是否有奖励了。</p>
+<h2 id="录入学生信息"><a href="#录入学生信息" class="headerlink" title="录入学生信息"></a>录入学生信息</h2><p>java的控制台输入我也是没弄过，这次就来试试。</p>
+<p>会了之后发现蛮简单的。创建一个<code>Scanner</code>对象，传入源输入流，要从控制台输入，所以输入流设置为<code>System.in</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
+
+<p>需要读取一行数据，可以使用<code>next()</code>或者<code>nextLine()</code>方法，区别详情见百度</p>
+<p>录入普通字符串搞定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的学号"</span>);</span><br><span class="line">String studentId = scanner.nextLine();</span><br><span class="line">		</span><br><span class="line">System.out.println(<span class="string">"请输入学生的姓名"</span>);</span><br><span class="line">String name = scanner.nextLine();</span><br></pre></td></tr></table></figure>
+
+<p>录入性别则需要判断合法性（其实上面的学号，姓名也需要判断合法性，不过不是本次练习的核心，就没弄了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String genderString = <span class="string">""</span>;</span><br><span class="line">Gender gender = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">"请输入学生的性别,输入\"男\" 或者\"女\""</span>);</span><br><span class="line">	genderString = scanner.nextLine();</span><br><span class="line">	gender =  Gender.newGender(genderString);</span><br><span class="line">&#125;<span class="keyword">while</span>(gender == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里用了一个do-while循环，如果输入的不是枚举类里面有的值，就要求再次输入。</p>
+<p>接着是年龄，年龄是一个正整数，需要<code>nextInt()</code>来获取整数，如果输入的不是整数，就会抛出异常。处理完这个异常之后继续要求输入，直到输入正确的年龄为止。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的年龄"</span>);</span><br><span class="line"><span class="keyword">int</span> age = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		age = scanner.nextInt();</span><br><span class="line">		<span class="keyword">if</span>(age&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">"年龄必须是正数"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		System.out.println(<span class="string">"年龄必须是整数"</span>);</span><br><span class="line">		scanner.next();<span class="comment">//清空错误数据</span></span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在输入完整数类型的年龄后，需要输入字符串类型的专业了，这里会遇到和C++输入一样的情况，那就是你还没输入就当你输入了，最后得到的是空字符串。这是因为在输入整数后按下回车键确定时，这个换行符还留存在输入缓冲区，下一个<code>nextLine()</code>将其当成了结束标志，从而结束字符串的输入。所以需要清空一下缓冲区，清空方式就是读取一个值并丢弃：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scanner.nextLine();<span class="comment">//清除缓冲区空行</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"请输入学生的专业"</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br></pre></td></tr></table></figure>
+
+<p>最后是录入学生的奖励，这个部分加深了我对“String的相等比较不能用<code>==</code>而要用<code>equals()</code>”的知识点的印象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的专业"</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"请输入学生的奖励，每输入完一项换行，输入\"done\"结束输入"</span>);</span><br><span class="line">String rewardString = <span class="string">""</span>;</span><br><span class="line">Vector&lt;String&gt; reward = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	rewardString = scanner.nextLine();</span><br><span class="line">	<span class="keyword">if</span>(!rewardString.equalsIgnoreCase(<span class="string">"done"</span>)) reward.add(rewardString);</span><br><span class="line">&#125; <span class="keyword">while</span> (!rewardString.equalsIgnoreCase(<span class="string">"done"</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><h2 id="保存数据到文件"><a href="#保存数据到文件" class="headerlink" title="保存数据到文件"></a>保存数据到文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 保存到文件中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 保存的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">saveData</span><span class="params">(String pathName)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">		<span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">		</span><br><span class="line">		File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">		File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">"/Rewards.csv"</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line">		<span class="keyword">if</span>(!rewardFile.exists()) rewardFile.createNewFile();</span><br><span class="line">		</span><br><span class="line">		FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br><span class="line">		FileOutputStream rewardFOS = <span class="keyword">new</span> FileOutputStream(rewardFile);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> curPosition = <span class="number">0</span>;<span class="comment">//“奖励”文件指针当前位置</span></span><br><span class="line">		<span class="keyword">for</span>(StudentInfo studentInfo:m_studentInfoList) &#123;</span><br><span class="line">			</span><br><span class="line">			String studentInfoString = String.format(<span class="string">"%s,%s,%s,%d,%s,"</span>, </span><br><span class="line">					studentInfo.getStudentId(),</span><br><span class="line">					studentInfo.getName(),</span><br><span class="line">					studentInfo.getGender().getGenderString(),</span><br><span class="line">					studentInfo.getAge(),</span><br><span class="line">					studentInfo.getMajor()</span><br><span class="line">					);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			String rewardString = String.join(<span class="string">","</span>, studentInfo.getReward());<span class="comment">//拼接奖励字符串</span></span><br><span class="line">			<span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">				<span class="comment">//奖励字符串不为空，则添加换行符</span></span><br><span class="line">				rewardString += <span class="string">"\n"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">				</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">byte</span>[] rewardBuf = rewardString.getBytes();<span class="comment">//转换为字节数组</span></span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			studentInfoString += String.format(<span class="string">"%s,%s\n"</span>, curPosition,rewardBuf.length);</span><br><span class="line">			curPosition += rewardBuf.length;<span class="comment">//计算下一个位置</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//写入文件		</span></span><br><span class="line">			infoFOS.write(infoBuf);</span><br><span class="line">			rewardFOS.write(rewardBuf);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.printf(<span class="string">"成功保存%d条记录到以下文件中：\n[%s]\n[%s]\n"</span>,</span><br><span class="line">				m_studentInfoList.size(),</span><br><span class="line">				infoFile.getCanonicalPath(),</span><br><span class="line">				rewardFile.getCanonicalPath()</span><br><span class="line">				);</span><br><span class="line">		</span><br><span class="line">		rewardFOS.close();</span><br><span class="line">		infoFOS.close();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> m_studentInfoList.size();</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="从文件中加载数据"><a href="#从文件中加载数据" class="headerlink" title="从文件中加载数据"></a>从文件中加载数据</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 从文件中加载</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> clearFlag 是否清空内存中原有数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 读取的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">loadData</span><span class="params">(String pathName,<span class="keyword">boolean</span> clearFlag)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(clearFlag) m_studentInfoList.clear();</span><br><span class="line">			</span><br><span class="line">			File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">			<span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">			</span><br><span class="line">			File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">			File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">"/Rewards.csv"</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line">		</span><br><span class="line">			</span><br><span class="line">			BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">			RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">"r"</span>);<span class="comment">//打开随机读写</span></span><br><span class="line">			</span><br><span class="line">			String tmpString = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//按行读取</span></span><br><span class="line">				String[] infoStrings = tmpString.split(<span class="string">","</span>);<span class="comment">//按照分隔符分割</span></span><br><span class="line">				</span><br><span class="line">				<span class="keyword">if</span>(infoStrings.length != <span class="number">7</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果字段数对不上，说明文件格式有问题</span></span><br><span class="line">				&#125;</span><br><span class="line">					</span><br><span class="line">				<span class="comment">//从StudentInfo文件中读取学生信息</span></span><br><span class="line">				String studentId = infoStrings[<span class="number">0</span>];</span><br><span class="line">				String name = infoStrings[<span class="number">1</span>];</span><br><span class="line">				Gender gender = Gender.newGender(infoStrings[<span class="number">2</span>]);</span><br><span class="line">				<span class="keyword">if</span>(gender == <span class="keyword">null</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">int</span> age = Integer.parseInt(infoStrings[<span class="number">3</span>]);</span><br><span class="line">				String major = infoStrings[<span class="number">4</span>];</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">long</span> position = Long.parseLong(infoStrings[<span class="number">5</span>]);</span><br><span class="line">				<span class="keyword">int</span> rewardLen = Integer.parseInt(infoStrings[<span class="number">6</span>]);</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">				randomAccessFile.seek(position);</span><br><span class="line">				<span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">				randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line">				</span><br><span class="line">				String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br><span class="line">				</span><br><span class="line">				</span><br><span class="line">				Vector&lt;String&gt; rewardList = <span class="keyword">null</span>;</span><br><span class="line">				<span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">					<span class="comment">//如果奖励不为空则添加</span></span><br><span class="line">					rewardList = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line">					String[] rewardArr = rewardString.split(<span class="string">","</span>);</span><br><span class="line">					<span class="keyword">for</span>(String reward : rewardArr) &#123;</span><br><span class="line">						rewardList.add(reward);</span><br><span class="line">					&#125;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				</span><br><span class="line">				StudentInfo newStudentInfo = <span class="keyword">new</span> StudentInfo(studentId, name, gender, age, major, rewardList);</span><br><span class="line">				</span><br><span class="line">				m_studentInfoList.add(newStudentInfo);</span><br><span class="line">				counter++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			bufReader.close();</span><br><span class="line">			randomAccessFile.close();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">return</span> counter;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>憧憬少
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://changingself.github.io/posts/java_simple_studentInfoSystem/" title="【编程练习】java简易学生管理系统">https://changingself.github.io/posts/java_simple_studentInfoSystem/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/Scrapy_spider_1/" rel="prev" title="Scrapy爬虫框架（1）一个简单的可用的爬虫">
+      <i class="fa fa-chevron-left"></i> Scrapy爬虫框架（1）一个简单的可用的爬虫
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/sound-card-data-acquisition/" rel="next" title="【作业总结】声卡数据采集及处理">
+      【作业总结】声卡数据采集及处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件1-学生基本信息"><span class="nav-number">2.1.</span> <span class="nav-text">文件1 学生基本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件2-奖励"><span class="nav-number">2.2.</span> <span class="nav-text">文件2 奖励</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构"><span class="nav-number">3.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点总结"><span class="nav-number">4.</span> <span class="nav-text">知识点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gender枚举类"><span class="nav-number">4.1.</span> <span class="nav-text">Gender枚举类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File类"><span class="nav-number">4.2.</span> <span class="nav-text">File类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileOutputStream类"><span class="nav-number">4.3.</span> <span class="nav-text">FileOutputStream类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileReader类和BufferedReader类"><span class="nav-number">4.4.</span> <span class="nav-text">FileReader类和BufferedReader类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#录入学生信息"><span class="nav-number">4.5.</span> <span class="nav-text">录入学生信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心代码"><span class="nav-number">5.</span> <span class="nav-text">核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存数据到文件"><span class="nav-number">5.1.</span> <span class="nav-text">保存数据到文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从文件中加载数据"><span class="nav-number">5.2.</span> <span class="nav-text">从文件中加载数据</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="憧憬少"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">憧憬少</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChangingSelf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChangingSelf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13290087" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;13290087" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>Bilibili</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://endlesspeak.gitee.io/" title="https:&#x2F;&#x2F;endlesspeak.gitee.io&#x2F;" rel="noopener" target="_blank">无涯</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lollipopnougat.github.io/Crepeblog/" title="https:&#x2F;&#x2F;lollipopnougat.github.io&#x2F;Crepeblog&#x2F;" rel="noopener" target="_blank">封掣</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/1625--H/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1625--H&#x2F;" rel="noopener" target="_blank">暮冥</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hanechiri.github.io/" title="https:&#x2F;&#x2F;hanechiri.github.io" rel="noopener" target="_blank">羽尘</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://1rt7cz.coding-pages.com/" title="https:&#x2F;&#x2F;1rt7cz.coding-pages.com&#x2F;" rel="noopener" target="_blank">跃东</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">憧憬少</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">44 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2c2d9b5607027ef5684f',
+      clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+      repo: 'blog-comments',
+      owner: 'ChangingSelf',
+      admin: ['ChangingSelf'],
+      id: '7683a98daedcc99a7ea31f8b47e8ae18',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":false},"log":false});</script></body>
+</html>

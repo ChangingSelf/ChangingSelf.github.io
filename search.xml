@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>记第二次重装系统</title>
+    <url>/posts/Reinstall_win10/</url>
+    <content><![CDATA[<p>折腾了三个多小时终于把win10重装好了，这是我第二次自己装系统。</p>
+<p>本文记录了我这次重装系统的过程，以及一些从中学到的新知识，供参考。</p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.bilibili.com/video/av77344372" target="_blank" rel="noopener">【装机教程】超详细WIN10系统安装教程，官方ISO直装与PE两种方法</a></li>
+<li><a href="https://github.com/chennnnny/good-use-software/wiki/" target="_blank" rel="noopener">定制chocolatey安装路径</a></li>
+</ul>
+<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>第一次重装用的是一键装机的软件做的U盘，捆绑了一大堆东西，而且装完还是什么都不明白，啥也没学到，装的还是阉割版的企业版（不确定是不是，因为我现在装好专业版后发现功能似乎比原来多）</p>
+<p>这一次重装的起因是：我弟将家里的台式机从win7升级到win10。他在b站找到了一个讲得非常详细的<a href="https://www.bilibili.com/video/av77344372" target="_blank" rel="noopener">装系统教程</a>，并且成功自己装好了系统。</p>
+<p>我也看了一下那个教程，光是看完视频我就觉得收获颇多，比第一次自己动手装系统学到的还多。学到了pe是什么，以及装系统的一些原理。</p>
+<p>当时我就给自己以前买的16gU盘里面装了一个pe，并尝试从U盘启动以打开pe。不同于第一次，这一次我对里面的东西都有了一些了解，不是完全抓瞎，开始研究里面每个东西是干啥的。非常有成就感。</p>
+<p>玩了一下pe之后就退了回到win10，虽然也有安装包，不过我还是不敢轻易装，还是怕自己吧电脑折腾坏了，等到下次做好准备再说。</p>
+<p>这周五我觉得就是合适的时机了，晚上九点钟将系统先用dism++备份好，在幕布（可以在网页端登录）列好需要重新安装的软件，准备开始了。</p>
+<h1 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h1><p>在操作开始之前，我先总结一下有关的概念</p>
+<h2 id="什么是PE系统"><a href="#什么是PE系统" class="headerlink" title="什么是PE系统"></a>什么是PE系统</h2><p>下面来自百度百科：</p>
+<blockquote>
+<p>Windows Preinstallation Environment（Windows PE），Windows预安装环境，是带有有限服务的最小Win32子系统，基于以保护模式运行的Windows XP Professional及以上内核。它包括运行Windows安装程序及脚本、连接网络共享、自动化基本过程以及执行硬件验证所需的最小功能。</p>
+</blockquote>
+<p>简单来说，PE就是一个小型的windows系统，去掉了一切不必要的功能，将体积缩小到能够装进U盘里面运行（当然并不是在U盘里面直接运行）。</p>
+<p>电脑可以选择从哪个磁盘来启动，如果你插上了U盘，也可以选择从U盘启动，从而启动U盘中存放的PE系统。</p>
+<h2 id="两种安装方式"><a href="#两种安装方式" class="headerlink" title="两种安装方式"></a>两种安装方式</h2><p>如同参考视频里面说的，你可以用官方镜像来安装，也可以用PE系统来辅助安装。</p>
+<p>第一种方法就是到微软官网去，用官网的启动U盘制作器把你的U盘制作成启动U盘，这样你从U盘启动电脑之后，就会自动进入安装程序。</p>
+<p>第二种方法是下载系统的ISO镜像文件（其实就是一个比较特别的压缩包），并在U盘里面安装PE系统，把ISO文件放进U盘。从U盘启动时，首先进入PE系统，在这里可以对现有的磁盘进行操作，你可以用PE里面自带的分区工具来提前分区，然后装载放在U盘的ISO文件，进行安装。</p>
+<p>详细的内容看参考视频，UP主讲得非常非常好！</p>
+<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>开始安装之后把系统盘清了准备安装结果出现错误，我开始慌了。</p>
+<p>退出安装回到pe桌面，在家里找出以前买的移动硬盘，把文件啥的给拷进去（之前认为装系统只清系统盘就够了，但现在的情况似乎要全部清掉，不管怎样先备份），同时使用pe里面的dism++来尝试恢复之前的备份。</p>
+<p>使用PE系统安装的好处就体现出来了，如果我用的是第一种方法，那么一旦主系统被删了，那么我就没办法补救了，连进去拷贝数据都做不到。</p>
+<p>也许是我使用方式不对，系统并没有恢复，拔掉U盘后无法进入系统。那就只好继续装了。</p>
+<p>由于我以及备份好了数据，所以将分区全部清掉，重新分区。</p>
+<p>我现在有一块1T的机械硬盘和自己加装的256g的固态硬盘。</p>
+<p>固态硬盘两个区：</p>
+<ul>
+<li>系统C盘</li>
+<li>加速区S盘</li>
+</ul>
+<p>机械硬盘四个区</p>
+<ul>
+<li>虚拟机Z盘（未装SSD前的C盘，后来被我用来放virtualbox的虚拟磁盘）</li>
+<li>文件F盘</li>
+<li>软件D盘</li>
+<li>娱乐E盘。</li>
+</ul>
+<p>分区确实挺多的，足足六个分区，而其中还有功能重复的盘。根据我现在的使用情况，我分成了三个分区：系统C盘，软件D盘，文件F盘。</p>
+<p>F盘是我之前最常用的盘，正因为之前把所有资料都放在这里，备份起来非常方便。</p>
+<p>之后就很顺利的照着视频完成了安装。</p>
+<h2 id="chocolatey重装软件"><a href="#chocolatey重装软件" class="headerlink" title="chocolatey重装软件"></a>chocolatey重装软件</h2><p>重装软件我使用的是chocolatey，这个是我最近找到的一个工具，它是一个windows包管理工具，类似于Linux上面的apt，不用关心它从哪里下载，安装到哪里，有哪些依赖，一个命令搞定安装。</p>
+<p>如果你不想让它默认安装在C盘，那么你得先在环境变量里面添加一个变量<code>ChocolateyInstall</code>，值为你指定的它的安装路径。</p>
+<p>如果你不想让它将下载的软件放在C盘，那么你也得添加一个环境变量<code>ChocolateyToolsLocation</code>，值为你指定的工具安装路径。</p>
+<p>然后去它的<a href="https://www.chocolatey.org/install" target="_blank" rel="noopener">官网</a>下载它。（如果先安装再修改环境变量会出现一系列问题，别问我怎么知道的）</p>
+<p>下载它的方式是：复制官网给出的下载命令，以管理员身份打开powershell，运行这条安装命令，它就会自动安装到你之前指定的位置。</p>
+<p>在cmd或者powershell输入以下命令以确认安装成功：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> -?</span><br></pre></td></tr></table></figure>
+
+<p>常用指令：</p>
+<p>列出/查询软件包</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> list 软件包名</span><br><span class="line"><span class="variable">$choco</span> search 软件包名</span><br></pre></td></tr></table></figure>
+
+<p>查询本地已安装的软件包（-lo就是local的缩写）</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> list <span class="literal">-lo</span></span><br></pre></td></tr></table></figure>
+
+<p>安装某个软件包</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> install 软件包名</span><br></pre></td></tr></table></figure>
+
+<p>卸载某个软件包</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> uninstall 软件包名</span><br></pre></td></tr></table></figure>
+
+<p>升级某个软件</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> upgrade 软件包名</span><br></pre></td></tr></table></figure>
+
+<p>更多的命令可以去官网的<a href="https://www.chocolatey.org/docs" target="_blank" rel="noopener">文档</a>查看，具体有哪些包可以去<a href="https://www.chocolatey.org/packages" target="_blank" rel="noopener">这里</a>查看</p>
+<h3 id="我用chocolatey安装的软件"><a href="#我用chocolatey安装的软件" class="headerlink" title="我用chocolatey安装的软件"></a>我用chocolatey安装的软件</h3><p>比如我要安装chrome，可以用这个命令：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$choco</span> install googlechrome</span><br></pre></td></tr></table></figure>
+
+<p>下面列出我下载的软件：</p>
+<ul>
+<li><p>chrome：谷歌浏览器</p>
+</li>
+<li><p>git</p>
+<ul>
+<li>choco install git.install</li>
+</ul>
+</li>
+<li><p>cmder：很好用的终端，可以代替系统自带的cmd和powershell来用</p>
+<ul>
+<li>choco install cmder</li>
+</ul>
+</li>
+<li><p>potplayer：很好用的视频播放器</p>
+<ul>
+<li>choco install potplayer</li>
+</ul>
+</li>
+<li><p>wechat：微信</p>
+<ul>
+<li>choco install wechat</li>
+</ul>
+</li>
+<li><p>github-desktop</p>
+<ul>
+<li>choco install github-desktop</li>
+</ul>
+</li>
+<li><p>vscode</p>
+<ul>
+<li>choco install vscode</li>
+</ul>
+</li>
+<li><p>eclipse</p>
+<ul>
+<li>choco install eclipse</li>
+</ul>
+</li>
+<li><p>jdk8</p>
+<ul>
+<li>choco install jdk8</li>
+</ul>
+</li>
+<li><p>python</p>
+<ul>
+<li>choco install python</li>
+</ul>
+</li>
+<li><p>steam</p>
+</li>
+<li><p>wps-office-free</p>
+<p>英文版的</p>
+<ul>
+<li>由于无法使用之前的账号登录就换成中国版了</li>
+</ul>
+</li>
+<li><p>winrar</p>
+</li>
+<li><p>putty</p>
+</li>
+<li><p>anki</p>
+</li>
+<li><p>obs</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>win10</tag>
+        <tag>os</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【作业总结】声卡数据采集及处理</title>
+    <url>/posts/sound-card-data-acquisition/</url>
+    <content><![CDATA[<p>这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业：</p>
+<p>以小组为单位，写一个声卡数据采集程序，功能要求：</p>
+<ol>
+<li>以曲线形式显示波形；</li>
+<li>利用数字滤波器对数据进行平滑滤波；</li>
+<li>对声音信号进行FFT变化，计算信号的主频。</li>
+</ol>
+<p>对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。</p>
+<p>到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，<del>为了能够偷懒，</del>为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。</p>
+<p>本文并不专业，作者本身不是控制专业，所以出现错误在所难免，<strong>本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。</strong></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="http://shanewfx.github.io/blog/2013/08/14/caprure-audio-on-windows/" target="_blank" rel="noopener">Windows上的音频采集技术</a>：采集过程整体流程说明</li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/wasapi" target="_blank" rel="noopener">About WASAPI</a>：音频API官方文档</li>
+<li><a href="https://blog.csdn.net/FunnyWhiteCat/article/details/88676119" target="_blank" rel="noopener">使用WASAPI捕获声卡音频</a>：对官方文档示例代码的改写</li>
+<li><a href="https://www.jianshu.com/p/968f684ecd83" target="_blank" rel="noopener">WASAPI 01 采集默认设备的音频</a>：对API分段解析的一篇博文</li>
+<li><a href="https://www.bilibili.com/video/av91971619" target="_blank" rel="noopener">如何对时域声音信号进行FFT变换</a>：一个B站的视频，蛮不错的，比较清晰，不过没讲FFT原理，我从中知道了FFT的输入输出分别应该是什么。</li>
+<li><a href="https://www.bilibili.com/video/av45626580/" target="_blank" rel="noopener">【算法讲堂】【电子科技大学】【ACM】快速傅里叶变换（FFT）</a>：也是B站视频，代码主要参考的是这个，不过是递归版本的。但是好理解</li>
+<li><a href="https://blog.csdn.net/enjoy_pascal/article/details/81478582" target="_blank" rel="noopener">简单易懂的FFT</a></li>
+<li><a href="https://blog.csdn.net/u011327754/article/details/80001123" target="_blank" rel="noopener">【信号处理】信号处理中的FFT后的意义及常用处理方法</a></li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>还是得写啊，我先确认一下小组成员的配置。</p>
+<p>小组总共四个人，<a href="https://github.com/ChangingSelf" target="_blank" rel="noopener">我</a>、<a href="https://github.com/EndlessPeak" target="_blank" rel="noopener">leesin</a>、<a href="https://github.com/MikoSamey" target="_blank" rel="noopener">咸鱼米</a>、<a href="https://gitee.com/jane_white" target="_blank" rel="noopener">简白</a>。</p>
+<p>我只和咸鱼米一起写过代码，大致了解她的水平。</p>
+<p>预估编程能力：我 &gt; leesin &gt; 咸鱼米 &gt; 简白；</p>
+<p>对git了解程度： 我 ≈ leesin &gt; 咸鱼米 &gt; 简白；</p>
+<h2 id="硬件配置"><a href="#硬件配置" class="headerlink" title="硬件配置"></a>硬件配置</h2><p>简白没有带电脑，无法参与编程；</p>
+<p>咸鱼米的电脑非常卡顿，存储空间也非常小，上学期写课设的时候，她甚至是把eclipse放在U盘里面打开的，不指望她能用vs。</p>
+<p>leesin的电脑应该和我相当，目前没有出现过啥问题。</p>
+<p>我的电脑以及网络应该是小组里面最好的，游戏本外加非常快的网络，看网课从来只有老师那边卡（说起这个就想起网络测控老师那边卡成壁纸的网速）</p>
+<h2 id="软件配置"><a href="#软件配置" class="headerlink" title="软件配置"></a>软件配置</h2><p>首先应该会用到windows的API，用C++比较好，组员们最熟悉的也是它（大概吧），而且课设是做个小车，曾经接触过单片机编程，知道是需要用C来编程的，java、python啥的别想用，所以最终选了C++。</p>
+<p>这次除了这上面的作业外，还有一个略简单的作业，PID控制程序，这个就用VC++6.0来写了，照顾一下没有vs的咸鱼米，正好我也在学校机房写习惯了它。</p>
+<p>但是写完PID之后，发现声卡数据采集程序要是拿VC++6.0来写，未知原因跑不通，加上调试起来确实没有vs方便，就决定这个项目还是用vs吧。</p>
+<p>IDE决定是vs，接着是协作方式的问题，果断git，平台的话，还是用国内的码云吧，毕竟要考虑网速问题。</p>
+<p>在码云上建立了私有仓库，用master-develop分支结构。</p>
+<h1 id="时间轴"><a href="#时间轴" class="headerlink" title="时间轴"></a>时间轴</h1><h2 id="周二-2020-03-03"><a href="#周二-2020-03-03" class="headerlink" title="周二-2020-03-03"></a>周二-2020-03-03</h2><p>初步了解组员情况，分析题目要求。</p>
+<p>在码云建立私有库，并邀请组员加入。PID项目初始化。</p>
+<h2 id="周三-2020-03-04"><a href="#周三-2020-03-04" class="headerlink" title="周三-2020-03-04"></a>周三-2020-03-04</h2><p>了解了一下PID算法，然后交给leesin和咸鱼米去整了。</p>
+<p>真正的难点在于声卡数据采集和处理这个项目。我们都对此非常不了解。</p>
+<h3 id="声卡数据采集"><a href="#声卡数据采集" class="headerlink" title="声卡数据采集"></a>声卡数据采集</h3><p>首先，需要采集声音信息。</p>
+<p>该如何采集？我当时想到的是，应该是有API可以调用的，但是并没有查到那种讲解API的博客，能找到的只有官方文档：<a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/wasapi" target="_blank" rel="noopener">About WASAPI</a>。</p>
+<p>在本次项目之前，我是不太喜欢读文档的，因为有很多讲解得很详细的博客，没理由去自己啃文档啊，而且一般那种时候我都是处于课设周，需要查询大量资料，没有时间去看英文文档，除非遇到看博客解决不了的问题。</p>
+<p>这次只能看了，当然，还是得配合翻译插件（chrome刚装彩云小译没几天就用上了，中英对照效果还不错）。</p>
+<blockquote>
+<p>The Windows Audio Session API (WASAPI) enables client applications to manage the flow of audio data between the application and an <a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/audio-endpoint-devices" target="_blank" rel="noopener">audio endpoint device</a>.</p>
+<p>Windows 音频会话 API (WASAPI)使客户端应用程序能够管理应用程序和音频端点设备之间的音频数据流。</p>
+<p>Header files Audioclient.h and Audiopolicy.h define the WASAPI interfaces.</p>
+<p>头文件 Audioclient.h 和 audiopolis. h 定义了 WASAPI 接口。</p>
+</blockquote>
+<p>懂了，想用这个API得先包含两个头文件，<code>Audioclient.h</code>和<code>Audiopolicy.h</code>，不过在vc++6.0我编译不了，说没有这俩文件，但是vs可以，所以后来统一用了vs。</p>
+<p>接着看后面的说明，照着做但是不行。</p>
+<p>比如，让我调用<code>IMMDevice::Activate</code>这个方法，写上去却找不到这个方法，说是<code>::</code>前面得是命名空间或者类。后来折腾了很久才发现，原来<code>IMMDevice</code>不是命名空间而是类名啊！</p>
+<p>然而我还是不太清楚如何弄出来它说的那些客户端，各种参数太多了，不知道传啥。好在后面终于找到了一些有用的资料。</p>
+<p>对于采集数据的流程和原理不是很明白，但是通过读文档以及后来找到的一些博客互相配合着理解，总算对整个流程有了一个大致的了解。</p>
+<p>流程分为以下几步（<a href="http://shanewfx.github.io/blog/2013/08/14/caprure-audio-on-windows/" target="_blank" rel="noopener">Windows上的音频采集技术</a>：采集过程整体流程说明）：</p>
+<blockquote>
+<ul>
+<li>创建多媒体设备枚举器(IMMDeviceEnumerator)</li>
+<li>通过多媒体设备枚举器获取声卡接口(IMMDevice)</li>
+<li>通过声卡接口获取声卡客户端接口(IAudioClient)</li>
+<li>通过声卡客户端接口(IAudioClient)可获取声卡输出的音频参数、初始化声卡、获取声卡输出缓冲区的大小、开启/停止对声卡输出的采集</li>
+<li>通过声卡采集客户端接口(IAudioCaptureClient)可获取采集的声卡输出数据，并对内部缓冲区进行控制</li>
+</ul>
+</blockquote>
+<hr>
+<p>由于用到的函数太多了，就只给出函数官方文档链接，以及在代码中做出简单的注释。注释内容大部分为机翻。</p>
+<p>为了清晰，没有加入错误处理的代码。</p>
+<p>下面的示例代码解析自官方的示例程序<a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/capturing-a-stream" target="_blank" rel="noopener">Capturing a Stream</a>，会有一些改动。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>最开始，得使用<code>CoInitialize</code>函数来在当前线程上初始化 COM 库（<a href="https://docs.microsoft.com/en-us/windows/win32/api/objbase/nf-objbase-coinitialize" target="_blank" rel="noopener">CoInitialize函数</a>）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">CoInitialize(<span class="literal">NULL</span>);<span class="comment">//初始化com库</span></span><br></pre></td></tr></table></figure>
+
+<p>采集结束后，记得关闭</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">CoUninitialize();</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建多媒体设备枚举器"><a href="#创建多媒体设备枚举器" class="headerlink" title="创建多媒体设备枚举器"></a>创建多媒体设备枚举器</h4><p>定义一些常量</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioClient = __uuidof(IAudioClient);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioCaptureClient = __uuidof(IAudioCaptureClient);</span><br></pre></td></tr></table></figure>
+
+<p>这些常量是这些类的UUID，总之就是用来标识这些类的。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance" target="_blank" rel="noopener">Cocreateinstance函数</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建多媒体设备枚举器</span></span><br><span class="line">	IMMDeviceEnumerator *pEnumerator = <span class="literal">NULL</span>;</span><br><span class="line">	CoCreateInstance(</span><br><span class="line">		CLSID_MMDeviceEnumerator, <span class="comment">//创建与指定 CLSID (Class ID，即类标识符)关联的类的单个未初始化对象。</span></span><br><span class="line">        <span class="literal">NULL</span>,<span class="comment">//如果为 NULL，则表示该对象不是作为聚合的一部分创建的</span></span><br><span class="line">		CLSCTX_ALL,<span class="comment">//管理新创建对象的代码将在其中运行的上下文。 这些值取自枚举 CLSCTX</span></span><br><span class="line">        IID_IMMDeviceEnumerator,<span class="comment">//对用于与对象通信的接口标识符的引用</span></span><br><span class="line">		(<span class="keyword">void</span>**)&amp;pEnumerator);<span class="comment">//接收 riid 请求的接口指针的指针变量的地址。 成功返回后，* ppv 包含请求的接口指针。 失败时，* ppv 包含 NULL。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取声卡接口"><a href="#获取声卡接口" class="headerlink" title="获取声卡接口"></a>获取声卡接口</h4><p>使用刚刚获取的枚举器来获取默认音频端点设备。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdeviceenumerator-getdefaultaudioendpoint" target="_blank" rel="noopener">IMMDeviceEnumerator::GetDefaultAudioEndpoint方法</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取声卡接口</span></span><br><span class="line">	IMMDevice *pDevice = <span class="literal">NULL</span>;<span class="comment">//声卡接口</span></span><br><span class="line">	pEnumerator-&gt;GetDefaultAudioEndpoint(</span><br><span class="line">		eCapture,<span class="comment">//端点设备的数据流方向。 调用方应该将此参数设置为以下两个 EDataFlow 枚举值之一:eRender,eCapture,前者渲染，后者捕获</span></span><br><span class="line">        eConsole,<span class="comment">//端点设备的角色。 调用者应该将这个参数设置为以下 ERole 枚举值之一:eConsole,eMultimedia,eCommunications</span></span><br><span class="line">        &amp;pDevice);<span class="comment">//指向一个指针变量，该方法将默认音频端点设备的端点对象的 immmdevice 接口的地址写入该指针变量</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="设置默认音频格式"><a href="#设置默认音频格式" class="headerlink" title="设置默认音频格式"></a>设置默认音频格式</h4><p>这里用的是使用最小音频格式，也可以手动设置自己的音频格式。</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmeapi/ns-mmeapi-waveformatex" target="_blank" rel="noopener">WAVEFORMATEX 结构体</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取音频格式</span></span><br><span class="line">WAVEFORMATEX *pwfx = <span class="literal">NULL</span>;</span><br><span class="line">pAudioClient-&gt;GetMixFormat(&amp;pwfx);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取声卡客户端"><a href="#获取声卡客户端" class="headerlink" title="获取声卡客户端"></a>获取声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-activate" target="_blank" rel="noopener">IMMDevice::Activate方法</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//通过声卡接口获取声卡客户端接口</span></span><br><span class="line">	IAudioClient *pAudioClient = <span class="literal">NULL</span>;</span><br><span class="line">	pDevice-&gt;Activate(IID_IAudioClient, CLSCTX_ALL, <span class="literal">NULL</span>, (<span class="keyword">void</span>**)&amp;pAudioClient);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="初始化声卡客户端"><a href="#初始化声卡客户端" class="headerlink" title="初始化声卡客户端"></a>初始化声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-initialize" target="_blank" rel="noopener">IAudioClient::Initialize方法</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">REFERENCE_TIME hnsRequestedDuration = REFTIMES_PER_SEC; <span class="comment">//采样持续时间，单位100纳秒</span></span><br><span class="line">pAudioClient-&gt;Initialize(</span><br><span class="line">	AUDCLNT_SHAREMODE_SHARED,<span class="comment">//与其他设备共享音频端点设备</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//选项</span></span><br><span class="line">	hnsRequestedDuration,<span class="comment">//以时间值表示的缓冲区容量</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//设备周期，共享模式下设为0</span></span><br><span class="line">	pwfx,<span class="comment">//音频格式</span></span><br><span class="line">	<span class="literal">NULL</span><span class="comment">//指向session的GUID的指针，设置为NULL表示打开一个新session</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><code>REFTIMES_PER_SEC</code>是一个宏，作为参考时间单位。100纳秒 = 1e-7秒，即这个宏定义的值。也就是说，上面的代码是采样1秒的意思。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取捕获客户端"><a href="#获取捕获客户端" class="headerlink" title="获取捕获客户端"></a>获取捕获客户端</h4><p><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudioclient-getservice" target="_blank" rel="noopener">IAudioClient::GetService方法</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取捕获客户端</span></span><br><span class="line">	IAudioCaptureClient *pCaptureClient = <span class="literal">NULL</span>;</span><br><span class="line">	hr = pAudioClient-&gt;GetService(</span><br><span class="line">        IID_IAudioCaptureClient, <span class="comment">//客户端接口ID</span></span><br><span class="line">        (<span class="keyword">void</span>**)&amp;pCaptureClient);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="启动音频流"><a href="#启动音频流" class="headerlink" title="启动音频流"></a>启动音频流</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-start" target="_blank" rel="noopener">IAudioClient::Start</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//启动音频流</span></span><br><span class="line">m_pAudioClient-&gt;Start();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="采集数据"><a href="#采集数据" class="headerlink" title="采集数据"></a>采集数据</h4><p>启动音频流之后，就可以开始捕获数据了，音频流有一个缓冲区</p>
+<p>流程如下：</p>
+<ul>
+<li>从缓冲区获取下一个数据包</li>
+<li>处理数据包</li>
+<li>释放缓冲区</li>
+<li>获取下一个数据包大小，循环直到缓冲区为空</li>
+</ul>
+<p>获取数据包大小，以确定流中是否有数据。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">UINT32 packetLength = <span class="number">0</span>;<span class="comment">//数据包长度</span></span><br><span class="line">BYTE *pData = <span class="literal">NULL</span>;<span class="comment">//数据包首地址</span></span><br><span class="line">UINT32 numFramesAvailable;<span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">DWORD flags;<span class="comment">//缓冲区状态标志</span></span><br><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; recorder;<span class="comment">//用于存储数据</span></span><br><span class="line"></span><br><span class="line">pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);<span class="comment">//获取下一个数据包的大小</span></span><br></pre></td></tr></table></figure>
+
+<p>处理其中的数据。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-releasebuffer" target="_blank" rel="noopener">IAudioCaptureClient::ReleaseBuffer</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getnextpacketsize" target="_blank" rel="noopener">IAudioCaptureClient::GetNextPacketSize</a></li>
+<li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getbuffer" target="_blank" rel="noopener">IAudioCaptureClient::GetBuffer</a></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (packetLength != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获取缓冲区中的数据</span></span><br><span class="line">		pCaptureClient-&gt;GetBuffer(</span><br><span class="line">			&amp;pData,<span class="comment">//数据包指针变量的地址</span></span><br><span class="line">			&amp;numFramesAvailable, <span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">			&amp;flags, <span class="comment">//缓冲区状态标志</span></span><br><span class="line">			<span class="literal">NULL</span>,</span><br><span class="line">			<span class="literal">NULL</span></span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//判断是否静音</span></span><br><span class="line">		<span class="keyword">if</span> (flags &amp; AUDCLNT_BUFFERFLAGS_SILENT)</span><br><span class="line">		&#123;</span><br><span class="line">			pData = <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> dataSize = numFramesAvailable * <span class="number">4</span>;<span class="comment">//可用帧数*4=BYTE数</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//采集数据</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataSize; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			BYTE tem = pData[i];</span><br><span class="line">			recorder.push_back(pData[i]);<span class="comment">//添加进自己实现准备好的数据数组中</span></span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//释放缓冲区</span></span><br><span class="line">		pCaptureClient-&gt;ReleaseBuffer(numFramesAvailable);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//获取下一个数据包大小</span></span><br><span class="line">		pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当然，由于缓冲区会不断地进来数据，你可以加一个判断，读取了多少个数据包后退出循环，否则会无限循环。</p>
+<h4 id="关闭音频流"><a href="#关闭音频流" class="headerlink" title="关闭音频流"></a>关闭音频流</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pAudioClient-&gt;Stop();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="测试输出"><a href="#测试输出" class="headerlink" title="测试输出"></a>测试输出</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; recorder.<span class="built_in">size</span>(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, recorder[i]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308165600.png" alt="输出效果图"></p>
+<p>周三大概做到这里</p>
+<h2 id="周四-2020-03-05"><a href="#周四-2020-03-05" class="headerlink" title="周四-2020-03-05"></a>周四-2020-03-05</h2><p>周四主要将波形曲线画出来。</p>
+<h3 id="绘制波形"><a href="#绘制波形" class="headerlink" title="绘制波形"></a>绘制波形</h3><p>创建了一个MFC项目，并新建了一个类，主要是将上面说到的代码简单封装了一下，没有用到的暂时不显示。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//CRecorder.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dshow.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winerror.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mmdeviceapi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Functiondiscoverykeys_devpkey.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audioclient.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audiopolicy.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_ON_ERROR(hres)  \</span></span><br><span class="line">              <span class="keyword">if</span> (FAILED(hres)) &#123; <span class="keyword">goto</span> Exit; &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAFE_RELEASE(punk)  \</span></span><br><span class="line">              <span class="keyword">if</span> ((punk) != <span class="literal">NULL</span>)  \</span><br><span class="line">                &#123; (punk)-&gt;Release(); (punk) = <span class="literal">NULL</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRecorder</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;BYTE&gt; m_recorder;<span class="comment">//数据记录器</span></span><br><span class="line">	IAudioClient *m_pAudioClient;<span class="comment">//声卡客户端</span></span><br><span class="line">	IAudioCaptureClient *m_pCaptureClient;<span class="comment">//捕获流客户端</span></span><br><span class="line">	WAVEFORMATEX *m_pwfx;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	CRecorder();</span><br><span class="line">    <span class="comment">//手动提取出来的代码</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;<span class="comment">//初始化</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">refreshRecorder</span><span class="params">()</span></span>;<span class="comment">//刷新采样数据</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onError</span><span class="params">(HRESULT hres)</span></span>;<span class="comment">//错误处理（也没咋用，懒得写那么多错误处理）</span></span><br><span class="line"></span><br><span class="line">	<span class="function">HRESULT <span class="title">RecordAudioStream</span><span class="params">()</span></span>;<span class="comment">//整块的示例代码，用于测试，现在不使用</span></span><br><span class="line"></span><br><span class="line">	~CRecorder();</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">drawWaveform</span><span class="params">(CDC* pDC, CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span></span>;<span class="comment">//绘制图像</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>实现部分和上面差不多就不赘述了。</p>
+<p>主要是绘制方面。</p>
+<p>第三个参数<code>vector&lt;BYTE&gt; output</code>是为了后面的滤波所准备的，是由leesin提出的改进</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> CRecorder::drawWaveform(CDC* pDC,CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//RecordAudioStream();</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">height</span> = <span class="built_in">rect</span>.Height();</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">width</span> = <span class="built_in">rect</span>.Width();</span><br><span class="line">	<span class="keyword">int</span> x_coefficient = <span class="number">5</span>;</span><br><span class="line">	<span class="comment">//int a = dataStart;</span></span><br><span class="line">	pDC -&gt; MoveTo( <span class="number">0</span>, output[dataStart] );</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = dataStart; i &lt; output.<span class="built_in">size</span>() &amp;&amp; (i-dataStart+<span class="number">1</span>)*x_coefficient &lt;= <span class="built_in">width</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pDC-&gt;LineTo((i-dataStart+<span class="number">1</span>) * x_coefficient, output[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在对话框类中获取pDC</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> CsoundcarddataacquisitionDlg::drawWaveform()</span><br><span class="line">&#123;</span><br><span class="line">	m_pPanel = GetDlgItem(IDC_PANEL);<span class="comment">//获得静态窗口对象指针</span></span><br><span class="line">	<span class="comment">//清屏</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(FALSE);<span class="comment">//偷懒用的方法</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(TRUE);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件区域</span></span><br><span class="line">	CRect <span class="built_in">rect</span>;</span><br><span class="line">	m_pPanel-&gt;GetClientRect(&amp;<span class="built_in">rect</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件画笔</span></span><br><span class="line">	CDC* pDC = m_pPanel-&gt;GetDC();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//绘制原始采样数据</span></span><br><span class="line">	m_pPanel-&gt;UpdateWindow();</span><br><span class="line">	<span class="comment">//m_recorder.RecordAudioStream();</span></span><br><span class="line">	m_recorder.refreshRecorder();</span><br><span class="line">	m_recorder.drawWaveform(pDC, <span class="built_in">rect</span>,m_recorder.NoFiltering());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	ReleaseDC(pDC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; CRecorder::NoFiltering()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_recorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308173908.png" alt="第一次显示的图"></p>
+<h3 id="滤波算法"><a href="#滤波算法" class="headerlink" title="滤波算法"></a>滤波算法</h3><p>老师给了个txt，里面就是各种滤波算法，我也没啥精力去研究了，就交给leesin了，他完成得很不错，就是刚刚上面说的设计就是他整的。不过一开始用的算法效果不太好，让他继续研究。此时咸鱼米在弄vc6.0的PID那个项目，因为她没有vs。</p>
+<h2 id="周五周六-2020-03-06-07"><a href="#周五周六-2020-03-06-07" class="headerlink" title="周五周六-2020-03-06~07"></a>周五周六-2020-03-06~07</h2><p>这两天都在学习那个FFT快速傅里叶变换</p>
+<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>参考各方资料写出来这个递归版本的（迭代版本的看不懂），参考链接见本文开头。</p>
+<ul>
+<li>输入：多项式系数表示法的系数，值为时域下的幅值</li>
+<li>输出：多项式点值表示法的点（以复数表示），其模为频域下的幅值</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*FFT</span></span><br><span class="line"><span class="comment">传入的复数数组里面都是实数，含义是多项式系数表示法的系数，值为时域幅值</span></span><br><span class="line"><span class="comment">系数数组长度得是2的整数次方</span></span><br><span class="line"><span class="comment">返回值的模为频谱幅值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; CRecorder::FFT(<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="number">3.141592651</span>;</span><br><span class="line">	<span class="keyword">int</span> len = A.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (len == <span class="number">1</span>) <span class="keyword">return</span> A;<span class="comment">//递归结束条件</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A1, A2;<span class="comment">//A(x) = A1(x^2) + x * A2(x^2)</span></span><br><span class="line">	<span class="comment">//将系数分类</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">			A1.push_back(A[i]);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			A2.push_back(A[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A1 = FFT(A1);</span><br><span class="line">	A2 = FFT(A2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; Wn(<span class="built_in">cos</span>(<span class="number">2.0</span>*PI / len), <span class="built_in">sin</span>(<span class="number">2.0</span>*PI / len));<span class="comment">//len等分点的角度增量</span></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; W(<span class="number">1.0</span>, <span class="number">0.0</span>);<span class="comment">//用于遍历复平面单位圆上的len个等分点</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i * <span class="number">2</span> &lt; len; i++, W *= Wn)</span><br><span class="line">	&#123;</span><br><span class="line">		A[i] = A1[i] + W * A2[i];</span><br><span class="line">		A[i + len / <span class="number">2</span>] = A1[i] - W * A2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成之后的效果是下面这样的：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308174022.png" alt=""></p>
+<p>上图的坐标都是没有变换的，还是以左上角为原点。</p>
+<p>（未完待续）</p>
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>cpp</tag>
+        <tag>mfc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【编程练习】java简易学生管理系统</title>
+    <url>/posts/java_simple_studentInfoSystem/</url>
+    <content><![CDATA[<p>上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。</p>
+<p>在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。</p>
+<p>本文主要总结一下本练习用到的一些知识点，方便下次使用。</p>
+<p><a href="https://github.com/ChangingSelf/fileio-exercises" target="_blank" rel="noopener">本文对应的github库</a></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.cnblogs.com/kaml8/p/9853595.html" target="_blank" rel="noopener">java输入和输出函数</a></li>
+<li><a href="https://www.cnblogs.com/oneboi/articles/8615331.html" target="_blank" rel="noopener">java文件和文件夹的创建</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/87560794" target="_blank" rel="noopener">Java I/O包 读写文件</a>：有关各种文件流、Reader和Writer之间关系的解释</li>
+<li><a href="https://blog.csdn.net/ai_bao_zi/article/details/81097898" target="_blank" rel="noopener">java基础知识之FileInputStream流</a></li>
+<li><a href="https://www.cnblogs.com/ywzbky/p/10697414.html" target="_blank" rel="noopener">JAVA中字符流详解</a></li>
+<li><a href="https://www.jianshu.com/p/ec76c4394a00" target="_blank" rel="noopener">Java 实现文件随机读写-RandomAccessFile</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/68598753" target="_blank" rel="noopener">流-文件操作（1）-Java高级知识（4）</a>：讲了流的原理和分类</li>
+<li><a href="https://zhuanlan.zhihu.com/p/98911542" target="_blank" rel="noopener">Java语言的输入与输出与文件处理</a>：常用文件处理类的API列表</li>
+<li><a href="https://cloud.tencent.com/developer/ask/48910" target="_blank" rel="noopener">如何检查Java字符串并不是所有空白？</a></li>
+</ul>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
+<li>1.建两个文本文件</li>
+<li>2.插入学生信息</li>
+<li>3.查询学生对应的奖励</li>
+<li>4.增删改信息</li>
+</ul>
+<h2 id="文件1-学生基本信息"><a href="#文件1-学生基本信息" class="headerlink" title="文件1 学生基本信息"></a>文件1 学生基本信息</h2><table>
+<thead>
+<tr>
+<th>学号</th>
+<th>姓名</th>
+<th>性别</th>
+<th>年龄</th>
+<th>专业</th>
+<th>位置</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2017901006</td>
+<td>杨啸</td>
+<td>男</td>
+<td>21</td>
+<td>软件工程</td>
+<td>0</td>
+<td>30</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+</tr>
+</tbody></table>
+<ul>
+<li>位置：奖励文件内对应的位置</li>
+<li>长度：奖励文件内对应的奖励字段的长度</li>
+</ul>
+<h2 id="文件2-奖励"><a href="#文件2-奖励" class="headerlink" title="文件2 奖励"></a>文件2 奖励</h2><p>记录学生获得的奖励</p>
+<table>
+<thead>
+<tr>
+<th align="center">奖励</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2011校奖学金，2012国家奖学金</td>
+</tr>
+<tr>
+<td align="center">2012校优秀学生</td>
+</tr>
+</tbody></table>
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><ul>
+<li>model包<ul>
+<li>Gender枚举类：枚举值为“男”和“女”</li>
+<li>StudentInfo类：作为学生信息结点，存储学生信息的六个字段。后来写着写着觉得这个类名太长了，不该加Info后缀的，写起来怪怪的。</li>
+<li>StudentInfoSystem类：用于实现整个系统的逻辑功能，包括录入信息，查找信息，保存数据，读取数据等。</li>
+</ul>
+</li>
+<li>view包<ul>
+<li>ConsoleMenu类：控制台菜单类，作为与用户交互的界面。</li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><h2 id="Gender枚举类"><a href="#Gender枚举类" class="headerlink" title="Gender枚举类"></a>Gender枚举类</h2><p>在录入学生性别的时候，会涉及到输入什么的问题，输入0或1？输入“男”或“女”？如果用整数或者字符串都可能会产生非法数据，导致一些问题，这些问题在很久以前我拿C++写的时候就遇到过一些。</p>
+<p>最好的方式不是用布尔类型这种二值类型，而是使用枚举类型，因为有可能用到别的值，比如UNSET（未设置）。</p>
+<p>在这次练习之前，我会的java枚举大概是下面这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Gender &#123;</span><br><span class="line">	MALE,</span><br><span class="line">	FAMALE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如同C++枚举一样列出枚举值，然后当成常量一样使用。</p>
+<p>后面变成了这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Gender.java</span></span><br><span class="line"><span class="keyword">package</span> model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Gender &#123;</span><br><span class="line">	MALE(<span class="string">"男"</span>),</span><br><span class="line">	FAMALE(<span class="string">"女"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String m_genderString;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Gender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">		m_genderString = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getGenderString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> m_genderString;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据字符串的值返回对应的枚举值</span></span><br><span class="line"><span class="comment">	 * TODO：应该可以优化成不用手动写switch的</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> genderString</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 返回字符串对应的枚举值，找不到则返回null</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Gender <span class="title">newGender</span><span class="params">(String genderString)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (genderString) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"男"</span>:</span><br><span class="line">			<span class="keyword">return</span> Gender.MALE;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"女"</span>:</span><br><span class="line">			<span class="keyword">return</span> Gender.FAMALE;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>百度了几篇博客之后（当时没收藏，找不到了），知道了枚举类一点点原理。</p>
+<p>拿上面这个代码举例：写<code>MALE(&quot;男&quot;)</code>其实像是为Gender类的构造方法传入一个值为“男”的字符串，而默认的构造方法是没有参数的，所以你需要写一个以字符串为参数的构造方法。</p>
+<p>为了保留下这个传入的字符串，需要定义一个字符串类型的属性；为了获取它，再定义一个getter。</p>
+<p>这样做的目的是，在输出学生性别时，可以调用性别属性的<code>getGenderString()</code>方法获取对应的字符串。</p>
+<p>最下面那个<code>newGender()</code>方法则是在录入学生性别时使用。</p>
+<h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><p>java中的File类是对文件的抽象，它可以是文件，也可以是目录。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br></pre></td></tr></table></figure>
+
+<p>它拥有的方法主要是用于检测文件的信息的，比如它是文件还是目录，是否存在，绝对路径是什么等等，它不能直接读写文件（创建倒是可以）。</p>
+<p>读写文件得需要其他类，这一部分的类太多了，我找了挺久才找到合适的类。</p>
+<h2 id="FileOutputStream类"><a href="#FileOutputStream类" class="headerlink" title="FileOutputStream类"></a>FileOutputStream类</h2><p>首先是保存数据到文件中。用到了这个类，它是文件输出流，以字节流的形式输出到文件。意思就是给他传入的参数是字节数组而不是字符串。不过字符串转字节数组非常简单，用字符串的<code>getBytes()</code>就好。</p>
+<p>打开文件输出流：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">			</span><br><span class="line">File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">			</span><br><span class="line"><span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line">			</span><br><span class="line">FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br></pre></td></tr></table></figure>
+
+<p>随后拼接好学生信息的字符串，转换为字节数组，传入即可：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line">infoFOS.write(infoBuf);<span class="comment">//写入文件</span></span><br></pre></td></tr></table></figure>
+
+<p>最后记得close</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">infoFOS.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="FileReader类和BufferedReader类"><a href="#FileReader类和BufferedReader类" class="headerlink" title="FileReader类和BufferedReader类"></a>FileReader类和BufferedReader类</h2><p>一行一个学生信息，所以读取时打算直接readline，需要<code>BufferedReader</code>类，进而需要<code>FileReader</code>类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">String tmpString = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为基本信息文件中保存的是奖励在奖励文件中的位置与长度，所以在读取时需要设置文件指针。</p>
+<p>这个需要用到<code>RandomAccessFile</code>类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">"r"</span>);<span class="comment">//打开随机读写</span></span><br></pre></td></tr></table></figure>
+
+<p>设置文件指针到指定位置，读取对应长度的字节。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">randomAccessFile.seek(position);</span><br><span class="line"><span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes);</span><br></pre></td></tr></table></figure>
+
+<p>写到这里我还遇到了一个问题，就是读取到字符串后，无法判断字符串是否为空，如果用<code>rewardString.equals(&quot;&quot;)</code>或者``rewardString.isEmpty()`，发现字符串的长度是和我设置的缓冲区大小有关的。虽然全部是空白，但是并不为空字符串。用长度判断也不行。</p>
+<p>后来找到了一个方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br></pre></td></tr></table></figure>
+
+<p><code>trim()</code>可以去掉首尾空白，那么1024长度的空字符串就会变成0长度的普通的空字符串，就可以用刚刚的方式来判断学生是否有奖励了。</p>
+<h2 id="录入学生信息"><a href="#录入学生信息" class="headerlink" title="录入学生信息"></a>录入学生信息</h2><p>java的控制台输入我也是没弄过，这次就来试试。</p>
+<p>会了之后发现蛮简单的。创建一个<code>Scanner</code>对象，传入源输入流，要从控制台输入，所以输入流设置为<code>System.in</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
+
+<p>需要读取一行数据，可以使用<code>next()</code>或者<code>nextLine()</code>方法，区别详情见百度</p>
+<p>录入普通字符串搞定：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的学号"</span>);</span><br><span class="line">String studentId = scanner.nextLine();</span><br><span class="line">		</span><br><span class="line">System.out.println(<span class="string">"请输入学生的姓名"</span>);</span><br><span class="line">String name = scanner.nextLine();</span><br></pre></td></tr></table></figure>
+
+<p>录入性别则需要判断合法性（其实上面的学号，姓名也需要判断合法性，不过不是本次练习的核心，就没弄了）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String genderString = <span class="string">""</span>;</span><br><span class="line">Gender gender = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">"请输入学生的性别,输入\"男\" 或者\"女\""</span>);</span><br><span class="line">	genderString = scanner.nextLine();</span><br><span class="line">	gender =  Gender.newGender(genderString);</span><br><span class="line">&#125;<span class="keyword">while</span>(gender == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里用了一个do-while循环，如果输入的不是枚举类里面有的值，就要求再次输入。</p>
+<p>接着是年龄，年龄是一个正整数，需要<code>nextInt()</code>来获取整数，如果输入的不是整数，就会抛出异常。处理完这个异常之后继续要求输入，直到输入正确的年龄为止。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的年龄"</span>);</span><br><span class="line"><span class="keyword">int</span> age = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		age = scanner.nextInt();</span><br><span class="line">		<span class="keyword">if</span>(age&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">"年龄必须是正数"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		System.out.println(<span class="string">"年龄必须是整数"</span>);</span><br><span class="line">		scanner.next();<span class="comment">//清空错误数据</span></span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在输入完整数类型的年龄后，需要输入字符串类型的专业了，这里会遇到和C++输入一样的情况，那就是你还没输入就当你输入了，最后得到的是空字符串。这是因为在输入整数后按下回车键确定时，这个换行符还留存在输入缓冲区，下一个<code>nextLine()</code>将其当成了结束标志，从而结束字符串的输入。所以需要清空一下缓冲区，清空方式就是读取一个值并丢弃：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">scanner.nextLine();<span class="comment">//清除缓冲区空行</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"请输入学生的专业"</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br></pre></td></tr></table></figure>
+
+<p>最后是录入学生的奖励，这个部分加深了我对“String的相等比较不能用<code>==</code>而要用<code>equals()</code>”的知识点的印象。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">"请输入学生的专业"</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"请输入学生的奖励，每输入完一项换行，输入\"done\"结束输入"</span>);</span><br><span class="line">String rewardString = <span class="string">""</span>;</span><br><span class="line">Vector&lt;String&gt; reward = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">	rewardString = scanner.nextLine();</span><br><span class="line">	<span class="keyword">if</span>(!rewardString.equalsIgnoreCase(<span class="string">"done"</span>)) reward.add(rewardString);</span><br><span class="line">&#125; <span class="keyword">while</span> (!rewardString.equalsIgnoreCase(<span class="string">"done"</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><h2 id="保存数据到文件"><a href="#保存数据到文件" class="headerlink" title="保存数据到文件"></a>保存数据到文件</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 保存到文件中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 保存的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">saveData</span><span class="params">(String pathName)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">		<span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">		</span><br><span class="line">		File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">		File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">"/Rewards.csv"</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line">		<span class="keyword">if</span>(!rewardFile.exists()) rewardFile.createNewFile();</span><br><span class="line">		</span><br><span class="line">		FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br><span class="line">		FileOutputStream rewardFOS = <span class="keyword">new</span> FileOutputStream(rewardFile);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> curPosition = <span class="number">0</span>;<span class="comment">//“奖励”文件指针当前位置</span></span><br><span class="line">		<span class="keyword">for</span>(StudentInfo studentInfo:m_studentInfoList) &#123;</span><br><span class="line">			</span><br><span class="line">			String studentInfoString = String.format(<span class="string">"%s,%s,%s,%d,%s,"</span>, </span><br><span class="line">					studentInfo.getStudentId(),</span><br><span class="line">					studentInfo.getName(),</span><br><span class="line">					studentInfo.getGender().getGenderString(),</span><br><span class="line">					studentInfo.getAge(),</span><br><span class="line">					studentInfo.getMajor()</span><br><span class="line">					);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			String rewardString = String.join(<span class="string">","</span>, studentInfo.getReward());<span class="comment">//拼接奖励字符串</span></span><br><span class="line">			<span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">				<span class="comment">//奖励字符串不为空，则添加换行符</span></span><br><span class="line">				rewardString += <span class="string">"\n"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">				</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">byte</span>[] rewardBuf = rewardString.getBytes();<span class="comment">//转换为字节数组</span></span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			studentInfoString += String.format(<span class="string">"%s,%s\n"</span>, curPosition,rewardBuf.length);</span><br><span class="line">			curPosition += rewardBuf.length;<span class="comment">//计算下一个位置</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//写入文件		</span></span><br><span class="line">			infoFOS.write(infoBuf);</span><br><span class="line">			rewardFOS.write(rewardBuf);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.printf(<span class="string">"成功保存%d条记录到以下文件中：\n[%s]\n[%s]\n"</span>,</span><br><span class="line">				m_studentInfoList.size(),</span><br><span class="line">				infoFile.getCanonicalPath(),</span><br><span class="line">				rewardFile.getCanonicalPath()</span><br><span class="line">				);</span><br><span class="line">		</span><br><span class="line">		rewardFOS.close();</span><br><span class="line">		infoFOS.close();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> m_studentInfoList.size();</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="从文件中加载数据"><a href="#从文件中加载数据" class="headerlink" title="从文件中加载数据"></a>从文件中加载数据</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 从文件中加载</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> clearFlag 是否清空内存中原有数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 读取的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">loadData</span><span class="params">(String pathName,<span class="keyword">boolean</span> clearFlag)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(clearFlag) m_studentInfoList.clear();</span><br><span class="line">			</span><br><span class="line">			File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">			<span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line">			</span><br><span class="line">			File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">"/StudentInfoList.csv"</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">			File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">"/Rewards.csv"</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line">		</span><br><span class="line">			</span><br><span class="line">			BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">			RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">"r"</span>);<span class="comment">//打开随机读写</span></span><br><span class="line">			</span><br><span class="line">			String tmpString = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//按行读取</span></span><br><span class="line">				String[] infoStrings = tmpString.split(<span class="string">","</span>);<span class="comment">//按照分隔符分割</span></span><br><span class="line">				</span><br><span class="line">				<span class="keyword">if</span>(infoStrings.length != <span class="number">7</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果字段数对不上，说明文件格式有问题</span></span><br><span class="line">				&#125;</span><br><span class="line">					</span><br><span class="line">				<span class="comment">//从StudentInfo文件中读取学生信息</span></span><br><span class="line">				String studentId = infoStrings[<span class="number">0</span>];</span><br><span class="line">				String name = infoStrings[<span class="number">1</span>];</span><br><span class="line">				Gender gender = Gender.newGender(infoStrings[<span class="number">2</span>]);</span><br><span class="line">				<span class="keyword">if</span>(gender == <span class="keyword">null</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">int</span> age = Integer.parseInt(infoStrings[<span class="number">3</span>]);</span><br><span class="line">				String major = infoStrings[<span class="number">4</span>];</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">long</span> position = Long.parseLong(infoStrings[<span class="number">5</span>]);</span><br><span class="line">				<span class="keyword">int</span> rewardLen = Integer.parseInt(infoStrings[<span class="number">6</span>]);</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">				randomAccessFile.seek(position);</span><br><span class="line">				<span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">				randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line">				</span><br><span class="line">				String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br><span class="line">				</span><br><span class="line">				</span><br><span class="line">				Vector&lt;String&gt; rewardList = <span class="keyword">null</span>;</span><br><span class="line">				<span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">					<span class="comment">//如果奖励不为空则添加</span></span><br><span class="line">					rewardList = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line">					String[] rewardArr = rewardString.split(<span class="string">","</span>);</span><br><span class="line">					<span class="keyword">for</span>(String reward : rewardArr) &#123;</span><br><span class="line">						rewardList.add(reward);</span><br><span class="line">					&#125;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				</span><br><span class="line">				StudentInfo newStudentInfo = <span class="keyword">new</span> StudentInfo(studentId, name, gender, age, major, rewardList);</span><br><span class="line">				</span><br><span class="line">				m_studentInfoList.add(newStudentInfo);</span><br><span class="line">				counter++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			bufReader.close();</span><br><span class="line">			randomAccessFile.close();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">return</span> counter;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Scrapy爬虫框架（1）一个简单的可用的爬虫</title>
+    <url>/posts/Scrapy_spider_1/</url>
+    <content><![CDATA[<p>很久没写爬虫了，又重新开始使用scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。</p>
+<p>本文将初级知识点简单梳理，实现了一个HelloWorld级别的Scrapy爬虫。</p>
+<p>本文适用于Scrapy 1.6.0，结合了自己的理解，可能理解有错误，欢迎在下面评论区指出。</p>
+<p><strong>不包含安装教程。</strong></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://baike.baidu.com/item/scrapy/7914913?fr=aladdin" target="_blank" rel="noopener">Scrapy-百度百科</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/96082022" target="_blank" rel="noopener">Python爬虫-scrapy介绍及使用</a></li>
+<li><a href="http://www.scrapyd.cn/doc/" target="_blank" rel="noopener">Scrapy中文网</a></li>
+<li><a href="http://lab.scrapyd.cn/" target="_blank" rel="noopener">Scrapy中文网的爬虫实验室</a></li>
+<li>xpath教程：<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/29436838" target="_blank" rel="noopener">学爬虫利器XPath,看这一篇就够了</a>：这个是结合代码来讲解的</li>
+<li><a href="https://zhuanlan.zhihu.com/p/65177112" target="_blank" rel="noopener">Python神技能：六张表 搞定 Xpath 语法</a>：这个是列出语法表的</li>
+</ul>
+</li>
+<li><a href="https://www.jianshu.com/p/4e5aaf317f95" target="_blank" rel="noopener">VScode Python no module的解决方法</a></li>
+<li><a href="https://www.cnblogs.com/yrxns/p/7930177.html" target="_blank" rel="noopener">Python中获得当前目录和上级目录</a></li>
+</ul>
+<h1 id="Scrapy是啥"><a href="#Scrapy是啥" class="headerlink" title="Scrapy是啥"></a>Scrapy是啥</h1><p>先看看<a href="https://baike.baidu.com/item/scrapy/7914913?fr=aladdin" target="_blank" rel="noopener">Scrapy-百度百科</a>的解释：</p>
+<blockquote>
+<p>Scrapy是一个为爬取网站数据、提取结构性数据而设计的应用程序框架，它可以应用在广泛领域：Scrapy 常应用在包括数据挖掘，信息处理或存储历史数据等一系列的程序中。通常我们可以很简单的通过 Scrapy 框架实现一个爬虫，抓取指定网站的内容或图片。 </p>
+</blockquote>
+<p>它是一个<strong>框架</strong>，帮你解决写爬虫的过程中遇到的一些问题，简化你写爬虫的过程。对于一些简单的爬虫，你不需要自己来写重复的代码，它将重复的代码都隐藏起来，你只需要写一些与你需要爬取的网站相关的东西就可以了。</p>
+<p>例如，爬虫需要发送请求和获取响应，scrapy有个专门的调度器来帮你解决这个问题，你不需要自己来调度，你只需要使用它的下载器传给你的响应对象Response来进行解析即可，解析好的数据你也可以打包成它的一个名为Item的类的对象中，更方便地进行处理。方便很多。</p>
+<h1 id="Scrapy的组成"><a href="#Scrapy的组成" class="headerlink" title="Scrapy的组成"></a>Scrapy的组成</h1><p>下面这个图片来自于<a href="https://zhuanlan.zhihu.com/p/96082022" target="_blank" rel="noopener">Python爬虫-scrapy介绍及使用</a></p>
+<p><img src="https://pic4.zhimg.com/80/v2-5e7ceadeb3ddd9de9436008322aee147_hd.jpg" alt="借用知乎找来的图片"></p>
+<ul>
+<li><strong>调度器（Scheduler）</strong>选择合适的时机发送Request（请求）给下载器；</li>
+<li><strong>下载器（Downloader）</strong>处理Request（响应），即发送请求并获取响应Response，将Response传给爬虫；</li>
+<li><strong>爬虫（Spider）</strong>主要做两类事情：<ol>
+<li>提取当前Response中的数据，打包成Item（或者是dict），将它们发送给管道</li>
+<li>获取Response中下一个Request的url（比如你第一个Response爬取的是目录页，那么就是获取目录项对应的url）从而构造下一个Request，再将这个Request发送给调度器</li>
+</ol>
+</li>
+<li><strong>管道（Item Pipeline）</strong>处理Item中的数据</li>
+<li><strong>中间件（Middleware）</strong>分为下载中间件和爬虫中间件，用来在传送Request和Response过程中做一些额外的处理</li>
+<li><strong>引擎（Engine）</strong>用于将以上模块都连接起来，其他模块都直接与引擎交互，数据等由引擎进行转发</li>
+</ul>
+<p>一般我们需要编写的，就是爬虫和管道，也就是解析数据和处理数据。</p>
+<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>首先在命令行创建项目</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$scrapy</span> startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+<p>会生成一个以你项目名称命名的文件夹，里面就是你的项目文件</p>
+<p><img src="https://pic2.zhimg.com/80/v2-24923a6533dde878d8e61b2da8104831_hd.jpg" alt="再次借用一下知乎那篇文章的图片"></p>
+<h2 id="创建爬虫"><a href="#创建爬虫" class="headerlink" title="创建爬虫"></a>创建爬虫</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$scrapy</span> genspider 爬虫名 爬取的域名</span><br></pre></td></tr></table></figure>
+
+<p>它的作用是在spider目录下按照模板创建一个以你爬虫为名的py文件，当然你也可以手动创建，只要你的文件符合scrapy的要求就行，最好用命令。</p>
+<p>记得先切换到你项目目录。</p>
+<h2 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h2><p>我要练习爬取的是<a href="http://www.scrapyd.cn/doc/" target="_blank" rel="noopener">Scrapy中文网</a>提供的<a href="http://lab.scrapyd.cn/" target="_blank" rel="noopener">爬虫实验室</a></p>
+<p>爬虫命名为lab，创建好的初始爬虫文件<code>lab.py</code>是这样的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'lab'</span></span><br><span class="line">    allowed_domains = [<span class="string">'lab.scrapyd.cn'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://lab.scrapyd.cn'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>name</strong>：爬虫名</li>
+<li><strong>allowed_domains</strong>：允许访问的域名，<strong>注意是域名，而不是要爬取的url，别写成<a href="http://lab.scrapyd.cn之类的" target="_blank" rel="noopener">http://lab.scrapyd.cn之类的</a></strong></li>
+<li><strong>start_urls</strong>：初始url</li>
+<li>parse(self,response)：解析函数，传入的参数就是Response响应，你可以用这个引用来获取网页内容，从而进行处理</li>
+</ul>
+<h3 id="运行过程理解"><a href="#运行过程理解" class="headerlink" title="运行过程理解"></a>运行过程理解</h3><p>按照我的理解，当启动这个爬虫时：</p>
+<ul>
+<li>scrapy会将start_urls这个列表里面的url都生成对应的Request发给<strong>调度器</strong></li>
+<li>然后调度器将Request通过引擎转发给<strong>下载器</strong></li>
+<li>下载器再将下载好的Response发给<strong>引擎</strong>，引擎调用该爬虫的parse方法，将这个Response传入作为参数</li>
+<li>引擎获取parse的返回值<ul>
+<li>如果是Request（即新的请求），就发送给<strong>调度器</strong></li>
+<li>如果是item或者dict，就发送给<strong>管道</strong></li>
+</ul>
+</li>
+<li>当调度器中没有新的Request了，scrapy停止。</li>
+</ul>
+<h3 id="调试解析"><a href="#调试解析" class="headerlink" title="调试解析"></a>调试解析</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$scrapy</span> shell 你要爬取的url</span><br></pre></td></tr></table></figure>
+
+<p>此处，我要爬取的就是<code>http://lab.scrapyd.cn</code>。</p>
+<p>这个命令可以打开交互式调试命令行，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$scrapy</span> shell http://lab.scrapyd.cn</span><br><span class="line"><span class="comment">#……省略一大堆日志信息</span></span><br><span class="line">[s] Available Scrapy objects:</span><br><span class="line">[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)</span><br><span class="line">[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x0000017F01C9A748&gt;</span><br><span class="line">[s]   item       &#123;&#125;</span><br><span class="line">[s]   request    &lt;GET http://lab.scrapyd.cn&gt;</span><br><span class="line">[s]   response   &lt;200 http://lab.scrapyd.cn&gt;</span><br><span class="line">[s]   settings   &lt;scrapy.settings.Settings object at 0x0000017F031BCBE0&gt;</span><br><span class="line">[s]   spider     &lt;LabSpider <span class="string">'lab'</span> at 0x17f034c2da0&gt;</span><br><span class="line">[s] Useful shortcuts:</span><br><span class="line">[s]   fetch(url[, redirect=True]) Fetch URL and update <span class="built_in">local</span> objects (by default, redirects are followed)</span><br><span class="line">[s]   fetch(req)                  Fetch a scrapy.Request and update <span class="built_in">local</span> objects</span><br><span class="line">[s]   shelp()           Shell <span class="built_in">help</span> (<span class="built_in">print</span> this <span class="built_in">help</span>)</span><br><span class="line">[s]   view(response)    View response <span class="keyword">in</span> a browser</span><br><span class="line">In [1]:</span><br></pre></td></tr></table></figure>
+
+<p>scrapy这时已经将response给你了，你可以使用这些命令来进行调试。</p>
+<p>没错，就是给parse函数传的那个response参数。</p>
+<p>你可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">In[1]:response.text</span><br></pre></td></tr></table></figure>
+
+<p>来获取得到的html字符串，以确定是否成功获取到自己想要的网页。</p>
+<p>先去那个网站按f12查看一下它的元素：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-mb-12 col-8"</span> <span class="attr">id</span>=<span class="string">"main"</span> <span class="attr">role</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">			</span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"quote post"</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>看官，此页面只为爬虫练习使用，都是残卷，若喜欢可以去找点高清版！<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">span</span>&gt;</span>作者：<span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">"author"</span>&gt;</span>中国传世名画<span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/archives/57.html"</span>&gt;</span>【详情】<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">	           	标签： <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"tag"</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/tag/%E8%89%BA%E6%9C%AF/"</span>&gt;</span>艺术<span class="tag">&lt;/<span class="name">a</span>&gt;</span>，<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"tag"</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/tag/%E5%90%8D%E7%94%BB/"</span>&gt;</span>名画<span class="tag">&lt;/<span class="name">a</span>&gt;</span>	        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>		</span><br><span class="line">			</span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"quote post"</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>下面每一幅都是上亿？你造几？<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">span</span>&gt;</span>作者：<span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">"author"</span>&gt;</span>天价世界名画<span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/archives/55.html"</span>&gt;</span>【详情】<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tags"</span>&gt;</span></span><br><span class="line">	           	标签： <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"tag"</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/tag/%E8%89%BA%E6%9C%AF/"</span>&gt;</span>艺术<span class="tag">&lt;/<span class="name">a</span>&gt;</span>，<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"tag"</span> <span class="attr">href</span>=<span class="string">"http://lab.scrapyd.cn/tag/%E5%90%8D%E7%94%BB/"</span>&gt;</span>名画<span class="tag">&lt;/<span class="name">a</span>&gt;</span>	        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>		</span><br><span class="line">			</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们需要获取到的，是以下内容：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[&#123;<span class="string">'text'</span>: <span class="string">'看官，此页面只为爬虫练习使用，都是残卷，若喜欢可以去找点高清版！'</span>, <span class="string">'tag'</span>: [<span class="string">'艺术'</span>, <span class="string">'名画'</span>]&#125;,</span><br><span class="line"> &#123;<span class="string">'text'</span>: <span class="string">'下面每一幅都是上亿？你造几？'</span>, <span class="string">'tag'</span>: [<span class="string">'艺术'</span>, <span class="string">'名画'</span>]&#125;, ]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>这个response拥有几种解析方法，你可以使用xpath，也可以用css。</p>
+<p>xpath教程：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/29436838" target="_blank" rel="noopener">学爬虫利器XPath,看这一篇就够了</a>：这个是结合代码来讲解的</li>
+<li><a href="https://zhuanlan.zhihu.com/p/65177112" target="_blank" rel="noopener">Python神技能：六张表 搞定 Xpath 语法</a>：这个是列出语法表的</li>
+</ul>
+<p>比如使用xpath：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">2</span>]: response.xpath(<span class="string">'//div[contains(@class,"quote")]'</span>)</span><br><span class="line">Out[<span class="number">2</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">'//div[contains(@class,"quote")]'</span> data=<span class="string">'&lt;div class="quote post"&gt;\n\t        &lt;span '</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">'//div[contains(@class,"quote")]'</span> data=<span class="string">'&lt;div class="quote post"&gt;\n\t        &lt;span '</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">'//div[contains(@class,"quote")]'</span> data=<span class="string">'&lt;div class="quote post"&gt;\n\t        &lt;span '</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">'//div[contains(@class,"quote")]'</span> data=<span class="string">'&lt;div class="quote post"&gt;\n\t        &lt;span '</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">'//div[contains(@class,"quote")]'</span> data=<span class="string">'&lt;div class="quote post"&gt;\n\t        &lt;span '</span>&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>返回的将是Selector的列表，Selector的具体用法也不在本文范围内。</p>
+<p>其实<code>response.xpath()</code>只是方便使用，它调用了<code>response.selector.xpath()</code>，也就是说xpath和css实际上是Selector的方法。说这个的原因在于告诉你，对于这个列表里面每一个Selector，你都可以使用同样的方法来进行解析。</p>
+<p>接着你就可以利用这个调试shell来调整你的xpath字符串或者css字符串了。</p>
+<h3 id="编写Item域"><a href="#编写Item域" class="headerlink" title="编写Item域"></a>编写Item域</h3><p>items.py里面有着你可以用的item类，根据你确定需要获取的字段（Field）来给它添加：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define here the models for your scraped items</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See documentation in:</span></span><br><span class="line"><span class="comment"># https://doc.scrapy.org/en/latest/topics/items.html</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TutorialItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    text = scrapy.Field()</span><br><span class="line">    tag = scrapy.Field()</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="解析代码"><a href="#解析代码" class="headerlink" title="解析代码"></a>解析代码</h3><p>我用的是css选择器。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LabSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'lab'</span></span><br><span class="line">    allowed_domains = [<span class="string">'lab.scrapyd.cn'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://lab.scrapyd.cn'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        quotes= response.css(<span class="string">'div.quote'</span>)</span><br><span class="line">        <span class="keyword">for</span> quote <span class="keyword">in</span> quotes:</span><br><span class="line">            item = items.TutorialItem()</span><br><span class="line">            text = quote.css(<span class="string">'.text::text'</span>)</span><br><span class="line">            tag = quote.css(<span class="string">'.tag::text'</span>)</span><br><span class="line">            item[<span class="string">'text'</span>] = text.get()</span><br><span class="line">            item[<span class="string">'tag'</span>] = tag.getall()</span><br><span class="line">            <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始爬取"><a href="#开始爬取" class="headerlink" title="开始爬取"></a>开始爬取</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$scrapy</span> crawl 需要启动的爬虫名 -o 输出文件名（比如test.json）</span><br></pre></td></tr></table></figure>
+
+<p>scrapy会自动将得到的item保存到输出文件</p>
+<h2 id="解决导入items模块的问题"><a href="#解决导入items模块的问题" class="headerlink" title="解决导入items模块的问题"></a>解决导入items模块的问题</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = os.path.dirname(__file__)</span><br><span class="line">parent_path = os.path.dirname(path)</span><br><span class="line">sys.path.append(parent_path)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> items</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>scrapy</tag>
+        <tag>spider</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【编程练习】明日非舟抽卡模拟器（2）xml文件解析</title>
+    <url>/posts/Africanights_simu_hr_2/</url>
+    <content><![CDATA[<p>为了修改与添加方便，将干员的信息放在简历类Resume中，简历信息使用xml文件存储，在启动时加载进来。</p>
+<p><a href="https://github.com/ChangingSelf/Africanights" target="_blank" rel="noopener">本项目连载github库地址</a></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/66284713" target="_blank" rel="noopener">细说java解析XML文档的常用方法（含实例）-知乎</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/ooppookid/article/details/51704792" target="_blank" rel="noopener">Java千百问_02基本使用（010）_java、javax、sun、org包有什么区别</a></p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/java/java-dom-intro.html" target="_blank" rel="noopener">Java DOM简介-w3cSchool</a></p>
+</li>
+</ul>
+<h1 id="解析xml文件"><a href="#解析xml文件" class="headerlink" title="解析xml文件"></a>解析xml文件</h1><p>需要import进来的内容如下，jdk1.8全部自带，不需要额外下载。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilder;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilderFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Document;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Node;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.NodeList;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取文档对象"><a href="#获取文档对象" class="headerlink" title="获取文档对象"></a>获取文档对象</h2><p>解析方式如下：</p>
+<ul>
+<li>首先获取一个工厂类（<code>DocumentBuilderFactory</code>）实例，使用了单例模式所以得用<code>newInstance()</code>来获取全局对象</li>
+<li>再用获得的工厂对象来创建文档解析器（<code>DocumentBuilder</code>）</li>
+<li>最后才能够利用文档解析器来解析文档（<code>Document</code>）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String path = <span class="string">"Melantha.xml"</span>;</span><br><span class="line"><span class="comment">//解析xml文件</span></span><br><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">Document doc = db.parse(path);</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>DocumentBuilder</code>对象的<code>parse()</code>方法可以直接传入String类型的字符串文件路径，也可以传入文件对象，例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line">String path = <span class="string">"Melantha.xml"</span>;</span><br><span class="line">File f=<span class="keyword">new</span> File(path);</span><br><span class="line"><span class="comment">//解析xml文件</span></span><br><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">Document doc = db.parse(f);</span><br></pre></td></tr></table></figure>
+
+<h2 id="DOM方式获取文档数据"><a href="#DOM方式获取文档数据" class="headerlink" title="DOM方式获取文档数据"></a>DOM方式获取文档数据</h2><p>此处引用自：<a href="https://www.w3cschool.cn/java/java-dom-intro.html" target="_blank" rel="noopener">Java DOM简介-w3cSchool</a></p>
+<blockquote>
+<p>例如，我们有以下xml结构:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">yourTag</span>&gt;</span>This is an <span class="tag">&lt;<span class="name">bold</span>&gt;</span>important<span class="tag">&lt;/<span class="name">bold</span>&gt;</span> test.<span class="tag">&lt;/<span class="name">yourTag</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>DOM节点的层级如下，其中每行代表一个节点:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ELEMENT: yourTag</span><br><span class="line">   + TEXT: This is an</span><br><span class="line">   + ELEMENT: bold</span><br><span class="line">     + TEXT: important</span><br><span class="line">   + TEXT: test.</span><br></pre></td></tr></table></figure>
+
+<p><code>yourTag</code>元素包含文本，后跟一个子元素，后跟另外的文本。</p>
+<h2 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h2><p>为了支持混合内容，DOM节点非常简单。标签元素的“内容”标识它是的节点的类型。</p>
+<p>例如，<yourTag> 节点内容是元素<code>yourTag</code>的名称。</p>
+<p>DOM节点API定义<code>nodeValue()</code>，<code>nodeType()</code>和<code>nodeName()</code>方法。</p>
+<p>对于元素节点<code>&lt; yourTag&gt;</code>nodeName()返回yourTag，而nodeValue()返回null。</p>
+<p>对于文本节点<code>+ TEXT:这是一个</code>nodeName()返回#text，nodeValue()返回“This is an”。</p>
+</blockquote>
+<p>虽然这里写的用<code>nodeValue()</code>，但现在用的是<code>getValue()</code>这样子的方法。</p>
+<h1 id="载入单份xml文件示例代码"><a href="#载入单份xml文件示例代码" class="headerlink" title="载入单份xml文件示例代码"></a>载入单份xml文件示例代码</h1><p>需要解析的xml文件的内容：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resume</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>玫兰莎<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">star</span>&gt;</span>3<span class="tag">&lt;/<span class="name">star</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chat</span>&gt;</span>......玫兰莎。从现在起，我的利刃将为您所用。<span class="tag">&lt;/<span class="name">chat</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">portrayal</span>&gt;</span>image/Melantha.jpg<span class="tag">&lt;/<span class="name">portrayal</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resume</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>代码部分：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 载入简历对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> path 简历文件路径</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 简历对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Resume <span class="title">loadResume</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">		Resume resume = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">//解析xml文件</span></span><br><span class="line">			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">			DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">			Document doc = db.parse(path);</span><br><span class="line">			</span><br><span class="line">			String nameString= doc.getElementsByTagName(<span class="string">"name"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			String starString= doc.getElementsByTagName(<span class="string">"star"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			<span class="keyword">int</span> starInt = Integer.valueOf(starString);</span><br><span class="line">			String chatString= doc.getElementsByTagName(<span class="string">"chat"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			String portrayalString= doc.getElementsByTagName(<span class="string">"portrayal"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			resume = <span class="keyword">new</span> Resume(nameString, starInt, chatString, portrayalString);</span><br><span class="line">			resume.show();</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> resume;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>xml</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建新hexo博客后继续更新旧hexo博客的方法</title>
+    <url>/posts/update_old_hexo_blog_after_build_new_hexo_blog/</url>
+    <content><![CDATA[<p>我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
+<p>问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights                             &#96;</span><br></pre></td></tr></table></figure>
+
+<p>大意是我没有权限，也就是ssh没有配好。</p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://blog.csdn.net/skylin19840101/article/details/98616205" target="_blank" rel="noopener">github支持多个账号</a></li>
+<li><a href="https://www.cnblogs.com/yanglang/p/9563496.html" target="_blank" rel="noopener">SSH-keygen用法</a></li>
+<li><a href="https://www.awaimai.com/2200.html" target="_blank" rel="noopener">git配置多个SSH-key</a></li>
+<li><a href="https://blog.csdn.net/hao495430759/article/details/80673568" target="_blank" rel="noopener">git配置多个SSH-key-多图易理解版</a></li>
+<li><a href="https://www.centos.bz/2018/06/%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E5%AF%B9%E5%B9%B6%E4%B8%94%E6%B0%B8%E4%B9%85%E5%A4%9Assh%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener">配置多个ssh密钥对并且永久多ssh管理</a></li>
+<li><a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a></li>
+<li><a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">ssh百度百科</a></li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="目前状况"><a href="#目前状况" class="headerlink" title="目前状况"></a>目前状况</h2><p>操作系统是win10（找到的资料很多linux的，不过没关系，有git-bash）</p>
+<p>github上有两个账号，一个旧账号（HaneChiri），一个新账号（ChangingSelf）。本地有两个hexo博客源代码文件夹，分别对应两个账号上搭建的博客。</p>
+<p>本地<code>C:\Users\Administrator\.ssh</code>文件夹内有：</p>
+<ul>
+<li>id_rsa.pub：公钥文件，已添加到ChangingSelf账号的ssh-key</li>
+<li>id_rsa：私钥文件</li>
+<li>known_hosts</li>
+</ul>
+<p>现在在ChangingSelf博客文件夹内使用<code>hexo d</code>部署博客，可以部署到对应账号的仓库，而在HaneChiri博客文件夹内部署博客，则权限不足。</p>
+<p>（现在回想起来也许直接将现在新的公钥添加到旧账号中就搞定了呀，搞那么麻烦QAQ，等写完这篇文再试试这个方法）</p>
+<h2 id="过程复盘"><a href="#过程复盘" class="headerlink" title="过程复盘"></a>过程复盘</h2><h3 id="生成新密钥对"><a href="#生成新密钥对" class="headerlink" title="生成新密钥对"></a>生成新密钥对</h3><p>先来看看<a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">百度百科</a>关于SSH（安全外壳协议）的介绍：</p>
+<blockquote>
+<p>从客户端来看，SSH提供两种级别的安全验证。</p>
+<p><strong>第一种级别（基于口令的安全验证）</strong></p>
+<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的<a href="https://baike.baidu.com/item/服务器" target="_blank" rel="noopener">服务器</a>。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p><strong>第二种级别（基于密匙的安全验证）</strong></p>
+<p>需要依靠<a href="https://baike.baidu.com/item/密匙" target="_blank" rel="noopener">密匙</a>，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。</p>
+<p>用这种方式，你必须知道自己密匙的<a href="https://baike.baidu.com/item/口令" target="_blank" rel="noopener">口令</a>。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
+<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要10秒 [2] 。</p>
+</blockquote>
+<p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在github服务器上，本地保留私钥。</p>
+<p>首先，打开git-bash，生成新的ssh密钥对：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ssh-keygen -t rsa -C <span class="string">"youremail@xxx.com"</span> -f keyfileName</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-t</td>
+<td>生成的密钥类型，默认rsa</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>注释文字，应该不会影响密钥内容，这里设置成邮箱</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定密钥文件名，默认为id_rsa</td>
+</tr>
+</tbody></table>
+<p>由于.ssh目录下已经存在默认文件名的密钥，所以换一个名字。我想要生成旧账号HaneChiri的密钥，所以文件名就起名为<code>id_rsa_hanechiri</code>，当然，这个并无影响。</p>
+<p>最后会生成两个文件，.pub后缀的是公钥，另一个是私钥。</p>
+<h3 id="添加公钥到github账号"><a href="#添加公钥到github账号" class="headerlink" title="添加公钥到github账号"></a>添加公钥到github账号</h3><p>在网页右上角账号设置中找到SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
+<p>添加完毕后再次部署HaneChiri的博客，发现仍然是这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
+
+<p>也对，现在有两个密钥对，可能是配对错误了。</p>
+<p>仔细看错误内容，HaneChiri库拒绝了用户ChangingSelf的访问，也就是说，用的是HaneChiri的公钥，与新账号ChangingSelf的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
+<h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到ssh-agent的高速缓存中，我打开另一个git-bash的时候就不行了（参考：<a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a>）</p>
+<h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开ssh-agent服务，即输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-agent bash</span><br></pre></td></tr></table></figure>
+
+<p>然后添加私钥：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri</span><br></pre></td></tr></table></figure>
+
+<p>这里的地址是需要使用的私钥文件的绝对地址。</p>
+<p>可以通过-l选项查看所有已经添加的私钥：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -l</span><br></pre></td></tr></table></figure>
+
+<p>使用-D选项清空私钥列表：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -D</span><br></pre></td></tr></table></figure>
+
+<p>接着在这个git-bash里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
+<h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件config，这个文件长这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:&#x2F;Users&#x2F;Administrator&#x2F;.ssh&#x2F;id_rsa_hanechiri</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User HaneChiri</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>网站别名，最好和HostName一致</td>
+</tr>
+<tr>
+<td>HostName</td>
+<td>网站域名</td>
+</tr>
+<tr>
+<td>IdentityFile</td>
+<td>私钥文件的绝对路径</td>
+</tr>
+<tr>
+<td>PreferredAuthentications</td>
+<td>验证方式，填publickey就是公钥验证</td>
+</tr>
+<tr>
+<td>User</td>
+<td>用户名</td>
+</tr>
+</tbody></table>
+<p>可以配置多个网站，每个网站都有上面这些字段。在你使用ssh访问这个文件内存在的某个网站时，ssh就会拿这个文件里面指定的私钥来进行验证。</p>
+<p>在.ssh目录下找，如果存在这个名为<code>config</code>的文件，就打开来编辑，没有的话就新建一个。</p>
+<p>配置好文件之后，打开git-bash再使用<code>hexo d</code>就搞定部署了。</p>
+<p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了config文件的方法，写本文时才尝试临时性的方法，成功了）</p>
+<h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对ssh更加了解之后，才想到的简便方法：直接把新账号ChangingSelf的公钥添加到旧账号的ssh-key中。</p>
+<p>结果给我显示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure>
+
+<p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+]]></content>
+      <categories>
+        <category>解决方案</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</title>
+    <url>/posts/Africanights_simu_hr_1/</url>
+    <content><![CDATA[<p>好友封掣写了一个<a href="https://github.com/lollipopnougat/arknights" target="_blank" rel="noopener">明日方舟模拟寻访</a>，于是也想做一个来作为java的练手，这学期写课设的时候就体现出我平时写代码写太少了。</p>
+<p>当然，经过这学期末的编码轰炸，我现在可不敢像以前一样没有计划地直接开始，先想好它的架构，随后再开始编写，并留下系列博文记录，供以后参考。</p>
+<p><a href="https://github.com/ChangingSelf/Africanights" target="_blank" rel="noopener">本项目连载github库地址</a></p>
+<a id="more"></a>
+
+<h1 id="目前已经构思的架构"><a href="#目前已经构思的架构" class="headerlink" title="目前已经构思的架构"></a>目前已经构思的架构</h1><ul>
+<li>主包<ul>
+<li>视图包view</li>
+<li>模型包model<ul>
+<li>简历类Resume：用于存储干员的信息，比如名字，星级，立绘路径等</li>
+<li>人事资源类HumanResourse：用于存储合成玉以及其他抽卡资源数目<ul>
+<li>属性<ul>
+<li>合成玉数目</li>
+<li>卡池</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>单抽</li>
+<li>十连</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>卡池类Pool<ul>
+<li>属性<ul>
+<li>星级出率：一维数组，下标对应星级，值为对应出率</li>
+<li>简历池：二维数组，一维下标对应星级，二维下标动态，值为干员引用</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>载入简历loadResume(String fileName)<br>从文件中读取出简历，并加入简历池</li>
+<li>抽出下一份简历recruit()<br>先抽取星级，再从对应的星级池中抽取简历</li>
+<li>抽取星级randomStar()<br>生成1~100的随机整数，根据星级出率确定每个星级的区间，判断随机数落在哪个区间，从而确定星级</li>
+<li>抽取对应星级的简历randomResume(int star)<br>从简历池中随机抽取下标，并返回下标对应的干员引用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>根据卡池的出率抽取星级。</p>
+<p>干员的星级分为一星到六星，每个星级的概率不一定相同。</p>
+<p>这个目标的要点在于，如何给予六个星级不同的抽取概率。</p>
+<hr>
+<p><strong>方法一</strong>是创建一个100个元素的数组，根据不同星级各自的概率分配不同的元素数量。比如，三星有45%概率被抽出，那么就将45个元素赋值为“3”，六星有2%的概率，那么就将2个元素赋值为“6”。最后抽取下标来获取星级。</p>
+<p>不过我没有采取这种方式，这种方式有点暴力。这个例子里面还好，是100个整数，假如是100个开销比较大的对象，或者概率精确到了很多位小数，那么就不太合适了。</p>
+<hr>
+<p><strong>方法二</strong>是对每个星级划分一个区间，概率决定了区间的长度，在总区间内随机一个数，然后判断落在哪个星级区间。我用的是这个方法。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 卡池类</span></span><br><span class="line"><span class="comment"> * 负责存储卡池概率信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> africanights.model;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pool</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">double</span>[] m_starProbability = <span class="keyword">new</span> <span class="keyword">double</span>[] &#123;</span><br><span class="line">			<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="number">0.00</span>,<span class="comment">//1,2星</span></span><br><span class="line">			<span class="number">0.40</span>,<span class="number">0.50</span>,<span class="comment">//3,4星</span></span><br><span class="line">			<span class="number">0.08</span>,<span class="number">0.02</span><span class="comment">//5,6星</span></span><br><span class="line">	&#125;;<span class="comment">//星级出率，下标1~6对应星级，0暂时闲置</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据星级概率抽取出一个星级，取值为1~6</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 干员星级</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">randomStar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span> star = <span class="number">0</span>;<span class="comment">//返回值</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> randomInt = random.nextInt(<span class="number">100</span>) + <span class="number">1</span>;<span class="comment">//产生[1,100]之间的随机数</span></span><br><span class="line">		<span class="comment">//判断星级区间</span></span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 每一个星级根据概率大小占据[1,100]区间不同长度的区间，</span></span><br><span class="line"><span class="comment">		 * 判断随机数落在哪个区间，就是抽取到了哪个星级</span></span><br><span class="line"><span class="comment">		 * </span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">int</span> lowerInt=<span class="number">1</span>;<span class="comment">//边界整数，用于给星级区域定界</span></span><br><span class="line">		<span class="keyword">int</span> upperInt=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m_starProbability.length;i++) &#123;</span><br><span class="line">			lowerInt = upperInt;<span class="comment">//上一个星级的上界变为这个星级的下界</span></span><br><span class="line">			<span class="keyword">int</span> areaLength = (<span class="keyword">int</span>)Math.round(m_starProbability[i] * <span class="number">100</span>);</span><br><span class="line">			upperInt += areaLength;</span><br><span class="line">			<span class="keyword">if</span>(lowerInt &lt;= randomInt &amp;&amp; randomInt &lt; upperInt) &#123;</span><br><span class="line">				<span class="comment">//如果随机数落在[lowerInt,upperInt)区间</span></span><br><span class="line">				star = i;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//单独处理抽到100的情况</span></span><br><span class="line">		<span class="comment">//抽到100则为最高星级</span></span><br><span class="line">		<span class="keyword">if</span>(randomInt == <span class="number">100</span>) <span class="keyword">return</span> m_starProbability.length-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> star;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//测试randomStar()</span></span><br><span class="line">		Pool pool = <span class="keyword">new</span> Pool();</span><br><span class="line">		<span class="keyword">int</span>[] counter=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">7</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) &#123;</span><br><span class="line">			<span class="keyword">int</span> star = pool.randomStar();<span class="comment">//测试randomStar()</span></span><br><span class="line">			System.out.format(<span class="string">"%d\n"</span>,star);</span><br><span class="line">			counter[star]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">7</span>;i++) &#123;</span><br><span class="line">			System.out.format(<span class="string">"抽到%d星%d个\n"</span>,i,counter[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//测试randomStar()*/</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>更改git仓库已经commit的用户名和邮箱信息</title>
+    <url>/posts/git_amend_commited_info/</url>
+    <content><![CDATA[<p>换了一个github账号，想把以前的仓库push到新的账号上，但是commit的用户名和邮箱信息还是以前的，想修改成新的用户信息。</p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><p><a href="https://msd.misuland.com/pd/3223833238703179904" target="_blank" rel="noopener">图文详解如何修改git已提交记录的邮箱？</a> ：关于如何使用<code>git rebase -i</code>来修改commit的信息</p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/72717f1a1e90" target="_blank" rel="noopener">github修改commit的用户名和邮箱</a> ： 这里面讲得很全面，所有方法都讲到了</p>
+</li>
+<li><p><a href="https://help.github.com/en/github/using-git/changing-author-info" target="_blank" rel="noopener">git更改作者信息</a> ：git官方教程，使用脚本</p>
+</li>
+</ul>
+<h1 id="最终采纳的方法"><a href="#最终采纳的方法" class="headerlink" title="最终采纳的方法"></a>最终采纳的方法</h1><p>使用<code>git rebase</code>成功修改了一条，但是一条条改比较麻烦。</p>
+<p>最终使用了官方提供的脚本（怪不得那么多教程的脚本代码都长一样，原来是官方的），修改前面三个变量即可，详情见上面的官方教程的参考链接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter <span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL="your-old-email@example.com"</span></span><br><span class="line"><span class="string">CORRECT_NAME="Your Correct Name"</span></span><br><span class="line"><span class="string">CORRECT_EMAIL="your-correct-email@example.com"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME="$CORRECT_NAME"</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME="$CORRECT_NAME"</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">'</span> --tag-name-filter cat -- --branches --tags</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>解决方案</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【课设总结】基于LAN的即时通信软件</title>
+    <url>/posts/IMS_base_on_LAN/</url>
+    <content><![CDATA[<p>本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。</p>
+<p>由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更好维护一些，但是python写起来应该会更加轻松（个人看法）。</p>
+<p>本文基于我当时写的课设报告，在之后可能会将其中学到的知识整理成其他的博文，并在此文中列出。</p>
+<p>b站视频已上传：<a href="https://www.bilibili.com/video/av83477871/" target="_blank" rel="noopener">【课设思路分享】基于LAN的即时通讯软件</a></p>
+<p>对应github库传送门：<a href="https://github.com/ChangingSelf/simuqq" target="_blank" rel="noopener">simuqq</a></p>
+<p>比较长，配合侧边栏目录食用。</p>
+<a id="more"></a>
+
+<h1 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h1><p>程序分为服务端和客户端两部分，服务端无图形界面，客户端具有登录界面、主界面以及聊天窗口界面总共三个图形界面。</p>
+<p>先开启服务端程序，再打开客户端程序。</p>
+<p>客户端的初始界面是登陆界面，在这个界面可以输入用户名、密码，具有“登录”和“注册”两个按钮。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png" alt="客户端登录界面"></p>
+<p>在输入用户名和密码登录之后，会跳转到主页面。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102200520.png" alt="开了三个客户端登录之后的效果"></p>
+<p>主页面显示账号个人信息，以及当前在线的其他账号的用户名。用户可以双击选择当前在线的其他账号打开聊天窗口进行聊天。</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201641.png" alt="打开聊天窗口进行聊天"></p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201905.png" alt="回复对方"></p>
+<p>其中一人断开连接之后：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102202345.png" alt="断开连接之后"></p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>windows10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>编辑器（没影响）</td>
+<td>visual studio code</td>
+</tr>
+<tr>
+<td>解释器</td>
+<td>python3.7.0</td>
+</tr>
+</tbody></table>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>画个用例图先：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102151916.png" alt="用例图"></p>
+<p>客户端的用例有注册、登录、连接到服务端、查看在线的其他客户端以及选择聊天对象。</p>
+<p>其中，选择聊天对象进行聊天需要先查看当前有哪些客户端在线，而在这之前需要登录。</p>
+<h1 id="代码文件结构"><a href="#代码文件结构" class="headerlink" title="代码文件结构"></a>代码文件结构</h1><ul>
+<li>client.py：客户端业务逻辑代码</li>
+<li>server.py：服务端代码</li>
+<li>gui<ul>
+<li>home_page.py：登录后跳转到的主页面</li>
+<li>login_dlg.py：登录界面</li>
+<li>chat_dlg.py：聊天界面</li>
+</ul>
+</li>
+<li>account_database.json：用于存放注册账号数据的数据文件</li>
+<li>utility.py：存放一些自己写的工具函数</li>
+</ul>
+<h1 id="概要设计及对应代码"><a href="#概要设计及对应代码" class="headerlink" title="概要设计及对应代码"></a>概要设计及对应代码</h1><p>为了方便阅读，就将代码部分与设计部分放在一起。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png" alt="类图"></p>
+<h3 id="界面类"><a href="#界面类" class="headerlink" title="界面类"></a>界面类</h3><p>图形界面使用的是python自带的tkinter模块。对每个界面，单独编写一个类，放在单独的模块中，存放在代码根目录下的gui文件夹内。而业务逻辑另外编写client类和server类。</p>
+<p>令界面与业务逻辑结合的方式是，在client类中初始化界面时，将自身的处理函数作为回调函数传入界面类中，从而使界面的组件与回调函数绑定。</p>
+<h3 id="登录界面代码示例"><a href="#登录界面代码示例" class="headerlink" title="登录界面代码示例"></a>登录界面代码示例</h3><p>因为界面不是重点，故仅放出登录界面代码，其他两个界面类类似。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">登录模块login_dlg.py</span></span><br><span class="line"><span class="string">展示登录窗口并实现登录功能</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">import</span> gui.chat_dlg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginDlg</span><span class="params">(tk.Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, loginCallback, regCallback, master=None)</span>:</span></span><br><span class="line">        super().__init__(master=master)</span><br><span class="line">        self.master = master</span><br><span class="line">        self.geometry()</span><br><span class="line">        <span class="comment"># 设置按钮回调函数</span></span><br><span class="line">        self.loginCallback = loginCallback</span><br><span class="line">        self.regCallback = regCallback</span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        self.userName = tk.StringVar()  <span class="comment"># 与文本框双向绑定</span></span><br><span class="line">        self.password = tk.StringVar()</span><br><span class="line">        <span class="comment"># self.pack()</span></span><br><span class="line">        <span class="comment"># self.grid(row=0,column=0)</span></span><br><span class="line">        self.createWidgets()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createWidgets</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 登录框架=============</span></span><br><span class="line">        loginLF = tk.LabelFrame(self, text=<span class="string">'登录'</span>)</span><br><span class="line">        loginLF.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, sticky=tk.E+tk.W)</span><br><span class="line">        self.loginLF = loginLF  <span class="comment"># 这里需要将它保存为属性，否则这个函数结束后会出问题</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用户名</span></span><br><span class="line">        self.userNameLab = tk.Label(loginLF, text=<span class="string">'用户名'</span>)</span><br><span class="line">        self.userNameLab.grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.userNameEntry = tk.Entry(loginLF, textvariable=self.userName)</span><br><span class="line">        self.userNameEntry.grid(row=<span class="number">0</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 密码框</span></span><br><span class="line">        self.passwdLab = tk.Label(loginLF, text=<span class="string">'密码'</span>)</span><br><span class="line">        self.passwdLab.grid(row=<span class="number">1</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.passwdEntry = tk.Entry(</span><br><span class="line">            loginLF, show=<span class="string">'*'</span>, textvariable=self.password)</span><br><span class="line">        self.passwdEntry.grid(row=<span class="number">1</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 登录按钮</span></span><br><span class="line">        self.loginBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">'登录'</span>, command=self.loginCallback)</span><br><span class="line">        self.loginBtn.grid(row=<span class="number">2</span>, column=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 注册按钮</span></span><br><span class="line">        self.signupBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">'注册'</span>, command=self.regCallback)</span><br><span class="line">        self.signupBtn.grid(row=<span class="number">2</span>, column=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.userName.get())</span><br><span class="line">        print(self.password.get())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">geometry</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.master.geometry(<span class="string">'300x100'</span>)<span class="comment">#用于调整窗口大小</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span><span class="comment">#用于在本模块内测试用的函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    window = tk.Tk()</span><br><span class="line">    loginDlg = LoginDlg(test2, test2, window)</span><br><span class="line">    loginDlg.mainloop()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="客户端类Client"><a href="#客户端类Client" class="headerlink" title="客户端类Client"></a>客户端类Client</h3><p>客户端掌握着界面对象的引用，在初始化它们时，将自身的处理函数传入给它们，以便在触发界面事件时调用。</p>
+<p>客户端主要提供了以下方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>connect</td>
+<td>连接到服务器</td>
+</tr>
+<tr>
+<td>login</td>
+<td>登录，需要调用connect，由服务端进行合法性检测</td>
+</tr>
+<tr>
+<td>register</td>
+<td>注册，为了简化而直接由客户端写入文件</td>
+</tr>
+<tr>
+<td>send</td>
+<td>构造消息并发送给服务端</td>
+</tr>
+<tr>
+<td>recv</td>
+<td>接收消息并解析</td>
+</tr>
+</tbody></table>
+<p>为了客户端与服务端交流的便利，我自定义了消息格式，所以发送时需要封装，接收时需要解析，下文会讲。</p>
+<h3 id="服务端类Server"><a href="#服务端类Server" class="headerlink" title="服务端类Server"></a>服务端类Server</h3><p>服务端没有界面（做了就做不完了），负责接收连接以及转发客户端之间的聊天消息。ip以及端口是固定的。</p>
+<h2 id="数据文件格式"><a href="#数据文件格式" class="headerlink" title="数据文件格式"></a>数据文件格式</h2><p>已经注册的账号信息使用json文件保存（即<code>account_database.json</code>），保存格式如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"用户名1"</span>:&#123;</span><br><span class="line">        <span class="attr">"password"</span>:<span class="string">"密码1"</span>,</span><br><span class="line">        <span class="attr">"registerTime"</span>:注册时间<span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"用户名2"</span>:&#123;</span><br><span class="line">        <span class="attr">"password"</span>:<span class="string">"密码2"</span>,</span><br><span class="line">        <span class="attr">"registerTime"</span>:注册时间<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用用户名作为键，每个用户对应一个密码以及一个注册时间。</p>
+<h2 id="自定义消息"><a href="#自定义消息" class="headerlink" title="自定义消息"></a>自定义消息</h2><p><strong>（这个是我自己规定的服务端和客户端之间交换信息的格式）</strong></p>
+<p>客户端不直接与另一个客户端通信，而是通过服务端转发。</p>
+<p>客户端与服务端之间发送规定格式的json字符串来交流，此字符串以下称之为“消息”，聊天的文字称作“聊天消息”。此格式解析出来是python的一个字典，也就是json里面的对象，可以方便地使用键值对来找到需要的字段值。字段如下（不是所有的字段都同时被设置）：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>当前消息类型（必选）</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>errStr</td>
+<td>错误字符串</td>
+</tr>
+<tr>
+<td>infoStr</td>
+<td>信息字符串</td>
+</tr>
+<tr>
+<td>message</td>
+<td>聊天消息</td>
+</tr>
+<tr>
+<td>data</td>
+<td>传递的数据</td>
+</tr>
+</tbody></table>
+<p>其中type字段的值以及对应的必选字段如下：</p>
+<ul>
+<li>登录login：必须设置userName和password，用于客户端发送登录请求以及服务端发送确认；</li>
+<li>数据刷新data：必须设置data，且为字典，用于服务端给客户端发送更新后的当前在线列表；</li>
+<li>聊天消息msg: 必须设置message和userName，用于客户端向另一个客户端发送聊天消息时使用，其中message是聊天消息的内容。当源客户端向服务端发送此消息时，userName是目的客户端的用户名，服务端接收到消息之后，将userName改为源客户端的用户名，然后转发消息给目的客户端；</li>
+<li>提示info: 必须设置infoStr，发送提示信息</li>
+<li>错误err:必须设置errStr，发送错误信息</li>
+</ul>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册时客户端读取数据文件并检查注册信息合法性，用户名不可重复，密码可以重复，用户名和密码都是字符串。</p>
+<p>当注册信息合法，就组装json字符串，并写入数据文件。</p>
+<p><strong>注意：这里本来应该是客户端将注册信息发送给服务端，然后服务端修改数据文件的，但是我为了防止自己写不完，就简化了这个流程</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"><span class="keyword">import</span> utility<span class="comment">#只强调一下这个是自定义模块</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="comment">#...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        注册</span></span><br><span class="line"><span class="string">        在填写了用户名和密码之后，如果信息合法，则将信息写入数据文件</span></span><br><span class="line"><span class="string">        :return: 注册成功返回0,失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">'loginDlg'</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">'loginDlg'</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'用户名不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'密码不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> open(self.dataFile, <span class="string">'a+'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">            <span class="comment"># 使用a+方式打开，防止文件内容被覆盖</span></span><br><span class="line">            fp.seek(<span class="number">0</span>)  <span class="comment"># 调整指针到开头</span></span><br><span class="line">            accountStr = fp.read()</span><br><span class="line">            <span class="keyword">if</span> accountStr == <span class="string">''</span>:</span><br><span class="line">                <span class="comment"># 如果文件内没有内容，即刚刚创建</span></span><br><span class="line">                accountData = &#123;&#125;</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 否则读取文件内容</span></span><br><span class="line">                fp.seek(<span class="number">0</span>)</span><br><span class="line">                accountData = json.loads(accountStr)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> userName <span class="keyword">in</span> accountData.keys():</span><br><span class="line">                utility.showerror(<span class="string">'该用户名已经被注册'</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 写入数据文件</span></span><br><span class="line">            accountData.update(&#123;</span><br><span class="line">                userName: &#123;</span><br><span class="line">                    <span class="string">'password'</span>: password,</span><br><span class="line">                    <span class="string">'registerTime'</span>: time.time()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            utility.showinfo(<span class="string">'注册成功！'</span>)</span><br><span class="line">            fp.seek(<span class="number">0</span>)</span><br><span class="line">            fp.truncate()  <span class="comment"># 只保留从开头到当前位置，其余删除#当前位置为开头，故为全部删除</span></span><br><span class="line">            json.dump(accountData, fp, indent=<span class="number">4</span>, separators=(<span class="string">','</span>, <span class="string">':'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>这一部分的要点在于，文件中存储的是json字符串，不能简单地添加到文件末尾，而是需要将数据先读取出来，添加完数据后，再将整个文件覆盖。</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>客户端首先尝试连接服务端，如果成功再进行下一步。</p>
+<h3 id="请求登录"><a href="#请求登录" class="headerlink" title="请求登录"></a>请求登录</h3><p>客户端向服务端发送登录请求消息，并等待服务端的确认消息。</p>
+<p><strong>登录请求消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>login</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>用户名输入框中的值</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码输入框中的值</td>
+</tr>
+</tbody></table>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendLoginData</span><span class="params">(self, userName: str, password: str)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        发送登录数据</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 构造并发送消息</span></span><br><span class="line">        accountData = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'login'</span>,</span><br><span class="line">            <span class="string">'userName'</span>: userName,</span><br><span class="line">            <span class="string">'password'</span>: password</span><br><span class="line">        &#125;</span><br><span class="line">        accountStr = utility.dumpJson(accountData)</span><br><span class="line">        self.send(accountStr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>服务端收到登录请求消息之后，检查账号信息的合法性。会向客户端回复两种消息，错误消息或者登录确认消息。</p>
+<h3 id="处理登录请求"><a href="#处理登录请求" class="headerlink" title="处理登录请求"></a>处理登录请求</h3><h4 id="登录失败"><a href="#登录失败" class="headerlink" title="登录失败"></a>登录失败</h4><p>如果账号信息错误，服务端向此客户端发送错误消息，并断开与它的连接。错误消息包含以下字段：</p>
+<p> <strong>err消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>err</td>
+</tr>
+<tr>
+<td>errStr</td>
+<td>错误信息</td>
+</tr>
+</tbody></table>
+<p>客户端收到此错误消息后，显示警告对话框，并重置socket。</p>
+<h4 id="登录成功"><a href="#登录成功" class="headerlink" title="登录成功"></a>登录成功</h4><p>若服务端检测到账号信息无误，则向此客户端发送确认消息，并将它的socket、地址以及登录时间加入到在线列表中，并向其他在线的客户端发送数据刷新消息（见下文）。</p>
+<p><strong>登录确认消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>login</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>置为空字符串</td>
+</tr>
+<tr>
+<td>password</td>
+<td>置为空字符串</td>
+</tr>
+<tr>
+<td>infoStr</td>
+<td>可选，登录成功提示</td>
+</tr>
+<tr>
+<td>data</td>
+<td>设置为当前在线账户列表</td>
+</tr>
+</tbody></table>
+<p>这是服务端处理登录请求的代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">acceptLogin</span><span class="params">(self, cliSock, cliAddr)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接受已连接的客户端的登录请求</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 获取客户端提交的账号密码，客户端以json字符串的形式发送过来</span></span><br><span class="line">        loginStr = cliSock.recv(self.bufsize).decode()</span><br><span class="line">        loginDict = utility.loadJson(loginStr)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查登录消息是否正确</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(loginDict):</span><br><span class="line">            errStr = <span class="string">'数据有误，请重新连接'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查账号</span></span><br><span class="line">        cliUserName = loginDict[<span class="string">'userName'</span>]</span><br><span class="line">        cliPassword = loginDict[<span class="string">'password'</span>]</span><br><span class="line">        res = self.checkAccount(cliUserName, cliPassword)</span><br><span class="line">        <span class="keyword">if</span> res == <span class="number">-1</span>:</span><br><span class="line">            errStr = <span class="string">'账号不存在'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res == <span class="number">-2</span>:</span><br><span class="line">            errStr = <span class="string">'密码错误'</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.info(<span class="string">'用户[userName=&#123;&#125;]登录成功'</span>.format(cliUserName))</span><br><span class="line">            <span class="comment"># 将新用户加入在线列表</span></span><br><span class="line">            self.onlineClients.update(&#123;</span><br><span class="line">                cliUserName: &#123;</span><br><span class="line">                    <span class="string">'socket'</span>: cliSock,  <span class="comment"># 客户端socket</span></span><br><span class="line">                    <span class="string">'address'</span>: cliAddr,  <span class="comment"># 客户端地址</span></span><br><span class="line">                    <span class="string">'loginTime'</span>: time.time()  <span class="comment"># 登录时间</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment"># 登录成功，向该客户端发送确认消息</span></span><br><span class="line">            self.sendLoginAck(cliSock)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendLoginAck</span><span class="params">(self, cliSock)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        登录成功之后向客户端发送确认消息以及当前在线客户端列表</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        curOnline = self.getCurOnline()  <span class="comment"># 获取当前在线列表</span></span><br><span class="line"></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'login'</span>,</span><br><span class="line">            <span class="string">'infoStr'</span>: <span class="string">'登录成功！'</span>,</span><br><span class="line">            <span class="string">'data'</span>: curOnline,</span><br><span class="line">            <span class="string">'userName'</span>: <span class="string">''</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        self.send(cliSock, **msgDict)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="等待确认"><a href="#等待确认" class="headerlink" title="等待确认"></a>等待确认</h3><p>发送了登录请求消息之后，客户端会等待服务端发来的登录确认消息或者错误消息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">recvLoginAck</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        等待服务端传回确认</span></span><br><span class="line"><span class="string">        :return: 成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        res = self.recv()</span><br><span class="line">        res = utility.loadJson(res)</span><br><span class="line">        <span class="comment"># 检查消息合法性</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(res):</span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> res[<span class="string">'type'</span>] == <span class="string">'err'</span>:</span><br><span class="line">            <span class="comment"># 如果收到的是服务端的错误消息</span></span><br><span class="line">            utility.showerror(res[<span class="string">'errStr'</span>])</span><br><span class="line">            self.resetSock()  <span class="comment"># 重启socket</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res[<span class="string">'type'</span>] == <span class="string">'login'</span>:</span><br><span class="line">            <span class="comment"># 登录成功，输出信息</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'infoStr'</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                utility.showinfo(res[<span class="string">'infoStr'</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                utility.showinfo(<span class="string">'登录成功'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'data'</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                self.contactList = res[<span class="string">'data'</span>][<span class="string">'curOnline'</span>]</span><br><span class="line">                self.gui[<span class="string">'homePage'</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                contactList = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不是err消息也不是确认消息，则登录失败</span></span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端登录代码"><a href="#客户端登录代码" class="headerlink" title="客户端登录代码"></a>客户端登录代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        登录</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">'loginDlg'</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">'loginDlg'</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'用户名不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">''</span>:</span><br><span class="line">            utility.showerror(<span class="string">'密码不能为空'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果连接成功，向服务器发送信息</span></span><br><span class="line">        res = self.connect()</span><br><span class="line">        <span class="keyword">if</span> res != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="comment"># 构造并发送消息</span></span><br><span class="line">        self.sendLoginData(userName, password)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果发送信息成功，且账号信息正确，则弹出好友列表页面</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 等待服务端的确认信息</span></span><br><span class="line">        <span class="keyword">if</span> self.recvLoginAck() == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 跳转到主页面</span></span><br><span class="line">            self.userName = userName</span><br><span class="line">            self.gotoHomePage()</span><br><span class="line">            <span class="comment"># 开启接收消息线程</span></span><br><span class="line">            self.recvThread = threading.Thread(target=self.recvLoop)</span><br><span class="line">            self.recvThread.setDaemon(<span class="literal">True</span>)</span><br><span class="line">            self.recvThread.start()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>登录的流程如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png" alt="客户端登录-活动图"></p>
+<h2 id="客户端界面跳转"><a href="#客户端界面跳转" class="headerlink" title="客户端界面跳转"></a>客户端界面跳转</h2><p>登录成功后，会从登陆界面跳转到主页面。</p>
+<p>原理是将登录界面隐藏，再显示主界面。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">gotoHomePage</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        跳转到主页面</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> self.gui.keys():</span><br><span class="line">            self.gui[page].grid_forget()</span><br><span class="line"></span><br><span class="line">        self.window.title(<span class="string">'SimuQQ主页面'</span>)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].userName.set(self.userName)</span><br><span class="line">        self.gui[<span class="string">'homePage'</span>].geometry()</span><br></pre></td></tr></table></figure>
+
+<p>打开聊天窗口：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">openChatWindow</span><span class="params">(self, userName)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        打开聊天窗口</span></span><br><span class="line"><span class="string">        :param userName: 聊天对象的用户名</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        self.chatWith = userName  <span class="comment"># 设置聊天对象</span></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.chatWindow.title(<span class="string">'[&#123;&#125;]向[&#123;&#125;]发起的聊天'</span>.format(self.userName, userName))</span><br><span class="line">        self.chatWindow.deiconify()</span><br><span class="line">        <span class="comment"># self.chatWindow.mainloop()</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="发送聊天消息"><a href="#发送聊天消息" class="headerlink" title="发送聊天消息"></a>发送聊天消息</h2><p>用户在客户端的在线列表中双击选择一个在线客户端，会打开对选择对象的聊天窗口。</p>
+<p>用户在输入框中输入聊天消息并点击发送按钮后，客户端将会构建并发送msg消息给服务端，该消息的内容如下：</p>
+<p><strong>msg消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>msg</td>
+</tr>
+<tr>
+<td>message</td>
+<td>需要发送给聊天对象的聊天消息</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>聊天对象的用户名</td>
+</tr>
+</tbody></table>
+<p>服务端在收到客户端的msg消息后，将userName字段修改为发送端的用户名，并转发给目的端。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">sendChatMsg</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        发送聊天消息</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="comment"># 获取聊天窗口的输入框内文字</span></span><br><span class="line">        chatMsg = self.gui[<span class="string">'chatDlg'</span>].getInputContent()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 构造消息</span></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'msg'</span>,</span><br><span class="line">            <span class="string">'userName'</span>: self.chatWith,</span><br><span class="line">            <span class="string">'message'</span>: chatMsg</span><br><span class="line">        &#125;</span><br><span class="line">        msgStr = utility.dumpJson(msgDict)</span><br><span class="line">        <span class="comment"># 发送消息</span></span><br><span class="line">        self.send(msgStr)</span><br><span class="line">        <span class="comment"># 同时在自己这边显示自己说的话</span></span><br><span class="line">        <span class="comment"># 构建输出内容</span></span><br><span class="line">        outputContent = <span class="string">'[&#123;&#125;]&#123;&#125;\n&#123;&#125;'</span>.format(</span><br><span class="line">            self.userName, time.strftime(<span class="string">'%Y/%m/%d %H:%M:%S'</span>), chatMsg)</span><br><span class="line"></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].addOutputContent(outputContent)</span><br><span class="line">        <span class="comment"># 清空输入框</span></span><br><span class="line">        self.gui[<span class="string">'chatDlg'</span>].clearInputContent()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="客户端消息处理"><a href="#客户端消息处理" class="headerlink" title="客户端消息处理"></a>客户端消息处理</h2><p>客户端在登录成功后，开启消息接收线程，它的线程体是一个无限循环，并将其置为守护线程（Deamon Thread），在所有前台线程结束之后，消息接收线程也随之结束。</p>
+<p>在没有注意到这一点前，我调试了这个bug很久——关闭窗口会无响应，后来才知道不是tkinter的问题，而是我开的这个线程没有随之关闭。</p>
+<p>客户端主要会收到两种消息，数据刷新消息和聊天消息。同样的，这里本来还应该处理err消息以及info消息的，担心做不完就简化了。</p>
+<h3 id="数据刷新消息"><a href="#数据刷新消息" class="headerlink" title="数据刷新消息"></a>数据刷新消息</h3><p>在服务端接收一个新的连接时，或是服务端检测到一个旧有连接断开时，会向当前在线的客户端发送一个数据刷新消息，该消息包含以下字段：</p>
+<p><strong>data消息的结构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>data</td>
+</tr>
+<tr>
+<td>data</td>
+<td>当前在线账号的用户名的列表</td>
+</tr>
+</tbody></table>
+<p>客户端收到此消息时，调用界面类的对应方法刷新主页面的在线列表。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">recvLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接收消息的循环</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            msgStr = self.recv()</span><br><span class="line">            msgDict = utility.loadJson(msgStr)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(msgDict):</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># 如果消息不正确，忽略这个消息</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">'type'</span>] == <span class="string">'data'</span>:</span><br><span class="line">                <span class="comment"># 如果接收到数据刷新消息</span></span><br><span class="line">                self.contactList = msgDict[<span class="string">'data'</span>][<span class="string">'curOnline'</span>]</span><br><span class="line">                self.gui[<span class="string">'homePage'</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">'type'</span>] == <span class="string">'msg'</span>:</span><br><span class="line">                <span class="comment"># 如果接收到聊天消息</span></span><br><span class="line">                self.openChatWindow(msgDict[<span class="string">'userName'</span>])</span><br><span class="line">                <span class="comment"># 构建输出内容</span></span><br><span class="line">                outputContent = <span class="string">'[&#123;&#125;]&#123;&#125;\n&#123;&#125;'</span>.format(</span><br><span class="line">                    msgDict[<span class="string">'userName'</span>], time.strftime(<span class="string">'%Y/%m/%d %H:%M:%S'</span>), msgDict[<span class="string">'message'</span>])</span><br><span class="line"></span><br><span class="line">                self.gui[<span class="string">'chatDlg'</span>].addOutputContent(outputContent)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="服务端消息处理"><a href="#服务端消息处理" class="headerlink" title="服务端消息处理"></a>服务端消息处理</h2><p>接下来是比较核心的部分。</p>
+<p>在编写客户端时，为了专注于客户端的编写，对于服务端，我采用的是比较简单的无限循环：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">acceptLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        接受连接的线程循环</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        刚开始的时候测试客户端用的，</span></span><br><span class="line"><span class="string">        客户端的登录测试完毕之后，将其中的代码提取出来封成另一个函数acceptLogin()，</span></span><br><span class="line"><span class="string">        供selectLoop使用</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.info(<span class="string">'正在等待新的连接'</span>)</span><br><span class="line">            <span class="comment"># 接受新的连接请求</span></span><br><span class="line">            cliSock, cliAddr = self.serSock.accept()</span><br><span class="line">            self.acceptLogin(cliSock, cliAddr)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>客户端大致成型之后，我开始编写服务端的这一部分。</p>
+<p>我想起来之前在编写c++聊天室的时候，用到了一个事件模型，可以解决以上线程循环遇到的问题。</p>
+<p>上面这个写法会出现的问题，以前我就遇到过。</p>
+<p>如果服务端想要监听多个客户端发送过来的聊天消息，第一种方法是遍历每个客户端，recv每个客户端（将客户端socket改成非阻塞的就行）；第二种方法是为每个客户端建立单独的接收消息线程。</p>
+<p>这两个方案其实都不太好。后来我找到了一个叫做事件选择模型的东西（<code>WSAEventSelect</code>），解决了一部分问题，当时知识还是太浅薄，不能完全理解那东西，所以还是写出了一堆bug。</p>
+<p>现在回想起来，python里面应该也有类似的东西吧？我就记着个select了，一搜，还真是叫做select。</p>
+<p>找到可用的资料好像并不太多，其中一个对我很有用的文章的链接是这个：<a href="https://www.jianshu.com/p/e26594304e11" target="_blank" rel="noopener">python Select模块简单使用</a></p>
+<p>后来翻了一下文档，找到了关于select的英文原版<a href="https://docs.python.org/3.7/library/select.html#select.select" target="_blank" rel="noopener">简介</a></p>
+<p><strong>我简单描述一下我在这个项目里面是如何使用select模型的：</strong></p>
+<p>设置三个需要处理消息的队列，分别存放所有的socket（包括服务端socket和客户端socket）、用于存放存在待处理消息的socket的等待队列、需要检查错误的socket的队列。</p>
+<p>select函数接收上述三个队列，并在阻塞timeout时间后返回三个队列，分别是可读取队列、可写入队列和错误队列。</p>
+<p>可读取队列中的socket是已经接收到消息的socket，即接收缓冲区中存在消息，需要处理。如果是服务端socket，表明有新的客户端连接请求到达，对连接请求进行处理；如果是客户端socket，表明有已经连接的客户端发送消息过来，先将它们放入对应的消息队列中，并将它们加入到第二个监听队列即等待消息处理的队列。</p>
+<p>可写入队列中的socket是从等待消息处理的队列中选择出目前能够接受消息、即接收缓冲区可用的socket。遍历这个队列，对其中的socket进行消息处理，处理完毕后删除它的消息队列，以及将它移出等待队列。</p>
+<p>错误队列存放从需要检查错误的socket队列中选择出的出错的socket，在本项目中将需要检查设置为存放所有socket的队列，即检查所有的socket。遍历此队列，将错误的socket移除。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">selectLoop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        使用select函数来进行处理的循环</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">        readList = [self.serSock]</span><br><span class="line">        writeList = []</span><br><span class="line">        message_dict = &#123;&#125;  <span class="comment"># 存储消息用的字典，键为socket，值为消息列表</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        logging.info(<span class="string">'服务器已经启动，正在等待客户端的连接'</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.debug(<span class="string">'循环数：'</span>+str(i))</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="comment"># select函数阻塞timeout时间，从参数的三个列表中，选择出此时可读取、可写入、出现错误的元素返回</span></span><br><span class="line">            readableList, writableList, exceptionList = select.select(</span><br><span class="line">                readList, writeList, readList, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 1. 遍历当前可读取的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> readableList:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> sock <span class="keyword">is</span> self.serSock:</span><br><span class="line">                    <span class="comment"># 如果是服务端socket，那么就是有客户端来连接了</span></span><br><span class="line">                    cliSock, cliAddr = sock.accept()</span><br><span class="line">                    <span class="keyword">if</span> self.acceptLogin(cliSock, cliAddr) == <span class="number">0</span>:</span><br><span class="line">                        <span class="comment"># 如果登录成功</span></span><br><span class="line">                        readList.append(cliSock)  <span class="comment"># 将新的客户端socket加入监听列表</span></span><br><span class="line">                        message_dict[cliSock] = []  <span class="comment"># 为新的socket创建消息列表</span></span><br><span class="line">                        self.refreshCurOnline()  <span class="comment"># 给所有在线客户端刷新在线信息</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 已连接的用户发送消息过来</span></span><br><span class="line">                    <span class="comment"># 接收一下</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        data = sock.recv(self.bufsize)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                        readList.remove(sock)</span><br><span class="line">                        <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line"></span><br><span class="line">                        logging.info(<span class="string">'客户端[userName=&#123;&#125;]断开了连接'</span>.format(</span><br><span class="line">                            self.getUserNameBySock(sock)))</span><br><span class="line">                        self.closeLink(sock)</span><br><span class="line">                    <span class="keyword">else</span>:  <span class="comment"># 如果没有出现异常，再检查是否收到空数据</span></span><br><span class="line">                        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                            <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                            readList.remove(sock)</span><br><span class="line">                            <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line">                            self.closeLink(sock)</span><br><span class="line">                            print(<span class="string">'客户端[&#123;&#125;]断开了连接'</span>.format(</span><br><span class="line">                                self.getUserNameBySock(sock)))</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="comment"># 收到老用户的消息</span></span><br><span class="line">                            dataStr = data.decode()</span><br><span class="line">                            <span class="comment"># 将消息加入对应的消息队列</span></span><br><span class="line">                            message_dict[sock].append(dataStr)</span><br><span class="line">                            writeList.append(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 2.处理待回复的消息</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> writableList:</span><br><span class="line">                <span class="keyword">while</span> len(message_dict[sock]) &gt; <span class="number">0</span>:</span><br><span class="line">                    dataStr = message_dict[sock][<span class="number">0</span>]  <span class="comment"># 取出消息队列中第一个消息</span></span><br><span class="line">                    <span class="keyword">del</span> message_dict[sock][<span class="number">0</span>]</span><br><span class="line">                    self.addressMsg(sock, dataStr)  <span class="comment"># 处理消息</span></span><br><span class="line">                    <span class="comment"># 测试代码：测试消息处理是否可用</span></span><br><span class="line">                    <span class="comment"># sock.sendall(('echo:'+dataStr).encode())</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 将消息队列中所有消息处理完毕，则将它从待回复队列中删除</span></span><br><span class="line">                writeList.remove(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 3.处理出错的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> exceptionList:</span><br><span class="line">                readList.remove(sock)</span><br></pre></td></tr></table></figure>
+
+<p>待我更加理解这个东西，可能会回来补充完善这个部分。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上便是我的计算机网络课设的核心思路以及核心代码了，其他未列出的方法，读者看方法名字大致也能猜到它们的作用，就不浪费篇幅去说了。</p>
+<p>本文耗费5个小时完成（结合课设报告）。</p>
+<p>如有错漏欢迎在下方评论区指出。</p>
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>internet</tag>
+        <tag>tkinter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章分类说明</title>
+    <url>/posts/categories_description/</url>
+    <content><![CDATA[<p>为了对文章进行更好的管理，需要提前确定好文章的分类。将本博客内的文章分为以下七类：</p>
+<ul>
+<li>过程复盘</li>
+<li>知识整理</li>
+<li>解决方案</li>
+<li>算法理解</li>
+<li>工具使用</li>
+<li>目录索引</li>
+<li>日志随笔</li>
+</ul>
+<a id="more"></a>
+
+<p> 分类定好了基本就不变了：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>过程复盘</td>
+<td>记录学习实践一个事物的过程，侧重记录与反思</td>
+</tr>
+<tr>
+<td>知识整理</td>
+<td>针对某一部分知识进行集中整理方便查阅，例如API、语法、命令等</td>
+</tr>
+<tr>
+<td>解决方案</td>
+<td>针对遇到的某个具体问题寻找解决方案</td>
+</tr>
+<tr>
+<td>算法理解</td>
+<td>针对某个具体算法的理解掌握</td>
+</tr>
+<tr>
+<td>工具使用</td>
+<td>对于框架、软件、网站等工具的使用方法与心得经验，或是简单推荐</td>
+</tr>
+<tr>
+<td>目录索引</td>
+<td>定期将本博客的文章索引起来，或者整理一些有用的参考链接</td>
+</tr>
+<tr>
+<td>日志随笔</td>
+<td>随便写点啥心情，或者年终总结之类的</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>目录索引</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/hello_world/</url>
+    <content><![CDATA[<p>大家好，我是憧憬少。</p>
+<a id="more"></a>
+
+<p>这是用hexo搭建的第二个博客，由于想改一个名字，又担心会影响到很多东西，于是就新搭建了一个，原本的博客仍然保留，链接在此：<a href="https://hanechiri.github.io" target="_blank" rel="noopener">羽尘的个人博客-尘世未解</a></p>
+<p>其实和以前的几乎是一样的，只是改了用户名，以及域名。这可能是中二病带来的对帅气名字的执着吧！</p>
+<p>现在是2019年12月30日，大三第一学期末，现在的我，比之前会了更多的东西，也认识到了文字输出对于学习的重要性，所以我会花更多时间在写博客总结上（也许吧）。</p>
+]]></content>
+  </entry>
+</search>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://changingself.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to HaneChi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建新hexo博客后继续更新旧hexo博客的方法">
+<meta property="og:url" content="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/index.html">
+<meta property="og:site_name" content="憧憬少的个人博客">
+<meta property="og:description" content="我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to HaneChi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-28T04:15:33.000Z">
+<meta property="article:modified_time" content="2020-03-14T03:56:45.680Z">
+<meta property="article:author" content="憧憬少">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="ssh">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>建新hexo博客后继续更新旧hexo博客的方法 | 憧憬少的个人博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">憧憬少的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">少时憧憬皆似梦，来日期许莫成空</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="憧憬少">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="憧憬少的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          建新hexo博客后继续更新旧hexo博客的方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-28 12:15:33" itemprop="dateCreated datePublished" datetime="2020-01-28T12:15:33+08:00">2020-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-14 11:56:45" itemprop="dateModified" datetime="2020-03-14T11:56:45+08:00">2020-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" itemprop="url" rel="index">
+                    <span itemprop="name">解决方案</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
+<p>问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights                             &#96;</span><br></pre></td></tr></table></figure>
+
+<p>大意是我没有权限，也就是ssh没有配好。</p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://blog.csdn.net/skylin19840101/article/details/98616205" target="_blank" rel="noopener">github支持多个账号</a></li>
+<li><a href="https://www.cnblogs.com/yanglang/p/9563496.html" target="_blank" rel="noopener">SSH-keygen用法</a></li>
+<li><a href="https://www.awaimai.com/2200.html" target="_blank" rel="noopener">git配置多个SSH-key</a></li>
+<li><a href="https://blog.csdn.net/hao495430759/article/details/80673568" target="_blank" rel="noopener">git配置多个SSH-key-多图易理解版</a></li>
+<li><a href="https://www.centos.bz/2018/06/%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E5%AF%B9%E5%B9%B6%E4%B8%94%E6%B0%B8%E4%B9%85%E5%A4%9Assh%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener">配置多个ssh密钥对并且永久多ssh管理</a></li>
+<li><a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a></li>
+<li><a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">ssh百度百科</a></li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="目前状况"><a href="#目前状况" class="headerlink" title="目前状况"></a>目前状况</h2><p>操作系统是win10（找到的资料很多linux的，不过没关系，有git-bash）</p>
+<p>github上有两个账号，一个旧账号（HaneChiri），一个新账号（ChangingSelf）。本地有两个hexo博客源代码文件夹，分别对应两个账号上搭建的博客。</p>
+<p>本地<code>C:\Users\Administrator\.ssh</code>文件夹内有：</p>
+<ul>
+<li>id_rsa.pub：公钥文件，已添加到ChangingSelf账号的ssh-key</li>
+<li>id_rsa：私钥文件</li>
+<li>known_hosts</li>
+</ul>
+<p>现在在ChangingSelf博客文件夹内使用<code>hexo d</code>部署博客，可以部署到对应账号的仓库，而在HaneChiri博客文件夹内部署博客，则权限不足。</p>
+<p>（现在回想起来也许直接将现在新的公钥添加到旧账号中就搞定了呀，搞那么麻烦QAQ，等写完这篇文再试试这个方法）</p>
+<h2 id="过程复盘"><a href="#过程复盘" class="headerlink" title="过程复盘"></a>过程复盘</h2><h3 id="生成新密钥对"><a href="#生成新密钥对" class="headerlink" title="生成新密钥对"></a>生成新密钥对</h3><p>先来看看<a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">百度百科</a>关于SSH（安全外壳协议）的介绍：</p>
+<blockquote>
+<p>从客户端来看，SSH提供两种级别的安全验证。</p>
+<p><strong>第一种级别（基于口令的安全验证）</strong></p>
+<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的<a href="https://baike.baidu.com/item/服务器" target="_blank" rel="noopener">服务器</a>。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p><strong>第二种级别（基于密匙的安全验证）</strong></p>
+<p>需要依靠<a href="https://baike.baidu.com/item/密匙" target="_blank" rel="noopener">密匙</a>，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。</p>
+<p>用这种方式，你必须知道自己密匙的<a href="https://baike.baidu.com/item/口令" target="_blank" rel="noopener">口令</a>。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
+<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要10秒 [2] 。</p>
+</blockquote>
+<p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在github服务器上，本地保留私钥。</p>
+<p>首先，打开git-bash，生成新的ssh密钥对：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ssh-keygen -t rsa -C <span class="string">"youremail@xxx.com"</span> -f keyfileName</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-t</td>
+<td>生成的密钥类型，默认rsa</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>注释文字，应该不会影响密钥内容，这里设置成邮箱</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定密钥文件名，默认为id_rsa</td>
+</tr>
+</tbody></table>
+<p>由于.ssh目录下已经存在默认文件名的密钥，所以换一个名字。我想要生成旧账号HaneChiri的密钥，所以文件名就起名为<code>id_rsa_hanechiri</code>，当然，这个并无影响。</p>
+<p>最后会生成两个文件，.pub后缀的是公钥，另一个是私钥。</p>
+<h3 id="添加公钥到github账号"><a href="#添加公钥到github账号" class="headerlink" title="添加公钥到github账号"></a>添加公钥到github账号</h3><p>在网页右上角账号设置中找到SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
+<p>添加完毕后再次部署HaneChiri的博客，发现仍然是这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
+
+<p>也对，现在有两个密钥对，可能是配对错误了。</p>
+<p>仔细看错误内容，HaneChiri库拒绝了用户ChangingSelf的访问，也就是说，用的是HaneChiri的公钥，与新账号ChangingSelf的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
+<h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到ssh-agent的高速缓存中，我打开另一个git-bash的时候就不行了（参考：<a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a>）</p>
+<h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开ssh-agent服务，即输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-agent bash</span><br></pre></td></tr></table></figure>
+
+<p>然后添加私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri</span><br></pre></td></tr></table></figure>
+
+<p>这里的地址是需要使用的私钥文件的绝对地址。</p>
+<p>可以通过-l选项查看所有已经添加的私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -l</span><br></pre></td></tr></table></figure>
+
+<p>使用-D选项清空私钥列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -D</span><br></pre></td></tr></table></figure>
+
+<p>接着在这个git-bash里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
+<h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件config，这个文件长这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:&#x2F;Users&#x2F;Administrator&#x2F;.ssh&#x2F;id_rsa_hanechiri</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User HaneChiri</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>网站别名，最好和HostName一致</td>
+</tr>
+<tr>
+<td>HostName</td>
+<td>网站域名</td>
+</tr>
+<tr>
+<td>IdentityFile</td>
+<td>私钥文件的绝对路径</td>
+</tr>
+<tr>
+<td>PreferredAuthentications</td>
+<td>验证方式，填publickey就是公钥验证</td>
+</tr>
+<tr>
+<td>User</td>
+<td>用户名</td>
+</tr>
+</tbody></table>
+<p>可以配置多个网站，每个网站都有上面这些字段。在你使用ssh访问这个文件内存在的某个网站时，ssh就会拿这个文件里面指定的私钥来进行验证。</p>
+<p>在.ssh目录下找，如果存在这个名为<code>config</code>的文件，就打开来编辑，没有的话就新建一个。</p>
+<p>配置好文件之后，打开git-bash再使用<code>hexo d</code>就搞定部署了。</p>
+<p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了config文件的方法，写本文时才尝试临时性的方法，成功了）</p>
+<h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对ssh更加了解之后，才想到的简便方法：直接把新账号ChangingSelf的公钥添加到旧账号的ssh-key中。</p>
+<p>结果给我显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure>
+
+<p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>憧憬少
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/" title="建新hexo博客后继续更新旧hexo博客的方法">https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/ssh/" rel="tag"># ssh</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/Africanights_simu_hr_1/" rel="prev" title="【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级">
+      <i class="fa fa-chevron-left"></i> 【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/Africanights_simu_hr_2/" rel="next" title="【编程练习】明日非舟抽卡模拟器（2）xml文件解析">
+      【编程练习】明日非舟抽卡模拟器（2）xml文件解析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目前状况"><span class="nav-number">2.1.</span> <span class="nav-text">目前状况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程复盘"><span class="nav-number">2.2.</span> <span class="nav-text">过程复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成新密钥对"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成新密钥对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加公钥到github账号"><span class="nav-number">2.2.2.</span> <span class="nav-text">添加公钥到github账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变使用的私钥"><span class="nav-number">2.2.3.</span> <span class="nav-text">改变使用的私钥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#临时性保存"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">临时性保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#永久性保存"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">永久性保存</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后做个试验"><span class="nav-number">3.</span> <span class="nav-text">最后做个试验</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="憧憬少"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">憧憬少</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChangingSelf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChangingSelf" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/13290087" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;13290087" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>Bilibili</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://endlesspeak.gitee.io/" title="https:&#x2F;&#x2F;endlesspeak.gitee.io&#x2F;" rel="noopener" target="_blank">无涯</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lollipopnougat.github.io/Crepeblog/" title="https:&#x2F;&#x2F;lollipopnougat.github.io&#x2F;Crepeblog&#x2F;" rel="noopener" target="_blank">封掣</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/1625--H/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1625--H&#x2F;" rel="noopener" target="_blank">暮冥</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hanechiri.github.io/" title="https:&#x2F;&#x2F;hanechiri.github.io" rel="noopener" target="_blank">羽尘</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://1rt7cz.coding-pages.com/" title="https:&#x2F;&#x2F;1rt7cz.coding-pages.com&#x2F;" rel="noopener" target="_blank">跃东</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">憧憬少</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">44 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '2c2d9b5607027ef5684f',
+      clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+      repo: 'blog-comments',
+      owner: 'ChangingSelf',
+      admin: ['ChangingSelf'],
+      id: '14325c7c7a797b8ff4cbdfd785f19110',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":false},"log":false});</script></body>
+</html>
