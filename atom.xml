@@ -45,7 +45,7 @@
     <link href="https://changingself.github.io/posts/sound-card-data-acquisition/"/>
     <id>https://changingself.github.io/posts/sound-card-data-acquisition/</id>
     <published>2020-03-08T03:05:47.000Z</published>
-    <updated>2020-03-14T03:56:45.682Z</updated>
+    <updated>2020-03-19T07:19:52.252Z</updated>
     
     <summary type="html">
     
@@ -59,6 +59,7 @@
 &lt;p&gt;对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。&lt;/p&gt;
 &lt;p&gt;到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，&lt;del&gt;为了能够偷懒，&lt;/del&gt;为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。&lt;/p&gt;
 &lt;p&gt;本文并不专业，作者本身不是控制专业，所以出现错误在所难免，&lt;strong&gt;本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gitee.com/ChangingSelf/sound-card-data-acquisition&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;码云仓库开源链接&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     

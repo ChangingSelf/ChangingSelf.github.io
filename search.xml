@@ -165,6 +165,7 @@
 <p>对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。</p>
 <p>到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，<del>为了能够偷懒，</del>为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。</p>
 <p>本文并不专业，作者本身不是控制专业，所以出现错误在所难免，<strong>本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。</strong></p>
+<p><a href="https://gitee.com/ChangingSelf/sound-card-data-acquisition" target="_blank" rel="noopener">码云仓库开源链接</a></p>
 <a id="more"></a>
 
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
@@ -332,7 +333,8 @@
 <p>完成之后的效果是下面这样的：</p>
 <p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308174022.png" alt=""></p>
 <p>上图的坐标都是没有变换的，还是以左上角为原点。</p>
-<p>（未完待续）</p>
+<h2 id="发现重装系统前写的东西都没了"><a href="#发现重装系统前写的东西都没了" class="headerlink" title="发现重装系统前写的东西都没了"></a>发现重装系统前写的东西都没了</h2><p>啊啊啊啊啊啊！后面那么一大段就这样没了！不太想补了。</p>
+<p>其实核心部分也基本上说完了，剩下的就是坐标转化以及动态采样了，读者们可以移步本项目的<a href="https://gitee.com/ChangingSelf/sound-card-data-acquisition" target="_blank" rel="noopener">码云仓库</a>查看代码。</p>
 ]]></content>
       <categories>
         <category>过程复盘</category>
