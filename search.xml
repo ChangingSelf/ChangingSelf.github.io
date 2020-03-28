@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【周总结】2020年第13周总结</title>
+    <url>/posts/2020_week13/</url>
+    <content><![CDATA[<p>这是今年的第【13】周，日期从2020年3月22日 到2020年3月28日 </p>
+<p>一整周都坚持使用活页版子弹笔记记录日待办，在完成一件事情后，基本不会因为不知道做什么而浪费了时间。</p>
+<a id="more"></a>
+
+<h1 id="本周目标以及完成情况"><a href="#本周目标以及完成情况" class="headerlink" title="本周目标以及完成情况"></a>本周目标以及完成情况</h1><ul>
+<li><input disabled="" type="checkbox"> 达目标早睡全勤。未完成，熬夜两天</li>
+<li><input disabled="" type="checkbox"> 处理好爬虫项目。未完成，遇到了很难搞的问题</li>
+<li><input disabled="" type="checkbox"> 分配固定时间背单词。未完成</li>
+<li><input disabled="" type="checkbox"> 分配固定时间做错题。未完成</li>
+<li><input disabled="" type="checkbox"> 分配固定时间做笔记。未完成</li>
+<li><input checked="" disabled="" type="checkbox"> 每天布置第二天待办。完成，使用活页本，按照子弹笔记记录方式进行。</li>
+<li><input checked="" disabled="" type="checkbox"> 专心听课。半完成，由于专心听课甚至还忘记上课签到。</li>
+<li><input checked="" disabled="" type="checkbox"> 确定院校和专业。完成。</li>
+</ul>
+<h1 id="本周有什么成果"><a href="#本周有什么成果" class="headerlink" title="本周有什么成果"></a>本周有什么成果</h1><p>目前没有什么产出</p>
+<h1 id="学习了什么内容"><a href="#学习了什么内容" class="headerlink" title="学习了什么内容"></a>学习了什么内容</h1><p>测试模块，罗列本周学习的内容，从“本周成果”模块中分离出来，加上学校课程学习内容</p>
+<ul>
+<li>数据库：sql更新语句和视图</li>
+<li>信息安全：公钥密码体制、RSA算法、消息认证。待整理笔记，有些数论方面的知识没能很好地理解</li>
+<li>软件质量保证：回归测试、验收测试</li>
+<li>线性代数：矩阵相似对角化</li>
+<li>python：tk模块的使用</li>
+</ul>
+<h1 id="下周目标"><a href="#下周目标" class="headerlink" title="下周目标"></a>下周目标</h1><ul>
+<li>“早睡”目标全勤</li>
+<li>不要将娱乐APP下载回来，网页锁失效后记得锁回去</li>
+<li>搞定爬虫</li>
+<li>专心听课，聚焦注意力</li>
+<li>数学题型本的每日整理</li>
+<li>尝试每天在电脑Vnote写日记</li>
+<li>复习Unit19、20的单词</li>
+<li>anki录入Unit1、2、3、4的主干词</li>
+</ul>
+]]></content>
+      <categories>
+        <category>日志随笔</category>
+      </categories>
+      <tags>
+        <tag>周总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【自我管理系统】归档文件</title>
     <url>/posts/self-management-archive/</url>
     <content><![CDATA[<p>记录2020年第12周的文件归档</p>
