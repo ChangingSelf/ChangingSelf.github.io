@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://changingself.github.io/"/>
-  <updated>2020-03-28T00:05:15.219Z</updated>
+  <updated>2020-04-04T00:58:03.919Z</updated>
   <id>https://changingself.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【作业总结】python写的DES替代算法的gui小工具</title>
+    <link href="https://changingself.github.io/posts/python_des_gui/"/>
+    <id>https://changingself.github.io/posts/python_des_gui/</id>
+    <published>2020-03-29T02:10:52.000Z</published>
+    <updated>2020-04-04T00:58:03.919Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;信息安全的上机作业：实现DES替代算法，不限语言，可以调库&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/DES&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;github库传送门&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png&quot; alt=&quot;完成图&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+    
+      <category term="tkinter" scheme="https://changingself.github.io/tags/tkinter/"/>
+    
+      <category term="密码算法" scheme="https://changingself.github.io/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>【周总结】2020年第13周总结</title>

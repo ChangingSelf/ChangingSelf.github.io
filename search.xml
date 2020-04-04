@@ -1,6 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【作业总结】python写的DES替代算法的gui小工具</title>
+    <url>/posts/python_des_gui/</url>
+    <content><![CDATA[<p>信息安全的上机作业：实现DES替代算法，不限语言，可以调库</p>
+<p><a href="https://github.com/ChangingSelf/DES" target="_blank" rel="noopener">github库传送门</a></p>
+<p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png" alt="完成图"></p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><p><a href="https://blog.csdn.net/whatday/article/details/97423901" target="_blank" rel="noopener">python3 bytes与hex字符串互转</a></p>
+</li>
+<li><p><a href="https://www.it610.com/article/1223283792861564928.htm" target="_blank" rel="noopener">对于Python中的字节串bytes和字符串以及转义字符的新的认识</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/66551c2b6b91" target="_blank" rel="noopener">python常用的十进制、16进制、字符串、字节串之间的转换</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/ahilll/article/details/81531587" target="_blank" rel="noopener">Python GUI之tkinter窗口视窗教程大集合（看这篇就够了）</a></p>
+</li>
+</ul>
+<h1 id="pyDes库"><a href="#pyDes库" class="headerlink" title="pyDes库"></a>pyDes库</h1><p>使用python来写最简单，安装一个pyDes库即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$pip</span> install pyDes</span><br></pre></td></tr></table></figure>
+
+<p>我采用的是默认的ECB（Electronic CodeBook电码本模式）。下面介绍的API也都是用最简单的版本。</p>
+<p>首先传入密钥创建一个des对象：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br></pre></td></tr></table></figure>
+
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 两种填充方式</span></span><br><span class="line">des.encrypt(plain_text,pad=<span class="string">' '</span>,padmode=pyDes.PAD_NORMAL)  <span class="comment"># 如果用默认模式，需要设置pad参数</span></span><br><span class="line"></span><br><span class="line">des.encrypt(plain_text,padmode=pyDes.PAD_PKCS5)  <span class="comment"># plain_text是明文,padmode是填充模式</span></span><br></pre></td></tr></table></figure>
+
+<p>如果只传入明文，就需要注意明文的长度问题；</p>
+<p>在<code>PAD_NORMAL</code>模式下设置pad参数的话，就代表使用pad的字符来填充明文不够长度的部分；</p>
+<p>在<code>PAD_PKCS5</code>模式下不能设置pad参数。一般用这个比较好。</p>
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">des.decrypt(cipher_text)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h1><h2 id="MyDes类"><a href="#MyDes类" class="headerlink" title="MyDes类"></a>MyDes类</h2><p>先写一个MyDes类将原本的pyDes.des类封装一下。这样可以加一些自己的方法，而且不用担心会不小心覆盖掉原来的方法。</p>
+<p>一开始写的类方法：</p>
+<ul>
+<li>构造方法</li>
+<li>加密：传入明文bytes，返回密文bytes</li>
+<li>解密：传入密文bytes，返回明文bytes</li>
+<li>随机生成密钥：随机生成8个字符的字符串</li>
+</ul>
+<p>后来加上的类方法：</p>
+<ul>
+<li>将字节串转换为十六进制字符串</li>
+<li>将十六进制字符串转换为字节串</li>
+</ul>
+<h2 id="MyDesGui类"><a href="#MyDesGui类" class="headerlink" title="MyDesGui类"></a>MyDesGui类</h2><p>再写一个MyDesGui类，专门用于图形界面显示。<strong>不过现在回过头来看，它还负责了本来应该由MyDes类负责的逻辑，这是一个需要改进的地方</strong></p>
+<p>图形界面相关类方法：</p>
+<ul>
+<li>构造方法</li>
+<li>初始化控件</li>
+<li>显示密文：传入密文bytes，在控件上显示密文</li>
+<li>显示明文：传入明文bytes，在控件上显示明文</li>
+</ul>
+<p>以下类方法本来应该放在MyDes类里面实现，在这里面只是简单地调用MyDes的类方法的，但是现在是直接在这里面实现对应的算法，需要改进</p>
+<ul>
+<li>des加密</li>
+<li>des解密</li>
+<li>二重des加密</li>
+<li>二重des解密</li>
+<li>三重两密des加密</li>
+<li>三重两密des解密</li>
+<li>三重三密des加密</li>
+<li>三重三密des解密</li>
+</ul>
+<h2 id="二重Des算法"><a href="#二重Des算法" class="headerlink" title="二重Des算法"></a>二重Des算法</h2><p>一开始的DES加密解密搞定了之后，二重DES，三重DES就比较简单了。</p>
+<p>设C为密文，P为明文，E_k为以k为密钥的DES加密，D_k为以k为密钥的DES解密。</p>
+<p>二重DES的加密：C = E_k2(E_k1(P))</p>
+<p>二重DES的解密：P = D_k1(D_k2(C))</p>
+<h2 id="三重两密Des算法"><a href="#三重两密Des算法" class="headerlink" title="三重两密Des算法"></a>三重两密Des算法</h2><p>加密：C = E_k1(D_k2(E_k1(P)))</p>
+<p>解密：P = D_k1(E_k2(D_k1(C)))</p>
+<h2 id="三重三密Des算法"><a href="#三重三密Des算法" class="headerlink" title="三重三密Des算法"></a>三重三密Des算法</h2><p>加密：C = E_k3(D_k2(E_k1(P)))</p>
+<p>解密：P = D_k1(E_k2(D_k3(C)))</p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="bytes和字符串之间的转换“损耗”"><a href="#bytes和字符串之间的转换“损耗”" class="headerlink" title="bytes和字符串之间的转换“损耗”"></a>bytes和字符串之间的转换“损耗”</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>pyDes库的加密解密的输入输出都是bytes类型的字节串，要如何将其正确地显示在编辑框上，以及从编辑框上读取呢？</p>
+<p>可能你会说，python将bytes转换成str不是很简单吗？</p>
+<p>str转换成bytes：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text_b = text.encode()  <span class="comment"># 如果出现问题，encode里面可以加上errors='ignore'参数</span></span><br></pre></td></tr></table></figure>
+
+<p>bytes转换成str：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text = text_b.decode()  <span class="comment"># 如果出现问题，decode里面可以加上errors='ignore'参数</span></span><br></pre></td></tr></table></figure>
+
+<p>没错，确实很简单，但是这种方式有一个问题，转换的过程中可能会有一些“损耗”。</p>
+<p>比如下面这段代码，预期结果是输出两个字节串，一个密文字节串，一个明文字节串：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line">print(cipher_text_b)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = cipher_text_b.decode()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = cipher_text.encode()</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b)</span><br></pre></td></tr></table></figure>
+
+<p>但是实际上的输出是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">b&#39;\x80$-\xd1\x07\x1e&#x3D;k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;</span><br><span class="line">24</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">UnicodeDecodeError                        Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-1-c98230c2df1e&gt; in &lt;module&gt;</span><br><span class="line">     11 print(len(cipher_text_b))</span><br><span class="line">     12 # 转换为字符串以显示在编辑框</span><br><span class="line">---&gt; 13 cipher_text &#x3D; cipher_text_b.decode()</span><br><span class="line">     14 </span><br><span class="line">     15 # 从编辑框获取密文字符串</span><br><span class="line"></span><br><span class="line">UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0x80 in position 0: invalid start byte</span><br></pre></td></tr></table></figure>
+
+<p>这是因为，<strong>加密后的字节串是不符合utf-8的编码格式的</strong>。我一开始想加个ignore选项忽略过去：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line">print(cipher_text_b)</span><br><span class="line">print(len(cipher_text_b))</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = cipher_text_b.decode(errors=<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = cipher_text.encode()</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b)</span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+
+<p>输出就会变成下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">b&#39;\x80$-\xd1\x07\x1e&#x3D;k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;</span><br><span class="line">24</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">ValueError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-2-63175c965c0a&gt; in &lt;module&gt;</span><br><span class="line">     16 </span><br><span class="line">     17 cipher_text_b &#x3D; cipher_text.encode()</span><br><span class="line">---&gt; 18 plain_text_b &#x3D; des.decrypt(cipher_text_b)</span><br><span class="line">     19 print(plain_text_b)</span><br><span class="line">     20 print(plain_text_b.decode())</span><br><span class="line"></span><br><span class="line">c:\python38\lib\site-packages\pyDes.py in decrypt(self, data, pad, padmode)</span><br><span class="line">    677                 if pad is not None:</span><br><span class="line">    678                         pad &#x3D; self._guardAgainstUnicode(pad)</span><br><span class="line">--&gt; 679                 data &#x3D; self.crypt(data, des.DECRYPT)</span><br><span class="line">    680                 return self._unpadData(data, pad, padmode)</span><br><span class="line">    681 </span><br><span class="line"></span><br><span class="line">c:\python38\lib\site-packages\pyDes.py in crypt(self, data, crypt_type)</span><br><span class="line">    570                 if len(data) % self.block_size !&#x3D; 0:</span><br><span class="line">    571                         if crypt_type &#x3D;&#x3D; des.DECRYPT: # Decryption must work on 8 byte blocks</span><br><span class="line">--&gt; 572                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n.&quot;)</span><br><span class="line">    573                         if not self.getPadding():</span><br><span class="line">    574                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n. Try setting the optional padding character&quot;)</span><br><span class="line"></span><br><span class="line">ValueError: Invalid data length, data must be a multiple of 8 bytes</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+
+<p>转换是成功了，但是解密时失败了，因为<strong>在转码时忽略了一些字节，导致长度对不上了。</strong></p>
+<p>我在写代码的时候遇到的就是这个问题，当局者迷，想不到是哪里出现了错误，单步调试发现是中间出现了“损耗”。在写本文总结的时候，才发现问题所在。可见总结复盘是多么重要，不写总结的话，这段调试时间就白费了。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>换一种方式将字节串转换为字符串，也就是不让字节串转换为每个字节对应的字符组成的字符串，而是直接将其编码显示出来，比如显示成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">b&#39;\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8chelloworld&#39;</span><br></pre></td></tr></table></figure>
+
+<p>而不是将其直接显示成对应字符的形式，即print函数的显示效果。</p>
+<p>不过这种方式仍然不能解决从字符串转换为字节串的问题。</p>
+<p>最后在一个博客（<a href="https://blog.csdn.net/whatday/article/details/97423901" target="_blank" rel="noopener">传送门</a>）里面找到了比较好用的转换函数，也比较容易看懂：</p>
+<p>十六进制字符串转bytes</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">hex string to bytes</span></span><br><span class="line"><span class="string">eg:</span></span><br><span class="line"><span class="string">'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'</span></span><br><span class="line"><span class="string">b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hexStringTobytes</span><span class="params">(str)</span>:</span></span><br><span class="line">    str = str.replace(<span class="string">" "</span>, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">return</span> bytes.fromhex(str)</span><br><span class="line">    <span class="comment"># return a2b_hex(str)</span></span><br></pre></td></tr></table></figure>
+
+<p>bytes转十六进制字符串</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">bytes to hex string </span></span><br><span class="line"><span class="string">eg:</span></span><br><span class="line"><span class="string">b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'</span></span><br><span class="line"><span class="string">'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bytesToHexString</span><span class="params">(bs)</span>:</span></span><br><span class="line">    <span class="comment"># hex_str = ''</span></span><br><span class="line">    <span class="comment"># for item in bs:</span></span><br><span class="line">    <span class="comment">#     hex_str += str(hex(item))[2:].zfill(2).upper() + " "</span></span><br><span class="line">    <span class="comment"># return hex_str</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'%02X '</span> % b <span class="keyword">for</span> b <span class="keyword">in</span> bs])</span><br></pre></td></tr></table></figure>
+
+<p>这个博主采用了空格分隔的十六进制字符串，非常好地解决了我的需求，转换时不会损耗，显示在编辑框时也不会乱码。</p>
+<h2 id="解密后填充字符仍然存在"><a href="#解密后填充字符仍然存在" class="headerlink" title="解密后填充字符仍然存在"></a>解密后填充字符仍然存在</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line">print(plain_text)</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = bytesToHexString(cipher_text_b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = hexStringTobytes(cipher_text)</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你好世界helloworld</span><br><span class="line">你好世界helloworld</span><br></pre></td></tr></table></figure>
+
+<p>在解密后的输出结果中会出现几个乱码，后面这几个乱码是因为加密时进行了填充，而解密时没有去掉。</p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>我采用的是将填充字符换成空格，然后在显示的时候用strip去掉空白。但是刚刚发现还有更好的方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line">print(plain_text)</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = bytesToHexString(cipher_text_b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = hexStringTobytes(cipher_text)</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b,padmode=pyDes.PAD_PKCS5) <span class="comment"># 这里也添加填充选项</span></span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+
+<p>直接在解密时也添加相同的填充选项就行了。</p>
+<h1 id="其他知识"><a href="#其他知识" class="headerlink" title="其他知识"></a>其他知识</h1><h2 id="tkinter"><a href="#tkinter" class="headerlink" title="tkinter"></a>tkinter</h2><p>启动一个窗口：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line">root = tk.Tk()</span><br><span class="line">root.mainloop()</span><br></pre></td></tr></table></figure>
+
+<p>创建标签框架：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">des_LF = tk.LabelFrame(self.root, text=<span class="string">'DES'</span>)</span><br><span class="line">des_LF.grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>创建标签：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tk.Label(des_LF, text=<span class="string">'明文'</span>).grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>创建编辑框并与变量双向绑定：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plain_text_var = tk.StringVar()  <span class="comment"># 明文</span></span><br><span class="line">tk.Entry(des_LF,textvariable=self.plain_text_var).grid(row=<span class="number">0</span>,column=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>创建按钮并与响应函数绑定，其中用到了lambda函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tk.Button(des_LF,text=<span class="string">'DES加密'</span>,</span><br><span class="line">                  command=<span class="keyword">lambda</span>:self.encrypt(self.key_var.get(),isShow=<span class="literal">True</span>)</span><br><span class="line">                  ).grid(row=<span class="number">0</span>,column=<span class="number">2</span>,stick=tk.W+tk.E)</span><br></pre></td></tr></table></figure>
+
+<p>显示对话框：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter.messagebox <span class="keyword">as</span> tkm</span><br><span class="line">tkm.showwarning(<span class="string">'注意'</span>,<span class="string">'密钥长度必须为8个字符，即64bit'</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>过程复盘</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>tkinter</tag>
+        <tag>密码算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【周总结】2020年第13周总结</title>
     <url>/posts/2020_week13/</url>
     <content><![CDATA[<p>这是今年的第【13】周，日期从2020年3月22日 到2020年3月28日 </p>
