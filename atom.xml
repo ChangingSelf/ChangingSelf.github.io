@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>憧憬少的个人博客</title>
-  <icon>https://changingself.github.io/icon.png</icon>
-  <subtitle>少时憧憬皆似梦，来日期许莫成空</subtitle>
+  <icon>https://yxchangingself.xyz/icon.png</icon>
+  <subtitle>ChangingSelf&#39;s blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://changingself.github.io/"/>
-  <updated>2020-04-04T00:58:03.919Z</updated>
-  <id>https://changingself.github.io/</id>
+  <link href="https://yxchangingself.xyz/"/>
+  <updated>2020-04-05T02:41:56.600Z</updated>
+  <id>https://yxchangingself.xyz/</id>
   
   <author>
     <name>憧憬少</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>【作业总结】python写的DES替代算法的gui小工具</title>
-    <link href="https://changingself.github.io/posts/python_des_gui/"/>
-    <id>https://changingself.github.io/posts/python_des_gui/</id>
+    <link href="https://yxchangingself.xyz/posts/python_des_gui/"/>
+    <id>https://yxchangingself.xyz/posts/python_des_gui/</id>
     <published>2020-03-29T02:10:52.000Z</published>
-    <updated>2020-04-04T00:58:03.919Z</updated>
+    <updated>2020-04-05T02:41:56.600Z</updated>
     
     <summary type="html">
     
@@ -32,21 +32,21 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
-      <category term="tkinter" scheme="https://changingself.github.io/tags/tkinter/"/>
+      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
     
-      <category term="密码算法" scheme="https://changingself.github.io/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
+      <category term="密码算法" scheme="https://yxChangingSelf.xyz/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>【周总结】2020年第13周总结</title>
-    <link href="https://changingself.github.io/posts/2020_week13/"/>
-    <id>https://changingself.github.io/posts/2020_week13/</id>
+    <link href="https://yxchangingself.xyz/posts/2020_week13/"/>
+    <id>https://yxchangingself.xyz/posts/2020_week13/</id>
     <published>2020-03-28T00:02:40.000Z</published>
     <updated>2020-03-28T00:05:15.219Z</updated>
     
@@ -58,19 +58,19 @@
     </summary>
     
     
-      <category term="日志随笔" scheme="https://changingself.github.io/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="周总结" scheme="https://changingself.github.io/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+      <category term="周总结" scheme="https://yxChangingSelf.xyz/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>【自我管理系统】归档文件</title>
-    <link href="https://changingself.github.io/posts/self-management-archive/"/>
-    <id>https://changingself.github.io/posts/self-management-archive/</id>
+    <link href="https://yxchangingself.xyz/posts/self-management-archive/"/>
+    <id>https://yxchangingself.xyz/posts/self-management-archive/</id>
     <published>2020-03-22T12:08:10.000Z</published>
-    <updated>2020-03-22T14:32:23.981Z</updated>
+    <updated>2020-04-05T02:38:03.179Z</updated>
     
     <summary type="html">
     
@@ -80,15 +80,15 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
   </entry>
   
   <entry>
     <title>【周总结】2020年第12周总结</title>
-    <link href="https://changingself.github.io/posts/2020_week12/"/>
-    <id>https://changingself.github.io/posts/2020_week12/</id>
+    <link href="https://yxchangingself.xyz/posts/2020_week12/"/>
+    <id>https://yxchangingself.xyz/posts/2020_week12/</id>
     <published>2020-03-21T07:03:02.000Z</published>
     <updated>2020-03-21T07:18:15.049Z</updated>
     
@@ -100,17 +100,17 @@
     </summary>
     
     
-      <category term="日志随笔" scheme="https://changingself.github.io/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="周总结" scheme="https://changingself.github.io/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
+      <category term="周总结" scheme="https://yxChangingSelf.xyz/tags/%E5%91%A8%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>记第二次重装系统</title>
-    <link href="https://changingself.github.io/posts/Reinstall_win10/"/>
-    <id>https://changingself.github.io/posts/Reinstall_win10/</id>
+    <link href="https://yxchangingself.xyz/posts/Reinstall_win10/"/>
+    <id>https://yxchangingself.xyz/posts/Reinstall_win10/</id>
     <published>2020-03-14T13:01:12.000Z</published>
     <updated>2020-03-14T14:09:02.268Z</updated>
     
@@ -122,19 +122,19 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="win10" scheme="https://changingself.github.io/tags/win10/"/>
+      <category term="win10" scheme="https://yxChangingSelf.xyz/tags/win10/"/>
     
-      <category term="os" scheme="https://changingself.github.io/tags/os/"/>
+      <category term="os" scheme="https://yxChangingSelf.xyz/tags/os/"/>
     
   </entry>
   
   <entry>
     <title>【作业总结】声卡数据采集及处理</title>
-    <link href="https://changingself.github.io/posts/sound-card-data-acquisition/"/>
-    <id>https://changingself.github.io/posts/sound-card-data-acquisition/</id>
+    <link href="https://yxchangingself.xyz/posts/sound-card-data-acquisition/"/>
+    <id>https://yxchangingself.xyz/posts/sound-card-data-acquisition/</id>
     <published>2020-03-08T03:05:47.000Z</published>
     <updated>2020-03-19T07:19:52.252Z</updated>
     
@@ -155,19 +155,19 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="cpp" scheme="https://changingself.github.io/tags/cpp/"/>
+      <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
     
-      <category term="mfc" scheme="https://changingself.github.io/tags/mfc/"/>
+      <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
     
   </entry>
   
   <entry>
     <title>【编程练习】java简易学生管理系统</title>
-    <link href="https://changingself.github.io/posts/java_simple_studentInfoSystem/"/>
-    <id>https://changingself.github.io/posts/java_simple_studentInfoSystem/</id>
+    <link href="https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/"/>
+    <id>https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/</id>
     <published>2020-03-03T03:11:45.000Z</published>
     <updated>2020-03-14T03:56:45.681Z</updated>
     
@@ -181,17 +181,17 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
     
   </entry>
   
   <entry>
     <title>Scrapy爬虫框架（1）一个简单的可用的爬虫</title>
-    <link href="https://changingself.github.io/posts/Scrapy_spider_1/"/>
-    <id>https://changingself.github.io/posts/Scrapy_spider_1/</id>
+    <link href="https://yxchangingself.xyz/posts/Scrapy_spider_1/"/>
+    <id>https://yxchangingself.xyz/posts/Scrapy_spider_1/</id>
     <published>2020-02-18T04:22:13.000Z</published>
     <updated>2020-03-14T03:56:45.681Z</updated>
     
@@ -205,21 +205,21 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
-      <category term="scrapy" scheme="https://changingself.github.io/tags/scrapy/"/>
+      <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
     
-      <category term="spider" scheme="https://changingself.github.io/tags/spider/"/>
+      <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
     
   </entry>
   
   <entry>
     <title>【编程练习】明日非舟抽卡模拟器（2）xml文件解析</title>
-    <link href="https://changingself.github.io/posts/Africanights_simu_hr_2/"/>
-    <id>https://changingself.github.io/posts/Africanights_simu_hr_2/</id>
+    <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_2/"/>
+    <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_2/</id>
     <published>2020-02-04T14:24:41.000Z</published>
     <updated>2020-03-14T03:56:45.681Z</updated>
     
@@ -231,19 +231,19 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
     
-      <category term="xml" scheme="https://changingself.github.io/tags/xml/"/>
+      <category term="xml" scheme="https://yxChangingSelf.xyz/tags/xml/"/>
     
   </entry>
   
   <entry>
     <title>建新hexo博客后继续更新旧hexo博客的方法</title>
-    <link href="https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/"/>
-    <id>https://changingself.github.io/posts/update_old_hexo_blog_after_build_new_hexo_blog/</id>
+    <link href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"/>
+    <id>https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/</id>
     <published>2020-01-28T04:15:33.000Z</published>
     <updated>2020-03-14T03:56:45.680Z</updated>
     
@@ -258,19 +258,19 @@
     </summary>
     
     
-      <category term="解决方案" scheme="https://changingself.github.io/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="hexo" scheme="https://changingself.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
     
-      <category term="ssh" scheme="https://changingself.github.io/tags/ssh/"/>
+      <category term="ssh" scheme="https://yxChangingSelf.xyz/tags/ssh/"/>
     
   </entry>
   
   <entry>
     <title>【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</title>
-    <link href="https://changingself.github.io/posts/Africanights_simu_hr_1/"/>
-    <id>https://changingself.github.io/posts/Africanights_simu_hr_1/</id>
+    <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_1/"/>
+    <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_1/</id>
     <published>2020-01-27T14:20:48.000Z</published>
     <updated>2020-03-14T03:56:45.680Z</updated>
     
@@ -283,17 +283,17 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="java" scheme="https://changingself.github.io/tags/java/"/>
+      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
     
   </entry>
   
   <entry>
     <title>更改git仓库已经commit的用户名和邮箱信息</title>
-    <link href="https://changingself.github.io/posts/git_amend_commited_info/"/>
-    <id>https://changingself.github.io/posts/git_amend_commited_info/</id>
+    <link href="https://yxchangingself.xyz/posts/git_amend_commited_info/"/>
+    <id>https://yxchangingself.xyz/posts/git_amend_commited_info/</id>
     <published>2020-01-15T03:05:44.000Z</published>
     <updated>2020-03-14T03:56:45.679Z</updated>
     
@@ -304,17 +304,17 @@
     </summary>
     
     
-      <category term="解决方案" scheme="https://changingself.github.io/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="git" scheme="https://changingself.github.io/tags/git/"/>
+      <category term="git" scheme="https://yxChangingSelf.xyz/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>【课设总结】基于LAN的即时通信软件</title>
-    <link href="https://changingself.github.io/posts/IMS_base_on_LAN/"/>
-    <id>https://changingself.github.io/posts/IMS_base_on_LAN/</id>
+    <link href="https://yxchangingself.xyz/posts/IMS_base_on_LAN/"/>
+    <id>https://yxchangingself.xyz/posts/IMS_base_on_LAN/</id>
     <published>2020-01-02T07:06:27.000Z</published>
     <updated>2020-03-14T03:56:45.678Z</updated>
     
@@ -330,21 +330,21 @@
     </summary>
     
     
-      <category term="过程复盘" scheme="https://changingself.github.io/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
-      <category term="python" scheme="https://changingself.github.io/tags/python/"/>
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
-      <category term="internet" scheme="https://changingself.github.io/tags/internet/"/>
+      <category term="internet" scheme="https://yxChangingSelf.xyz/tags/internet/"/>
     
-      <category term="tkinter" scheme="https://changingself.github.io/tags/tkinter/"/>
+      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
     
   </entry>
   
   <entry>
     <title>文章分类说明</title>
-    <link href="https://changingself.github.io/posts/categories_description/"/>
-    <id>https://changingself.github.io/posts/categories_description/</id>
+    <link href="https://yxchangingself.xyz/posts/categories_description/"/>
+    <id>https://yxchangingself.xyz/posts/categories_description/</id>
     <published>2019-12-31T12:30:06.000Z</published>
     <updated>2020-03-14T03:56:45.678Z</updated>
     
@@ -364,15 +364,15 @@
     </summary>
     
     
-      <category term="目录索引" scheme="https://changingself.github.io/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
+      <category term="目录索引" scheme="https://yxChangingSelf.xyz/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
     
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://changingself.github.io/posts/hello_world/"/>
-    <id>https://changingself.github.io/posts/hello_world/</id>
+    <link href="https://yxchangingself.xyz/posts/hello_world/"/>
+    <id>https://yxchangingself.xyz/posts/hello_world/</id>
     <published>2019-12-30T13:01:12.000Z</published>
     <updated>2020-03-14T13:14:32.130Z</updated>
     
