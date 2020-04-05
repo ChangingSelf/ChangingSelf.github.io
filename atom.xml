@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-04-05T02:41:56.600Z</updated>
+  <updated>2020-04-05T15:47:15.440Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记第二次博客切换主题以及主题优化</title>
+    <link href="https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/"/>
+    <id>https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/</id>
+    <published>2020-04-05T13:50:18.000Z</published>
+    <updated>2020-04-05T15:47:15.440Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;参考链接&quot;&gt;&lt;a href=&quot;#参考链接&quot; class=&quot;headerlink&quot; title=&quot;参考链接&quot;&gt;&lt;/a&gt;参考链接&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>【作业总结】python写的DES替代算法的gui小工具</title>
