@@ -5,7 +5,8 @@
 	color: #fff;
 	cursor: pointer;
 	font-size: 12px;
-	left: 0;
+	left: 20px;
+	/*right: 0;*/
 	margin-left: -100px;
 	padding: 5px 2px 5px 5px;
 	position: fixed;
@@ -24,7 +25,8 @@
 
 #waifu {
 	bottom: -1000px;
-	left: 0;
+	/*left: 0;*/
+	right: 100px;
 	line-height: 0;
 	position: fixed;
 	transform: translateY(3px);
