@@ -37,7 +37,8 @@ python常用的十进制">
     <script src="/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -454,21 +455,21 @@ python常用的十进制">
 </li>
 </ul>
 <h1 id="pyDes库"><a href="#pyDes库" class="headerlink" title="pyDes库"></a>pyDes库</h1><p>使用python来写最简单，安装一个pyDes库即可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pip</span> install pyDes</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$pip</span> <span class="token function">install</span> pyDes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我采用的是默认的ECB（Electronic CodeBook电码本模式）。下面介绍的API也都是用最简单的版本。</p>
 <p>首先传入密钥创建一个des对象：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pyDes
 
-<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两种填充方式</span></span><br><span class="line">des.encrypt(plain_text,pad=<span class="string">' '</span>,padmode=pyDes.PAD_NORMAL)  <span class="comment"># 如果用默认模式，需要设置pad参数</span></span><br><span class="line"></span><br><span class="line">des.encrypt(plain_text,padmode=pyDes.PAD_PKCS5)  <span class="comment"># plain_text是明文,padmode是填充模式</span></span><br></pre></td></tr></table></figure>
+key <span class="token operator">=</span> <span class="token string">'Ts%uN#w4'</span>  # 密钥需要<span class="token number">8</span>个字符，即64bit
+des <span class="token operator">=</span> pyDes<span class="token punctuation">.</span>des<span class="token punctuation">(</span>key<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 两种填充方式</span>
+des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text<span class="token punctuation">,</span>pad<span class="token operator">=</span><span class="token string">' '</span><span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_NORMAL<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 如果用默认模式，需要设置pad参数</span>
 
+des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># plain_text是明文,padmode是填充模式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果只传入明文，就需要注意明文的长度问题；</p>
 <p>在<code>PAD_NORMAL</code>模式下设置pad参数的话，就代表使用pad的字符来填充明文不够长度的部分；</p>
 <p>在<code>PAD_PKCS5</code>模式下不能设置pad参数。一般用这个比较好。</p>
-<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">des.decrypt(cipher_text)</span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><pre class="line-numbers language-python"><code class="language-python">des<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>cipher_text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h1 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h1><h2 id="MyDes类"><a href="#MyDes类" class="headerlink" title="MyDes类"></a>MyDes类</h2><p>先写一个MyDes类将原本的pyDes.des类封装一下。这样可以加一些自己的方法，而且不用担心会不小心覆盖掉原来的方法。</p>
 <p>一开始写的类方法：</p>
 <ul>
@@ -512,67 +513,182 @@ python常用的十进制">
 <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="bytes和字符串之间的转换“损耗”"><a href="#bytes和字符串之间的转换“损耗”" class="headerlink" title="bytes和字符串之间的转换“损耗”"></a>bytes和字符串之间的转换“损耗”</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>pyDes库的加密解密的输入输出都是bytes类型的字节串，要如何将其正确地显示在编辑框上，以及从编辑框上读取呢？</p>
 <p>可能你会说，python将bytes转换成str不是很简单吗？</p>
 <p>str转换成bytes：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text_b = text.encode()  <span class="comment"># 如果出现问题，encode里面可以加上errors='ignore'参数</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">text_b <span class="token operator">=</span> text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 如果出现问题，encode里面可以加上errors='ignore'参数</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>bytes转换成str：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text = text_b.decode()  <span class="comment"># 如果出现问题，decode里面可以加上errors='ignore'参数</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">text <span class="token operator">=</span> text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 如果出现问题，decode里面可以加上errors='ignore'参数</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>没错，确实很简单，但是这种方式有一个问题，转换的过程中可能会有一些“损耗”。</p>
 <p>比如下面这段代码，预期结果是输出两个字节串，一个密文字节串，一个明文字节串：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line">print(cipher_text_b)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = cipher_text_b.decode()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = cipher_text.encode()</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pyDes
+plain_text <span class="token operator">=</span> <span class="token string">'你好世界helloworld'</span>
 
+key <span class="token operator">=</span> <span class="token string">'Ts%uN#w4'</span>  # 密钥需要<span class="token number">8</span>个字符，即64bit
+des <span class="token operator">=</span> pyDes<span class="token punctuation">.</span>des<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取明文字符串plain_text</span>
+plain_text_b <span class="token operator">=</span> plain_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cipher_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text_b<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 转换为字符串以显示在编辑框</span>
+cipher_text <span class="token operator">=</span> cipher_text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取密文字符串</span>
+
+cipher_text_b <span class="token operator">=</span> cipher_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plain_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text_b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是实际上的输出是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">b&#39;\x80$-\xd1\x07\x1e&#x3D;k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;</span><br><span class="line">24</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">UnicodeDecodeError                        Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-1-c98230c2df1e&gt; in &lt;module&gt;</span><br><span class="line">     11 print(len(cipher_text_b))</span><br><span class="line">     12 # 转换为字符串以显示在编辑框</span><br><span class="line">---&gt; 13 cipher_text &#x3D; cipher_text_b.decode()</span><br><span class="line">     14 </span><br><span class="line">     15 # 从编辑框获取密文字符串</span><br><span class="line"></span><br><span class="line">UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0x80 in position 0: invalid start byte</span><br></pre></td></tr></table></figure>
+<pre><code>b&#39;\x80$-\xd1\x07\x1e=k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;
+24
+---------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+&lt;ipython-input-1-c98230c2df1e&gt; in &lt;module&gt;
+     11 print(len(cipher_text_b))
+     12 # 转换为字符串以显示在编辑框
+---&gt; 13 cipher_text = cipher_text_b.decode()
+     14 
+     15 # 从编辑框获取密文字符串
 
-<p>这是因为，<strong>加密后的字节串是不符合utf-8的编码格式的</strong>。我一开始想加个ignore选项忽略过去：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line">print(cipher_text_b)</span><br><span class="line">print(len(cipher_text_b))</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = cipher_text_b.decode(errors=<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = cipher_text.encode()</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b)</span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte 0x80 in position 0: invalid start byte</code></pre><p>这是因为，<strong>加密后的字节串是不符合utf-8的编码格式的</strong>。我一开始想加个ignore选项忽略过去：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pyDes
+plain_text <span class="token operator">=</span> <span class="token string">'你好世界helloworld'</span>
 
+key <span class="token operator">=</span> <span class="token string">'Ts%uN#w4'</span>  # 密钥需要<span class="token number">8</span>个字符，即64bit
+des <span class="token operator">=</span> pyDes<span class="token punctuation">.</span>des<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取明文字符串plain_text</span>
+plain_text_b <span class="token operator">=</span> plain_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cipher_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text_b<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>len<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 转换为字符串以显示在编辑框</span>
+cipher_text <span class="token operator">=</span> cipher_text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span>errors<span class="token operator">=</span><span class="token string">'ignore'</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取密文字符串</span>
+
+cipher_text_b <span class="token operator">=</span> cipher_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plain_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text_b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出就会变成下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">b&#39;\x80$-\xd1\x07\x1e&#x3D;k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;</span><br><span class="line">24</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">ValueError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-2-63175c965c0a&gt; in &lt;module&gt;</span><br><span class="line">     16 </span><br><span class="line">     17 cipher_text_b &#x3D; cipher_text.encode()</span><br><span class="line">---&gt; 18 plain_text_b &#x3D; des.decrypt(cipher_text_b)</span><br><span class="line">     19 print(plain_text_b)</span><br><span class="line">     20 print(plain_text_b.decode())</span><br><span class="line"></span><br><span class="line">c:\python38\lib\site-packages\pyDes.py in decrypt(self, data, pad, padmode)</span><br><span class="line">    677                 if pad is not None:</span><br><span class="line">    678                         pad &#x3D; self._guardAgainstUnicode(pad)</span><br><span class="line">--&gt; 679                 data &#x3D; self.crypt(data, des.DECRYPT)</span><br><span class="line">    680                 return self._unpadData(data, pad, padmode)</span><br><span class="line">    681 </span><br><span class="line"></span><br><span class="line">c:\python38\lib\site-packages\pyDes.py in crypt(self, data, crypt_type)</span><br><span class="line">    570                 if len(data) % self.block_size !&#x3D; 0:</span><br><span class="line">    571                         if crypt_type &#x3D;&#x3D; des.DECRYPT: # Decryption must work on 8 byte blocks</span><br><span class="line">--&gt; 572                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n.&quot;)</span><br><span class="line">    573                         if not self.getPadding():</span><br><span class="line">    574                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n. Try setting the optional padding character&quot;)</span><br><span class="line"></span><br><span class="line">ValueError: Invalid data length, data must be a multiple of 8 bytes</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<pre><code>b&#39;\x80$-\xd1\x07\x1e=k+\xac\x00\xb4\xbb\x19\xa6\xf6\xd7\x8f\x91\x86\xa0\x9e.\x05&#39;
+24
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-2-63175c965c0a&gt; in &lt;module&gt;
+     16 
+     17 cipher_text_b = cipher_text.encode()
+---&gt; 18 plain_text_b = des.decrypt(cipher_text_b)
+     19 print(plain_text_b)
+     20 print(plain_text_b.decode())
 
-<p>转换是成功了，但是解密时失败了，因为<strong>在转码时忽略了一些字节，导致长度对不上了。</strong></p>
+c:\python38\lib\site-packages\pyDes.py in decrypt(self, data, pad, padmode)
+    677                 if pad is not None:
+    678                         pad = self._guardAgainstUnicode(pad)
+--&gt; 679                 data = self.crypt(data, des.DECRYPT)
+    680                 return self._unpadData(data, pad, padmode)
+    681 
+
+c:\python38\lib\site-packages\pyDes.py in crypt(self, data, crypt_type)
+    570                 if len(data) % self.block_size != 0:
+    571                         if crypt_type == des.DECRYPT: # Decryption must work on 8 byte blocks
+--&gt; 572                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n.&quot;)
+    573                         if not self.getPadding():
+    574                                 raise ValueError(&quot;Invalid data length, data must be a multiple of &quot; + str(self.block_size) + &quot; bytes\n. Try setting the optional padding character&quot;)
+
+ValueError: Invalid data length, data must be a multiple of 8 bytes
+.</code></pre><p>转换是成功了，但是解密时失败了，因为<strong>在转码时忽略了一些字节，导致长度对不上了。</strong></p>
 <p>我在写代码的时候遇到的就是这个问题，当局者迷，想不到是哪里出现了错误，单步调试发现是中间出现了“损耗”。在写本文总结的时候，才发现问题所在。可见总结复盘是多么重要，不写总结的话，这段调试时间就白费了。</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>换一种方式将字节串转换为字符串，也就是不让字节串转换为每个字节对应的字符组成的字符串，而是直接将其编码显示出来，比如显示成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b&#39;\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8chelloworld&#39;</span><br></pre></td></tr></table></figure>
-
-<p>而不是将其直接显示成对应字符的形式，即print函数的显示效果。</p>
+<pre><code>b&#39;\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8chelloworld&#39;</code></pre><p>而不是将其直接显示成对应字符的形式，即print函数的显示效果。</p>
 <p>不过这种方式仍然不能解决从字符串转换为字节串的问题。</p>
 <p>最后在一个博客（<a href="https://blog.csdn.net/whatday/article/details/97423901" target="_blank" rel="noopener">传送门</a>）里面找到了比较好用的转换函数，也比较容易看懂：</p>
 <p>十六进制字符串转bytes</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">hex string to bytes</span></span><br><span class="line"><span class="string">eg:</span></span><br><span class="line"><span class="string">'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'</span></span><br><span class="line"><span class="string">b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hexStringTobytes</span><span class="params">(str)</span>:</span></span><br><span class="line">    str = str.replace(<span class="string">" "</span>, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">return</span> bytes.fromhex(str)</span><br><span class="line">    <span class="comment"># return a2b_hex(str)</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token triple-quoted-string string">'''
+hex string to bytes
+eg:
+'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'
+b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'
+'''</span>
+<span class="token keyword">def</span> <span class="token function">hexStringTobytes</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    str <span class="token operator">=</span> str<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> bytes<span class="token punctuation">.</span>fromhex<span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># return a2b_hex(str)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>bytes转十六进制字符串</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">bytes to hex string </span></span><br><span class="line"><span class="string">eg:</span></span><br><span class="line"><span class="string">b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'</span></span><br><span class="line"><span class="string">'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bytesToHexString</span><span class="params">(bs)</span>:</span></span><br><span class="line">    <span class="comment"># hex_str = ''</span></span><br><span class="line">    <span class="comment"># for item in bs:</span></span><br><span class="line">    <span class="comment">#     hex_str += str(hex(item))[2:].zfill(2).upper() + " "</span></span><br><span class="line">    <span class="comment"># return hex_str</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join([<span class="string">'%02X '</span> % b <span class="keyword">for</span> b <span class="keyword">in</span> bs])</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token triple-quoted-string string">'''
+bytes to hex string 
+eg:
+b'\x01#Eg\x89\xab\xcd\xef\x01#Eg\x89\xab\xcd\xef'
+'01 23 45 67 89 AB CD EF 01 23 45 67 89 AB CD EF'
+'''</span>
+<span class="token keyword">def</span> <span class="token function">bytesToHexString</span><span class="token punctuation">(</span>bs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># hex_str = ''</span>
+    <span class="token comment" spellcheck="true"># for item in bs:</span>
+    <span class="token comment" spellcheck="true">#     hex_str += str(hex(item))[2:].zfill(2).upper() + " "</span>
+    <span class="token comment" spellcheck="true"># return hex_str</span>
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'%02X '</span> <span class="token operator">%</span> b <span class="token keyword">for</span> b <span class="token keyword">in</span> bs<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这个博主采用了空格分隔的十六进制字符串，非常好地解决了我的需求，转换时不会损耗，显示在编辑框时也不会乱码。</p>
-<h2 id="解密后填充字符仍然存在"><a href="#解密后填充字符仍然存在" class="headerlink" title="解密后填充字符仍然存在"></a>解密后填充字符仍然存在</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line">print(plain_text)</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = bytesToHexString(cipher_text_b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = hexStringTobytes(cipher_text)</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b)</span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+<h2 id="解密后填充字符仍然存在"><a href="#解密后填充字符仍然存在" class="headerlink" title="解密后填充字符仍然存在"></a>解密后填充字符仍然存在</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pyDes
 
+plain_text <span class="token operator">=</span> <span class="token string">'你好世界helloworld'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text<span class="token punctuation">)</span>
+
+key <span class="token operator">=</span> <span class="token string">'Ts%uN#w4'</span>  # 密钥需要<span class="token number">8</span>个字符，即64bit
+des <span class="token operator">=</span> pyDes<span class="token punctuation">.</span>des<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取明文字符串plain_text</span>
+plain_text_b <span class="token operator">=</span> plain_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cipher_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text_b<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 转换为字符串以显示在编辑框</span>
+cipher_text <span class="token operator">=</span> bytesToHexString<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取密文字符串</span>
+
+cipher_text_b <span class="token operator">=</span> hexStringTobytes<span class="token punctuation">(</span>cipher_text<span class="token punctuation">)</span>
+plain_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你好世界helloworld</span><br><span class="line">你好世界helloworld</span><br></pre></td></tr></table></figure>
-
-<p>在解密后的输出结果中会出现几个乱码，后面这几个乱码是因为加密时进行了填充，而解密时没有去掉。</p>
+<pre><code>你好世界helloworld
+你好世界helloworld</code></pre><p>在解密后的输出结果中会出现几个乱码，后面这几个乱码是因为加密时进行了填充，而解密时没有去掉。</p>
 <h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>我采用的是将填充字符换成空格，然后在显示的时候用strip去掉空白。但是刚刚发现还有更好的方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line">plain_text = <span class="string">'你好世界helloworld'</span></span><br><span class="line">print(plain_text)</span><br><span class="line"></span><br><span class="line">key = <span class="string">'Ts%uN#w4'</span>  <span class="comment"># 密钥需要8个字符，即64bit</span></span><br><span class="line">des = pyDes.des(key)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取明文字符串plain_text</span></span><br><span class="line">plain_text_b = plain_text.encode()</span><br><span class="line">cipher_text_b = des.encrypt(plain_text_b,padmode=pyDes.PAD_PKCS5)</span><br><span class="line"><span class="comment"># 转换为字符串以显示在编辑框</span></span><br><span class="line">cipher_text = bytesToHexString(cipher_text_b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从编辑框获取密文字符串</span></span><br><span class="line"></span><br><span class="line">cipher_text_b = hexStringTobytes(cipher_text)</span><br><span class="line">plain_text_b = des.decrypt(cipher_text_b,padmode=pyDes.PAD_PKCS5) <span class="comment"># 这里也添加填充选项</span></span><br><span class="line">print(plain_text_b.decode())</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> pyDes
 
+plain_text <span class="token operator">=</span> <span class="token string">'你好世界helloworld'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text<span class="token punctuation">)</span>
+
+key <span class="token operator">=</span> <span class="token string">'Ts%uN#w4'</span>  # 密钥需要<span class="token number">8</span>个字符，即64bit
+des <span class="token operator">=</span> pyDes<span class="token punctuation">.</span>des<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取明文字符串plain_text</span>
+plain_text_b <span class="token operator">=</span> plain_text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cipher_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>plain_text_b<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 转换为字符串以显示在编辑框</span>
+cipher_text <span class="token operator">=</span> bytesToHexString<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># 从编辑框获取密文字符串</span>
+
+cipher_text_b <span class="token operator">=</span> hexStringTobytes<span class="token punctuation">(</span>cipher_text<span class="token punctuation">)</span>
+plain_text_b <span class="token operator">=</span> des<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>cipher_text_b<span class="token punctuation">,</span>padmode<span class="token operator">=</span>pyDes<span class="token punctuation">.</span>PAD_PKCS5<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 这里也添加填充选项</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>plain_text_b<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>直接在解密时也添加相同的填充选项就行了。</p>
 <h1 id="其他知识"><a href="#其他知识" class="headerlink" title="其他知识"></a>其他知识</h1><h2 id="tkinter"><a href="#tkinter" class="headerlink" title="tkinter"></a>tkinter</h2><p>启动一个窗口：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line">root = tk.Tk()</span><br><span class="line">root.mainloop()</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> tkinter <span class="token keyword">as</span> tk
+root <span class="token operator">=</span> tk<span class="token punctuation">.</span>Tk<span class="token punctuation">(</span><span class="token punctuation">)</span>
+root<span class="token punctuation">.</span>mainloop<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>创建标签框架：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">des_LF = tk.LabelFrame(self.root, text=<span class="string">'DES'</span>)</span><br><span class="line">des_LF.grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">des_LF <span class="token operator">=</span> tk<span class="token punctuation">.</span>LabelFrame<span class="token punctuation">(</span>self<span class="token punctuation">.</span>root<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'DES'</span><span class="token punctuation">)</span>
+des_LF<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>创建标签：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tk.Label(des_LF, text=<span class="string">'明文'</span>).grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">tk<span class="token punctuation">.</span>Label<span class="token punctuation">(</span>des_LF<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'明文'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>创建编辑框并与变量双向绑定：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plain_text_var = tk.StringVar()  <span class="comment"># 明文</span></span><br><span class="line">tk.Entry(des_LF,textvariable=self.plain_text_var).grid(row=<span class="number">0</span>,column=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">plain_text_var <span class="token operator">=</span> tk<span class="token punctuation">.</span>StringVar<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 明文</span>
+tk<span class="token punctuation">.</span>Entry<span class="token punctuation">(</span>des_LF<span class="token punctuation">,</span>textvariable<span class="token operator">=</span>self<span class="token punctuation">.</span>plain_text_var<span class="token punctuation">)</span><span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>column<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>创建按钮并与响应函数绑定，其中用到了lambda函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tk.Button(des_LF,text=<span class="string">'DES加密'</span>,</span><br><span class="line">                  command=<span class="keyword">lambda</span>:self.encrypt(self.key_var.get(),isShow=<span class="literal">True</span>)</span><br><span class="line">                  ).grid(row=<span class="number">0</span>,column=<span class="number">2</span>,stick=tk.W+tk.E)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python">tk<span class="token punctuation">.</span>Button<span class="token punctuation">(</span>des_LF<span class="token punctuation">,</span>text<span class="token operator">=</span><span class="token string">'DES加密'</span><span class="token punctuation">,</span>
+                  command<span class="token operator">=</span><span class="token keyword">lambda</span><span class="token punctuation">:</span>self<span class="token punctuation">.</span>encrypt<span class="token punctuation">(</span>self<span class="token punctuation">.</span>key_var<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>isShow<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">)</span><span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>column<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>stick<span class="token operator">=</span>tk<span class="token punctuation">.</span>W<span class="token operator">+</span>tk<span class="token punctuation">.</span>E<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>显示对话框：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter.messagebox <span class="keyword">as</span> tkm</span><br><span class="line">tkm.showwarning(<span class="string">'注意'</span>,<span class="string">'密钥长度必须为8个字符，即64bit'</span>)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> tkinter<span class="token punctuation">.</span>messagebox <span class="token keyword">as</span> tkm
+tkm<span class="token punctuation">.</span>showwarning<span class="token punctuation">(</span><span class="token string">'注意'</span><span class="token punctuation">,</span><span class="token string">'密钥长度必须为8个字符，即64bit'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1012,7 +1128,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             

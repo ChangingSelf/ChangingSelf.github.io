@@ -33,7 +33,8 @@
     <script src="/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -482,28 +483,22 @@
 <p>然后去它的<a href="https://www.chocolatey.org/install" target="_blank" rel="noopener">官网</a>下载它。（如果先安装再修改环境变量会出现一系列问题，别问我怎么知道的）</p>
 <p>下载它的方式是：复制官网给出的下载命令，以管理员身份打开powershell，运行这条安装命令，它就会自动安装到你之前指定的位置。</p>
 <p>在cmd或者powershell输入以下命令以确认安装成功：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> -?</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> <span class="token operator">-</span>?<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>常用指令：</p>
 <p>列出/查询软件包</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> list 软件包名</span><br><span class="line"><span class="variable">$choco</span> search 软件包名</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> list 软件包名
+<span class="token variable">$choco</span> search 软件包名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>查询本地已安装的软件包（-lo就是local的缩写）</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> list <span class="literal">-lo</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> list <span class="token operator">-</span>lo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装某个软件包</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> install 软件包名</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> install 软件包名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>卸载某个软件包</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> uninstall 软件包名</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> uninstall 软件包名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>升级某个软件</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> upgrade 软件包名</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> upgrade 软件包名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>更多的命令可以去官网的<a href="https://www.chocolatey.org/docs" target="_blank" rel="noopener">文档</a>查看，具体有哪些包可以去<a href="https://www.chocolatey.org/packages" target="_blank" rel="noopener">这里</a>查看</p>
 <h3 id="我用chocolatey安装的软件"><a href="#我用chocolatey安装的软件" class="headerlink" title="我用chocolatey安装的软件"></a>我用chocolatey安装的软件</h3><p>比如我要安装chrome，可以用这个命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$choco</span> install googlechrome</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token variable">$choco</span> install googlechrome<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>下面列出我下载的软件：</p>
 <ul>
 <li><p>chrome：谷歌浏览器</p>
@@ -992,7 +987,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             

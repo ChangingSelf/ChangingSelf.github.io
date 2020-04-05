@@ -251,9 +251,9 @@
     
       &lt;p&gt;我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。&lt;/p&gt;
 &lt;p&gt;问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ERROR: Permission to HaneChiri&amp;#x2F;HaneChiri.github.io.git denied to ChangingSelf.   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fatal: Could not read from remote repository.                                         &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Please make sure you have the correct access rights                             &amp;#96;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;大意是我没有权限，也就是ssh没有配好。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
+fatal: Could not read from remote repository.                                         
+Please make sure you have the correct access rights                             `    &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大意是我没有权限，也就是ssh没有配好。&lt;/p&gt;
     
     </summary>
     

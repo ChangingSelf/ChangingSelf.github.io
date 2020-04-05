@@ -34,7 +34,8 @@
     <script src="/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -413,14 +414,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    14 分
                 </div>
                 
 				
@@ -502,55 +503,64 @@
 <p>为了清晰，没有加入错误处理的代码。</p>
 <p>下面的示例代码解析自官方的示例程序<a href="https://docs.microsoft.com/en-us/windows/win32/coreaudio/capturing-a-stream" target="_blank" rel="noopener">Capturing a Stream</a>，会有一些改动。</p>
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>最开始，得使用<code>CoInitialize</code>函数来在当前线程上初始化 COM 库（<a href="https://docs.microsoft.com/en-us/windows/win32/api/objbase/nf-objbase-coinitialize" target="_blank" rel="noopener">CoInitialize函数</a>）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CoInitialize(<span class="literal">NULL</span>);<span class="comment">//初始化com库</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">CoInitialize(NULL);//初始化com库<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>采集结束后，记得关闭</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CoUninitialize();</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">CoUninitialize();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="创建多媒体设备枚举器"><a href="#创建多媒体设备枚举器" class="headerlink" title="创建多媒体设备枚举器"></a>创建多媒体设备枚举器</h4><p>定义一些常量</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioClient = __uuidof(IAudioClient);</span><br><span class="line"><span class="keyword">const</span> IID IID_IAudioCaptureClient = __uuidof(IAudioCaptureClient);</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">    const CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
+    const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
+    const IID IID_IAudioClient = __uuidof(IAudioClient);
+    const IID IID_IAudioCaptureClient = __uuidof(IAudioCaptureClient);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这些常量是这些类的UUID，总之就是用来标识这些类的。</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/combaseapi/nf-combaseapi-cocreateinstance" target="_blank" rel="noopener">Cocreateinstance函数</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多媒体设备枚举器</span></span><br><span class="line">	IMMDeviceEnumerator *pEnumerator = <span class="literal">NULL</span>;</span><br><span class="line">	CoCreateInstance(</span><br><span class="line">		CLSID_MMDeviceEnumerator, <span class="comment">//创建与指定 CLSID (Class ID，即类标识符)关联的类的单个未初始化对象。</span></span><br><span class="line">        <span class="literal">NULL</span>,<span class="comment">//如果为 NULL，则表示该对象不是作为聚合的一部分创建的</span></span><br><span class="line">		CLSCTX_ALL,<span class="comment">//管理新创建对象的代码将在其中运行的上下文。 这些值取自枚举 CLSCTX</span></span><br><span class="line">        IID_IMMDeviceEnumerator,<span class="comment">//对用于与对象通信的接口标识符的引用</span></span><br><span class="line">		(<span class="keyword">void</span>**)&amp;pEnumerator);<span class="comment">//接收 riid 请求的接口指针的指针变量的地址。 成功返回后，* ppv 包含请求的接口指针。 失败时，* ppv 包含 NULL。</span></span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">//创建多媒体设备枚举器
+    IMMDeviceEnumerator *pEnumerator = NULL;
+    CoCreateInstance(
+        CLSID_MMDeviceEnumerator, //创建与指定 CLSID (Class ID，即类标识符)关联的类的单个未初始化对象。
+        NULL,//如果为 NULL，则表示该对象不是作为聚合的一部分创建的
+        CLSCTX_ALL,//管理新创建对象的代码将在其中运行的上下文。 这些值取自枚举 CLSCTX
+        IID_IMMDeviceEnumerator,//对用于与对象通信的接口标识符的引用
+        (void**)&pEnumerator);//接收 riid 请求的接口指针的指针变量的地址。 成功返回后，* ppv 包含请求的接口指针。 失败时，* ppv 包含 NULL。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="获取声卡接口"><a href="#获取声卡接口" class="headerlink" title="获取声卡接口"></a>获取声卡接口</h4><p>使用刚刚获取的枚举器来获取默认音频端点设备。</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdeviceenumerator-getdefaultaudioendpoint" target="_blank" rel="noopener">IMMDeviceEnumerator::GetDefaultAudioEndpoint方法</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取声卡接口</span></span><br><span class="line">	IMMDevice *pDevice = <span class="literal">NULL</span>;<span class="comment">//声卡接口</span></span><br><span class="line">	pEnumerator-&gt;GetDefaultAudioEndpoint(</span><br><span class="line">		eCapture,<span class="comment">//端点设备的数据流方向。 调用方应该将此参数设置为以下两个 EDataFlow 枚举值之一:eRender,eCapture,前者渲染，后者捕获</span></span><br><span class="line">        eConsole,<span class="comment">//端点设备的角色。 调用者应该将这个参数设置为以下 ERole 枚举值之一:eConsole,eMultimedia,eCommunications</span></span><br><span class="line">        &amp;pDevice);<span class="comment">//指向一个指针变量，该方法将默认音频端点设备的端点对象的 immmdevice 接口的地址写入该指针变量</span></span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">//获取声卡接口
+    IMMDevice *pDevice = NULL;//声卡接口
+    pEnumerator->GetDefaultAudioEndpoint(
+        eCapture,//端点设备的数据流方向。 调用方应该将此参数设置为以下两个 EDataFlow 枚举值之一:eRender,eCapture,前者渲染，后者捕获
+        eConsole,//端点设备的角色。 调用者应该将这个参数设置为以下 ERole 枚举值之一:eConsole,eMultimedia,eCommunications
+        &pDevice);//指向一个指针变量，该方法将默认音频端点设备的端点对象的 immmdevice 接口的地址写入该指针变量<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="设置默认音频格式"><a href="#设置默认音频格式" class="headerlink" title="设置默认音频格式"></a>设置默认音频格式</h4><p>这里用的是使用最小音频格式，也可以手动设置自己的音频格式。</p>
 <p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmeapi/ns-mmeapi-waveformatex" target="_blank" rel="noopener">WAVEFORMATEX 结构体</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取音频格式</span></span><br><span class="line">WAVEFORMATEX *pwfx = <span class="literal">NULL</span>;</span><br><span class="line">pAudioClient-&gt;GetMixFormat(&amp;pwfx);</span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">    //获取音频格式
+    WAVEFORMATEX *pwfx = NULL;
+    pAudioClient->GetMixFormat(&pwfx);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h4 id="获取声卡客户端"><a href="#获取声卡客户端" class="headerlink" title="获取声卡客户端"></a>获取声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-activate" target="_blank" rel="noopener">IMMDevice::Activate方法</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过声卡接口获取声卡客户端接口</span></span><br><span class="line">	IAudioClient *pAudioClient = <span class="literal">NULL</span>;</span><br><span class="line">	pDevice-&gt;Activate(IID_IAudioClient, CLSCTX_ALL, <span class="literal">NULL</span>, (<span class="keyword">void</span>**)&amp;pAudioClient);</span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">//通过声卡接口获取声卡客户端接口
+    IAudioClient *pAudioClient = NULL;
+    pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (void**)&pAudioClient);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h4 id="初始化声卡客户端"><a href="#初始化声卡客户端" class="headerlink" title="初始化声卡客户端"></a>初始化声卡客户端</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-initialize" target="_blank" rel="noopener">IAudioClient::Initialize方法</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">REFERENCE_TIME hnsRequestedDuration = REFTIMES_PER_SEC; <span class="comment">//采样持续时间，单位100纳秒</span></span><br><span class="line">pAudioClient-&gt;Initialize(</span><br><span class="line">	AUDCLNT_SHAREMODE_SHARED,<span class="comment">//与其他设备共享音频端点设备</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//选项</span></span><br><span class="line">	hnsRequestedDuration,<span class="comment">//以时间值表示的缓冲区容量</span></span><br><span class="line">	<span class="number">0</span>,<span class="comment">//设备周期，共享模式下设为0</span></span><br><span class="line">	pwfx,<span class="comment">//音频格式</span></span><br><span class="line">	<span class="literal">NULL</span><span class="comment">//指向session的GUID的指针，设置为NULL表示打开一个新session</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">    REFERENCE_TIME hnsRequestedDuration = REFTIMES_PER_SEC; //采样持续时间，单位100纳秒
+    pAudioClient->Initialize(
+        AUDCLNT_SHAREMODE_SHARED,//与其他设备共享音频端点设备
+        0,//选项
+        hnsRequestedDuration,//以时间值表示的缓冲区容量
+        0,//设备周期，共享模式下设为0
+        pwfx,//音频格式
+        NULL//指向session的GUID的指针，设置为NULL表示打开一个新session
+    );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>REFTIMES_PER_SEC</code>是一个宏，作为参考时间单位。100纳秒 = 1e-7秒，即这个宏定义的值。也就是说，上面的代码是采样1秒的意思。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">// REFERENCE_TIME time units per second and per millisecond
+#define REFTIMES_PER_SEC  10000000
+#define REFTIMES_PER_MILLISEC  10000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h4 id="获取捕获客户端"><a href="#获取捕获客户端" class="headerlink" title="获取捕获客户端"></a>获取捕获客户端</h4><p><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudioclient-getservice" target="_blank" rel="noopener">IAudioClient::GetService方法</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取捕获客户端</span></span><br><span class="line">	IAudioCaptureClient *pCaptureClient = <span class="literal">NULL</span>;</span><br><span class="line">	hr = pAudioClient-&gt;GetService(</span><br><span class="line">        IID_IAudioCaptureClient, <span class="comment">//客户端接口ID</span></span><br><span class="line">        (<span class="keyword">void</span>**)&amp;pCaptureClient);</span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">//获取捕获客户端
+    IAudioCaptureClient *pCaptureClient = NULL;
+    hr = pAudioClient->GetService(
+        IID_IAudioCaptureClient, //客户端接口ID
+        (void**)&pCaptureClient);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="启动音频流"><a href="#启动音频流" class="headerlink" title="启动音频流"></a>启动音频流</h4><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient-start" target="_blank" rel="noopener">IAudioClient::Start</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//启动音频流</span></span><br><span class="line">m_pAudioClient-&gt;Start();</span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-c++"><code class="language-c++">//启动音频流
+m_pAudioClient->Start();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="采集数据"><a href="#采集数据" class="headerlink" title="采集数据"></a>采集数据</h4><p>启动音频流之后，就可以开始捕获数据了，音频流有一个缓冲区</p>
 <p>流程如下：</p>
 <ul>
@@ -560,42 +570,165 @@
 <li>获取下一个数据包大小，循环直到缓冲区为空</li>
 </ul>
 <p>获取数据包大小，以确定流中是否有数据。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UINT32 packetLength = <span class="number">0</span>;<span class="comment">//数据包长度</span></span><br><span class="line">BYTE *pData = <span class="literal">NULL</span>;<span class="comment">//数据包首地址</span></span><br><span class="line">UINT32 numFramesAvailable;<span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">DWORD flags;<span class="comment">//缓冲区状态标志</span></span><br><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; recorder;<span class="comment">//用于存储数据</span></span><br><span class="line"></span><br><span class="line">pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);<span class="comment">//获取下一个数据包的大小</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++"><code class="language-c++">UINT32 packetLength = 0;//数据包长度
+BYTE *pData = NULL;//数据包首地址
+UINT32 numFramesAvailable;//数据包中可用的音频帧数
+DWORD flags;//缓冲区状态标志
+vector<BYTE> recorder;//用于存储数据
 
+pCaptureClient->GetNextPacketSize(&packetLength);//获取下一个数据包的大小<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>处理其中的数据。</p>
 <ul>
 <li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-releasebuffer" target="_blank" rel="noopener">IAudioCaptureClient::ReleaseBuffer</a></li>
 <li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getnextpacketsize" target="_blank" rel="noopener">IAudioCaptureClient::GetNextPacketSize</a></li>
 <li><a href="https://docs.microsoft.com/zh-cn/windows/win32/api/audioclient/nf-audioclient-iaudiocaptureclient-getbuffer" target="_blank" rel="noopener">IAudioCaptureClient::GetBuffer</a></li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (packetLength != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获取缓冲区中的数据</span></span><br><span class="line">		pCaptureClient-&gt;GetBuffer(</span><br><span class="line">			&amp;pData,<span class="comment">//数据包指针变量的地址</span></span><br><span class="line">			&amp;numFramesAvailable, <span class="comment">//数据包中可用的音频帧数</span></span><br><span class="line">			&amp;flags, <span class="comment">//缓冲区状态标志</span></span><br><span class="line">			<span class="literal">NULL</span>,</span><br><span class="line">			<span class="literal">NULL</span></span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//判断是否静音</span></span><br><span class="line">		<span class="keyword">if</span> (flags &amp; AUDCLNT_BUFFERFLAGS_SILENT)</span><br><span class="line">		&#123;</span><br><span class="line">			pData = <span class="literal">NULL</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> dataSize = numFramesAvailable * <span class="number">4</span>;<span class="comment">//可用帧数*4=BYTE数</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//采集数据</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataSize; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			BYTE tem = pData[i];</span><br><span class="line">			recorder.push_back(pData[i]);<span class="comment">//添加进自己实现准备好的数据数组中</span></span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//释放缓冲区</span></span><br><span class="line">		pCaptureClient-&gt;ReleaseBuffer(numFramesAvailable);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//获取下一个数据包大小</span></span><br><span class="line">		pCaptureClient-&gt;GetNextPacketSize(&amp;packetLength);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++"><code class="language-c++">    while (packetLength != 0)
+        {
+            //获取缓冲区中的数据
+            pCaptureClient->GetBuffer(
+                &pData,//数据包指针变量的地址
+                &numFramesAvailable, //数据包中可用的音频帧数
+                &flags, //缓冲区状态标志
+                NULL,
+                NULL
+            );
+
+            //判断是否静音
+            if (flags & AUDCLNT_BUFFERFLAGS_SILENT)
+            {
+                pData = NULL;
+            }
+            int dataSize = numFramesAvailable * 4;//可用帧数*4=BYTE数
+
+            //采集数据
+            for (int i = 0; i < dataSize; i++)
+            {
+                BYTE tem = pData[i];
+                recorder.push_back(pData[i]);//添加进自己实现准备好的数据数组中
+
+            }
 
 
+            //释放缓冲区
+            pCaptureClient->ReleaseBuffer(numFramesAvailable);
 
+            //获取下一个数据包大小
+            pCaptureClient->GetNextPacketSize(&packetLength);
+
+        }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然，由于缓冲区会不断地进来数据，你可以加一个判断，读取了多少个数据包后退出循环，否则会无限循环。</p>
-<h4 id="关闭音频流"><a href="#关闭音频流" class="headerlink" title="关闭音频流"></a>关闭音频流</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pAudioClient-&gt;Stop();</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="测试输出"><a href="#测试输出" class="headerlink" title="测试输出"></a>测试输出</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; recorder.<span class="built_in">size</span>(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, recorder[i]);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="关闭音频流"><a href="#关闭音频流" class="headerlink" title="关闭音频流"></a>关闭音频流</h4><pre class="line-numbers language-c++"><code class="language-c++">pAudioClient->Stop();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="测试输出"><a href="#测试输出" class="headerlink" title="测试输出"></a>测试输出</h4><pre class="line-numbers language-c++"><code class="language-c++">for (int i = 0; i < recorder.size(); i++)
+    {
+        printf("%d\n", recorder[i]);
+    }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308165600.png" alt="输出效果图"></p>
 <p>周三大概做到这里</p>
 <h2 id="周四-2020-03-05"><a href="#周四-2020-03-05" class="headerlink" title="周四-2020-03-05"></a>周四-2020-03-05</h2><p>周四主要将波形曲线画出来。</p>
 <h3 id="绘制波形"><a href="#绘制波形" class="headerlink" title="绘制波形"></a>绘制波形</h3><p>创建了一个MFC项目，并新建了一个类，主要是将上面说到的代码简单封装了一下，没有用到的暂时不显示。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CRecorder.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dshow.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winerror.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mmdeviceapi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Functiondiscoverykeys_devpkey.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audioclient.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Audiopolicy.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// REFERENCE_TIME time units per second and per millisecond</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_SEC  10000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REFTIMES_PER_MILLISEC  10000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_ON_ERROR(hres)  \</span></span><br><span class="line">              <span class="keyword">if</span> (FAILED(hres)) &#123; <span class="keyword">goto</span> Exit; &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAFE_RELEASE(punk)  \</span></span><br><span class="line">              <span class="keyword">if</span> ((punk) != <span class="literal">NULL</span>)  \</span><br><span class="line">                &#123; (punk)-&gt;Release(); (punk) = <span class="literal">NULL</span>; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRecorder</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">vector</span>&lt;BYTE&gt; m_recorder;<span class="comment">//数据记录器</span></span><br><span class="line">	IAudioClient *m_pAudioClient;<span class="comment">//声卡客户端</span></span><br><span class="line">	IAudioCaptureClient *m_pCaptureClient;<span class="comment">//捕获流客户端</span></span><br><span class="line">	WAVEFORMATEX *m_pwfx;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	CRecorder();</span><br><span class="line">    <span class="comment">//手动提取出来的代码</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;<span class="comment">//初始化</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">refreshRecorder</span><span class="params">()</span></span>;<span class="comment">//刷新采样数据</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onError</span><span class="params">(HRESULT hres)</span></span>;<span class="comment">//错误处理（也没咋用，懒得写那么多错误处理）</span></span><br><span class="line"></span><br><span class="line">	<span class="function">HRESULT <span class="title">RecordAudioStream</span><span class="params">()</span></span>;<span class="comment">//整块的示例代码，用于测试，现在不使用</span></span><br><span class="line"></span><br><span class="line">	~CRecorder();</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">drawWaveform</span><span class="params">(CDC* pDC, CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span></span>;<span class="comment">//绘制图像</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++"><code class="language-c++">//CRecorder.h
+#pragma once
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <dshow.h>
+#include <Windows.h>
+#include <winerror.h>
+#include <mmdeviceapi.h>
+#include <Functiondiscoverykeys_devpkey.h>
+
+#include <Audioclient.h>
+#include <Audiopolicy.h>
+#include <complex>
+
+using namespace std;
+
+// REFERENCE_TIME time units per second and per millisecond
+#define REFTIMES_PER_SEC  10000000
+#define REFTIMES_PER_MILLISEC  10000
+
+#define EXIT_ON_ERROR(hres)  \
+              if (FAILED(hres)) { goto Exit; }
+#define SAFE_RELEASE(punk)  \
+              if ((punk) != NULL)  \
+                { (punk)->Release(); (punk) = NULL; }
+
+
+class CRecorder
+{
+private:
+    vector<BYTE> m_recorder;//数据记录器
+    IAudioClient *m_pAudioClient;//声卡客户端
+    IAudioCaptureClient *m_pCaptureClient;//捕获流客户端
+    WAVEFORMATEX *m_pwfx;
+
+
+public:
+    CRecorder();
+    //手动提取出来的代码
+    void init();//初始化
+    void refreshRecorder();//刷新采样数据
+    void onError(HRESULT hres);//错误处理（也没咋用，懒得写那么多错误处理）
+
+    HRESULT RecordAudioStream();//整块的示例代码，用于测试，现在不使用
+
+    ~CRecorder();
+    int drawWaveform(CDC* pDC, CRect rect,vector<BYTE> output);//绘制图像
+
+};
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>实现部分和上面差不多就不赘述了。</p>
 <p>主要是绘制方面。</p>
 <p>第三个参数<code>vector&lt;BYTE&gt; output</code>是为了后面的滤波所准备的，是由leesin提出的改进</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> CRecorder::drawWaveform(CDC* pDC,CRect <span class="built_in">rect</span>,<span class="built_in">vector</span>&lt;BYTE&gt; output)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//RecordAudioStream();</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">height</span> = <span class="built_in">rect</span>.Height();</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">width</span> = <span class="built_in">rect</span>.Width();</span><br><span class="line">	<span class="keyword">int</span> x_coefficient = <span class="number">5</span>;</span><br><span class="line">	<span class="comment">//int a = dataStart;</span></span><br><span class="line">	pDC -&gt; MoveTo( <span class="number">0</span>, output[dataStart] );</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = dataStart; i &lt; output.<span class="built_in">size</span>() &amp;&amp; (i-dataStart+<span class="number">1</span>)*x_coefficient &lt;= <span class="built_in">width</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		pDC-&gt;LineTo((i-dataStart+<span class="number">1</span>) * x_coefficient, output[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">int CRecorder::drawWaveform(CDC* pDC,CRect rect,vector<BYTE> output)
+{
+    //RecordAudioStream();
+    int height = rect.Height();
+    int width = rect.Width();
+    int x_coefficient = 5;
+    //int a = dataStart;
+    pDC -> MoveTo( 0, output[dataStart] );
+    for (int i = dataStart; i < output.size() && (i-dataStart+1)*x_coefficient <= width; i++)
+    {
+        pDC->LineTo((i-dataStart+1) * x_coefficient, output[i]);
+    }
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在对话框类中获取pDC</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> CsoundcarddataacquisitionDlg::drawWaveform()</span><br><span class="line">&#123;</span><br><span class="line">	m_pPanel = GetDlgItem(IDC_PANEL);<span class="comment">//获得静态窗口对象指针</span></span><br><span class="line">	<span class="comment">//清屏</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(FALSE);<span class="comment">//偷懒用的方法</span></span><br><span class="line">	m_pPanel-&gt;ShowWindow(TRUE);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件区域</span></span><br><span class="line">	CRect <span class="built_in">rect</span>;</span><br><span class="line">	m_pPanel-&gt;GetClientRect(&amp;<span class="built_in">rect</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取控件画笔</span></span><br><span class="line">	CDC* pDC = m_pPanel-&gt;GetDC();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//绘制原始采样数据</span></span><br><span class="line">	m_pPanel-&gt;UpdateWindow();</span><br><span class="line">	<span class="comment">//m_recorder.RecordAudioStream();</span></span><br><span class="line">	m_recorder.refreshRecorder();</span><br><span class="line">	m_recorder.drawWaveform(pDC, <span class="built_in">rect</span>,m_recorder.NoFiltering());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	ReleaseDC(pDC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++"><code class="language-c++">void CsoundcarddataacquisitionDlg::drawWaveform()
+{
+    m_pPanel = GetDlgItem(IDC_PANEL);//获得静态窗口对象指针
+    //清屏
+    m_pPanel->ShowWindow(FALSE);//偷懒用的方法
+    m_pPanel->ShowWindow(TRUE);
 
+    //获取控件区域
+    CRect rect;
+    m_pPanel->GetClientRect(&rect);
+
+    //获取控件画笔
+    CDC* pDC = m_pPanel->GetDC();
+
+    //绘制原始采样数据
+    m_pPanel->UpdateWindow();
+    //m_recorder.RecordAudioStream();
+    m_recorder.refreshRecorder();
+    m_recorder.drawWaveform(pDC, rect,m_recorder.NoFiltering());
+
+
+    ReleaseDC(pDC);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;BYTE&gt; CRecorder::NoFiltering()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_recorder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-c++"><code class="language-c++">vector<BYTE> CRecorder::NoFiltering()
+{
+    return m_recorder;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308173908.png" alt="第一次显示的图"></p>
 <h3 id="滤波算法"><a href="#滤波算法" class="headerlink" title="滤波算法"></a>滤波算法</h3><p>老师给了个txt，里面就是各种滤波算法，我也没啥精力去研究了，就交给leesin了，他完成得很不错，就是刚刚上面说的设计就是他整的。不过一开始用的算法效果不太好，让他继续研究。此时咸鱼米在弄vc6.0的PID那个项目，因为她没有vs。</p>
 <h2 id="周五周六-2020-03-06-07"><a href="#周五周六-2020-03-06-07" class="headerlink" title="周五周六-2020-03-06~07"></a>周五周六-2020-03-06~07</h2><p>这两天都在学习那个FFT快速傅里叶变换</p>
@@ -604,8 +737,40 @@
 <li>输入：多项式系数表示法的系数，值为时域下的幅值</li>
 <li>输出：多项式点值表示法的点（以复数表示），其模为频域下的幅值</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*FFT</span></span><br><span class="line"><span class="comment">传入的复数数组里面都是实数，含义是多项式系数表示法的系数，值为时域幅值</span></span><br><span class="line"><span class="comment">系数数组长度得是2的整数次方</span></span><br><span class="line"><span class="comment">返回值的模为频谱幅值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; CRecorder::FFT(<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">double</span> PI = <span class="number">3.141592651</span>;</span><br><span class="line">	<span class="keyword">int</span> len = A.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (len == <span class="number">1</span>) <span class="keyword">return</span> A;<span class="comment">//递归结束条件</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt;&gt; A1, A2;<span class="comment">//A(x) = A1(x^2) + x * A2(x^2)</span></span><br><span class="line">	<span class="comment">//将系数分类</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">			A1.push_back(A[i]);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			A2.push_back(A[i]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	A1 = FFT(A1);</span><br><span class="line">	A2 = FFT(A2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; Wn(<span class="built_in">cos</span>(<span class="number">2.0</span>*PI / len), <span class="built_in">sin</span>(<span class="number">2.0</span>*PI / len));<span class="comment">//len等分点的角度增量</span></span><br><span class="line">	<span class="built_in">complex</span>&lt;<span class="keyword">double</span>&gt; W(<span class="number">1.0</span>, <span class="number">0.0</span>);<span class="comment">//用于遍历复平面单位圆上的len个等分点</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i * <span class="number">2</span> &lt; len; i++, W *= Wn)</span><br><span class="line">	&#123;</span><br><span class="line">		A[i] = A1[i] + W * A2[i];</span><br><span class="line">		A[i + len / <span class="number">2</span>] = A1[i] - W * A2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++"><code class="language-c++">/*
+*FFT
+传入的复数数组里面都是实数，含义是多项式系数表示法的系数，值为时域幅值
+系数数组长度得是2的整数次方
+返回值的模为频谱幅值
+*/
+vector<complex<double>> CRecorder::FFT(vector<complex<double>> A)
+{
+    const double PI = 3.141592651;
+    int len = A.size();
+    if (len == 1) return A;//递归结束条件
+    vector<complex<double>> A1, A2;//A(x) = A1(x^2) + x * A2(x^2)
+    //将系数分类
+    for (int i = 0; i < len; i++)
+    {
+        if (i % 2 == 0)
+            A1.push_back(A[i]);
+        else
+            A2.push_back(A[i]);
+    }
 
+    A1 = FFT(A1);
+    A2 = FFT(A2);
+
+    complex<double> Wn(cos(2.0*PI / len), sin(2.0*PI / len));//len等分点的角度增量
+    complex<double> W(1.0, 0.0);//用于遍历复平面单位圆上的len个等分点
+
+    for (int i = 0; i * 2 < len; i++, W *= Wn)
+    {
+        A[i] = A1[i] + W * A2[i];
+        A[i + len / 2] = A1[i] - W * A2[i];
+    }
+    return A;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>完成之后的效果是下面这样的：</p>
 <p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200308174022.png" alt=""></p>
 <p>上图的坐标都是没有变换的，还是以左上角为原点。</p>
@@ -1033,7 +1198,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             

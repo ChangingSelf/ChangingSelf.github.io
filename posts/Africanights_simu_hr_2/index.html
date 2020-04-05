@@ -34,7 +34,8 @@ Java千百问_02基本使用（01">
     <script src="/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -413,7 +414,7 @@ Java千百问_02基本使用（01">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    728
+                    706
                 </div>
                 
 
@@ -444,28 +445,41 @@ Java千百问_02基本使用（01">
 </li>
 </ul>
 <h1 id="解析xml文件"><a href="#解析xml文件" class="headerlink" title="解析xml文件"></a>解析xml文件</h1><p>需要import进来的内容如下，jdk1.8全部自带，不需要额外下载。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilder;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilderFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Document;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Node;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.NodeList;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>parsers<span class="token punctuation">.</span>DocumentBuilder<span class="token punctuation">;</span>
+<span class="token keyword">import</span> javax<span class="token punctuation">.</span>xml<span class="token punctuation">.</span>parsers<span class="token punctuation">.</span>DocumentBuilderFactory<span class="token punctuation">;</span>
 
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>w3c<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>Document<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>w3c<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>Node<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>w3c<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>NodeList<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="获取文档对象"><a href="#获取文档对象" class="headerlink" title="获取文档对象"></a>获取文档对象</h2><p>解析方式如下：</p>
 <ul>
 <li>首先获取一个工厂类（<code>DocumentBuilderFactory</code>）实例，使用了单例模式所以得用<code>newInstance()</code>来获取全局对象</li>
 <li>再用获得的工厂对象来创建文档解析器（<code>DocumentBuilder</code>）</li>
 <li>最后才能够利用文档解析器来解析文档（<code>Document</code>）</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String path = <span class="string">"Melantha.xml"</span>;</span><br><span class="line"><span class="comment">//解析xml文件</span></span><br><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">Document doc = db.parse(path);</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-java"><code class="language-java">String path <span class="token operator">=</span> <span class="token string">"Melantha.xml"</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//解析xml文件</span>
+DocumentBuilderFactory dbf <span class="token operator">=</span> DocumentBuilderFactory<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+DocumentBuilder db <span class="token operator">=</span> dbf<span class="token punctuation">.</span><span class="token function">newDocumentBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Document doc <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里<code>DocumentBuilder</code>对象的<code>parse()</code>方法可以直接传入String类型的字符串文件路径，也可以传入文件对象，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line">String path = <span class="string">"Melantha.xml"</span>;</span><br><span class="line">File f=<span class="keyword">new</span> File(path);</span><br><span class="line"><span class="comment">//解析xml文件</span></span><br><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">Document doc = db.parse(f);</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>File<span class="token punctuation">;</span>
+String path <span class="token operator">=</span> <span class="token string">"Melantha.xml"</span><span class="token punctuation">;</span>
+File f<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//解析xml文件</span>
+DocumentBuilderFactory dbf <span class="token operator">=</span> DocumentBuilderFactory<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+DocumentBuilder db <span class="token operator">=</span> dbf<span class="token punctuation">.</span><span class="token function">newDocumentBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Document doc <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="DOM方式获取文档数据"><a href="#DOM方式获取文档数据" class="headerlink" title="DOM方式获取文档数据"></a>DOM方式获取文档数据</h2><p>此处引用自：<a href="https://www.w3cschool.cn/java/java-dom-intro.html" target="_blank" rel="noopener">Java DOM简介-w3cSchool</a></p>
 <blockquote>
 <p>例如，我们有以下xml结构:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">yourTag</span>&gt;</span>This is an <span class="tag">&lt;<span class="name">bold</span>&gt;</span>important<span class="tag">&lt;/<span class="name">bold</span>&gt;</span> test.<span class="tag">&lt;/<span class="name">yourTag</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>yourTag</span><span class="token punctuation">></span></span>This is an <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bold</span><span class="token punctuation">></span></span>important<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bold</span><span class="token punctuation">></span></span> test.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>yourTag</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>DOM节点的层级如下，其中每行代表一个节点:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ELEMENT: yourTag</span><br><span class="line">   + TEXT: This is an</span><br><span class="line">   + ELEMENT: bold</span><br><span class="line">     + TEXT: important</span><br><span class="line">   + TEXT: test.</span><br></pre></td></tr></table></figure>
-
-<p><code>yourTag</code>元素包含文本，后跟一个子元素，后跟另外的文本。</p>
+<pre><code>ELEMENT: yourTag
+   + TEXT: This is an
+   + ELEMENT: bold
+     + TEXT: important
+   + TEXT: test.</code></pre><p><code>yourTag</code>元素包含文本，后跟一个子元素，后跟另外的文本。</p>
 <h2 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h2><p>为了支持混合内容，DOM节点非常简单。标签元素的“内容”标识它是的节点的类型。</p>
 <p>例如，<yourTag> 节点内容是元素<code>yourTag</code>的名称。</p>
 <p>DOM节点API定义<code>nodeValue()</code>，<code>nodeType()</code>和<code>nodeName()</code>方法。</p>
@@ -474,11 +488,42 @@ Java千百问_02基本使用（01">
 </blockquote>
 <p>虽然这里写的用<code>nodeValue()</code>，但现在用的是<code>getValue()</code>这样子的方法。</p>
 <h1 id="载入单份xml文件示例代码"><a href="#载入单份xml文件示例代码" class="headerlink" title="载入单份xml文件示例代码"></a>载入单份xml文件示例代码</h1><p>需要解析的xml文件的内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resume</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>玫兰莎<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">star</span>&gt;</span>3<span class="tag">&lt;/<span class="name">star</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chat</span>&gt;</span>......玫兰莎。从现在起，我的利刃将为您所用。<span class="tag">&lt;/<span class="name">chat</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">portrayal</span>&gt;</span>image/Melantha.jpg<span class="tag">&lt;/<span class="name">portrayal</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resume</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resume</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>玫兰莎<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>star</span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>star</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>chat</span><span class="token punctuation">></span></span>......玫兰莎。从现在起，我的利刃将为您所用。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>chat</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>portrayal</span><span class="token punctuation">></span></span>image/Melantha.jpg<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>portrayal</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resume</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码部分：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 载入简历对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> path 简历文件路径</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 简历对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Resume <span class="title">loadResume</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">		Resume resume = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">//解析xml文件</span></span><br><span class="line">			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">			DocumentBuilder db = dbf.newDocumentBuilder();</span><br><span class="line">			Document doc = db.parse(path);</span><br><span class="line">			</span><br><span class="line">			String nameString= doc.getElementsByTagName(<span class="string">"name"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			String starString= doc.getElementsByTagName(<span class="string">"star"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			<span class="keyword">int</span> starInt = Integer.valueOf(starString);</span><br><span class="line">			String chatString= doc.getElementsByTagName(<span class="string">"chat"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			String portrayalString= doc.getElementsByTagName(<span class="string">"portrayal"</span>).item(<span class="number">0</span>).getFirstChild().getNodeValue();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			resume = <span class="keyword">new</span> Resume(nameString, starInt, chatString, portrayalString);</span><br><span class="line">			resume.show();</span><br><span class="line">		&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> resume;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+     * 载入简历对象
+     * @param path 简历文件路径
+     * @return 简历对象
+     */</span>
+    <span class="token keyword">public</span> Resume <span class="token function">loadResume</span><span class="token punctuation">(</span>String path<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Resume resume <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//解析xml文件</span>
+            DocumentBuilderFactory dbf <span class="token operator">=</span> DocumentBuilderFactory<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            DocumentBuilder db <span class="token operator">=</span> dbf<span class="token punctuation">.</span><span class="token function">newDocumentBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Document doc <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+            String nameString<span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">item</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFirstChild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getNodeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            String starString<span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"star"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">item</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFirstChild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getNodeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> starInt <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>starString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            String chatString<span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"chat"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">item</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFirstChild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getNodeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            String portrayalString<span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"portrayal"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">item</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFirstChild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getNodeValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+            resume <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Resume</span><span class="token punctuation">(</span>nameString<span class="token punctuation">,</span> starInt<span class="token punctuation">,</span> chatString<span class="token punctuation">,</span> portrayalString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            resume<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> resume<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -904,7 +949,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             

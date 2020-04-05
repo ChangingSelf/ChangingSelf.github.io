@@ -28,7 +28,8 @@
     <script src="/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -407,7 +408,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.8k
                 </div>
                 
 
@@ -427,9 +428,9 @@
             <div id="articleContent">
                 <p>我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
 <p>问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights                             &#96;</span><br></pre></td></tr></table></figure>
-
-<p>大意是我没有权限，也就是ssh没有配好。</p>
+<pre><code>ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
+fatal: Could not read from remote repository.                                         
+Please make sure you have the correct access rights                             `    </code></pre><p>大意是我没有权限，也就是ssh没有配好。</p>
 <a id="more"></a>
 
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
@@ -463,10 +464,7 @@
 </blockquote>
 <p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在github服务器上，本地保留私钥。</p>
 <p>首先，打开git-bash，生成新的ssh密钥对：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ssh-keygen -t rsa -C <span class="string">"youremail@xxx.com"</span> -f keyfileName</span></span><br></pre></td></tr></table></figure>
-
-
-
+<pre class="line-numbers language-shell"><code class="language-shell">$ssh-keygen -t rsa -C "youremail@xxx.com" -f keyfileName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <table>
 <thead>
 <tr>
@@ -491,29 +489,27 @@
 <p>最后会生成两个文件，.pub后缀的是公钥，另一个是私钥。</p>
 <h3 id="添加公钥到github账号"><a href="#添加公钥到github账号" class="headerlink" title="添加公钥到github账号"></a>添加公钥到github账号</h3><p>在网页右上角账号设置中找到SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
 <p>添加完毕后再次部署HaneChiri的博客，发现仍然是这个错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.   </span><br><span class="line">fatal: Could not read from remote repository.                                         </span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
-
-<p>也对，现在有两个密钥对，可能是配对错误了。</p>
+<pre><code>ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
+fatal: Could not read from remote repository.                                         
+Please make sure you have the correct access rights       </code></pre><p>也对，现在有两个密钥对，可能是配对错误了。</p>
 <p>仔细看错误内容，HaneChiri库拒绝了用户ChangingSelf的访问，也就是说，用的是HaneChiri的公钥，与新账号ChangingSelf的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
 <h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到ssh-agent的高速缓存中，我打开另一个git-bash的时候就不行了（参考：<a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a>）</p>
 <h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开ssh-agent服务，即输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-agent bash</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-agent <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后添加私钥：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这里的地址是需要使用的私钥文件的绝对地址。</p>
 <p>可以通过-l选项查看所有已经添加的私钥：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -l</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>使用-D选项清空私钥列表：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -D</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add -D<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>接着在这个git-bash里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
 <h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件config，这个文件长这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:&#x2F;Users&#x2F;Administrator&#x2F;.ssh&#x2F;id_rsa_hanechiri</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User HaneChiri</span><br></pre></td></tr></table></figure>
-
-<table>
+<pre><code>Host github.com
+    HostName github.com
+    IdentityFile C:/Users/Administrator/.ssh/id_rsa_hanechiri
+    PreferredAuthentications publickey
+    User HaneChiri</code></pre><table>
 <thead>
 <tr>
 <th>字段</th>
@@ -547,9 +543,7 @@
 <p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了config文件的方法，写本文时才尝试临时性的方法，成功了）</p>
 <h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对ssh更加了解之后，才想到的简便方法：直接把新账号ChangingSelf的公钥添加到旧账号的ssh-key中。</p>
 <p>结果给我显示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure>
-
-<p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+<pre><code>Key is already in use</code></pre><p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
 
             </div>
             <hr/>
@@ -972,7 +966,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.8k</span>&nbsp;字
+                class="white-color">26.4k</span>&nbsp;字
             
             
             
