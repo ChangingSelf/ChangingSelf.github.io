@@ -1,0 +1,1155 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="学校信息门户模拟登录, 憧憬少的个人博客">
+    <meta name="description" content="将登陆学校信息门户的部分专门封装成一个模块，需要的时候导入。
+
+
+相关链接本文代码的github链接
+获取登录所需表单数据
+从图中看到的，和在登录页面源代码中查找的，需要的表单数据如下：
+
+username：用户名，也就是信息门户账号
+pa">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>学校信息门户模拟登录 | 憧憬少的个人博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
+
+
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">憧憬少的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">憧憬少的个人博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">学校信息门户模拟登录</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/spider/">
+                                <span class="chip bg-color">spider</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                过程复盘
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-20
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-04-06
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    4 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>将登陆学校信息门户的部分专门封装成一个模块，需要的时候导入。</p>
+<a id="more"></a>
+
+<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p><a href="https://github.com/HaneChiri/CHD_portal_login" target="_blank" rel="noopener">本文代码的github链接</a></p>
+<h1 id="获取登录所需表单数据"><a href="#获取登录所需表单数据" class="headerlink" title="获取登录所需表单数据"></a>获取登录所需表单数据</h1><p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190718144535.png" alt=""></p>
+<p>从图中看到的，和在登录页面源代码中查找的，需要的表单数据如下：</p>
+<ul>
+<li>username：用户名，也就是信息门户账号</li>
+<li>password：是经过加密之后的密码</li>
+<li>lt：是一个每次请求都会变化的表单隐藏域值</li>
+<li>dllt：固定表单隐藏域值</li>
+<li>execution：固定表单隐藏域值</li>
+<li>_eventId：固定表单隐藏域值</li>
+<li>rmShown：固定表单隐藏域值</li>
+</ul>
+<p>除了需要表单数据之外，还需要在登录页面源代码中获取密钥，详情见：<a href="https://hanechiri.github.io/post/portal_login_encrypt/#more" target="_blank" rel="noopener">学校信息门户模拟登录之密码加密</a></p>
+<p>使用<code>BeautifulSoup</code>来获取这些数据。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> portal_login<span class="token punctuation">.</span>encrypt <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+<span class="token keyword">def</span> <span class="token function">get_login_data</span><span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token triple-quoted-string string">'''
+    长安大学登录表单数据解析
+    :param login_url: 登录页面的url
+    :return (登录信息字典,获取时得到的cookies)
+    '''</span>
+    username<span class="token operator">=</span>input<span class="token punctuation">(</span><span class="token string">'input username:'</span><span class="token punctuation">)</span>
+    password<span class="token operator">=</span>input<span class="token punctuation">(</span><span class="token string">'input password:'</span><span class="token punctuation">)</span>
+    username<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    password<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#去除头尾空格</span>
+
+
+    <span class="token comment" spellcheck="true">#获取登录所需表单数据</span>
+    response<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
+    html<span class="token operator">=</span>response<span class="token punctuation">.</span>text
+    soup<span class="token operator">=</span>BeautifulSoup<span class="token punctuation">(</span>html<span class="token punctuation">,</span><span class="token string">'lxml'</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#获取密钥来加密密码</span>
+    pattern <span class="token operator">=</span> re<span class="token punctuation">.</span>compile<span class="token punctuation">(</span><span class="token string">'var\s*?pwdDefaultEncryptSalt\s*?=\s*?"(.*?)"'</span><span class="token punctuation">)</span>
+    key <span class="token operator">=</span> pattern<span class="token punctuation">.</span>findall<span class="token punctuation">(</span>html<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    password<span class="token operator">=</span>encrypt_aes<span class="token punctuation">(</span>password<span class="token punctuation">,</span>key<span class="token punctuation">)</span>
+
+    lt<span class="token operator">=</span>soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'lt'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'value'</span><span class="token punctuation">]</span>
+    dllt<span class="token operator">=</span>soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'dllt'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'value'</span><span class="token punctuation">]</span>
+    execution <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'execution'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'value'</span><span class="token punctuation">]</span>
+    _eventId <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'_eventId'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'value'</span><span class="token punctuation">]</span>
+    rmShown <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'rmShown'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'value'</span><span class="token punctuation">]</span>
+
+    login_data<span class="token operator">=</span><span class="token punctuation">{</span>
+        <span class="token string">'username'</span><span class="token punctuation">:</span> username<span class="token punctuation">,</span>
+        <span class="token string">'password'</span><span class="token punctuation">:</span> password<span class="token punctuation">,</span>
+        <span class="token string">'lt'</span><span class="token punctuation">:</span> lt<span class="token punctuation">,</span>
+        <span class="token string">'dllt'</span><span class="token punctuation">:</span> dllt<span class="token punctuation">,</span>
+        <span class="token string">'execution'</span><span class="token punctuation">:</span> execution<span class="token punctuation">,</span>
+        <span class="token string">'_eventId'</span><span class="token punctuation">:</span> _eventId<span class="token punctuation">,</span>
+        <span class="token string">'rmShown'</span><span class="token punctuation">:</span> rmShown
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>login_data<span class="token punctuation">,</span>response<span class="token punctuation">.</span>cookies<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>要注意的是，获取完数据之后，需要将response的cookies留下来，因为不同cookies对应的登录数据也不一样（比如说每次打开页面都不一样的密钥和lt）</p>
+<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><h2 id="登录过程分析"><a href="#登录过程分析" class="headerlink" title="登录过程分析"></a>登录过程分析</h2><p>在登录页面输入账号密码，F12打开开发者工具，<code>Network</code>勾选<code>Preserve log</code>，点击登录，然后就会出现下图场景：</p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190720115959.png" alt=""></p>
+<p>找到从登陆页面出去的第一个响应，可以发现这个响应的状态码是302，代表“重定向”。在<code>Response Headers</code>里面可以找到<code>Location</code>这个键，它指示的是重定向的地址。</p>
+<p>这个响应的含义大概是“服务器告诉浏览器带着给它的cookies去访问<code>Location</code>指示的url”</p>
+<p>在刷出来的一大堆响应中继续寻找，找到下一个地址：</p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190720121006.png" alt=""></p>
+<p>从图中可以看到，目的地址已经是门户的主页url了，继续跳转：</p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190720121212.png" alt=""></p>
+<p>随便打开一个登陆才能查看的页面，查看它的cookie，发现浏览器带着这几个cookies来访问这个页面，也就是说，我们需要获取到这几个cookies，才能登录成功：</p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190720121401.png" alt=""></p>
+<h2 id="处理跳转"><a href="#处理跳转" class="headerlink" title="处理跳转"></a>处理跳转</h2><p>默认情况下，requests的<code>post()</code>方法是得到跳转后最终页面的响应，也就是说，登录成功就返回门户主页的响应，登录失败就返回跳转之后回到的登录页面的响应。</p>
+<p>需要设置一个参数，来阻止它进行跳转：</p>
+<pre class="line-numbers language-python"><code class="language-python">response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">,</span>allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也就是：</p>
+<pre class="line-numbers language-python"><code class="language-python">allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>不允许跳转，第一次请求得到什么响应就返回什么响应。</p>
+<p>每一次跳转，我们需要做的工作如下：</p>
+<ol>
+<li>将现有的cookies与新获取的cookies合并</li>
+<li>找到下一个重定向地址，带上cookies，再一次请求</li>
+</ol>
+<p>实现代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python">response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">,</span>allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>    
+<span class="token keyword">while</span> response<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">302</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#如果响应状态是“重定向”</span>
+    <span class="token comment" spellcheck="true">#合并新获取到的cookies</span>
+    cookies<span class="token operator">=</span>join_cookies<span class="token punctuation">(</span>cookies<span class="token punctuation">,</span>response<span class="token punctuation">.</span>cookies<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#获取下一个需要跳转的url</span>
+    next_station<span class="token operator">=</span>response<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'Location'</span><span class="token punctuation">]</span>
+    response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>next_station<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">,</span>allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+cookies<span class="token operator">=</span>join_cookies<span class="token punctuation">(</span>cookies<span class="token punctuation">,</span>response<span class="token punctuation">.</span>cookies<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>join_cookies()</code>的实现如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">join_cookies</span><span class="token punctuation">(</span>cookies1<span class="token punctuation">,</span>cookies2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    将cookies1和cookies2合并
+    '''</span>
+    cookies<span class="token operator">=</span>dict<span class="token punctuation">(</span>cookies1<span class="token punctuation">,</span><span class="token operator">**</span>cookies2<span class="token punctuation">)</span>
+    cookies<span class="token operator">=</span>requests<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>cookiejar_from_dict<span class="token punctuation">(</span>cookies<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> cookies<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="登录函数总览"><a href="#登录函数总览" class="headerlink" title="登录函数总览"></a>登录函数总览</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">login</span><span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token punctuation">,</span>check_url<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    登录到CHD信息门户
+    :param login_url: 登录页面的url
+    :param headers: 使用的headers
+    :param check_url: 用于检查的url，尝试请求此页面并核对是否能请求到
+    :return: 已登录的cookies
+    '''</span>
+    data<span class="token punctuation">,</span>cookies<span class="token operator">=</span>get_login_data<span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token punctuation">)</span><span class="token comment" spellcheck="true">#获取登录数据</span>
+
+    response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>login_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">,</span>allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>    
+    <span class="token keyword">while</span> response<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">302</span><span class="token punctuation">:</span><span class="token comment" spellcheck="true">#如果响应状态是“重定向”</span>
+        <span class="token comment" spellcheck="true">#合并新获取到的cookies</span>
+        cookies<span class="token operator">=</span>join_cookies<span class="token punctuation">(</span>cookies<span class="token punctuation">,</span>response<span class="token punctuation">.</span>cookies<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true">#获取下一个需要跳转的url</span>
+        next_station<span class="token operator">=</span>response<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">'Location'</span><span class="token punctuation">]</span>
+        response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>next_station<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">,</span>allow_redirects<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+    cookies<span class="token operator">=</span>join_cookies<span class="token punctuation">(</span>cookies<span class="token punctuation">,</span>response<span class="token punctuation">.</span>cookies<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#登录检查</span>
+    <span class="token keyword">if</span> check_url <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+        response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>check_url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">,</span>cookies<span class="token operator">=</span>cookies<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> response<span class="token punctuation">.</span>url<span class="token operator">==</span>check_url<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"登录成功"</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"登录失败"</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> cookies<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz/posts/portal_login/">https://yxChangingSelf.xyz/posts/portal_login/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/spider/">
+                                    <span class="chip bg-color">spider</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '2c2d9b5607027ef5684f',
+        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+        repo: 'blog-comments',
+        owner: 'ChangingSelf',
+        admin: "ChangingSelf",
+        id: '2019-07-20T11-21-16',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/simple_password_generater/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="简易密码生成器">
+                        
+                        <span class="card-title">简易密码生成器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            为了管理自己平时各种各样的账号密码，我使用了一个加密了的xlsx文件来记录，同时使用了密码生成规则。为了方便生成密码，使用python写了一个小工具。
+由于代码比较简单，因此不做过多说明，仅做记录。
+
+
+密码生成规则对于一些比较重要的账号，
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-06
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                    过程复盘
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/portal_login_encrypt/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="学校信息门户模拟登录之密码加密">
+                        
+                        <span class="card-title">学校信息门户模拟登录之密码加密</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            以前写的爬虫无法登录到学校的信息门户上去了，因为门户的新JS代码将表单的密码先加密了一次，再将其与别的表单数据POST过去。使用的是AES加密的CBC模式。
+本文前半部分是我的python组长雁横给组员们讲解的信息门户的密码加密思路，然后由
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                    过程复盘
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/spider/">
+                        <span class="chip bg-color">spider</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">密码算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 憧憬少的个人博客<br />'
+            + '文章作者: 憧憬少<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">80.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    
+
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

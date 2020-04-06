@@ -1,0 +1,1209 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MFC习题|RGB颜色模型演示程序, 憧憬少的个人博客">
+    <meta name="description" content="习题来源：《计算机图形学基础教程》孔令德（第二版）
+用mfc基于对话框的编程，实现下图的RGB颜色模型演示程序。点击颜色按钮能将“颜色及代码”这个组框中的静态文本框变成对应的颜色，调色板按钮可以调出自带的颜色选择对话框。滚动条和旁边的编辑框">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>MFC习题|RGB颜色模型演示程序 | 憧憬少的个人博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
+
+
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">憧憬少的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">憧憬少的个人博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MFC习题|RGB颜色模型演示程序</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/cpp/">
+                                <span class="chip bg-color">cpp</span>
+                            </a>
+                        
+                            <a href="/tags/mfc/">
+                                <span class="chip bg-color">mfc</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                过程复盘
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-14
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-04-06
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    7 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>习题来源：《计算机图形学基础教程》孔令德（第二版）</p>
+<p>用mfc基于对话框的编程，实现下图的RGB颜色模型演示程序。点击颜色按钮能将“颜色及代码”这个组框中的静态文本框变成对应的颜色，调色板按钮可以调出自带的颜色选择对话框。滚动条和旁边的编辑框都可以调整颜色。</p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190914121959.png" alt=""></p>
+<a id="more"></a>
+
+<p>设计对话框过程不详述，直接开始代码和思路介绍。<strong>参考链接见文末。</strong></p>
+<h1 id="改变演示块颜色"><a href="#改变演示块颜色" class="headerlink" title="改变演示块颜色"></a>改变演示块颜色</h1><p>我在这里将用于演示颜色的静态文本框称为演示块，对应的ID为<code>IDC_COLOR_BOX</code>。</p>
+<p>查找了很久关于“如何修改控件颜色”的资料。</p>
+<p>改变控件颜色需要在对话框类的<code>OnCltColor()</code>成员函数里面写对应代码。要生成这个方法，需要添加<code>WM_CTLCOLOR</code>这个消息的响应函数，在<code>Class View</code>的对话框类上右键可以找到<code>Add Windows Message Handler</code>，在这里添加就可以了。</p>
+<p>生成的代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">HBRUSH CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnCtlColor</span><span class="token punctuation">(</span>CDC<span class="token operator">*</span> pDC<span class="token punctuation">,</span> CWnd<span class="token operator">*</span> pWnd<span class="token punctuation">,</span> UINT nCtlColor<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    HBRUSH hbr <span class="token operator">=</span> CDialog<span class="token operator">::</span><span class="token function">OnCtlColor</span><span class="token punctuation">(</span>pDC<span class="token punctuation">,</span> pWnd<span class="token punctuation">,</span> nCtlColor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// TODO: Change any attributes of the DC here</span>
+
+    <span class="token comment" spellcheck="true">// TODO: Return a different brush if the default is not desired</span>
+    <span class="token keyword">return</span> hbr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个函数会在每个控件被重绘时调用，所以将改变控件颜色的代码放在这里就行了。</p>
+<p>参数<code>pWnd</code>可以用来识别现在是哪个控件正在被重绘。</p>
+<p>它的返回值是用于填充控件的画刷。</p>
+<p>可以先判断是哪个控件正在被重绘，当演示块被重绘时，将它的颜色调整为自己设置的颜色。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">HBRUSH CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnCtlColor</span><span class="token punctuation">(</span>CDC<span class="token operator">*</span> pDC<span class="token punctuation">,</span> CWnd<span class="token operator">*</span> pWnd<span class="token punctuation">,</span> UINT nCtlColor<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    HBRUSH hbr <span class="token operator">=</span> CDialog<span class="token operator">::</span><span class="token function">OnCtlColor</span><span class="token punctuation">(</span>pDC<span class="token punctuation">,</span> pWnd<span class="token punctuation">,</span> nCtlColor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// TODO: Change any attributes of the DC here</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>pWnd<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetDlgCtrlID</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> IDC_COLOR_BOX<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//判断控件</span>
+    <span class="token punctuation">{</span>
+        hbr<span class="token operator">=</span><span class="token function">CreateSolidBrush</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//调整颜色</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// TODO: Return a different brush if the default is not desired</span>
+    <span class="token keyword">return</span> hbr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面代码的<code>m_color</code>是一个对话框类的<code>protected</code>变量，我把它和自动生成的<code>m_hIcon</code>放在了一起。</p>
+<p><strong>注意：如果这个变量被设置为<code>public</code>，就会在运行时产生错误，原因未知。</strong></p>
+<p>此变量在对话框类的初始化函数<code>OnInitDialog()</code>内初始化。</p>
+<p><strong>有了以上代码之后，想要改变演示块的颜色，只需要改变<code>m_color</code>的值并刷新对话框（例如使用<code>Invalidate()</code>）就可以了。</strong></p>
+<h1 id="显示颜色代码"><a href="#显示颜色代码" class="headerlink" title="显示颜色代码"></a>显示颜色代码</h1><p>在演示块下面有一个静态文本框用于显示当前颜色的十六进制代码，例如“#ffffff”。</p>
+<p>由于颜色每次都是在对话框刷新的时候被改变的，可以将这个功能写在<code>OnPaint()</code>内。获取方式也不难，看代码基本能看懂，不赘述。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnPaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//其他代码</span>
+    <span class="token comment" spellcheck="true">//获取颜色代码</span>
+
+    CStatic <span class="token operator">*</span>color_code <span class="token operator">=</span> <span class="token punctuation">(</span>CStatic<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_COLOR_CODE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CString color<span class="token punctuation">;</span>
+    color<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"#%02x%02x%02x"</span><span class="token punctuation">,</span><span class="token function">GetRValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">GetGValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">GetBValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    color_code <span class="token operator">-</span><span class="token operator">></span><span class="token function">SetWindowText</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="实现颜色按钮"><a href="#实现颜色按钮" class="headerlink" title="实现颜色按钮"></a>实现颜色按钮</h1><p>双击每个颜色按钮，添加它们的响应事件，例如：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnButtonRed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your control notification handler code here</span>
+    m_color <span class="token operator">=</span> <span class="token function">RGB</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Invalidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>调整它们的颜色，并进行刷新重绘。</p>
+<p>至于调色板按钮，需要使用mfc内置的颜色对话框<code>CColorDlg</code>:</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnButtonPalette</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your control notification handler code here</span>
+    CColorDialog palette<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nResponse <span class="token operator">=</span> palette<span class="token punctuation">.</span><span class="token function">DoModal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>nResponse <span class="token operator">==</span> IDOK<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        m_color <span class="token operator">=</span> palette<span class="token punctuation">.</span><span class="token function">GetColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取调色板的颜色</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Invalidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="实现滚动条"><a href="#实现滚动条" class="headerlink" title="实现滚动条"></a>实现滚动条</h1><h2 id="初始化滚动条"><a href="#初始化滚动条" class="headerlink" title="初始化滚动条"></a>初始化滚动条</h2><p>首先需要在对话框的<code>OnInitDialog()</code>方法内，新增初始化滚动条范围值的代码。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">BOOL CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnInitDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//其它代码</span>
+    <span class="token comment" spellcheck="true">//...</span>
+
+    CScrollBar <span class="token operator">*</span>scroll<span class="token operator">=</span><span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_R<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    scroll<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetScrollRange</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    scroll <span class="token operator">=</span> <span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_G<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    scroll<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetScrollRange</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    scroll <span class="token operator">=</span> <span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    scroll<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetScrollRange</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// return TRUE  unless you set the focus to a control</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这段代码初始化了三个滚动条控件，首先用<code>GetDlgItem()</code>来获取ID对应的控件对象的指针，然后调用<code>SetScrollRange()</code>来设定其范围为0~255。</p>
+<h2 id="响应滚动条事件"><a href="#响应滚动条事件" class="headerlink" title="响应滚动条事件"></a>响应滚动条事件</h2><p>滚动条的响应事件不像按钮一样是每个按钮分开的，而是分为水平滚动条事件响应函数，和垂直滚动条响应函数。</p>
+<p>在<code>Class View</code>里对对话框类右键，在右键菜单中找到<code>Add Windows Message Handler</code>，添加<code>WM_HSCROLL</code>消息的响应函数（如果是垂直滚动条，应该是<code>WM_VSCROLL</code>消息）。</p>
+<p>生成的响应函数是这样的：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnHScroll</span><span class="token punctuation">(</span>UINT nSBCode<span class="token punctuation">,</span> UINT nPos<span class="token punctuation">,</span> CScrollBar<span class="token operator">*</span> pScrollBar<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your message handler code here and/or call default</span>
+    CDialog<span class="token operator">::</span><span class="token function">OnHScroll</span><span class="token punctuation">(</span>nSBCode<span class="token punctuation">,</span> nPos<span class="token punctuation">,</span> pScrollBar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>没看文档，不过参数大概意思可能是：</p>
+<ul>
+<li>nSBCode：滚动条响应的消息类型</li>
+<li>nPos：滚动条改变状态之后的值</li>
+<li>pScrollBar：指向被改变状态的滚动条控件的指针</li>
+</ul>
+<p>滚动条拖动的代码需要自己写，在实现功能之前，你即使用鼠标拖动滑块，滑块也会回到原来的位置。</p>
+<p>在这个响应函数里面，我只让滚动条改变对应的编辑框对应的数值。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnHScroll</span><span class="token punctuation">(</span>UINT nSBCode<span class="token punctuation">,</span> UINT nPos<span class="token punctuation">,</span> CScrollBar<span class="token operator">*</span> pScrollBar<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your message handler code here and/or call default</span>
+
+    CDialog<span class="token operator">::</span><span class="token function">OnHScroll</span><span class="token punctuation">(</span>nSBCode<span class="token punctuation">,</span> nPos<span class="token punctuation">,</span> pScrollBar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> pos <span class="token operator">=</span> pScrollBar<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetScrollPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取当前位置</span>
+
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>nSBCode<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> SB_THUMBPOSITION<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>被拖动
+        pos <span class="token operator">=</span> nPos<span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//其实这里还可以写别的事件响应，丰富功能</span>
+    <span class="token punctuation">}</span>
+    pScrollBar<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetScrollPos</span><span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//设置与滚动条对应的编辑框的数值</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>pScrollBar<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetDlgCtrlID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> IDC_SCROLLBAR_R<span class="token operator">:</span>
+        <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_R<span class="token punctuation">,</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> IDC_SCROLLBAR_G<span class="token operator">:</span>
+        <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_G<span class="token punctuation">,</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> IDC_SCROLLBAR_B<span class="token operator">:</span>
+        <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_B<span class="token punctuation">,</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="响应编辑框变化事件"><a href="#响应编辑框变化事件" class="headerlink" title="响应编辑框变化事件"></a>响应编辑框变化事件</h2><p>现在已经可以滑动滚动条来修改编辑框内的值了，但演示块的颜色还不会改变，我把这个功能写在编辑框里面了，这样，可以顺便实现“在编辑框内修改值来修改颜色”的功能。</p>
+<p>这是其中一个编辑框的响应函数代码，其他两个类似，要说的内容都写在注释里面了。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnChangeEditR</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: If this is a RICHEDIT control, the control will not</span>
+    <span class="token comment" spellcheck="true">// send this notification unless you override the CDialog::OnInitDialog()</span>
+    <span class="token comment" spellcheck="true">// function and call CRichEditCtrl().SetEventMask()</span>
+    <span class="token comment" spellcheck="true">// with the ENM_CHANGE flag ORed into the mask.</span>
+
+    <span class="token comment" spellcheck="true">// TODO: Add your control notification handler code here</span>
+    <span class="token function">UpdateData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//更新数据，将数据从控件上同步到绑定的变量</span>
+    <span class="token keyword">int</span> pos <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>m_R_value<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_R<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">SetScrollPos</span><span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//根据滚动条位置设置当前颜色值</span>
+    <span class="token keyword">int</span> R<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>G<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>B<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    R<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_R<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">GetScrollPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    G<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_G<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">GetScrollPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    B<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span>CScrollBar<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_SCROLLBAR_B<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">GetScrollPos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_color <span class="token operator">=</span> <span class="token function">RGB</span><span class="token punctuation">(</span>R<span class="token punctuation">,</span>G<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//为了防止整个对话框闪烁，只刷新演示块</span>
+    CRect rect<span class="token punctuation">;</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span>CStatic<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">GetDlgItem</span><span class="token punctuation">(</span>IDC_COLOR_BOX<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">GetWindowRect</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ScreenToClient</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//转换为对话框上的客户坐标</span>
+    <span class="token function">InvalidateRect</span><span class="token punctuation">(</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//只刷新控件位置</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>完成这一步之后，已经能够实现使用滚动条或者编辑框来改变颜色了，但是当你在点击颜色按钮时，虽然颜色改变了，但是滚动条的位置和编辑框的值不会随之改变。</p>
+<p>因此还需要一步：</p>
+<h2 id="滚动条随颜色而变化位置"><a href="#滚动条随颜色而变化位置" class="headerlink" title="滚动条随颜色而变化位置"></a>滚动条随颜色而变化位置</h2><p>这个对话框内只有颜色按钮能够改变颜色，所以简单地在所有颜色按钮的代码内添加改变位置的代码即可。</p>
+<p>而改变滚动条的位置只需要改变对应的编辑框的数值就可以了。</p>
+<p>于是颜色按钮代码变成了这样</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphcisExercise2Dlg<span class="token operator">::</span><span class="token function">OnButtonRed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your control notification handler code here</span>
+    m_color <span class="token operator">=</span> <span class="token function">RGB</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//调整滚动条位置</span>
+    <span class="token keyword">int</span> R<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>G<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>B<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    R<span class="token operator">=</span><span class="token function">GetRValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    G<span class="token operator">=</span><span class="token function">GetGValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    B<span class="token operator">=</span><span class="token function">GetBValue</span><span class="token punctuation">(</span>m_color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_R<span class="token punctuation">,</span>R<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_G<span class="token punctuation">,</span>G<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SetDlgItemInt</span><span class="token punctuation">(</span>IDC_EDIT_B<span class="token punctuation">,</span>B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">Invalidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="部分用到的MFC函数或宏的简介"><a href="#部分用到的MFC函数或宏的简介" class="headerlink" title="部分用到的MFC函数或宏的简介"></a>部分用到的MFC函数或宏的简介</h1><p>详细的自己百度</p>
+<ul>
+<li><code>GetRValue()</code>，<code>GetGValue()</code>，<code>GetBValue()</code>，分别用于获取颜色值的RGB三个通道的值</li>
+<li><code>SetDlgItemInt()</code>，可以将值送入ID对应的控件</li>
+<li><code>GetDlgItem()</code>，通过ID来获取指向控件的指针，记得转换指针类型</li>
+<li><code>Invalidate()</code>，使客户区无效化，引起重绘</li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="http://www.jizhuomi.com/software/191.html" target="_blank" rel="noopener">VS2010/MFC编程入门之二十六（常用控件：滚动条控件Scroll Bar）-鸡啄米</a></li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz/posts/MFC_RGB_demonstration/">https://yxChangingSelf.xyz/posts/MFC_RGB_demonstration/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/cpp/">
+                                    <span class="chip bg-color">cpp</span>
+                                </a>
+                            
+                                <a href="/tags/mfc/">
+                                    <span class="chip bg-color">mfc</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '2c2d9b5607027ef5684f',
+        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+        repo: 'blog-comments',
+        owner: 'ChangingSelf',
+        admin: "ChangingSelf",
+        id: '2019-09-14T12-19-05',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/hello_world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            大家好，我是憧憬少。
+
+
+这是用hexo搭建的第二个博客，由于想改一个名字，又担心会影响到很多东西，于是就新搭建了一个，原本的博客仍然保留，链接在此：羽尘的个人博客-尘世未解
+其实和以前的几乎是一样的，只是改了用户名，以及域名。这可能是中二
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            憧憬少
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/MFC_get_input_by_Dialog/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="MFC用对话框获取输入">
+                        
+                        <span class="card-title">MFC用对话框获取输入</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在MFC调用对话框读入数据，并在客户区输出。
+这是《计算机图形学基础教程》的一个习题：
+
+使用MFC设计一个长方形类CRectangle，调用对话框读入长方形的长度和宽度，在客户区输出长方形的周长和面积。
+
+这个书上并没有教怎么用对话框读取
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-category">
+                                    解决方案
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/cpp/">
+                        <span class="chip bg-color">cpp</span>
+                    </a>
+                    
+                    <a href="/tags/mfc/">
+                        <span class="chip bg-color">mfc</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 憧憬少的个人博客<br />'
+            + '文章作者: 憧憬少<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">80.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    
+
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

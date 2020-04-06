@@ -1,0 +1,1516 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="java基于AWT的对战小游戏, 憧憬少的个人博客">
+    <meta name="description" content="这学期的java课设弄完了，写个博客总结一下。
+哔哩哔哩对应视频的传送门
+
+
+课设目的与要求根据讲义中策略模式的案例，设计和实现一个基于策略模式的角色扮演游戏。其中包括主要有角色类及其子类、相关的行为类集合和测试类等。
+通过本次实验，能够在">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>java基于AWT的对战小游戏 | 憧憬少的个人博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
+
+
+
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">憧憬少的个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">憧憬少的个人博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">java基于AWT的对战小游戏</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/awt/">
+                                <span class="chip bg-color">awt</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                过程复盘
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-06-13
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-04-06
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>这学期的java课设弄完了，写个博客总结一下。</p>
+<p><a href="https://www.bilibili.com/video/av54526303/" target="_blank" rel="noopener">哔哩哔哩对应视频的传送门</a></p>
+<a id="more"></a>
+
+<h1 id="课设目的与要求"><a href="#课设目的与要求" class="headerlink" title="课设目的与要求"></a>课设目的与要求</h1><p>根据讲义中策略模式的案例，设计和实现一个基于<strong>策略模式</strong>的角色扮演游戏。其中包括主要有角色类及其子类、相关的行为类集合和测试类等。</p>
+<p>通过本次实验，能够在掌握面向对象程序设计的基本思想基础上；深化理解 Java 面向对象程序设计中消息、继承、多态、接口、抽象类和抽象方法等概念和实现方式；并进一步掌握 Java 程序设计中的基本语法和 Java程序运行方法等；理解和应用包（package）。</p>
+<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><p>一个游戏中有多种角色(Character)，例如：国王（King）、皇后（Queen）、骑士（Knight）、老怪（Troll）。角色之间可能要发生战斗(fight)，每场战斗都是一个角色与另一角色之间的一对一战 斗。</p>
+<p>每个角色都有自己的生命值 (hitPoint) 、 魔法值（magicPoint）、攻击力值(damage)和防御力值(defense)。</p>
+<p>每种角色都有一种武器进行攻击（fight）；在程序运行中，可以动态修改角色的武器(setWeaponBehavior)。</p>
+<p>每种角色都有一种魔法对自己或者其他角色施法（performMagic）；可以动态改变拥有的魔法（setMagicBehavior）。</p>
+<ol>
+<li><p>首先设计和实现抽象类 Characters。</p>
+</li>
+<li><p>设计和实现 Character 类的几个子类：King、Queen、Knight、Troll。位</p>
+</li>
+<li><p>设计接口 WeaponBehavior 和 MagicBehavior。</p>
+<ul>
+<li><p>接 口 WeaponBehavior 的 实 现 类 ：</p>
+<ul>
+<li><p>KnifeBehavior （ 用 刀 ）</p>
+</li>
+<li><p>BowAndArrowBehavior （ 用 弓 箭 ）</p>
+</li>
+<li><p>AxeBehavior （ 用 斧 ）</p>
+</li>
+<li><p>SwordBehavior（用剑）</p>
+</li>
+</ul>
+</li>
+<li><p>接口MagicBehavior的实现类：</p>
+<ul>
+<li>HealBehavior（治疗）</li>
+<li>InvisibleBehavior（隐身）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>实现接口中的抽象方法，可以只在屏幕输出简单信息，也可以结合生命值(hitPoint)、攻击力值(damage)和防御力值(defense)计算。</p>
+<ol start="4">
+<li><p>编写测试代码，对以上设计的系统进行测试。要求在程序运行期间，能动态改变角色拥有的武器或者魔法。</p>
+</li>
+<li><p>自己添加一种角色、或者添加一种武器及魔法，设计相应的类，并编写测试代码进行测试。</p>
+</li>
+<li><p>按照 Java 的规范，添加详细的文档注释，并用 Javadoc 生成标准的帮助文档。</p>
+</li>
+<li><p>将上述编译、运行、生成帮助文档的命令，填写至实验报告相应位置。</p>
+</li>
+<li><p>填写实验报告。并将程序代码及生成的帮助文档打包上交。</p>
+</li>
+</ol>
+<h1 id="涉及的主要内容"><a href="#涉及的主要内容" class="headerlink" title="涉及的主要内容"></a>涉及的主要内容</h1><ol>
+<li>单例模式。游戏窗口只能有一个对象，因此使用了单例模式。</li>
+<li>策略模式。在角色类中有两个抽象策略（武器策略和魔法策略），具体策略在类中实现。</li>
+<li>双缓冲技术。在绘制游戏画面的时候使用了双缓冲技术，防止画面闪烁。</li>
+<li>多线程。在两处使用了多线程，一处是为了解决按键冲突的问题，另一处是为了实现游戏周期性判定的功能。</li>
+<li>awt。</li>
+</ol>
+<h1 id="基本逻辑流程"><a href="#基本逻辑流程" class="headerlink" title="基本逻辑流程"></a>基本逻辑流程</h1><ol>
+<li>抽象角色类由具体子类实现，子类主要实现了抽象方法<code>getAppearance</code>，用于获取角色的外貌（即图片），外貌会根据角色状态的不同而改变，比如角色死亡时外貌是墓碑；</li>
+<li>根据角色的坐标以及属性（例如是否隐身，当前武器是什么）来绘制角色以及属性条、武器栏和魔法栏。</li>
+<li>游戏时钟周期线程用于周期性地执行一些操作，例如每秒钟恢复一定的HP和MP，对于隐身状态的角色，每秒钟扣除一定量的MP等。</li>
+</ol>
+<h1 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h1><ol>
+<li><strong>玩家1操作：</strong>键盘上A键D键分别对应左右移动，J键使用武器攻击，K键使用魔法，L键切换武器，O键切换魔法；</li>
+<li><strong>玩家2操作：</strong>键盘上←键→键分别对应左右移动，小键盘上，1键使用武器攻击，2键使用魔法，3键切换武器，6键切换魔法；</li>
+<li>每把武器有自己的攻击威力和攻击距离，只有在两个角色的距离在武器的攻击范围内时，才能够攻击成功；</li>
+<li>伤害计算公式为：被攻击者受到的最终伤害=攻击者攻击力+攻击者武器威力-被攻击者的防御力。若伤害小于等于0，则不予扣除；</li>
+<li>每秒钟会恢复一定量的HP和MP；</li>
+<li>一方死亡（HP降为0及以下）则游戏结束。</li>
+</ol>
+<h1 id="设计与实现"><a href="#设计与实现" class="headerlink" title="设计与实现"></a>设计与实现</h1><h2 id="主要框架"><a href="#主要框架" class="headerlink" title="主要框架"></a>主要框架</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FightFieldFrame</span> <span class="token keyword">extends</span> <span class="token class-name">Frame</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//一些游戏常量以及窗口</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Dimension         SCREEN_DIMENSION<span class="token operator">=</span>Toolkit<span class="token punctuation">.</span><span class="token function">getDefaultToolkit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getScreenSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> FFF_X<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> FFF_Y<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> FFF_HEIGHT<span class="token operator">=</span>SCREEN_DIMENSION<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> FFF_WIDTH<span class="token operator">=</span>SCREEN_DIMENSION<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//……省略其他成员函数，下面会列举来说明</span>
+<span class="token comment" spellcheck="true">/*******************main函数**************************/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        FightFieldFrame f<span class="token operator">=</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token string">"战斗领域"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        f<span class="token punctuation">.</span><span class="token function">initFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//初始化角色</span>
+        f<span class="token punctuation">.</span><span class="token function">initCharacter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//添加事件监听者</span>
+        f<span class="token punctuation">.</span><span class="token function">addWindowListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MyWindowListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        f<span class="token punctuation">.</span><span class="token function">addKeyListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">GamePad</span><span class="token punctuation">(</span>player1<span class="token punctuation">,</span>player2<span class="token punctuation">,</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//新建时钟线程，用于游戏中的周期性属性检查</span>
+        Thread clockThread<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ClockThread</span><span class="token punctuation">(</span>player1<span class="token punctuation">,</span> player2<span class="token punctuation">,</span> fff<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        clockThread<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>FightFieldFrame 类中：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//只能有一个窗体对象，使用单例模式</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> FightFieldFrame fff<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//单例模式使用的对象</span>
+<span class="token keyword">private</span> <span class="token function">FightFieldFrame</span><span class="token punctuation">(</span>String title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> FightFieldFrame <span class="token function">getInstance</span><span class="token punctuation">(</span>String title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>fff<span class="token operator">==</span>null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        fff<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">FightFieldFrame</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> fff<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="双缓冲"><a href="#双缓冲" class="headerlink" title="双缓冲"></a>双缓冲</h2><p>双缓冲因为有两个绘图对象而得名，先在一个image对象上绘图然后再将此对象绘制到Frame上，用于减少重绘时的闪烁。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 初始化框架的位置和大小，以及缓冲对象
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">initFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//这里准备一些对象构造完成之后才能做的事情</span>
+    fff<span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setBounds</span><span class="token punctuation">(</span>FFF_X<span class="token punctuation">,</span> FFF_Y<span class="token punctuation">,</span> FFF_WIDTH<span class="token punctuation">,</span> FFF_HEIGHT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Dimension d<span class="token operator">=</span><span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    imgBuffer<span class="token operator">=</span><span class="token function">createImage</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>width<span class="token punctuation">,</span> d<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gBuffer<span class="token operator">=</span>imgBuffer<span class="token punctuation">.</span><span class="token function">getGraphics</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>创建好缓冲对象后，在缓冲对象上绘制：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">paint</span><span class="token punctuation">(</span>Graphics g<span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+    <span class="token comment" spellcheck="true">//全都先绘制在缓冲区        </span>
+    <span class="token comment" spellcheck="true">//绘制背景</span>
+    Image background<span class="token operator">=</span><span class="token function">getToolkit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getImage</span><span class="token punctuation">(</span><span class="token string">"image\\background.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>background<span class="token operator">!=</span>null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        gBuffer<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>background<span class="token punctuation">,</span> FFF_X<span class="token punctuation">,</span> FFF_Y<span class="token punctuation">,</span> FFF_WIDTH<span class="token punctuation">,</span> FFF_HEIGHT<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//绘制人物</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>player1<span class="token operator">!=</span>null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">drawCharacter</span><span class="token punctuation">(</span>gBuffer<span class="token punctuation">,</span>player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">drawStrand</span><span class="token punctuation">(</span>gBuffer<span class="token punctuation">,</span> player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>player2<span class="token operator">!=</span>null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">drawCharacter</span><span class="token punctuation">(</span>gBuffer<span class="token punctuation">,</span>player2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">drawStrand</span><span class="token punctuation">(</span>gBuffer<span class="token punctuation">,</span> player2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token function">drawSlot</span><span class="token punctuation">(</span>gBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//drawStrand(gBuffer);//绘制绝对位置的属性条，由于没有什么技术含量就只做了一个示例</span>
+    <span class="token comment" spellcheck="true">//由于使用了背景图片，所以不必特地清空背景</span>
+    g<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>imgBuffer<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是，即便如此仍然会闪烁，这是因为重绘时调用的update函数会将Frame用背景色填充一次 再绘制。所以应该覆盖掉原本的方法，让它只绘制，不清空：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//======================//</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span>Graphics g<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//覆盖原本的方法</span>
+    <span class="token function">paint</span><span class="token punctuation">(</span>g<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//======================/*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="玩家操纵"><a href="#玩家操纵" class="headerlink" title="玩家操纵"></a>玩家操纵</h2><p>使用GamePad类作为键盘监听者，监听Frame的按键，调用角色对应的方法。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 游戏手柄类
+ * 用于将键位与角色的动作对应起来
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GamePad</span> <span class="token keyword">implements</span> <span class="token class-name">KeyListener</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Characters player1<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//玩家1</span>
+    <span class="token keyword">private</span> Characters player2<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//玩家2</span>
+    <span class="token keyword">private</span> FightFieldFrame fff<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">GamePad</span><span class="token punctuation">(</span>Characters p1<span class="token punctuation">,</span> Characters p2<span class="token punctuation">,</span> FightFieldFrame f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// TODO Auto-generated constructor stub</span>
+        player1<span class="token operator">=</span>p1<span class="token punctuation">;</span>
+        player2<span class="token operator">=</span>p2<span class="token punctuation">;</span>
+        fff<span class="token operator">=</span>f<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">keyPressed</span><span class="token punctuation">(</span>KeyEvent e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> code<span class="token operator">=</span>e<span class="token punctuation">.</span><span class="token function">getKeyCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_J<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>攻击
+            player1<span class="token punctuation">.</span><span class="token function">fight</span><span class="token punctuation">(</span>player2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player2<span class="token punctuation">.</span><span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_K<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>使用魔法
+            player1<span class="token punctuation">.</span><span class="token function">performMagic</span><span class="token punctuation">(</span>player2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_A<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>左
+            player1<span class="token punctuation">.</span><span class="token function">setMoveLeftFlag</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player1<span class="token punctuation">.</span><span class="token function">setDirection</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//false为朝右，true为朝左</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_D<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>右
+            player1<span class="token punctuation">.</span><span class="token function">setMoveRightFlag</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player1<span class="token punctuation">.</span><span class="token function">setDirection</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>        
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_L<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>切换武器
+            player1<span class="token punctuation">.</span><span class="token function">changeWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_O<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">1</span>切换魔法
+            player1<span class="token punctuation">.</span><span class="token function">changeMagic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>    
+        <span class="token comment" spellcheck="true">/****************************************************************/</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_NUMPAD1<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>攻击
+            player2<span class="token punctuation">.</span><span class="token function">fight</span><span class="token punctuation">(</span>player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player1<span class="token punctuation">.</span><span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_NUMPAD2<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>使用魔法
+            player2<span class="token punctuation">.</span><span class="token function">performMagic</span><span class="token punctuation">(</span>player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_LEFT<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>左
+            player2<span class="token punctuation">.</span><span class="token function">setMoveLeftFlag</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player2<span class="token punctuation">.</span><span class="token function">setDirection</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//false为朝右，true为朝左</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>    
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_RIGHT<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>右
+            player2<span class="token punctuation">.</span><span class="token function">setMoveRightFlag</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            player2<span class="token punctuation">.</span><span class="token function">setDirection</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_NUMPAD3<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>切换武器
+            player2<span class="token punctuation">.</span><span class="token function">changeWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_NUMPAD6<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>玩家<span class="token number">2</span>切换魔法
+            player2<span class="token punctuation">.</span><span class="token function">changeMagic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        fff<span class="token punctuation">.</span><span class="token function">repaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//重绘</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">keyReleased</span><span class="token punctuation">(</span>KeyEvent e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> code<span class="token operator">=</span>e<span class="token punctuation">.</span><span class="token function">getKeyCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>code<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_J<span class="token operator">:</span>        
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_A<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>左
+            player1<span class="token punctuation">.</span><span class="token function">setMoveLeftFlag</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_D<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>右
+            player1<span class="token punctuation">.</span><span class="token function">setMoveRightFlag</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            
+            <span class="token keyword">break</span><span class="token punctuation">;</span>            
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_K<span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_NUMPAD1<span class="token operator">:</span>            
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_LEFT<span class="token operator">:</span>
+            player2<span class="token punctuation">.</span><span class="token function">setMoveLeftFlag</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>            
+        <span class="token keyword">case</span> KeyEvent<span class="token punctuation">.</span>VK_RIGHT<span class="token operator">:</span>
+            player2<span class="token punctuation">.</span><span class="token function">setMoveRightFlag</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        fff<span class="token punctuation">.</span><span class="token function">repaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//重绘</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">keyTyped</span><span class="token punctuation">(</span>KeyEvent e<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，这里控制角色左右移动并不是直接调用角色的移动方法，而是更改角色移动的标志变量，利用线程来调用角色的移动方法。这样可以解决角色的按键冲突问题。</p>
+<h2 id="角色移动线程"><a href="#角色移动线程" class="headerlink" title="角色移动线程"></a>角色移动线程</h2><p>移动线程只负责发送消息给角色，而角色移动的具体判定由角色自身完成，从而更好地实现面向对象的思想。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MoveThread</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Characters character<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">MoveThread</span><span class="token punctuation">(</span>Characters c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        character<span class="token operator">=</span>c<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//线程只负责发送消息，让角色自己判断移动</span>
+            character<span class="token punctuation">.</span><span class="token function">moveRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            character<span class="token punctuation">.</span><span class="token function">moveLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>下面这是Characters类中的角色移动函数，添加了延时以免在按下移动按键的一瞬间，角色移动太快出了屏幕外面。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+     * 向左移动&lt;br/>
+     * 由于两个线程各自操作自己的角色，所以此函数不需要同步
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">moveLeft</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isAliveFlag<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>moveLeftFlag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x<span class="token operator">-=</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//防止跑得太快</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/**
+ * 向右移动&lt;br/>
+ * 由于两个线程各自操作自己的角色，所以此函数不需要同步
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">moveRight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isAliveFlag<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>moveRightFlag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">;</span>        
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="武器攻击实现机制"><a href="#武器攻击实现机制" class="headerlink" title="武器攻击实现机制"></a>武器攻击实现机制</h2><p>在Characters类中，使用武器进行攻击的方法如下，它的主要逻辑是调用useWeapon方法：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 攻击某个角色
+ * @param c 要攻击的角色
+ * @return 造成的真实伤害
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">fight</span><span class="token punctuation">(</span>Characters c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//由于武器有不同的特性，所以伤害的逻辑让武器实现</span>
+    <span class="token comment" spellcheck="true">//比如后期编写高级玩法时，弓需要计算射程</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isAliveFlag<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果已死亡，直接返回，下同</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>weapon<span class="token operator">==</span>null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name<span class="token operator">+</span><span class="token string">"没有武器，无法攻击"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> attackRange<span class="token operator">=</span>weapon<span class="token punctuation">.</span><span class="token function">getAttackRange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>attackRange<span class="token operator">></span><span class="token function">distance</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//攻击距离大于角色之间的距离才可攻击</span>
+        <span class="token keyword">return</span> weapon<span class="token punctuation">.</span><span class="token function">useWeapon</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//此角色攻击角色c</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>角色类的两个属性，武器和魔法，使用的都是对应接口的引用：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">protected</span> WeaponBehavior weapon<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//武器</span>
+<span class="token keyword">protected</span> MagicBehavior magic<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//魔法</span>
+
+以下是武器接口：
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">WeaponBehavior</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/**
+     * 使用武器
+     * @param attacker 武器持有者
+     * @param victim 被攻击者
+     * @return 造成的真实伤害
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">useWeapon</span><span class="token punctuation">(</span>Characters attacker<span class="token punctuation">,</span>Characters victim<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//使用武器</span>
+    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getAttackRange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> Image <span class="token function">getAppearance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+以下是具体的武器实现（以剑为例，其他大同小异）：
+<span class="token comment" spellcheck="true">/**
+ * 剑
+ * 实现武器接口
+ * 威力中等，攻击距离中等
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwordBehavior</span> <span class="token keyword">implements</span> <span class="token class-name">WeaponBehavior</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> String name<span class="token operator">=</span><span class="token string">"剑"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Image appearance<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DAMAGE<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//武器基础威力</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> ATTACK_RANGE<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//武器攻击距离,单位px</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String APPEARANCE_PATH<span class="token operator">=</span><span class="token string">"image\\Weapon\\Sword.png"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">SwordBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token function">SwordBehavior</span><span class="token punctuation">(</span>String _name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        name<span class="token operator">=</span>_name<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//剑，岂能无名OVO</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">/**
+     * 使用武器攻击
+     * @param attacker 攻击者
+     * @param victim 被攻击者
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">useWeapon</span><span class="token punctuation">(</span>Characters attacker<span class="token punctuation">,</span>Characters victim<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> attackDamage<span class="token operator">=</span>DAMAGE<span class="token operator">+</span>attacker<span class="token punctuation">.</span><span class="token function">getDamage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//造成的伤害为攻击者的伤害加上武器威力</span>
+        <span class="token keyword">int</span> finalDamage<span class="token operator">=</span>victim<span class="token punctuation">.</span><span class="token function">hitBy</span><span class="token punctuation">(</span>attacker<span class="token punctuation">,</span> attackDamage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>attacker<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"使用"</span><span class="token operator">+</span>name<span class="token operator">+</span><span class="token string">"对"</span><span class="token operator">+</span>victim<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"造成了"</span><span class="token operator">+</span>finalDamage<span class="token operator">+</span><span class="token string">"点伤害"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> finalDamage<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回最终伤害</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> name<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getAttackRange</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> ATTACK_RANGE<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> Image <span class="token function">getAppearance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        appearance<span class="token operator">=</span>Toolkit<span class="token punctuation">.</span><span class="token function">getDefaultToolkit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getImage</span><span class="token punctuation">(</span>APPEARANCE_PATH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> appearance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里面主要的代码是useWeapon方法里面调用的角色类的hitBy方法，里面有着伤害计算逻辑：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 被某个角色攻击
+ * @param attacker 攻击者
+ * @param attackDamage 攻击者给予的攻击伤害
+ * @return 最后造成的真实伤害
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">hitBy</span><span class="token punctuation">(</span>Characters attacker<span class="token punctuation">,</span><span class="token keyword">int</span> attackDamage<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//被攻击</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isAliveFlag<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> finalDamage<span class="token operator">=</span><span class="token punctuation">(</span>attackDamage<span class="token operator">-</span>defense<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//伤害计算：最终伤害=敌方攻击伤害-我方防御力</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">incHP</span><span class="token punctuation">(</span><span class="token operator">-</span>finalDamage<span class="token punctuation">)</span><span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//如果血量被扣到负数</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">killedBy</span><span class="token punctuation">(</span>attacker<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> finalDamage<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回最后造成的真实伤害</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>魔法的实现机制大同小异，不做特殊说明。</p>
+<h2 id="武器切换和魔法切换"><a href="#武器切换和魔法切换" class="headerlink" title="武器切换和魔法切换"></a>武器切换和魔法切换</h2><p>实现方法是在角色类里面声明数组：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">protected</span> WeaponBehavior weaponSlots<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//武器栏位，用于存储角色携带的武器</span>
+<span class="token keyword">protected</span> MagicBehavior magicSlots<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//魔法栏位</span>
+<span class="token keyword">protected</span> <span class="token keyword">int</span> weaponSlotsIndex<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//栏位索引，指示当前武器</span>
+<span class="token keyword">protected</span> <span class="token keyword">int</span> magicSlotsIndex<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以切换武器为例，如果当前武器是最后一把，那么换回第一把，否则索引自增：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 按顺序切换武器
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">changeWeapon</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setWeaponBehavior</span><span class="token punctuation">(</span>weaponSlots<span class="token punctuation">[</span>weaponSlotsIndex<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>weaponSlotsIndex<span class="token operator">+</span><span class="token number">1</span><span class="token operator">>=</span>weaponSlots<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        weaponSlotsIndex<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        weaponSlotsIndex<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="时钟线程"><a href="#时钟线程" class="headerlink" title="时钟线程"></a>时钟线程</h2><p>时钟线程用于进行一些游戏周期性方法的调用，比如周期性恢复HP，对角色属性值的判断等。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 时钟线程，用于一些周期性的计算
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ClockThread</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Characters player1<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//玩家1</span>
+    <span class="token keyword">private</span> Characters player2<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//玩家2</span>
+    <span class="token keyword">private</span> FightFieldFrame fff<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> interval<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//时钟周期</span>
+    <span class="token keyword">public</span> <span class="token function">ClockThread</span><span class="token punctuation">(</span>Characters p1<span class="token punctuation">,</span> Characters p2<span class="token punctuation">,</span> FightFieldFrame f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        player1<span class="token operator">=</span>p1<span class="token punctuation">;</span>
+        player2<span class="token operator">=</span>p2<span class="token punctuation">;</span>
+        fff<span class="token operator">=</span>f<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">/**
+     * 核对属性，并对于特定属性作出不同的事情
+     * @param c 核对角色c的属性
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cheackStatus</span><span class="token punctuation">(</span>Characters c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> Characters<span class="token punctuation">.</span>ST_INVISIBLE<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>隐身魔法每个周期扣除一定的魔力
+            <span class="token keyword">if</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">incMP</span><span class="token punctuation">(</span><span class="token operator">-</span>InvisibleBehavior<span class="token punctuation">.</span>COST<span class="token punctuation">)</span><span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//如果魔力不够</span>
+                c<span class="token punctuation">.</span><span class="token function">setStatus</span><span class="token punctuation">(</span>Characters<span class="token punctuation">.</span>ST_NORMAL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 周期性恢复属性值（回血回魔）
+     * @param c 周期性恢复角色c的HP和MP
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">recover</span><span class="token punctuation">(</span>Characters c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>c<span class="token punctuation">.</span><span class="token function">getIsAliveFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//角色死亡就不再回血</span>
+        c<span class="token punctuation">.</span><span class="token function">incHP</span><span class="token punctuation">(</span>Characters<span class="token punctuation">.</span>HP_RECOVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        c<span class="token punctuation">.</span><span class="token function">incMP</span><span class="token punctuation">(</span>Characters<span class="token punctuation">.</span>MP_RECOVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//做这个周期要做的事情            </span>
+            <span class="token function">cheackStatus</span><span class="token punctuation">(</span>player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">cheackStatus</span><span class="token punctuation">(</span>player2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">recover</span><span class="token punctuation">(</span>player1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">recover</span><span class="token punctuation">(</span>player2<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+            fff<span class="token punctuation">.</span><span class="token function">repaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//等待下一个周期</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span>interval<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://www.oschina.net/uploads/doc/javase-6-doc-api-zh_CN/java/awt/class-use/Image.html" target="_blank" rel="noopener">java.awt.Image官方文档</a></li>
+<li><a href="https://www.cnblogs.com/bigthing33/p/5148807.html" target="_blank" rel="noopener">使用eclipse生成javadoc-博客园</a></li>
+<li><a href="https://blog.csdn.net/kai_wei_zhang/article/details/8120382" target="_blank" rel="noopener">java双缓冲技术-CSDN</a></li>
+<li><a href="https://blog.csdn.net/u011393661/article/details/38434581" target="_blank" rel="noopener">java获取屏幕大小-CSDN</a></li>
+<li><a href="https://www.jb51.net/article/31981.htm" target="_blank" rel="noopener">java线程传参三种方式-脚本之家</a></li>
+<li><a href="https://y-1746119035.iteye.com/blog/2094687" target="_blank" rel="noopener">游戏角色移动流畅度的处理-ITeye</a></li>
+<li><a href="https://blog.csdn.net/qq_34781336/article/details/80569632" target="_blank" rel="noopener">eclipse调试方式和快捷键-CSDN</a></li>
+<li><a href="https://www.bilibili.com/video/av40583293?from=search&seid=15415941635306934765" target="_blank" rel="noopener">一个讲eclipse调试的b站视频（靠这个视频解决了调试问题）-bilibili</a></li>
+<li><a href="https://blog.csdn.net/asd765028286/article/details/78365274" target="_blank" rel="noopener">绘制字体修改-CSDN</a></li>
+</ul>
+<h1 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h1><p>这次课设对我来说是个挑战，首先时间比较紧张，和考试放在了一周，并且用的是学了几周还没私底下练习多少的JAVA。不过还是做的让我自己比较满意。</p>
+<p>我选择的是看上去较为简单的一道题目，虽然简单，但是这个题目的可扩展性很强，可以尽情开脑洞，我看中的就是这一点。我在高中的时候就尝试使用Visual Basic来编写类似的小游戏，一些可能会遇到的困难在那时已经思考过了，所以总体来说没有遇到太过麻烦的地方。</p>
+<p>随着经验的增长，我逐渐开始一边编程一边整理，让以后的自己也能够回顾这一次的项目。在写完这个课设之后，我用录屏软件录制了一个视频来整体讲述我编写过程中的思路，并上传到了Bilibili弹幕视频网站，总结经验，分享思路，以及为了便于以后回顾。地址是（<a href="https://www.bilibili.com/video/av54526303/）" target="_blank" rel="noopener">https://www.bilibili.com/video/av54526303/）</a></p>
+<p>当然，过程中也遇到了一些问题。</p>
+<p>比如绘制图片的时候遇到了只能使用绝对路径的问题，在老师上课演示的过程中也遇到过这个问题，后来我知道了JAVA相对路径是以项目根目录为基准而不是以文件目录为基准的。</p>
+<p>比如角色控制按键冲突。解决方法是使用多线程，两个线程控制分别控制两个角色。</p>
+<p>比如游戏周期性事件。在以前我使用Visual Basic的时候，是利用时钟控件来解决这个问题的，而JAVA里面可以使用线程来模拟那个时钟控件。这让我对时钟控件的原理有了比较好的认识。</p>
+<p>在假期里面，我可能会通过继续完善这个小游戏，来更加深入地学习JAVA。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://yxChangingSelf.xyz/posts/java_game_FightFieldFrame/">https://yxChangingSelf.xyz/posts/java_game_FightFieldFrame/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/awt/">
+                                    <span class="chip bg-color">awt</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '2c2d9b5607027ef5684f',
+        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
+        repo: 'blog-comments',
+        owner: 'ChangingSelf',
+        admin: "ChangingSelf",
+        id: '2019-06-13T20-39-29',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/Scrapy_spider_bilibiliRank/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="练习利用Scrapy爬取b站排行榜">
+                        
+                        <span class="card-title">练习利用Scrapy爬取b站排行榜</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            开始学python的Scrapy框架了，参考书是崔庆才的《python3网络爬虫开发实战》
+跟着示例敲完之后，又试着按照一样的逻辑去爬取了B站排行榜的数据。
+通过这个小项目学习使用Scrapy框架。
+
+
+步骤新建项目首先新建一个名为prac
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-06-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="post-category">
+                                    工具使用
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/scrapy/">
+                        <span class="chip bg-color">scrapy</span>
+                    </a>
+                    
+                    <a href="/tags/spider/">
+                        <span class="chip bg-color">spider</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/python_spider_note5optimization_of_the_spider_class/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="python爬虫学习笔记5爬虫类结构优化">
+                        
+                        <span class="card-title">python爬虫学习笔记5爬虫类结构优化</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            打算全部以cookie来登陆，而不依赖于session（因为听组长说session没cookie快，而且我想学些新东西而不是翻来覆去地在舒适区鼓捣）。弄了几天终于弄出来个代码不那么混乱的爬虫类了，更新一下博文来总结一下。代码在我github
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
+                                    过程复盘
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/spider/">
+                        <span class="chip bg-color">spider</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 憧憬少的个人博客<br />'
+            + '文章作者: 憧憬少<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">80.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    
+
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
