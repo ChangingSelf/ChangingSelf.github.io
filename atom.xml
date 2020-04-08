@@ -67,9 +67,9 @@
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
-      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
-    
       <category term="密码算法" scheme="https://yxChangingSelf.xyz/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
     
   </entry>
   
@@ -232,11 +232,11 @@
       <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
     
     
+      <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
+    
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
       <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
-    
-      <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
     
   </entry>
   
@@ -481,9 +481,9 @@ Please make sure you have the correct access rights                             
       <category term="知识整理" scheme="https://yxChangingSelf.xyz/categories/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"/>
     
     
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
-    
       <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
+    
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
   </entry>
   
