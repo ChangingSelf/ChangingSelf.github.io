@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-04-05T15:47:15.440Z</updated>
+  <updated>2020-04-11T06:38:31.656Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【周总结】2020年第15周总结：失控的情绪与崩溃的自我管理系统</title>
+    <link href="https://yxchangingself.xyz/posts/year2020week15/"/>
+    <id>https://yxchangingself.xyz/posts/year2020week15/</id>
+    <published>2020-04-11T05:08:51.000Z</published>
+    <updated>2020-04-11T06:38:31.656Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;事先说明，我的表达能力其实非常差，我没有能力将我的现状完整地有逻辑地表述出来。但是我觉得必须写出来，否则我自己都不能意识到我现在处于一个多么糟糕的状态。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>记第二次博客切换主题以及主题优化</title>
@@ -484,26 +503,6 @@ Please make sure you have the correct access rights                             
       <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019年暑假总结</title>
-    <link href="https://yxchangingself.xyz/posts/2019_summer_holidays_summary/"/>
-    <id>https://yxchangingself.xyz/posts/2019_summer_holidays_summary/</id>
-    <published>2019-08-20T03:34:50.000Z</published>
-    <updated>2020-04-06T09:12:22.590Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这个暑假大致是7月7日（到家时间）至8月24日，已经过了6周左右。&lt;/p&gt;
-&lt;p&gt;如果是以前的假期，肯定是不记得自己做过什么了，但是这次每周做了一次周总结，因此可以对照着周总结来进行假期总结。应该是头一次有参考地记录下自己的整个假期了。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   
