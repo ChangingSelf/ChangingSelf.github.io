@@ -413,7 +413,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-06
+                    2020-04-16
                 </div>
                 
 
@@ -468,35 +468,35 @@
 <p>选中用于输入数据的控件，然后点击<code>Add Variable</code>添加对话框类的成员变量。改变量名字，其他选项默认即可。</p>
 <p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190910200353.png" alt=""></p>
 <p>这个操作与你直接在类代码中添加的区别是，这个操作会建立起控件和这个成员变量的关联关系。这个关联关系体现在自定义对话框类的<code>DoDataExchange()</code>这个成员函数内：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void CInputRectangle::DoDataExchange(CDataExchange* pDX)
-{
-    CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(CInputRectangle)
-	DDX_Text(pDX, IDC_LENGTH, m_edLength);//添加关联变量之前，这里是没有这两行的
-	DDX_Text(pDX, IDC_WIDTH, m_edWidth);
-	//}}AFX_DATA_MAP
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CInputRectangle<span class="token operator">::</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>CDataExchange<span class="token operator">*</span> pDX<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CDialog<span class="token operator">::</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>pDX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//{{AFX_DATA_MAP(CInputRectangle)</span>
+	<span class="token function">DDX_Text</span><span class="token punctuation">(</span>pDX<span class="token punctuation">,</span> IDC_LENGTH<span class="token punctuation">,</span> m_edLength<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//添加关联变量之前，这里是没有这两行的</span>
+	<span class="token function">DDX_Text</span><span class="token punctuation">(</span>pDX<span class="token punctuation">,</span> IDC_WIDTH<span class="token punctuation">,</span> m_edWidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment" spellcheck="true">//}}AFX_DATA_MAP</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="调用对话框"><a href="#调用对话框" class="headerlink" title="调用对话框"></a>调用对话框</h1><p>如图，我打算使用菜单来调用对话框输入矩形长和宽。</p>
 <p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190910201233.png" alt=""></p>
 <p>添加菜单的过程不详细说。</p>
 <p>直接跳到菜单的响应函数：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void CComputerGraphicsExerciseView::OnHomework2_2() 
-{
-    // TODO: Add your command handler code here
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphicsExerciseView<span class="token operator">::</span><span class="token function">OnHomework2_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your command handler code here</span>
 
-    CInputRectangleDlg inputDlg;
-    int nResponse = inputDlg.DoModal();
-    if(nResponse==IDOK)
-    {
-        //这里获取输入并在客户区输出
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    CInputRectangleDlg inputDlg<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nResponse <span class="token operator">=</span> inputDlg<span class="token punctuation">.</span><span class="token function">DoModal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>nResponse<span class="token operator">==</span>IDOK<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//这里获取输入并在客户区输出</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在文件开头include对话框类的头文件，声明对象，并调用对话框对象的<code>DoModal()</code>方法。</p>
 <p>这个方法在对话框关闭之后，才会返回一个值，对应关闭对话框的动作，这里我用<code>nResponse</code>这个int变量接收返回值。</p>
 <p>接着判断返回值，如果是点击确定按钮关闭对话框，那么获取对话框的输入，并且在客户区输出。</p>
 <h2 id="获取输入"><a href="#获取输入" class="headerlink" title="获取输入"></a>获取输入</h2><p>绑定对话框上两个编辑框的变量分别为：<code>m_edWidth</code>和<code>m_edLength</code>。默认情况下，它们是CString类型的，因此需要进行类型转换。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">int width=atoi(inputDlg.m_edWidth.GetBuffer(0));
-int height=atoi(inputDlg.m_edLength.GetBuffer(0));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> width<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span>inputDlg<span class="token punctuation">.</span>m_edWidth<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> height<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span>inputDlg<span class="token punctuation">.</span>m_edLength<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>对上面两行代码的说明：</p>
 <ul>
 <li>两个关联变量是<code>public</code>的，因此可以直接访问。</li>
@@ -504,103 +504,103 @@ int height=atoi(inputDlg.m_edLength.GetBuffer(0));<span aria-hidden="true" class
 <li>atoi（ASCII to integer）把字符串转换成整型数</li>
 </ul>
 <h2 id="进行输出"><a href="#进行输出" class="headerlink" title="进行输出"></a>进行输出</h2><p>获取设备上下文，并调整坐标系：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CDC *pDC=GetDC();//获取设备上下文
+<pre class="line-numbers language-cpp"><code class="language-cpp">CDC <span class="token operator">*</span>pDC<span class="token operator">=</span><span class="token function">GetDC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取设备上下文</span>
 
-CRect rect;
-GetClientRect(&rect);
-pDC->SetMapMode(MM_ANISOTROPIC);
-pDC->SetWindowExt(rect.Width(),rect.Height());
-pDC->SetViewportExt(rect.Width(),-rect.Height());
-pDC->SetViewportOrg(rect.Width()/2,rect.Height()/2);
-rect.OffsetRect(-rect.Width()/2,-rect.Height()/2);
+CRect rect<span class="token punctuation">;</span>
+<span class="token function">GetClientRect</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetMapMode</span><span class="token punctuation">(</span>MM_ANISOTROPIC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetWindowExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportOrg</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+rect<span class="token punctuation">.</span><span class="token function">OffsetRect</span><span class="token punctuation">(</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-pDC->Rectangle(rect);//清空屏幕<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">Rectangle</span><span class="token punctuation">(</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//清空屏幕</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出数据，并释放设备上下文：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CRectangle crect(width,height);
+<pre class="line-numbers language-cpp"><code class="language-cpp">CRectangle <span class="token function">crect</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-CString perimeter_text,area_text;
-perimeter_text.Format("长方形的周长为：%.2f",crect.perimeter());
-area_text.Format("长方形的面积为：%.2f",crect.area());
+CString perimeter_text<span class="token punctuation">,</span>area_text<span class="token punctuation">;</span>
+perimeter_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的周长为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+area_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的面积为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-pDC->TextOut(0,0,perimeter_text);
-pDC->TextOut(0,20,area_text);
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>perimeter_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span>area_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-ReleaseDC(pDC);//释放设备上下文<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">ReleaseDC</span><span class="token punctuation">(</span>pDC<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//释放设备上下文</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样就完成了</p>
-<h2 id="菜单代码概览"><a href="#菜单代码概览" class="headerlink" title="菜单代码概览"></a>菜单代码概览</h2><pre class="line-numbers language-c++"><code class="language-c++">void CComputerGraphicsExerciseView::OnHomework2_2() 
-{
-    // TODO: Add your command handler code here
+<h2 id="菜单代码概览"><a href="#菜单代码概览" class="headerlink" title="菜单代码概览"></a>菜单代码概览</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CComputerGraphicsExerciseView<span class="token operator">::</span><span class="token function">OnHomework2_2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add your command handler code here</span>
 
-    CInputRectangleDlg inputDlg;
-    int nResponse = inputDlg.DoModal();
+    CInputRectangleDlg inputDlg<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nResponse <span class="token operator">=</span> inputDlg<span class="token punctuation">.</span><span class="token function">DoModal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    if(nResponse==IDOK)
-    {
+    <span class="token keyword">if</span><span class="token punctuation">(</span>nResponse<span class="token operator">==</span>IDOK<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
 
-        CDC *pDC=GetDC();
+        CDC <span class="token operator">*</span>pDC<span class="token operator">=</span><span class="token function">GetDC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        CRect rect;
-        GetClientRect(&rect);
-        pDC->SetMapMode(MM_ANISOTROPIC);
-        pDC->SetWindowExt(rect.Width(),rect.Height());
-        pDC->SetViewportExt(rect.Width(),-rect.Height());
-        pDC->SetViewportOrg(rect.Width()/2,rect.Height()/2);
-        rect.OffsetRect(-rect.Width()/2,-rect.Height()/2);
+        CRect rect<span class="token punctuation">;</span>
+        <span class="token function">GetClientRect</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetMapMode</span><span class="token punctuation">(</span>MM_ANISOTROPIC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetWindowExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportOrg</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        rect<span class="token punctuation">.</span><span class="token function">OffsetRect</span><span class="token punctuation">(</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        pDC->Rectangle(rect);//清空屏幕
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">Rectangle</span><span class="token punctuation">(</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//清空屏幕</span>
 
-        int width=atoi(inputDlg.m_edWidth.GetBuffer(0));
-        int height=atoi(inputDlg.m_edLength.GetBuffer(0));
-        CRectangle crect(width,height);
+        <span class="token keyword">int</span> width<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span>inputDlg<span class="token punctuation">.</span>m_edWidth<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> height<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span>inputDlg<span class="token punctuation">.</span>m_edLength<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        CRectangle <span class="token function">crect</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        CString perimeter_text,area_text;
-        perimeter_text.Format("长方形的周长为：%.2f",crect.perimeter());
-        area_text.Format("长方形的面积为：%.2f",crect.area());
+        CString perimeter_text<span class="token punctuation">,</span>area_text<span class="token punctuation">;</span>
+        perimeter_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的周长为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        area_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的面积为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        pDC->TextOut(0,0,perimeter_text);
-        pDC->TextOut(0,20,area_text);
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>perimeter_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span>area_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        ReleaseDC(pDC);
+        <span class="token function">ReleaseDC</span><span class="token punctuation">(</span>pDC<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    }
+    <span class="token punctuation">}</span>
 
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="错误思路"><a href="#错误思路" class="headerlink" title="错误思路"></a>错误思路</h1><p>一开始我以为需要编写对话框的<code>ok</code>按钮的响应事件，写成了下面这样，试了一下不行，不知道为什么：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">void CInputRectangleDlg::OnOK() 
-{
-    // TODO: Add extra validation here
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> CInputRectangleDlg<span class="token operator">::</span><span class="token function">OnOK</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: Add extra validation here</span>
 
-    CDialog::OnOK();
+    CDialog<span class="token operator">::</span><span class="token function">OnOK</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    UpdateData();//用于将数据从对话框同步到成员变量中
+    <span class="token function">UpdateData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//用于将数据从对话框同步到成员变量中</span>
 
-    int width=atoi( m_edWidth.GetBuffer(0));
-    int height=atoi( m_edLength.GetBuffer(0));
-    CRectangle crect(width,height);
+    <span class="token keyword">int</span> width<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span> m_edWidth<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> height<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span> m_edLength<span class="token punctuation">.</span><span class="token function">GetBuffer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CRectangle <span class="token function">crect</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-    CDC *pDC=GetDC();
+    CDC <span class="token operator">*</span>pDC<span class="token operator">=</span><span class="token function">GetDC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    CRect rect;
-    GetClientRect(&rect);
-    pDC->SetMapMode(MM_ANISOTROPIC);
-    pDC->SetWindowExt(rect.Width(),rect.Height());
-    pDC->SetViewportExt(rect.Width(),-rect.Height());
-    pDC->SetViewportOrg(rect.Width()/2,rect.Height()/2);
-    rect.OffsetRect(-rect.Width()/2,-rect.Height()/2);
+    CRect rect<span class="token punctuation">;</span>
+    <span class="token function">GetClientRect</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetMapMode</span><span class="token punctuation">(</span>MM_ANISOTROPIC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetWindowExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportExt</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">SetViewportOrg</span><span class="token punctuation">(</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    rect<span class="token punctuation">.</span><span class="token function">OffsetRect</span><span class="token punctuation">(</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Width</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span>rect<span class="token punctuation">.</span><span class="token function">Height</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    pDC->Rectangle(rect);//清空屏幕
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">Rectangle</span><span class="token punctuation">(</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//清空屏幕</span>
 
-    CString perimeter_text,area_text;
-    perimeter_text.Format("长方形的周长为：%.2f",crect.perimeter());
-    area_text.Format("长方形的面积为：%.2f",crect.area());
+    CString perimeter_text<span class="token punctuation">,</span>area_text<span class="token punctuation">;</span>
+    perimeter_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的周长为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">perimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    area_text<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"长方形的面积为：%.2f"</span><span class="token punctuation">,</span>crect<span class="token punctuation">.</span><span class="token function">area</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    pDC->TextOut(100,100,perimeter_text);
-    pDC->TextOut(100,300,area_text);
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span>perimeter_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pDC<span class="token operator">-</span><span class="token operator">></span><span class="token function">TextOut</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">,</span>area_text<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    ReleaseDC(pDC);
+    <span class="token function">ReleaseDC</span><span class="token punctuation">(</span>pDC<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-}
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
@@ -1026,7 +1026,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.3k</span>&nbsp;字
+                class="white-color">83.5k</span>&nbsp;字
             
             
             

@@ -410,21 +410,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-06
+                    2020-04-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    508
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    8 分
                 </div>
                 
 				
@@ -450,335 +450,335 @@
 <li>属性：姓名、性别、成绩、其余本质相同的属性（如班级号，学号）省略。</li>
 <li>方法：以不同方式显示该学生所有信息、手动录入学生信息</li>
 </ul>
-<h2 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h2><pre class="line-numbers language-c++"><code class="language-c++">#pragma once
-//链表结点类
-//学生类
-//属性：姓名、性别、成绩
-//方法：录入、显示
-class CStudent
-{
-    char name[20];
-    bool sex;//true为男，false为女
-    int score;
-public:
-    //链表需要的指针域
-    CStudent* next;
-//=======================================
-public:
-    //构造函数
-    CStudent(const char p_name[], bool p_sex, int p_score);
-    CStudent();
-    //录入与显示
-    void input();
-    void show(int method);
-    //get
-    char* getName() { return name; }
-    bool getSex() { return sex; }
-    int getScore() { return score; }
-    //析构函数
-    ~CStudent();
-};
+<h2 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token comment" spellcheck="true">//链表结点类</span>
+<span class="token comment" spellcheck="true">//学生类</span>
+<span class="token comment" spellcheck="true">//属性：姓名、性别、成绩</span>
+<span class="token comment" spellcheck="true">//方法：录入、显示</span>
+<span class="token keyword">class</span> <span class="token class-name">CStudent</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> sex<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true为男，false为女</span>
+    <span class="token keyword">int</span> score<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment" spellcheck="true">//链表需要的指针域</span>
+    CStudent<span class="token operator">*</span> next<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//=======================================</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment" spellcheck="true">//构造函数</span>
+    <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> p_name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> p_sex<span class="token punctuation">,</span> <span class="token keyword">int</span> p_score<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//录入与显示</span>
+    <span class="token keyword">void</span> <span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token keyword">int</span> method<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//get</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> name<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">bool</span> <span class="token function">getSex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> sex<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> <span class="token function">getScore</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> score<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//析构函数</span>
+    <span class="token operator">~</span><span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="类实现"><a href="#类实现" class="headerlink" title="类实现"></a>类实现</h2><pre class="line-numbers language-C++"><code class="language-C++">//@fileName <CStudent.cpp>
-#include "CStudent.h"
-#include <cstring>
-#include <iostream>
-using namespace std;
-CStudent::CStudent(const char p_name[], bool p_sex, int p_score)
-{//有参构造则自动录入信息
-    strcpy(name, p_name);
-    sex = p_sex;
-    score = p_score;
-}
-CStudent::CStudent()
-{
-    input();//如果无参构造，则手动录入信息
-}
-void CStudent::input()
-{
-    cout << "请输入学生姓名：" << endl;
-    cin >> name;
-    //如果遇到cin连续输入出错的问题，可以在每次输入后加个cin.get()
-    cout << "请输入学生性别（1为男，0为女）：" << endl;
-    int isex;
-    cin >> isex;
-    sex = isex ? true : false;
+<h2 id="类实现"><a href="#类实现" class="headerlink" title="类实现"></a>类实现</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@fileName &lt;CStudent.cpp></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CStudent.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+CStudent<span class="token operator">::</span><span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> p_name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">bool</span> p_sex<span class="token punctuation">,</span> <span class="token keyword">int</span> p_score<span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token comment" spellcheck="true">//有参构造则自动录入信息</span>
+    <span class="token function">strcpy</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> p_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sex <span class="token operator">=</span> p_sex<span class="token punctuation">;</span>
+    score <span class="token operator">=</span> p_score<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+CStudent<span class="token operator">::</span><span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果无参构造，则手动录入信息</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> CStudent<span class="token operator">::</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"请输入学生姓名："</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> name<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//如果遇到cin连续输入出错的问题，可以在每次输入后加个cin.get()</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"请输入学生性别（1为男，0为女）："</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> isex<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> isex<span class="token punctuation">;</span>
+    sex <span class="token operator">=</span> isex <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 
-    cout << "请输入学生成绩：" << endl;
-    cin >> score;
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"请输入学生成绩："</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> score<span class="token punctuation">;</span>
 
-}
+<span class="token punctuation">}</span>
 
-void CStudent::show(int method)
-{
+<span class="token keyword">void</span> CStudent<span class="token operator">::</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token keyword">int</span> method<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
 
-    switch (method)
-    {
-    case 0://横向显示，一行一条记录
-        cout << name<<"\t"
-            << (sex ? "男" : "女")<<"\t"
-            << score<<"\t"
-            << endl;
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>method<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token number">0</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>横向显示，一行一条记录
+        cout <span class="token operator">&lt;&lt;</span> name<span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span>
+            <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>sex <span class="token operator">?</span> <span class="token string">"男"</span> <span class="token operator">:</span> <span class="token string">"女"</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span>
+            <span class="token operator">&lt;&lt;</span> score<span class="token operator">&lt;&lt;</span><span class="token string">"\t"</span>
+            <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-        break;
-    case 1://纵向显示，每行一个属性
-        cout << "姓名：" << name << endl
-            << "性别：" << (sex ? "男" : "女") << endl
-            << "成绩：" << score << endl
-            << endl;
-        break;
-    default:
-        break;
-    }
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>纵向显示，每行一个属性
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"姓名："</span> <span class="token operator">&lt;&lt;</span> name <span class="token operator">&lt;&lt;</span> endl
+            <span class="token operator">&lt;&lt;</span> <span class="token string">"性别："</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>sex <span class="token operator">?</span> <span class="token string">"男"</span> <span class="token operator">:</span> <span class="token string">"女"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl
+            <span class="token operator">&lt;&lt;</span> <span class="token string">"成绩："</span> <span class="token operator">&lt;&lt;</span> score <span class="token operator">&lt;&lt;</span> endl
+            <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-}
+<span class="token punctuation">}</span>
 
-CStudent::~CStudent()
-{
-}
+CStudent<span class="token operator">::</span><span class="token operator">~</span><span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="链表类"><a href="#链表类" class="headerlink" title="链表类"></a>链表类</h1><h2 id="类声明-1"><a href="#类声明-1" class="headerlink" title="类声明"></a>类声明</h2><pre class="line-numbers language-c++"><code class="language-c++">//@fileName <CStudentList.h>
-#pragma once
-#include "CStudent.h"
-//链表类（带头结点的单向链表）
-//属性：指向头结点的头指针
-//方法：构造函数（手动输入）、构造函数（传入结点对象数组）、析构函数
-//方法：显示表、查找、删除、把数据存入文件、从文件中读取数据
+<h1 id="链表类"><a href="#链表类" class="headerlink" title="链表类"></a>链表类</h1><h2 id="类声明-1"><a href="#类声明-1" class="headerlink" title="类声明"></a>类声明</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@fileName &lt;CStudentList.h></span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CStudent.h"</span></span>
+<span class="token comment" spellcheck="true">//链表类（带头结点的单向链表）</span>
+<span class="token comment" spellcheck="true">//属性：指向头结点的头指针</span>
+<span class="token comment" spellcheck="true">//方法：构造函数（手动输入）、构造函数（传入结点对象数组）、析构函数</span>
+<span class="token comment" spellcheck="true">//方法：显示表、查找、删除、把数据存入文件、从文件中读取数据</span>
 
-class CStudentList
-{
-    CStudent* head;//头指针
-public:
-    //构造函数
-    CStudentList(int n);//手动录入n个学生的信息
-    CStudentList(CStudent s[],int n);//通过对象数组自动录入n个学生的信息
-    CStudentList(const char fileName[]);//读取文件中的数据信息来初始化
-    CStudentList();
-    //功能
-    void showList();//显示整个链表的信息
-    int search(const char name[]);//按名字查找并返回找到的个数
-    void deleteNode(CStudent*p);//删除指针p指向的结点
-    int deleteByName(const char name[]);//删除表中第一个匹配的记录，同时返回是否删除成功
-    //文件读写
-    void save(const char fileName[]);
-    void open(const char fileName[]);
-    //析构函数
-    ~CStudentList();
-};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">class</span> <span class="token class-name">CStudentList</span>
+<span class="token punctuation">{</span>
+    CStudent<span class="token operator">*</span> head<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//头指针</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment" spellcheck="true">//构造函数</span>
+    <span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//手动录入n个学生的信息</span>
+    <span class="token function">CStudentList</span><span class="token punctuation">(</span>CStudent s<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//通过对象数组自动录入n个学生的信息</span>
+    <span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//读取文件中的数据信息来初始化</span>
+    <span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//功能</span>
+    <span class="token keyword">void</span> <span class="token function">showList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//显示整个链表的信息</span>
+    <span class="token keyword">int</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//按名字查找并返回找到的个数</span>
+    <span class="token keyword">void</span> <span class="token function">deleteNode</span><span class="token punctuation">(</span>CStudent<span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//删除指针p指向的结点</span>
+    <span class="token keyword">int</span> <span class="token function">deleteByName</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//删除表中第一个匹配的记录，同时返回是否删除成功</span>
+    <span class="token comment" spellcheck="true">//文件读写</span>
+    <span class="token keyword">void</span> <span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//析构函数</span>
+    <span class="token operator">~</span><span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="类实现-1"><a href="#类实现-1" class="headerlink" title="类实现"></a>类实现</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>我设计了四个构造函数。</p>
 <p>1.如果没有参数，那么就只建立一个空链表，即只有一个头结点的链表。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::CStudentList>
-//@brief <创建空链表>
-CStudentList::CStudentList()
-{
-    head = new CStudent("HEAD", 1, 100);//头结点本身的数据并不重要，所以随意填写。
-    head->next = NULL;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::CStudentList></span>
+<span class="token comment" spellcheck="true">//@brief &lt;创建空链表></span>
+CStudentList<span class="token operator">::</span><span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token string">"HEAD"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//头结点本身的数据并不重要，所以随意填写。</span>
+    head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2.手动录入信息的构造函数</p>
-<pre class="line-numbers language-C++"><code class="language-C++">//@funcName <CStudentList::CStudentList(int n)>
-//@brief <创建n个结点的链表，并手动录入信息>
-//@parameter <n:初始链表结点数目（不计头结点）>
-CStudentList::CStudentList(int n)
-{
-    head = new CStudent("HEAD",1,100);
-    head->next = NULL;
-    for (int i = 0; i < n; i++)
-    {
-        CStudent *newNode = new CStudent();
-        newNode->next = head->next;
-        head->next = newNode;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::CStudentList(int n)></span>
+<span class="token comment" spellcheck="true">//@brief &lt;创建n个结点的链表，并手动录入信息></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;n:初始链表结点数目（不计头结点）></span>
+CStudentList<span class="token operator">::</span><span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token string">"HEAD"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        CStudent <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        newNode<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+        head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3.通过数组自动录入信息的构造函数</p>
 <p>和上一个差不多。</p>
-<pre class="line-numbers language-C++"><code class="language-C++">//@funcName <CStudentList::CStudentList(CStudent s[],int n)>
-//@brief <创建n个结点的链表，并自动从数组中获取信息>
-//@parameter <s:结点类对象数组><n:数组s的长度>
-CStudentList::CStudentList(CStudent s[], int n)
-{
-    head = new CStudent("HEAD", 1, 100);
-    head->next = NULL;
-    for (int i = 0; i < n; i++)
-    {
-        CStudent *newNode = new CStudent(s[i].getName(),s[i].getSex(),s[i].getScore());
-        newNode->next = head->next;
-        head->next = newNode;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::CStudentList(CStudent s[],int n)></span>
+<span class="token comment" spellcheck="true">//@brief &lt;创建n个结点的链表，并自动从数组中获取信息></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;s:结点类对象数组>&lt;n:数组s的长度></span>
+CStudentList<span class="token operator">::</span><span class="token function">CStudentList</span><span class="token punctuation">(</span>CStudent s<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token string">"HEAD"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        CStudent <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getSex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getScore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        newNode<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+        head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>4.通过文件自动录入信息的构造函数</p>
 <p>使用到了另一个成员函数<code>open()</code></p>
-<pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::CStudentList(const char fileName[])>
-//@brief <自动从文件中读取信息>
-//@parameter <fileName:数据来源文件的名字>
-CStudentList::CStudentList(const char fileName[])
-{
-    head = new CStudent("HEAD", 1, 100);
-    head->next = NULL;
-    open(fileName);
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="显示链表"><a href="#显示链表" class="headerlink" title="显示链表"></a>显示链表</h3><pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::showList()>
-//@brief <显示整个链表>
-void CStudentList::showList()
-{
-    CStudent*p = head->next;
-    cout << "姓名\t性别\t成绩" << endl;
-    while (p != NULL)
-    {
-        p->show(0);//以一行一记录的形式显示
-        p = p->next;//工作指针向后移动
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="查询结点"><a href="#查询结点" class="headerlink" title="查询结点"></a>查询结点</h3><pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::search>
-//@brief <按照名字查找数据并显示>
-//@parameter <name:要查找的学生的名字>
-//@return <找到的记录数目>
-int CStudentList::search(const char name[])
-{
-    int num = 0;
-    CStudent*p = head->next;
-    cout << "---------查找结果---------" << endl;
-    while (p != NULL)//遍历链表
-    {
-        if (strcmp(p->getName(),name)==0)//找到了需要的信息
-        {
-            num++;
-            p->show(0);
-        }
-        p = p->next;
-    }
-    return num;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::CStudentList(const char fileName[])></span>
+<span class="token comment" spellcheck="true">//@brief &lt;自动从文件中读取信息></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;fileName:数据来源文件的名字></span>
+CStudentList<span class="token operator">::</span><span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span><span class="token string">"HEAD"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token function">open</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="显示链表"><a href="#显示链表" class="headerlink" title="显示链表"></a>显示链表</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::showList()></span>
+<span class="token comment" spellcheck="true">//@brief &lt;显示整个链表></span>
+<span class="token keyword">void</span> CStudentList<span class="token operator">::</span><span class="token function">showList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CStudent<span class="token operator">*</span>p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"姓名\t性别\t成绩"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        p<span class="token operator">-</span><span class="token operator">></span><span class="token function">show</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//以一行一记录的形式显示</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//工作指针向后移动</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查询结点"><a href="#查询结点" class="headerlink" title="查询结点"></a>查询结点</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::search></span>
+<span class="token comment" spellcheck="true">//@brief &lt;按照名字查找数据并显示></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;name:要查找的学生的名字></span>
+<span class="token comment" spellcheck="true">//@return &lt;找到的记录数目></span>
+<span class="token keyword">int</span> CStudentList<span class="token operator">::</span><span class="token function">search</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    CStudent<span class="token operator">*</span>p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"---------查找结果---------"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//遍历链表</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token operator">></span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//找到了需要的信息</span>
+        <span class="token punctuation">{</span>
+            num<span class="token operator">++</span><span class="token punctuation">;</span>
+            p<span class="token operator">-</span><span class="token operator">></span><span class="token function">show</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> num<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="查找删除"><a href="#查找删除" class="headerlink" title="查找删除"></a>查找删除</h3><p>由于删除结点与查找要删除的结点相对独立，因此将删除结点独立出来一个函数，以便查找删除不同属性的数据。</p>
-<pre class="line-numbers language-C++"><code class="language-C++">//@funcName <CStudentList::deleteNode>
-//@brief <删除指针指向的链表节点>
-//@parameter <p:要删除的结点的指针>
-void CStudentList::deleteNode(CStudent*p)
-{
-    CStudent*p1 = head, *p2 = head->next;
-    while (p2 != p)
-    {
-        p1 = p1->next;
-        p2 = p2->next;
-    }
-    p1->next = p->next;
-    delete p;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::deleteNode></span>
+<span class="token comment" spellcheck="true">//@brief &lt;删除指针指向的链表节点></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;p:要删除的结点的指针></span>
+<span class="token keyword">void</span> CStudentList<span class="token operator">::</span><span class="token function">deleteNode</span><span class="token punctuation">(</span>CStudent<span class="token operator">*</span>p<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CStudent<span class="token operator">*</span>p1 <span class="token operator">=</span> head<span class="token punctuation">,</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p2 <span class="token operator">!=</span> p<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        p1 <span class="token operator">=</span> p1<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+        p2 <span class="token operator">=</span> p2<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    p1<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以查找姓名的删除函数为例子：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::deleteByName>
-//@brief <按名字查找并删除第一个符合条件的结点>
-//@parameter <name:要删除的结点的名字>
-//@return <是否删除成功(成功返回0，失败返回-1)>
-int CStudentList::deleteByName(const char name[])
-{
-    CStudent*p = head->next;
-    while (p != NULL)
-    {
-        if (strcmp(p->getName(), name) == 0)//找到了需要的信息
-        {
-            deleteNode(p);
-            return 0;
-        }
-        p = p->next;
-    }
-    return -1;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><pre class="line-numbers language-c++"><code class="language-c++">//@funcName <CStudentList::open>
-//@brief <从文件中读取数据并以覆盖形式写入链表>
-//@parameter <fileName:数据文件名>
-void CStudentList::open(const char fileName[])
-{
-    //清空链表
-    CStudent* p = head->next;
-    while (p != NULL)
-    {
-        delete head;
-        head = p;
-        p = p->next;
-    }
-    //未删除head
-    //从文件读取数据
-    ifstream fin(fileName);
-    while (!fin.eof())//end of file
-    {
-        char name[20];
-        bool sex=0;
-        int score=0;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::deleteByName></span>
+<span class="token comment" spellcheck="true">//@brief &lt;按名字查找并删除第一个符合条件的结点></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;name:要删除的结点的名字></span>
+<span class="token comment" spellcheck="true">//@return &lt;是否删除成功(成功返回0，失败返回-1)></span>
+<span class="token keyword">int</span> CStudentList<span class="token operator">::</span><span class="token function">deleteByName</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CStudent<span class="token operator">*</span>p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token operator">></span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//找到了需要的信息</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">deleteNode</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::open></span>
+<span class="token comment" spellcheck="true">//@brief &lt;从文件中读取数据并以覆盖形式写入链表></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;fileName:数据文件名></span>
+<span class="token keyword">void</span> CStudentList<span class="token operator">::</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//清空链表</span>
+    CStudent<span class="token operator">*</span> p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">delete</span> head<span class="token punctuation">;</span>
+        head <span class="token operator">=</span> p<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//未删除head</span>
+    <span class="token comment" spellcheck="true">//从文件读取数据</span>
+    ifstream <span class="token function">fin</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>fin<span class="token punctuation">.</span><span class="token function">eof</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//end of file</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">bool</span> sex<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> score<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
 
-        fin >> name >> sex >> score;
+        fin <span class="token operator">>></span> name <span class="token operator">>></span> sex <span class="token operator">>></span> score<span class="token punctuation">;</span>
 
-        //利用头插法把数据插入到链表中
-        CStudent *newNode = new CStudent(name,sex,score);
-        newNode->next = head->next;
-        head->next = newNode;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h3><pre class="line-numbers language-C++"><code class="language-C++">//@funcName <CStudentList::save>
-//@brief <将链表存入文件>
-//@parameter <fileName:保存到的数据文件名>
-void CStudentList::save(const char fileName[])
-{
-    ofstream fout(fileName);//打开文件，创建文件流对象
-    //遍历链表
-    CStudent *p = head->next;
-    while (p != NULL)
-    {
-        //将数据存入
-        fout << p->getName() << " "
-            << p->getSex() << " "
-            << p->getScore()
-            <<endl;
-        p = p->next;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><pre class="line-numbers language-c++"><code class="language-c++">CStudentList::~CStudentList()
-{
-    CStudent* p = head->next;
-    while (p != NULL)
-    {
-        delete head;
-        head = p;
-        p = p->next;
-    }
-    delete head;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token comment" spellcheck="true">//利用头插法把数据插入到链表中</span>
+        CStudent <span class="token operator">*</span>newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CStudent</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>sex<span class="token punctuation">,</span>score<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        newNode<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+        head<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//@funcName &lt;CStudentList::save></span>
+<span class="token comment" spellcheck="true">//@brief &lt;将链表存入文件></span>
+<span class="token comment" spellcheck="true">//@parameter &lt;fileName:保存到的数据文件名></span>
+<span class="token keyword">void</span> CStudentList<span class="token operator">::</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> fileName<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ofstream <span class="token function">fout</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开文件，创建文件流对象</span>
+    <span class="token comment" spellcheck="true">//遍历链表</span>
+    CStudent <span class="token operator">*</span>p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//将数据存入</span>
+        fout <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span>
+            <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">getSex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span>
+            <span class="token operator">&lt;&lt;</span> p<span class="token operator">-</span><span class="token operator">></span><span class="token function">getScore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><pre class="line-numbers language-cpp"><code class="language-cpp">CStudentList<span class="token operator">::</span><span class="token operator">~</span><span class="token function">CStudentList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CStudent<span class="token operator">*</span> p <span class="token operator">=</span> head<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">delete</span> head<span class="token punctuation">;</span>
+        head <span class="token operator">=</span> p<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">delete</span> head<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h1><p>菜单比较简单，整个程序主要流程：</p>
 <ol>
 <li>显示菜单选项，等待输入选项编号</li>
 <li>分支语句，按照不同选项调用链表提供的函数</li>
 <li>如果没有选择退出选项就循环</li>
 </ol>
-<h2 id="菜单函数示例"><a href="#菜单函数示例" class="headerlink" title="菜单函数示例"></a>菜单函数示例</h2><pre class="line-numbers language-c++"><code class="language-c++">void menu()
-{
-    cout << "========学生信息管理系统========" << endl;
-    cout << "1.显示学生信息表" << endl;
-    cout << "2.查找学生信息" << endl;
-    cout << "3.从文件读取" << endl;
-    cout << "4.将数据存入文件" << endl;
-    cout << "0.退出" << endl;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="选项分支示例"><a href="#选项分支示例" class="headerlink" title="选项分支示例"></a>选项分支示例</h2><pre class="line-numbers language-c++"><code class="language-c++">int main()
-{
+<h2 id="菜单函数示例"><a href="#菜单函数示例" class="headerlink" title="菜单函数示例"></a>菜单函数示例</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"========学生信息管理系统========"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"1.显示学生信息表"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"2.查找学生信息"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"3.从文件读取"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"4.将数据存入文件"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"0.退出"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="选项分支示例"><a href="#选项分支示例" class="headerlink" title="选项分支示例"></a>选项分支示例</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
 
-    int opt = -1;
-    CStudentList list("data.txt");
-    while (opt != 0)
-    {
-        menu();
-        cin >> opt;
-        switch (opt)
-        {
-        case 1:
-            system("cls");
-            list.showList();
-            break;
-        default:
-            break;
-        }
+    <span class="token keyword">int</span> opt <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    CStudentList <span class="token function">list</span><span class="token punctuation">(</span><span class="token string">"data.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>opt <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cin <span class="token operator">>></span> opt<span class="token punctuation">;</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>opt<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span>
+            <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            list<span class="token punctuation">.</span><span class="token function">showList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-    }
-    return 0;
-}
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
@@ -1184,7 +1184,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">81.3k</span>&nbsp;字
+                class="white-color">83.5k</span>&nbsp;字
             
             
             
