@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-04-11T06:38:31.656Z</updated>
+  <updated>2020-04-16T14:15:20.339Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客总目录</title>
+    <link href="https://yxchangingself.xyz/posts/blog-catalogue/"/>
+    <id>https://yxchangingself.xyz/posts/blog-catalogue/</id>
+    <published>2020-04-16T05:56:12.000Z</published>
+    <updated>2020-04-16T14:15:20.339Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始。&lt;/p&gt;
+&lt;p&gt;如果想要搜索特定内容，请结合标签、分类和站内搜索功能。部分博客有对应的B站视频，以及github库，详见各自文章的开头传送门。&lt;/p&gt;
+&lt;p&gt;此目录并非包含本站所有文章，比如日志总结之类的不一定会放到目录。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="目录索引" scheme="https://yxChangingSelf.xyz/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>【周总结】2020年第15周总结：失控的情绪与崩溃的自我管理系统</title>
@@ -479,30 +500,6 @@ Please make sure you have the correct access rights                             
       <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
     
       <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python爬虫解析库BeautifulSoup速查</title>
-    <link href="https://yxchangingself.xyz/posts/python_spider_parser_beautifulsoup/"/>
-    <id>https://yxchangingself.xyz/posts/python_spider_parser_beautifulsoup/</id>
-    <published>2019-09-06T08:47:50.000Z</published>
-    <updated>2020-04-06T09:08:55.216Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为了方便使用，将BeautifulSoup库常用的接口进行总结。&lt;/p&gt;
-&lt;p&gt;总结内容来源：《python3网络爬虫开发实战》崔庆才&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="知识整理" scheme="https://yxChangingSelf.xyz/categories/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"/>
-    
-    
-      <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
-    
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
   </entry>
   
