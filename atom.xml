@@ -38,25 +38,6 @@
   </entry>
   
   <entry>
-    <title>【周总结】2020年第15周总结：失控的情绪与崩溃的自我管理系统</title>
-    <link href="https://yxchangingself.xyz/posts/year2020week15/"/>
-    <id>https://yxchangingself.xyz/posts/year2020week15/</id>
-    <published>2020-04-11T05:08:51.000Z</published>
-    <updated>2020-04-11T06:38:31.656Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;事先说明，我的表达能力其实非常差，我没有能力将我的现状完整地有逻辑地表述出来。但是我觉得必须写出来，否则我自己都不能意识到我现在处于一个多么糟糕的状态。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>记第二次博客切换主题以及主题优化</title>
     <link href="https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/"/>
     <id>https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/</id>
@@ -114,26 +95,6 @@
   </entry>
   
   <entry>
-    <title>【周总结】2020年第13周总结</title>
-    <link href="https://yxchangingself.xyz/posts/2020_week13/"/>
-    <id>https://yxchangingself.xyz/posts/2020_week13/</id>
-    <published>2020-03-28T00:02:40.000Z</published>
-    <updated>2020-04-06T09:30:55.623Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是今年的第【13】周，日期从2020年3月22日 到2020年3月28日 &lt;/p&gt;
-&lt;p&gt;一整周都坚持使用活页版子弹笔记记录日待办，在完成一件事情后，基本不会因为不知道做什么而浪费了时间。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>【自我管理系统】归档文件</title>
     <link href="https://yxchangingself.xyz/posts/self-management-archive/"/>
     <id>https://yxchangingself.xyz/posts/self-management-archive/</id>
@@ -149,26 +110,6 @@
     
     
       <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【周总结】2020年第12周总结</title>
-    <link href="https://yxchangingself.xyz/posts/2020_week12/"/>
-    <id>https://yxchangingself.xyz/posts/2020_week12/</id>
-    <published>2020-03-21T07:03:02.000Z</published>
-    <updated>2020-04-06T09:30:44.974Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是今年的第【12】周，日期从2020年3月15日 到2020年3月21日 &lt;/p&gt;
-&lt;p&gt;这周沉迷小说，第一是沉迷看网络小说《修真聊天群》，第二是因lessin开始写他的&lt;a href=&quot;https://endlesspeak.gitee.io/novel/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《笑傲八荒》&lt;/a&gt;而想要重新写我自己的小说。这导致我一整个星期都没有早睡，甚至有通宵的行为。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -500,6 +441,72 @@ Please make sure you have the correct access rights                             
       <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
     
       <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python爬虫解析库BeautifulSoup速查</title>
+    <link href="https://yxchangingself.xyz/posts/python_spider_parser_beautifulsoup/"/>
+    <id>https://yxchangingself.xyz/posts/python_spider_parser_beautifulsoup/</id>
+    <published>2019-09-06T08:47:50.000Z</published>
+    <updated>2020-04-06T09:08:55.216Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了方便使用，将BeautifulSoup库常用的接口进行总结。&lt;/p&gt;
+&lt;p&gt;总结内容来源：《python3网络爬虫开发实战》崔庆才&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="知识整理" scheme="https://yxChangingSelf.xyz/categories/%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/"/>
+    
+    
+      <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
+    
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019年暑假总结</title>
+    <link href="https://yxchangingself.xyz/posts/2019_summer_holidays_summary/"/>
+    <id>https://yxchangingself.xyz/posts/2019_summer_holidays_summary/</id>
+    <published>2019-08-20T03:34:50.000Z</published>
+    <updated>2020-04-06T09:12:22.590Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个暑假大致是7月7日（到家时间）至8月24日，已经过了6周左右。&lt;/p&gt;
+&lt;p&gt;如果是以前的假期，肯定是不记得自己做过什么了，但是这次每周做了一次周总结，因此可以对照着周总结来进行假期总结。应该是头一次有参考地记录下自己的整个假期了。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一封邀请函</title>
+    <link href="https://yxchangingself.xyz/posts/invitation/"/>
+    <id>https://yxchangingself.xyz/posts/invitation/</id>
+    <published>2019-08-18T02:27:57.000Z</published>
+    <updated>2020-04-06T09:11:28.544Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果你是从外部链接来到这个页面，那么你也许是获得了进入一个自我管理群的邀请函。&lt;/p&gt;
+&lt;p&gt;你可以阅读下面的介绍，以确定要不要加入这个群。&lt;/p&gt;
+&lt;p&gt;建议在电脑上查看，有侧边栏目录方便跳转。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无论是否选择加入此群，都请不要将此链接随意传播。&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
     
   </entry>
   
