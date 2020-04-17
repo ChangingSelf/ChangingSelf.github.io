@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="git恢复误提交的内容, 憧憬少的个人博客">
-    <meta name="description" content="在图书馆敲下最后几行代码，然后就着手机热点把爬虫代码push上去之后，突然想起来，我好像忘了把账号密码部分改成手动输入，现在push上去的是明文啊！掀桌！早知道就回宿舍上传了，说不准还能想起来。
-
-
-问题及其解决方案已经上传了，即便我再改回">
+    <meta name="keywords" content="【自我管理系统】电脑文件管理系统v200417, 憧憬少的个人博客">
+    <meta name="description" content="管理文件，让我能够随时找到需要的文件">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>git恢复误提交的内容 | 憧憬少的个人博客</title>
+    <title>【自我管理系统】电脑文件管理系统v200417 | 憧憬少的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -253,12 +250,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/04/05/kYWwGKu5RSsItbJ.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">git恢复误提交的内容</h1>
+                    <h1 class="description center-align post-title">【自我管理系统】电脑文件管理系统v200417</h1>
                 </div>
             </div>
         </div>
@@ -373,25 +370,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/git/">
-                                <span class="chip bg-color">git</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                过程复盘
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -400,28 +384,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-11
+                    2020-04-17
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-06
+                    2020-04-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    360
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 				
@@ -432,24 +416,124 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在图书馆敲下最后几行代码，然后就着手机热点把爬虫代码push上去之后，突然想起来，我好像忘了把账号密码部分改成手动输入，现在push上去的是明文啊！掀桌！早知道就回宿舍上传了，说不准还能想起来。</p>
+                <p>所谓逆熵，就是建立系统，将自己的行为规范化。</p>
+<p>以此文梳理我的电脑文件管理系统，由于是我的文件管理系统，所以很多个性化的设置，读者建立自己的系统时可改为自己的。</p>
 <a id="more"></a>
 
-<h1 id="问题及其解决方案"><a href="#问题及其解决方案" class="headerlink" title="问题及其解决方案"></a>问题及其解决方案</h1><p>已经上传了，即便我再改回来上传，别人也可以从git log里面看到我的账号密码。</p>
-<p>那就版本回退，重新更新再上传。但是在我使用<code>GitHub Desktop</code>的<code>Revert this commit</code>的时候它却让我解决一大堆冲突……等会儿，啥时候多出来那么多“changes”？？？刚刚还一个都没有啊，怎么我用了这个选项还没回退就出现一大堆冲突？</p>
-<p>我对git其实不熟练，用GUI界面也是，解决这些冲突比较麻烦。所以最后的解决方案比较粗暴：</p>
-<ol>
-<li>删除本地库以解决那一大堆的冲突文件</li>
-<li>从远程库clone回来</li>
-<li>把库内文件全部打包复制在别的路径</li>
-<li>在库里面打开git bash，使用<code>git reset --hard 版本号</code>回到没出事的版本</li>
-<li>将前面备份的文件复制回来</li>
-<li>修改之后重新提交，完成</li>
-</ol>
-<h1 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h1><ul>
-<li>得多准备一条分支，别直接在主分支上边写</li>
-<li>一定要注意代码中的隐私信息！</li>
+<h1 id="目的（系统需求）"><a href="#目的（系统需求）" class="headerlink" title="目的（系统需求）"></a>目的（系统需求）</h1><ul>
+<li>当我产生或者获得一个新的文件时，知道存放到哪里</li>
+<li>当我想要找到某个我需要的文件时，能够迅速找到</li>
+<li>当我的电脑遗失或者重装时，重要的文件不丢失，能够迅速恢复</li>
+<li>让我能够舒适地使用电脑</li>
 </ul>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li>腾讯电脑管家桌面助手独立版：用到它的桌面收纳格、文件夹映射（减少查找层级）</li>
+<li>坚果云：用到云同步功能</li>
+<li>Listary：快速搜索打开文件夹和软件，可以用everything代替</li>
+</ul>
+<h1 id="环境配置（数据结构）"><a href="#环境配置（数据结构）" class="headerlink" title="环境配置（数据结构）"></a>环境配置（数据结构）</h1><p>磁盘分为三个分区：</p>
+<ul>
+<li>C盘：系统盘。100G。</li>
+<li>D盘：软件盘。自定义安装时改个盘符即可</li>
+<li>F盘：文件盘。分配最大的空间。<u>用腾讯桌面整理将其映射到桌面</u></li>
+</ul>
+<p>F盘下建立子文件夹：</p>
+<ul>
+<li>Archive：存放我的作业等项目文件的存档。<u>使用坚果云同步</u>。</li>
+<li>Blog：存放个人博客源文件</li>
+<li>Buffer：缓冲区，用于存放正在进行的项目的文件。固定到快速访问，并<u>用腾讯桌面整理将其映射到桌面</u></li>
+<li>MyNotebook：存放Vnote笔记本。<u>使用坚果云同步</u></li>
+<li>Resource：存放资源，包括课件、软件以及其他各种学习资源<ul>
+<li>Software</li>
+</ul>
+</li>
+<li>UserFolder：用户文件夹（图片、下载、音乐、文档、视频等）移动到这文件夹，避免占用系统盘空间。<ul>
+<li><strong>图片文件夹</strong>（<code>F:\UserFolder\Pictures</code>）下新建以下文件夹（因为暂时没有拍照存相片的习惯，所以没有相册文件夹）<ul>
+<li>Wallpaper：存放壁纸图片。桌面右键菜单【个性化】-&gt;左侧菜单【背景】-&gt;【背景】选项选择“幻灯片放映”，将本文件夹设置为相册。</li>
+<li>Temp：临时图片存放处。用于存放暂时保存的图片，默认此处的图片都是可以删除的，哪天想起来了就可以全选删除。</li>
+<li>Useful：存放有用的图片，比如证件照片等。</li>
+<li>Icon：图标包。图标可在<a href="https://www.flaticon.com/" target="_blank" rel="noopener">Flaticon</a>这个网站免费下载，用于装饰文件夹。</li>
+</ul>
+</li>
+<li>将<strong>下载文件夹</strong>（<code>F:\UserFolder\download</code>）（作为收集箱文件夹）<u>使用腾讯桌面整理映射到桌面</u>，便于随时打开、观察它是否存在未处理的文件以及将文件拖入。</li>
+<li><strong>视频文件夹</strong>（<code>F:\UserFolder\Videos</code>）新建Bilibili文件夹，存放自己做的B站视频。</li>
+</ul>
+</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>移动时注意先建立对应文件夹（如新建download文件夹），再将其路径指定为此文件夹，避免出现将整个F盘指定为用户文件夹的情况。</p>
+<p>如果出现上述问题，可通过以下方案解决，它来自此<a href="https://zhidao.baidu.com/question/266780916556253685.html" target="_blank" rel="noopener">百度知道链接</a></p>
+<blockquote>
+<p>可以在注册表中修改<br>win+R 输入“regedit”<br>找到\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders<br>找数值为属 F:\ 的 修改了就行</p>
+</blockquote>
+<h1 id="标准流程（数据操作）"><a href="#标准流程（数据操作）" class="headerlink" title="标准流程（数据操作）"></a>标准流程（数据操作）</h1><h2 id="收集"><a href="#收集" class="headerlink" title="收集"></a>收集</h2><p>由于文件大多数来自网络下载，将用户文件夹中的“download”文件夹设置为<strong>收集箱</strong>。相比于之前单独新建一个收集箱文件夹，省去了从download文件夹移动到收集箱的过程。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>根据文件类型进行分类</p>
+<ul>
+<li>自己新建的工程文件：在Buffer文件夹中找到对应的项目文件夹（或者新建）放入。</li>
+<li>下载的软件<ul>
+<li>安装版：放入<code>Resource\Software\Installer</code></li>
+<li>免安装版：放入<code>Resource\Software\Portable</code></li>
+</ul>
+</li>
+<li>图片<ul>
+<li>壁纸：放入<code>Pictures\WallPaper</code>文件夹</li>
+<li>临时截图：放入<code>Pictures\Temp</code>文件夹</li>
+<li>有用处的图片：放入<code>Pictures\Useful</code>文件夹</li>
+<li>图标包：放入<code>Pictures\Icon</code>文件夹</li>
+</ul>
+</li>
+<li>课件与讲义、笔记：放入Buffer文件夹中对应的课程文件夹</li>
+</ul>
+<h2 id="归档"><a href="#归档" class="headerlink" title="归档"></a>归档</h2><p>归档还是挺重要的，以前做过的东西可能还要用到。例如近期，软件质量保证与测试这门课程需要使用上上个学期的软件工程导论的第四次上机作业<code>4_软工导论实验四透镜质量检测190618.rar</code>的代码和报告来进行测试，我就很快找到了。</p>
+<p>当完成一个项目（比如课设、上机作业、校内校外活动例如某个比赛）后，将用到的资料打包为一个压缩包，只保留能够还原此项目的必要资料，例如编译生成的exe之类的都删除。</p>
+<p>压缩包命名为<code>[大学学期号_][科目名称]&lt;项目名称&gt;&lt;六位数归档日期&gt;</code>，其中尖括号必选，方括号可选例如：<code>5_计算机图形学隐面算法及光照模型191129.rar</code>代表：大学第五学期（大三第一学期）做的隐面算法及光照模型项目，它在2019年11月29日归档。</p>
+<p>这个归档日期并不代表它做完的日期，而是我在将其打包成压缩包并放入Archive文件夹的日期，或者是我根据文件的最后更新时间推测出的项目完成时间。因为我在形成这个归档系统之前，并没有记录完成时间的意识。</p>
+<p>打包好之后，将其放入Archive文件夹对应的年份文件夹中。若是有多个类似的项目文件（比如同一个课程的课设和上机），就新建一个文件夹将它们放在一起，但是内部不再新建新的层级的文件夹。</p>
+<p>此时，Archive文件夹中的一个示意结构如下：</p>
+<ul>
+<li>Archive<ul>
+<li>0000：用于存放未整理好的归档文件，这是我之前重构Archive文件夹时留下的，我觉得没有必要删除，就留着了。</li>
+<li>2017：存放2017年的项目文件<ul>
+<li>vb：2017年写的vb项目的文件夹<ul>
+<li><code>是英雄就下一百层171125.rar</code>：其实完成时间还要更早，但是最后更新日期是这个所以就用了它</li>
+<li>……</li>
+</ul>
+</li>
+<li><code>1_第八届创业先锋挑战赛171011.rar</code></li>
+<li>……</li>
+</ul>
+</li>
+<li>2018：<ul>
+<li>……</li>
+</ul>
+</li>
+<li>2019：<ul>
+<li>5_计算机辅助设计：同一科目的项目文件开一个文件夹存放<ul>
+<li><code>5_CAD复习笔记191210.rar</code></li>
+<li><code>5_CAD三类自由曲线191129.rar</code></li>
+<li><code>5_CAD旋转的三角形191129.rar</code></li>
+<li><code>5_CAD折线路径191129.rar</code></li>
+</ul>
+</li>
+<li><code>明日方舟代理指挥190721.rar</code>：不是学校作业的就不需要学期号了</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Archive文件夹使用云同步，重装系统后它是最快恢复的部分，这让我真正意识到建立一个完善的系统时多么重要。</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><ul>
+<li>双击ctrl使用Listary或者使用everything查找项目名称</li>
+<li>或者进入对应功能的文件夹手动查找，按照上面的方式设置，查找层级一般不会超过三层（因为还有桌面映射）</li>
+</ul>
+<h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2><p>根据F盘中文件夹中数据的重要程度来执行不同的策略。</p>
+<p>本系统中最为重要的文件是<code>Archive</code>中的文件，因为这里面都是我自己积累下来的自己完成的代码以及各种资料，它们是不可恢复的。</p>
+<p>其次是存放着日记的<code>MyNotebook</code>文件夹，虽然不可恢复但是对我来说只要不泄露就行，删日记这种事情我以前没少干。</p>
+<p>它们都使用了坚果云同步，以及定期移动硬盘备份。</p>
+<p>接着是<code>Blog</code>文件夹，它存放着我个人博客的hexo源代码。我使用git来对它进行管理，注意这个git库和它用于部署的git库不一样，这个是用于管理源代码而不是发布的内容（public文件夹）的。每发布一篇博文，或者修改一次配置，就commit一次。将其push到github的私有库，并通过码云的仓库导入功能同步过来，这样就轻松有了两份备份，而且自带历史版本管理。</p>
+<p><code>Buffer</code>文件夹不进行备份，借此让我在项目结束后尽快归档，避免数据丢失。</p>
+<p>最不重要的是<code>Resource</code>文件夹，里面存放的资源（软件安装包、课件、各种电子书）都是可以再次获取的，并不包含我的心血在其中。基本上不需要备份。偶尔一些比较难以获取的（比如下载速度贼慢的）会备份到百度云盘（莫得选择，坚果云的流量不能浪费）上。</p>
+<p><code>UserFolder\Video\Bilibili</code>：在每次录制并上传一个新的视频后，将其资料归档到这个文件夹，因为视频压缩后也很大，所以使用百度云盘备份。备份时机在每次录制并上传一个新的视频后。</p>
 
             </div>
             <hr/>
@@ -475,7 +559,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz/posts/git_reset_incorrect_commit/">https://yxChangingSelf.xyz/posts/git_reset_incorrect_commit/</a>
+                    <a href="https://yxChangingSelf.xyz/posts/self-management-file-manage-v200417/">https://yxChangingSelf.xyz/posts/self-management-file-manage-v200417/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -512,11 +596,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/git/">
-                                    <span class="chip bg-color">git</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -560,7 +640,7 @@
         repo: 'blog-comments',
         owner: 'ChangingSelf',
         admin: "ChangingSelf",
-        id: '2019-04-11T19-31-01',
+        id: '2020-04-17T20-05-25',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -581,59 +661,38 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/python_spider_note4optimization_of_the_login_function/">
+                <a href="/posts/self-management-file-manage-v200417/">
                     <div class="card-image">
                         
+                        <img src="https://i.loli.net/2020/04/05/kYWwGKu5RSsItbJ.jpg" class="responsive-img" alt="【自我管理系统】电脑文件管理系统v200417">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="python爬虫学习笔记4模拟登录函数的优化">
-                        
-                        <span class="card-title">python爬虫学习笔记4模拟登录函数的优化</span>
+                        <span class="card-title">【自我管理系统】电脑文件管理系统v200417</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面写的代码虽然完成了爬取的功能，但是过于凌乱，于是打算重构一遍。首先从登陆开始
-
-
-改进前的代码面向过程这是第一次写的登录函数，获取登录信息和登录本身是放在一起的。
-def login():
-    """
-    登录并返回已经登录的会
+                            管理文件，让我能够随时找到需要的文件
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-04-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-17
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            憧憬少
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/spider/">
-                        <span class="chip bg-color">spider</span>
-                    </a>
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -644,34 +703,30 @@ def login():
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/archive_project/">
+                <a href="/posts/blog-catalogue/">
                     <div class="card-image">
                         
+                        <img src="http://yxchangingself.xyz/medias/banner/1.jpg" class="responsive-img" alt="博客总目录">
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="手工归档编程项目">
-                        
-                        <span class="card-title">手工归档编程项目</span>
+                        <span class="card-title">博客总目录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            以前写代码建立的工程到处堆放，导致不能很好的找到以前的代码。虽然以前简单地划分了一下文件夹，但并没有投入太多精力去想如何分类。所以打算养成归档编程项目的好习惯，记录一下过程。也给读者们一个参考。
-
-
-不放图了，文件树结构就用无序列表来显示。
+                            这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始；如果想要搜索特定内容，请结合标签、分类和站内搜索功能
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
+                            <a href="/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/" class="post-category">
+                                    目录索引
                                 </a>
                             
                             
