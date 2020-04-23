@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-04-17T14:37:15.316Z</updated>
+  <updated>2020-04-23T15:56:45.620Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【自我管理系统】任务管理系统v200423</title>
+    <link href="https://yxchangingself.xyz/posts/self-management-task-manage-v200423/"/>
+    <id>https://yxchangingself.xyz/posts/self-management-task-manage-v200423/</id>
+    <published>2020-04-23T15:02:27.000Z</published>
+    <updated>2020-04-23T15:56:45.620Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;梳理我现有的任务管理系统，以做出改进。&lt;/p&gt;
+&lt;p&gt;目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>【自我管理系统】电脑文件管理系统v200417</title>
@@ -484,26 +504,6 @@ Please make sure you have the correct access rights                             
       <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019年暑假总结</title>
-    <link href="https://yxchangingself.xyz/posts/2019_summer_holidays_summary/"/>
-    <id>https://yxchangingself.xyz/posts/2019_summer_holidays_summary/</id>
-    <published>2019-08-20T03:34:50.000Z</published>
-    <updated>2020-04-06T09:12:22.590Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这个暑假大致是7月7日（到家时间）至8月24日，已经过了6周左右。&lt;/p&gt;
-&lt;p&gt;如果是以前的假期，肯定是不记得自己做过什么了，但是这次每周做了一次周总结，因此可以对照着周总结来进行假期总结。应该是头一次有参考地记录下自己的整个假期了。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   

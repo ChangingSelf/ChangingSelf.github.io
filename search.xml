@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>【自我管理系统】任务管理系统v200423</title>
+      <link href="/posts/self-management-task-manage-v200423/"/>
+      <url>/posts/self-management-task-manage-v200423/</url>
+      
+        <content type="html"><![CDATA[<p>梳理我现有的任务管理系统，以做出改进。</p><p>目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。</p><a id="more"></a><h1 id="目的（系统需求）"><a href="#目的（系统需求）" class="headerlink" title="目的（系统需求）"></a>目的（系统需求）</h1><p>建立并运行了这个系统后：</p><ul><li>当我得到一个任务的时候，我不会忘记这个任务或者遗失它的相关资料</li><li>能够让我明确地知道什么时候应该做什么事情，不会将时间浪费在迷茫上</li><li>当我要来执行一个任务的时候，我能够迅速地找到它的相关资料，不会将时间浪费在找资料上面</li></ul><h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul><li>活页本</li><li>充足的方格活页纸</li><li>活页本隔页</li></ul><h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>参照子弹笔记的<code>集子</code>的概念。原本我使用的是子弹笔记，后来移植到活页本上了。</p><h2 id="月集子"><a href="#月集子" class="headerlink" title="月集子"></a>月集子</h2><p>使用一张活页纸</p><ul><li>上个月的目标完成情况</li><li>上个月的总结，以无序列表的形式列举一下自己干了啥，附加自己对上个月的一段话概括描述</li><li>本月的目标：可以动态添加，但是添加到本部分的内容一定要明确、具体</li></ul><h2 id="周集子"><a href="#周集子" class="headerlink" title="周集子"></a>周集子</h2><p>一周使用一张活页纸</p><ul><li>上周的目标完成情况</li><li>上周的总结，以无序列表的形式列举一下自己干了啥，附加自己对上周的一段话概括描述</li><li>本周的目标：可以动态添加，但是添加到本部分的内容一定要明确、具体。如果全部完成，可以从月集子中选取目标加到这里</li></ul><h2 id="日集子"><a href="#日集子" class="headerlink" title="日集子"></a>日集子</h2><p>一周的内容按照顺序写，一般来说是七天用两张活页纸</p><ul><li>今天要做的任务：参考子弹笔记的记号系统</li></ul><p>任务结构（均写在一行）：</p><ul><li>分类：比如说“数学作业”，总之是一眼就能看出来是啥任务就行</li><li>任务内容：尽可能精简</li><li>截止时间</li></ul><h1 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h1><h2 id="收集"><a href="#收集" class="headerlink" title="收集"></a>收集</h2><ul><li>触发条件：被分配了任务时。比如，老师在网课直播中口头提到了作业。</li><li>动作：<ul><li>由其截止时间判断任务级别是日级别、周级别还是月级别，添加到对应的集子</li><li>记录<ul><li>记录载体优先级：活页本，电子产品，大脑。优先级越低的载体在条件满足时尽量将记录整理到优先级高的载体。</li></ul></li></ul></li></ul><h2 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h2><ul><li>触发条件：任务条目过多</li><li>动作：<ul><li>在空白纸页处按照重要紧急度分类，誊抄一遍任务</li></ul></li></ul><h2 id="归档"><a href="#归档" class="headerlink" title="归档"></a>归档</h2><ul><li>触发条件：集子周期结束时</li><li>动作：<ul><li>手机APP扫描，发送到电脑，按照<code>电脑文件管理系统</code>来进行归档</li><li>丢弃上一个周期已归档的活页纸</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日志随笔 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【自我管理系统】电脑文件管理系统v200417</title>
       <link href="/posts/self-management-file-manage-v200417/"/>
       <url>/posts/self-management-file-manage-v200417/</url>
