@@ -46,23 +46,6 @@
   </entry>
   
   <entry>
-    <title>博客分类修改说明v200426</title>
-    <link href="https://yxchangingself.xyz/posts/categories_description-v200426/"/>
-    <id>https://yxchangingself.xyz/posts/categories_description-v200426/</id>
-    <published>2020-04-26T15:03:12.000Z</published>
-    <updated>2020-04-26T15:33:19.558Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;对2020年4月26日博客分类修改的内容记录&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>【自我管理系统】任务管理系统v200423</title>
     <link href="https://yxchangingself.xyz/posts/self-management-task-manage-v200423/"/>
     <id>https://yxchangingself.xyz/posts/self-management-task-manage-v200423/</id>
@@ -493,6 +476,34 @@ Please make sure you have the correct access rights                             
     
     
       <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+      <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
+    
+      <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MFC用对话框获取输入</title>
+    <link href="https://yxchangingself.xyz/posts/MFC_get_input_by_Dialog/"/>
+    <id>https://yxchangingself.xyz/posts/MFC_get_input_by_Dialog/</id>
+    <published>2019-09-10T11:20:43.000Z</published>
+    <updated>2020-04-16T01:03:19.784Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在MFC调用对话框读入数据，并在客户区输出。&lt;/p&gt;
+&lt;p&gt;这是《计算机图形学基础教程》的一个习题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用MFC设计一个长方形类CRectangle，调用对话框读入长方形的长度和宽度，在客户区输出长方形的周长和面积。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个书上并没有教怎么用对话框读取输入，我在这之前也完全没接触过MFC的对话框。弄了两小时，终于把这道题做出来了。以此文记录一下&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
       <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
