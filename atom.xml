@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-05-11T14:34:13.837Z</updated>
+  <updated>2020-08-10T14:54:35.801Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【毕业实习总结】（2）mybatis框架的基本使用</title>
+    <link href="https://yxchangingself.xyz/posts/graduate_internship_2/"/>
+    <id>https://yxchangingself.xyz/posts/graduate_internship_2/</id>
+    <published>2020-08-10T13:08:27.000Z</published>
+    <updated>2020-08-10T14:54:35.801Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>【毕业实习总结】（1）maven环境配置</title>
+    <link href="https://yxchangingself.xyz/posts/graduate_internship_1/"/>
+    <id>https://yxchangingself.xyz/posts/graduate_internship_1/</id>
+    <published>2020-08-10T12:59:13.000Z</published>
+    <updated>2020-08-10T13:16:51.339Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
+&lt;p&gt;前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。&lt;/p&gt;
+&lt;p&gt;学习到的框架有mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立maven项目。&lt;/p&gt;
+&lt;p&gt;2020年7月15日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过git提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
+&lt;p&gt;本系列将会先整理学习笔记，最后对本次项目进行总结。&lt;/p&gt;
+&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
+    
+      <category term="maven" scheme="https://yxChangingSelf.xyz/tags/maven/"/>
+    
+  </entry>
   
   <entry>
     <title>【001】整理混乱的生活</title>
@@ -449,59 +498,6 @@ Please make sure you have the correct access rights                             
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>MFC习题|RGB颜色模型演示程序</title>
-    <link href="https://yxchangingself.xyz/posts/MFC_RGB_demonstration/"/>
-    <id>https://yxchangingself.xyz/posts/MFC_RGB_demonstration/</id>
-    <published>2019-09-14T04:19:05.000Z</published>
-    <updated>2020-04-06T09:10:10.706Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;习题来源：《计算机图形学基础教程》孔令德（第二版）&lt;/p&gt;
-&lt;p&gt;用mfc基于对话框的编程，实现下图的RGB颜色模型演示程序。点击颜色按钮能将“颜色及代码”这个组框中的静态文本框变成对应的颜色，调色板按钮可以调出自带的颜色选择对话框。滚动条和旁边的编辑框都可以调整颜色。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/20190914121959.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
-    
-    
-      <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
-    
-      <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MFC用对话框获取输入</title>
-    <link href="https://yxchangingself.xyz/posts/MFC_get_input_by_Dialog/"/>
-    <id>https://yxchangingself.xyz/posts/MFC_get_input_by_Dialog/</id>
-    <published>2019-09-10T11:20:43.000Z</published>
-    <updated>2020-04-16T01:03:19.784Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在MFC调用对话框读入数据，并在客户区输出。&lt;/p&gt;
-&lt;p&gt;这是《计算机图形学基础教程》的一个习题：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;使用MFC设计一个长方形类CRectangle，调用对话框读入长方形的长度和宽度，在客户区输出长方形的周长和面积。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个书上并没有教怎么用对话框读取输入，我在这之前也完全没接触过MFC的对话框。弄了两小时，终于把这道题做出来了。以此文记录一下&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    
-    
-      <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
-    
-      <category term="mfc" scheme="https://yxChangingSelf.xyz/tags/mfc/"/>
     
   </entry>
   

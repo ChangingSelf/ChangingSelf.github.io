@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="【自我管理系统】电脑文件管理系统v200417, 憧憬少的个人博客">
-    <meta name="description" content="分享与记录我的电脑文件管理系统">
+    <meta name="keywords" content="【毕业实习总结】（1）maven环境配置, 憧憬少的个人博客">
+    <meta name="description" content="配置maven来管理第三方依赖">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>【自我管理系统】电脑文件管理系统v200417 | 憧憬少的个人博客</title>
+    <title>【毕业实习总结】（1）maven环境配置 | 憧憬少的个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -250,12 +250,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/04/05/kYWwGKu5RSsItbJ.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">【自我管理系统】电脑文件管理系统v200417</h1>
+                    <h1 class="description center-align post-title">【毕业实习总结】（1）maven环境配置</h1>
                 </div>
             </div>
         </div>
@@ -370,21 +370,20 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                    <div class="article-tag">
                         
-                            <a href="/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/" class="post-category">
-                                日志随笔
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/maven/">
+                                <span class="chip bg-color">maven</span>
                             </a>
                         
                     </div>
+                    
+                </div>
+                <div class="col s5 right-align">
                     
                 </div>
             </div>
@@ -393,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-17
+                    2020-08-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-17
+                    2020-08-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    6 分
                 </div>
                 
 				
@@ -425,123 +424,84 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>以此文梳理我的电脑文件管理系统，由于是我的文件管理系统，所以很多个性化的设置，读者建立自己的系统时可改为自己的。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。</p>
+<p>前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。</p>
+<p>学习到的框架有mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立maven项目。</p>
+<p>2020年7月15日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过git提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。</p>
+<p>本系列将会先整理学习笔记，最后对本次项目进行总结。</p>
+<p>笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。</p>
 <a id="more"></a>
 
-<h1 id="目的（系统需求）"><a href="#目的（系统需求）" class="headerlink" title="目的（系统需求）"></a>目的（系统需求）</h1><ul>
-<li>当我产生或者获得一个新的文件时，知道存放到哪里</li>
-<li>当我想要找到某个我需要的文件时，能够迅速找到</li>
-<li>当我的电脑遗失或者重装时，重要的文件不丢失，能够迅速恢复</li>
-<li>让我能够舒适地使用电脑</li>
-</ul>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
-<li>腾讯电脑管家桌面助手独立版：用到它的桌面收纳格、文件夹映射（减少查找层级）</li>
-<li>坚果云：用到云同步功能</li>
-<li>Listary：快速搜索打开文件夹和软件，可以用everything代替</li>
-</ul>
-<h1 id="环境配置（数据结构）"><a href="#环境配置（数据结构）" class="headerlink" title="环境配置（数据结构）"></a>环境配置（数据结构）</h1><p>磁盘分为三个分区：</p>
-<ul>
-<li>C盘：系统盘。100G。</li>
-<li>D盘：软件盘。自定义安装时改个盘符即可</li>
-<li>F盘：文件盘。分配最大的空间。<u>用腾讯桌面整理将其映射到桌面</u></li>
-</ul>
-<p>F盘下建立子文件夹：</p>
-<ul>
-<li>Archive：存放我的作业等项目文件的存档。<u>使用坚果云同步</u>。</li>
-<li>Blog：存放个人博客源文件</li>
-<li>Buffer：缓冲区，用于存放正在进行的项目的文件。固定到快速访问，并<u>用腾讯桌面整理将其映射到桌面</u></li>
-<li>MyNotebook：存放Vnote笔记本。<u>使用坚果云同步</u></li>
-<li>Resource：存放资源，包括课件、软件以及其他各种学习资源<ul>
-<li>Software</li>
-</ul>
-</li>
-<li>UserFolder：用户文件夹（图片、下载、音乐、文档、视频等）移动到这文件夹，避免占用系统盘空间。<ul>
-<li><strong>图片文件夹</strong>（<code>F:\UserFolder\Pictures</code>）下新建以下文件夹（因为暂时没有拍照存相片的习惯，所以没有相册文件夹）<ul>
-<li>Wallpaper：存放壁纸图片。桌面右键菜单【个性化】-&gt;左侧菜单【背景】-&gt;【背景】选项选择“幻灯片放映”，将本文件夹设置为相册。</li>
-<li>Temp：临时图片存放处。用于存放暂时保存的图片，默认此处的图片都是可以删除的，哪天想起来了就可以全选删除。</li>
-<li>Useful：存放有用的图片，比如证件照片等。</li>
-<li>Icon：图标包。图标可在<a href="https://www.flaticon.com/" target="_blank" rel="noopener">Flaticon</a>这个网站免费下载，用于装饰文件夹。</li>
-</ul>
-</li>
-<li>将<strong>下载文件夹</strong>（<code>F:\UserFolder\download</code>）（作为收集箱文件夹）<u>使用腾讯桌面整理映射到桌面</u>，便于随时打开、观察它是否存在未处理的文件以及将文件拖入。</li>
-<li><strong>视频文件夹</strong>（<code>F:\UserFolder\Videos</code>）新建Bilibili文件夹，存放自己做的B站视频。</li>
-</ul>
-</li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>移动时注意先建立对应文件夹（如新建download文件夹），再将其路径指定为此文件夹，避免出现将整个F盘指定为用户文件夹的情况。</p>
-<p>如果出现上述问题，可通过以下方案解决，它来自此<a href="https://zhidao.baidu.com/question/266780916556253685.html" target="_blank" rel="noopener">百度知道链接</a></p>
+<h1 id="maven环境配置"><a href="#maven环境配置" class="headerlink" title="maven环境配置"></a>maven环境配置</h1><p>本项目是在eclipse下开发的maven项目，所以首先需要配置maven环境。</p>
+<h2 id="什么是maven"><a href="#什么是maven" class="headerlink" title="什么是maven"></a>什么是maven</h2><p>首先，什么是maven？下面是来自<a href="https://www.runoob.com/maven/maven-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a>的说明：</p>
 <blockquote>
-<p>可以在注册表中修改<br>win+R 输入“regedit”<br>找到\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders<br>找数值为属 F:\ 的 修改了就行</p>
+<p>Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。</p>
+<p>Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。</p>
+<p>Maven 也可被用于构建和管理各种项目，例如 C#，Ruby，Scala 和其他语言编写的项目。Maven 曾是 Jakarta 项目的子项目，现为由 Apache 软件基金会主持的独立 Apache 项目。</p>
+<p>——Maven 教程|菜鸟教程</p>
 </blockquote>
-<h1 id="标准流程（数据操作）"><a href="#标准流程（数据操作）" class="headerlink" title="标准流程（数据操作）"></a>标准流程（数据操作）</h1><h2 id="收集"><a href="#收集" class="headerlink" title="收集"></a>收集</h2><p>由于文件大多数来自网络下载，将用户文件夹中的“download”文件夹设置为<strong>收集箱</strong>。相比于之前单独新建一个收集箱文件夹，省去了从download文件夹移动到收集箱的过程。</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>根据文件类型进行分类</p>
-<ul>
-<li>自己新建的工程文件：在Buffer文件夹中找到对应的项目文件夹（或者新建）放入。</li>
-<li>下载的软件<ul>
-<li>安装版：放入<code>Resource\Software\Installer</code></li>
-<li>免安装版：放入<code>Resource\Software\Portable</code></li>
-</ul>
-</li>
-<li>图片<ul>
-<li>壁纸：放入<code>Pictures\WallPaper</code>文件夹</li>
-<li>临时截图：放入<code>Pictures\Temp</code>文件夹</li>
-<li>有用处的图片：放入<code>Pictures\Useful</code>文件夹</li>
-<li>图标包：放入<code>Pictures\Icon</code>文件夹</li>
-</ul>
-</li>
-<li>课件与讲义、笔记：放入Buffer文件夹中对应的课程文件夹</li>
-</ul>
-<h2 id="归档"><a href="#归档" class="headerlink" title="归档"></a>归档</h2><p>归档还是挺重要的，以前做过的东西可能还要用到。例如近期，软件质量保证与测试这门课程需要使用上上个学期的软件工程导论的第四次上机作业<code>4_软工导论实验四透镜质量检测190618.rar</code>的代码和报告来进行测试，我就很快找到了。</p>
-<p>当完成一个项目（比如课设、上机作业、校内校外活动例如某个比赛）后，将用到的资料打包为一个压缩包，只保留能够还原此项目的必要资料，例如编译生成的exe之类的都删除。</p>
-<p>压缩包命名为<code>[大学学期号_][科目名称]&lt;项目名称&gt;&lt;六位数归档日期&gt;</code>，其中尖括号必选，方括号可选例如：<code>5_计算机图形学隐面算法及光照模型191129.rar</code>代表：大学第五学期（大三第一学期）做的隐面算法及光照模型项目，它在2019年11月29日归档。</p>
-<p>这个归档日期并不代表它做完的日期，而是我在将其打包成压缩包并放入Archive文件夹的日期，或者是我根据文件的最后更新时间推测出的项目完成时间。因为我在形成这个归档系统之前，并没有记录完成时间的意识。</p>
-<p>打包好之后，将其放入Archive文件夹对应的年份文件夹中。若是有多个类似的项目文件（比如同一个课程的课设和上机），就新建一个文件夹将它们放在一起，但是内部不再新建新的层级的文件夹。</p>
-<p>此时，Archive文件夹中的一个示意结构如下：</p>
-<ul>
-<li>Archive<ul>
-<li>0000：用于存放未整理好的归档文件，这是我之前重构Archive文件夹时留下的，我觉得没有必要删除，就留着了。</li>
-<li>2017：存放2017年的项目文件<ul>
-<li>vb：2017年写的vb项目的文件夹<ul>
-<li><code>是英雄就下一百层171125.rar</code>：其实完成时间还要更早，但是最后更新日期是这个所以就用了它</li>
-<li>……</li>
-</ul>
-</li>
-<li><code>1_第八届创业先锋挑战赛171011.rar</code></li>
-<li>……</li>
-</ul>
-</li>
-<li>2018：<ul>
-<li>……</li>
-</ul>
-</li>
-<li>2019：<ul>
-<li>5_计算机辅助设计：同一科目的项目文件开一个文件夹存放<ul>
-<li><code>5_CAD复习笔记191210.rar</code></li>
-<li><code>5_CAD三类自由曲线191129.rar</code></li>
-<li><code>5_CAD旋转的三角形191129.rar</code></li>
-<li><code>5_CAD折线路径191129.rar</code></li>
-</ul>
-</li>
-<li><code>明日方舟代理指挥190721.rar</code>：不是学校作业的就不需要学期号了</li>
-<li>……</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Archive文件夹使用云同步，重装系统后它是最快恢复的部分，这让我真正意识到建立一个完善的系统是多么重要。</p>
-<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><ul>
-<li>双击ctrl使用Listary或者使用everything查找项目名称</li>
-<li>或者进入对应功能的文件夹手动查找，按照上面的方式设置，查找层级一般不会超过三层（因为还有桌面映射）</li>
-</ul>
-<h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2><p>根据F盘中文件夹中数据的重要程度来执行不同的策略。</p>
-<p>本系统中最为重要的文件是<code>Archive</code>中的文件，因为这里面都是我自己积累下来的自己完成的代码以及各种资料，它们是不可恢复的。</p>
-<p>其次是存放着日记的<code>MyNotebook</code>文件夹，虽然不可恢复但是对我来说只要不泄露就行，删日记这种事情我以前没少干。</p>
-<p>它们都使用了坚果云同步，以及定期移动硬盘备份。</p>
-<p>接着是<code>Blog</code>文件夹，它存放着我个人博客的hexo源代码。我使用git来对它进行管理，注意这个git库和它用于部署的git库不一样，这个是用于管理源代码而不是发布的内容（public文件夹）的。每发布一篇博文，或者修改一次配置，就commit一次。将其push到github的私有库，并通过码云的仓库导入功能同步过来，这样就轻松有了两份备份，而且自带历史版本管理。</p>
-<p><code>Buffer</code>文件夹不进行备份，借此让我在项目结束后尽快归档，避免数据丢失。</p>
-<p>最不重要的是<code>Resource</code>文件夹，里面存放的资源（软件安装包、课件、各种电子书）都是可以再次获取的，并不包含我的心血在其中。基本上不需要备份。偶尔一些比较难以获取的（比如下载速度贼慢的）会备份到百度云盘（莫得选择，坚果云的流量不能浪费）上。</p>
-<p><code>UserFolder\Video\Bilibili</code>：在每次录制并上传一个新的视频后，将其资料归档到这个文件夹，因为视频压缩后也很大，所以使用百度云盘备份。备份时机在每次录制并上传一个新的视频后。</p>
+<p>我的理解是，maven是一个可以帮助我们管理第三方的jar包的工具。</p>
+<p>当我们在编写项目的时候，除了标准库之外，总会用到第三方依赖，比如说fastjson、mysql的驱动等。</p>
+<p>在之前几次课设中，如果想要添加jar，就需要先去官网找这个jar包，下载后将其添加到WEB-INF目录下的lib文件夹，再将其添加到<code>Build Path</code>中。</p>
+<p>而在maven项目中，只需要在它的配置文件<code>pom.xml</code>中添加对应的依赖的配置即可，maven会自动将你要的jar包从maven远程库下载到本地仓库，接着你就可以在项目中使用它了，如果本地仓库内已经有这个版本的jar了，就不需要重复下载了，省去了很多麻烦。</p>
+<p>除了省去了自己下载和导入的麻烦，还可以方便团队协作。只需要一个<code>pom.xml</code>配置文件，就可以快速统一团队内部使用的依赖的版本。</p>
+<p>maven还有一些其他的功能，不过本项目中，我们只用到依赖管理。</p>
+<h2 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h2><p>首先需要去<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">官网</a>下载maven（先检查你电脑上有没有jdk）。下载到的文件的文件名大概是这样的：<code>apache-maven-3.6.3-bin.zip</code>，将其解压之后，放在非中文目录下，我是放在了D盘根目录下。</p>
+<p>接着将<code>D:\apache-maven-3.6.3\bin</code>，也就是你解压目录下的bin目录的路径配置到环境变量<code>Path</code>当中。在命令行中输入如下命令：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">$mvn -v<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果成功，那么就安装完毕。</p>
+<h2 id="配置maven本地仓库"><a href="#配置maven本地仓库" class="headerlink" title="配置maven本地仓库"></a>配置maven本地仓库</h2><p>接着找个地方建个文件夹作为你的本地maven仓库，它用来存放你项目中用到的依赖jar包。</p>
+<p>打开安装目录下的conf目录（本例中为<code>D:\apache-maven-3.6.3\conf</code>）下的<code>settings.xml</code>文件，找到这么一段注释：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- localRepository
+   | The path to the local repository maven will use to store artifacts.
+   |
+   | Default: ${user.home}/.m2/repository
+  &lt;localRepository>/path/to/local/repo&lt;/localRepository>
+  --></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将其中的<code>&lt;localRepository&gt;</code>标签解除注释并将内容配置为你刚刚创建的本地仓库文件夹。我的配置如下：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- localRepository
+   | The path to the local repository maven will use to store artifacts.
+   |
+   | Default: ${user.home}/.m2/repository
+  &lt;localRepository>/path/to/local/repo&lt;/localRepository>
+  --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>localRepository</span><span class="token punctuation">></span></span>D:/repository<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>localRepository</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>windows下<strong>注意将复制的路径的反斜杠改为正斜杠。</strong></p>
+<h2 id="配置maven的阿里云镜像"><a href="#配置maven的阿里云镜像" class="headerlink" title="配置maven的阿里云镜像"></a>配置maven的阿里云镜像</h2><p>maven远程库在国外，国内访问比较慢，你可以设置为国内的镜像从而加速下载。</p>
+<p>还是刚刚那个配置文件，找到<code>&lt;mirrors&gt;</code>标签，在网上搜索maven镜像，配置好之后如下(本例使用阿里云镜像)：</p>
+<pre class="line-numbers language-xml"><code class="language-xml">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrors</span><span class="token punctuation">></span></span>
+    <span class="token comment" spellcheck="true">&lt;!-- mirror
+     | Specifies a repository mirror site to use instead of a given repository. The repository that
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+    &lt;mirror>
+      &lt;id>mirrorId&lt;/id>
+      &lt;mirrorOf>repositoryId&lt;/mirrorOf>
+      &lt;name>Human Readable Name for this Mirror.&lt;/name>
+      &lt;url>http://my.repository.com/repo/path&lt;/url>
+    &lt;/mirror>
+     --></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>alimaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>aliyun maven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://maven.aliyun.com/nexus/content/groups/public/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">></span></span>
+
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrors</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="配置eclipse"><a href="#配置eclipse" class="headerlink" title="配置eclipse"></a>配置eclipse</h2><p>打开eclipse，打开菜单【windows】-&gt;【preferences】，左边搜索框中搜索maven，选择<code>Installations</code>选项，点击<code>Add</code>按钮，将你的maven安装目录添加进去（选择目录后直接点完成），添加后记得勾选新出现的行。下图为未添加时：</p>
+<p><img src="https://s1.ax1x.com/2020/07/18/U2esRP.png" alt="在eclipse中配置maven"></p>
+<p>这个选项这样就配置好了。</p>
+<p>接着配置下方的<code>User Setting</code>选项，将此页的<code>User Settings</code>框内配置为刚刚的<code>settings.xml</code>配置文件的路径，如果下方的<code>Local Repository</code>出现的是你刚刚设置的maven本地仓库的路径，那么你就配置成功了。点击<code>Apply and Close</code>关闭此窗口即可。</p>
+<p><img src="https://s1.ax1x.com/2020/07/18/U2miLD.md.png" alt="U2miLD.md.png"></p>
+<h2 id="在eclipse中新建maven项目"><a href="#在eclipse中新建maven项目" class="headerlink" title="在eclipse中新建maven项目"></a>在eclipse中新建maven项目</h2><p>eclipse菜单【file】-&gt;【new】-&gt;【project】，搜索maven project，点下一步。</p>
+<p>勾选<code>Create a simple project</code>，然后下一步。各个选项及其说明如图，这里的选项并不是太重要，后面可以在<code>pom.xml</code>里面改。</p>
+<p><img src="https://s1.ax1x.com/2020/07/18/U2mW6K.png" alt="在eclipse中新建maven项目"></p>
+<p>点击完成，你就新建了一个maven工程，不过有个问题，那就是新建的工程上面有一个红叉，这说明项目还有些问题。这是因为缺少<code>web.xml</code>这个文件。</p>
+<p>你可以再新建一个<code>Dynamic Web Project</code>，注意在新建的时候勾选生成<code>web.xml</code>的选项，然后将<code>WEB-INF</code>这个目录包括下面的<code>web.xml</code>文件都复制到maven项目的<code>src/main/webapp</code>下，这时红叉应该就会消失了。</p>
 
             </div>
             <hr/>
@@ -567,7 +527,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz/posts/self-management-file-manage-v200417/">https://yxChangingSelf.xyz/posts/self-management-file-manage-v200417/</a>
+                    <a href="https://yxChangingSelf.xyz/posts/graduate_internship_1/">https://yxChangingSelf.xyz/posts/graduate_internship_1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -604,7 +564,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/maven/">
+                                    <span class="chip bg-color">maven</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -648,7 +616,7 @@
         repo: 'blog-comments',
         owner: 'ChangingSelf',
         admin: "ChangingSelf",
-        id: '2020-04-17T20-05-25',
+        id: '2020-08-10T20-59-13',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -673,33 +641,29 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/self-management-task-manage-v200423/">
+                <a href="/posts/graduate_internship_2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="【自我管理系统】任务管理系统v200423">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="【毕业实习总结】（2）mybatis框架的基本使用">
                         
-                        <span class="card-title">【自我管理系统】任务管理系统v200423</span>
+                        <span class="card-title">【毕业实习总结】（2）mybatis框架的基本使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            管理、执行、归档每天产生的任务
+                            mybatis框架的
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-10
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    日志随笔
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            憧憬少
                             
                         </span>
                     </div>
@@ -714,30 +678,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/blog-catalogue/">
+                <a href="/posts/reboot-self-management-system/">
                     <div class="card-image">
                         
-                        <img src="http://yxchangingself.xyz/medias/banner/1.jpg" class="responsive-img" alt="博客总目录">
                         
-                        <span class="card-title">博客总目录</span>
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="【001】整理混乱的生活">
+                        
+                        <span class="card-title">【001】整理混乱的生活</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始；如果想要搜索特定内容，请结合标签、分类和站内搜索功能。如果觉得本站访问速度慢，可以在【友情链接】中找到托管在gitee的本站链接，速度会快很多
+                            重启自我管理系统
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/" class="post-category">
-                                    目录索引
+                            <a href="/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    日志随笔
                                 </a>
                             
                             
