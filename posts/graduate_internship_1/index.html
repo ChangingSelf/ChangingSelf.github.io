@@ -415,14 +415,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 				
@@ -511,7 +511,7 @@
 <p><img src="https://s1.ax1x.com/2020/07/18/U2mW6K.png" alt="在eclipse中新建maven项目"></p>
 <p>点击完成，你就新建了一个maven工程，不过有个问题，那就是新建的工程上面有一个红叉，这说明项目还有些问题。这是因为缺少<code>web.xml</code>这个文件。</p>
 <p>你可以再新建一个<code>Dynamic Web Project</code>，注意在新建的时候勾选生成<code>web.xml</code>的选项，然后将<code>WEB-INF</code>这个目录包括下面的<code>web.xml</code>文件都复制到maven项目的<code>src/main/webapp</code>下，这时红叉应该就会消失了。</p>
-<h1 id="eclipse导入maven项目"><a href="#eclipse导入maven项目" class="headerlink" title="eclipse导入maven项目"></a>eclipse导入maven项目</h1><p>下面是一个供练习导入的项目，它是当时在学习mybatis等框架时我放在码云上的，链接如下：</p>
+<h2 id="eclipse导入maven项目"><a href="#eclipse导入maven项目" class="headerlink" title="eclipse导入maven项目"></a>eclipse导入maven项目</h2><p>下面是一个供练习导入的项目，它是当时在学习mybatis等框架时我放在码云上的，链接如下：</p>
 <ul>
 <li><a href="https://gitee.com/ChangingSelf/learnSSM" target="_blank" rel="noopener">练习项目</a></li>
 </ul>
@@ -524,6 +524,27 @@
 <p>我们这一步仅仅是为了让它生成一个<code>.project</code>工程文件，所以现在可以在eclipse的工作空间视图中将这个工程给删除，但是要注意，千万不要勾选<code>delete project content from disk</code>这个选项（它会将你的工程从磁盘上删除），我们要的仅仅是将它从eclipse的工作空间中删除。</p>
 <p>然后eclipse菜单【file】-&gt;【import】，搜索maven，选择<code>Existing Maven Project</code>，将刚刚的工程导入进来就可以了。有了之前生成的<code>.project</code>文件以及我仓库里面本来就有的<code>pom.xml</code>配置文件，eclipse就能够知道这是一个eclipse的maven项目，从而导入进来。</p>
 <p>导入进来会有红叉，这是因为依赖还没下载好，你等它下载。如果下载好了还是有红叉，就打开项目属性，然后找到<code>project facets</code>这个选项，把你的java版本调整成你的对应版本就行了。</p>
+<h1 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h1><p>以添加mysql驱动jar为例。</p>
+<p>前往<a href="https://mvnrepository.com/" target="_blank" rel="noopener">maven中央仓库</a>的官网，搜索mysql，选择版本，并将其依赖的配置代码添加到<code>pom.xml</code>中：</p>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">></span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>TestMaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>packaging</span><span class="token punctuation">></span></span>war<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>packaging</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">></span></span>
+        <span class="token comment" spellcheck="true">&lt;!--这里就是新添加的依赖--></span>
+        <span class="token comment" spellcheck="true">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.1.47<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+        <span class="token comment" spellcheck="true">&lt;!--这里就是新添加的依赖--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文件保存后，等待eclipse把这个依赖自动下载到本地仓库，就可以使用它了。</p>
 
             </div>
             <hr/>
@@ -930,7 +951,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">93.5k</span>&nbsp;字
+                class="white-color">93.9k</span>&nbsp;字
             
             
             
