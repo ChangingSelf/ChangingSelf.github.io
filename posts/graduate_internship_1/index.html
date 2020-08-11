@@ -408,21 +408,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-10
+                    2020-08-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 				
@@ -511,6 +511,19 @@
 <p><img src="https://s1.ax1x.com/2020/07/18/U2mW6K.png" alt="在eclipse中新建maven项目"></p>
 <p>点击完成，你就新建了一个maven工程，不过有个问题，那就是新建的工程上面有一个红叉，这说明项目还有些问题。这是因为缺少<code>web.xml</code>这个文件。</p>
 <p>你可以再新建一个<code>Dynamic Web Project</code>，注意在新建的时候勾选生成<code>web.xml</code>的选项，然后将<code>WEB-INF</code>这个目录包括下面的<code>web.xml</code>文件都复制到maven项目的<code>src/main/webapp</code>下，这时红叉应该就会消失了。</p>
+<h1 id="eclipse导入maven项目"><a href="#eclipse导入maven项目" class="headerlink" title="eclipse导入maven项目"></a>eclipse导入maven项目</h1><p>下面是一个供练习导入的项目，它是当时在学习mybatis等框架时我放在码云上的，链接如下：</p>
+<ul>
+<li><a href="https://gitee.com/ChangingSelf/learnSSM" target="_blank" rel="noopener">练习项目</a></li>
+</ul>
+<p>由于我设置了忽略工程文件，所以clone下来之后还需要进行一系列操作才能导入到eclipse。步骤如下：</p>
+<p>首先确定你已经按照上文配置好maven环境。</p>
+<p>接着在eclipse菜单【file】-&gt;【import】，搜索<code>project from git</code>这个选项，选择<code>Clone Url</code>，将仓库clone到本地，这部分不详细配图说明了。</p>
+<p>clone下来之后，会有三个选项（为了演示方便我就随便放在桌面了，大家不要学，我之后会删除的）</p>
+<p><img src="https://s1.ax1x.com/2020/07/18/U2KI7F.png" alt="maven项目导入方式"></p>
+<p>选择图中第三个选项<code>Import as general project</code>，它会为你的项目生成一个新的project文件，但是按照这种方式导入进来，它只是一个普通的eclipse工程，并不是maven工程，这个怎么办呢？</p>
+<p>我们这一步仅仅是为了让它生成一个<code>.project</code>工程文件，所以现在可以在eclipse的工作空间视图中将这个工程给删除，但是要注意，千万不要勾选<code>delete project content from disk</code>这个选项（它会将你的工程从磁盘上删除），我们要的仅仅是将它从eclipse的工作空间中删除。</p>
+<p>然后eclipse菜单【file】-&gt;【import】，搜索maven，选择<code>Existing Maven Project</code>，将刚刚的工程导入进来就可以了。有了之前生成的<code>.project</code>文件以及我仓库里面本来就有的<code>pom.xml</code>配置文件，eclipse就能够知道这是一个eclipse的maven项目，从而导入进来。</p>
+<p>导入进来会有红叉，这是因为依赖还没下载好，你等它下载。如果下载好了还是有红叉，就打开项目属性，然后找到<code>project facets</code>这个选项，把你的java版本调整成你的对应版本就行了。</p>
 
             </div>
             <hr/>

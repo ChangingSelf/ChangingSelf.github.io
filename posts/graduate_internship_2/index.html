@@ -408,21 +408,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-10
+                    2020-08-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    16 分
                 </div>
                 
 				
@@ -439,20 +439,12 @@
 <p>2020年7月15日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过git提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。</p>
 <p>本系列将会先整理学习笔记，最后对本次项目进行总结。</p>
 <p>笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。</p>
-<h1 id="仓库链接及导入方式"><a href="#仓库链接及导入方式" class="headerlink" title="仓库链接及导入方式"></a>仓库链接及导入方式</h1><p>本文的练习项目已在码云开源，链接如下：</p>
+<h1 id="仓库链接"><a href="#仓库链接" class="headerlink" title="仓库链接"></a>仓库链接</h1><p>本文的练习项目已在码云开源，链接如下：</p>
 <ul>
 <li><a href="https://gitee.com/ChangingSelf/learnSSM" target="_blank" rel="noopener">学习mybatis的练习项目</a>，这个链接是本项目首页</li>
 <li><a href="https://gitee.com/ChangingSelf/learnSSM/tree/987490acbb1411ffb102dbdbf50f30e0cf0dbc84/" target="_blank" rel="noopener">这个链接会直接跳转到本文所对应的版本</a></li>
 </ul>
-<p>由于我设置了忽略工程文件，所以clone下来之后还需要进行一系列操作才能导入到eclipse。步骤如下：</p>
-<p>首先确定你已经按照前一篇文章的方式配置好maven环境。</p>
-<p>接着在eclipse菜单【file】-&gt;【import】，搜索<code>project from git</code>这个选项，选择<code>Clone Url</code>，将仓库clone到本地，这部分不详细配图说明了。</p>
-<p>clone下来之后，会有三个选项（为了演示方便我就随便放在桌面了，大家不要学，我之后会删除的）</p>
-<p><img src="https://s1.ax1x.com/2020/07/18/U2KI7F.png" alt="maven项目导入方式"></p>
-<p>选择图中第三个选项<code>Import as general project</code>，它会为你的项目生成一个新的project文件，但是按照这种方式导入进来，它只是一个普通的eclipse工程，并不是maven工程，这个怎么办呢？</p>
-<p>我们这一步仅仅是为了让它生成一个<code>.project</code>工程文件，所以现在可以在eclipse的工作空间视图中将这个工程给删除，但是要注意，千万不要勾选<code>delete project content from disk</code>这个选项（它会将你的工程从磁盘上删除），我们要的仅仅是将它从eclipse的工作空间中删除。</p>
-<p>然后eclipse菜单【file】-&gt;【import】，搜索maven，选择<code>Existing Maven Project</code>，将刚刚的工程导入进来就可以了。有了之前生成的<code>.project</code>文件以及我仓库里面本来就有的<code>pom.xml</code>配置文件，eclipse就能够知道这是一个eclipse的maven项目，从而导入进来。</p>
-<p>导入进来会有红叉，这是因为依赖还没下载好，你等它下载。如果下载好了还是有红叉，就打开项目属性，然后找到<code>project facets</code>这个选项，把你的java版本调整成你的对应版本就行了。</p>
+<p>导入方式见本系列的第一篇文章。</p>
 <h1 id="mybatis框架的基本使用"><a href="#mybatis框架的基本使用" class="headerlink" title="mybatis框架的基本使用"></a>mybatis框架的基本使用</h1><p><a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">mybatis官网文档</a></p>
 <h2 id="什么是mybatis"><a href="#什么是mybatis" class="headerlink" title="什么是mybatis"></a>什么是mybatis</h2><p>下面是mybatis官网的说明：</p>
 <blockquote>
