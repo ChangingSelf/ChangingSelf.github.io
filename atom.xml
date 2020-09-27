@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-08-11T13:27:41.616Z</updated>
+  <updated>2020-09-27T09:56:29.953Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【项目复盘】网络软件开发综合实践</title>
+    <link href="https://yxchangingself.xyz/posts/project-review-score-system/"/>
+    <id>https://yxchangingself.xyz/posts/project-review-score-system/</id>
+    <published>2020-09-27T09:40:30.000Z</published>
+    <updated>2020-09-27T09:56:29.953Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;尝试使用规范化的复盘方法来进行复盘总结，本文使用的方法来自：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/225812258&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>【毕业实习总结】（2）mybatis框架的基本使用</title>
@@ -70,27 +96,6 @@
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
     
       <category term="maven" scheme="https://yxChangingSelf.xyz/tags/maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【001】整理混乱的生活</title>
-    <link href="https://yxchangingself.xyz/posts/reboot-self-management-system/"/>
-    <id>https://yxchangingself.xyz/posts/reboot-self-management-system/</id>
-    <published>2020-05-11T10:46:14.000Z</published>
-    <updated>2020-05-11T14:34:13.837Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近这段时间，我的生活还是挺混乱的，有很多的事情要忙，有很多的时间与精力（足以应对这些事情），但是就是不能够充分地利用好现有的资源来做正事。要么就是浪费在看漫画看小说，要么就是逃避般的放空自己，去睡觉或者什么都不干。&lt;/p&gt;
-&lt;p&gt;尝试使用文字来梳理自己现在的状况，理清现在应该做什么事情。顺便记录下这个过程，以便自己以后参考。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;本文仅供参考，各位读者还是按照自己的方式来吧。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   
@@ -187,10 +192,10 @@
   
   <entry>
     <title>【作业总结】python写的DES替代算法的gui小工具</title>
-    <link href="https://yxchangingself.xyz/posts/python_des_gui/"/>
-    <id>https://yxchangingself.xyz/posts/python_des_gui/</id>
+    <link href="https://yxchangingself.xyz/posts/%E3%80%90%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93%E3%80%91python%E5%86%99%E7%9A%84DES%E6%9B%BF%E4%BB%A3%E7%AE%97%E6%B3%95%E7%9A%84gui%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
+    <id>https://yxchangingself.xyz/posts/%E3%80%90%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93%E3%80%91python%E5%86%99%E7%9A%84DES%E6%9B%BF%E4%BB%A3%E7%AE%97%E6%B3%95%E7%9A%84gui%E5%B0%8F%E5%B7%A5%E5%85%B7/</id>
     <published>2020-03-29T02:10:52.000Z</published>
-    <updated>2020-04-05T02:41:56.600Z</updated>
+    <updated>2020-08-12T15:26:05.882Z</updated>
     
     <summary type="html">
     
@@ -205,8 +210,6 @@
     
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
-    
-      <category term="密码算法" scheme="https://yxChangingSelf.xyz/tags/%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/"/>
     
       <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
     
