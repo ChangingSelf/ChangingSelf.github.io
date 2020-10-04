@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-09-27T09:56:29.953Z</updated>
+  <updated>2020-10-04T14:01:35.435Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【项目周报】图像识别开发综合实践（一）</title>
+    <link href="https://yxchangingself.xyz/posts/project-weekly-parking-charge-1/"/>
+    <id>https://yxchangingself.xyz/posts/project-weekly-parking-charge-1/</id>
+    <published>2020-10-04T13:44:35.000Z</published>
+    <updated>2020-10-04T14:01:35.435Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这是第二个大四综合实践——图像识别开发综合实践，题目是“基于图像识别技术的停车场收费系统”。&lt;/p&gt;
+&lt;p&gt;第一天的需求分析会议开着开着，我莫名其妙成了主持人。然后我拿着ipad绘制原型图给他们看，和他们商讨某个功能应该是个怎样的流程。（顺便一提，拿ipad来绘制原型图比起
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>【项目复盘】网络软件开发综合实践</title>
@@ -491,23 +515,6 @@ Please make sure you have the correct access rights                             
     
     
       <category term="目录索引" scheme="https://yxChangingSelf.xyz/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://yxchangingself.xyz/posts/hello_world/"/>
-    <id>https://yxchangingself.xyz/posts/hello_world/</id>
-    <published>2019-12-30T13:01:12.000Z</published>
-    <updated>2020-03-14T13:14:32.130Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;大家好，我是憧憬少。&lt;/p&gt;
-    
-    </summary>
-    
     
     
   </entry>
