@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>【项目周报】图像识别开发综合实践（一）</title>
-      <link href="/posts/project-weekly-parking-charge-1/"/>
-      <url>/posts/project-weekly-parking-charge-1/</url>
-      
-        <content type="html"><![CDATA[<p>这是第二个大四综合实践——图像识别开发综合实践，题目是“基于图像识别技术的停车场收费系统”。</p><p>第一天的需求分析会议开着开着，我莫名其妙成了主持人。然后我拿着ipad绘制原型图给他们看，和他们商讨某个功能应该是个怎样的流程。（顺便一提，拿ipad来绘制原型图比起之前直接编写一个网页版的界面原型要方便多了。）</p><p>和上一个综合实践一样，分为四周进行。第一周是需求分析，组长也不急着分配任务，于是我就自己领了个需求分析文档的任务来做。</p><p>做完之后我就找了找图片，避免这周这个项目没啥进度（事实上确实是这周只有我在搞这些东西）。</p><h1 id="一、项目业务背景"><a href="#一、项目业务背景" class="headerlink" title="一、项目业务背景"></a>一、<strong>项目业务背景</strong></h1><p>停车场的业务主要是停车收费业务。当车辆想要驶入停车场进行停放，由停车场进行保管，则在驶出停车场时需要缴纳一定的停车费用。</p><p>停车场管理人员（保安）需要一套基于图像识别技术的停车场收费系统，收集进场车辆与出场车辆的信息，便于在指定的时间范围内作为对用户的收费依据。</p><p>要求停车场收费系统采集如下信息：车牌号，进场时间，出场时间，车型等信息。</p><p>本项目需要开发这样一个停车场收费系统程序，来菜鸡进场车辆与出场车辆的原始信息，并将这些信息记录在数据库，用于生成天、周、月、季、年报表。</p><h1 id="二、名词解释"><a href="#二、名词解释" class="headerlink" title="二、名词解释"></a>二、名词解释</h1><ul><li><p><strong>管理员：</strong>需要使用该系统进行后台管理的用户，一般指代坐在岗亭中的门卫或者保安。</p></li><li><p><strong>车主：</strong>需要通过此系统得知自己需要缴纳的停车费用的用户。</p></li><li><p><strong>进场时间：</strong>车辆驶入停车场的时间。</p></li><li><p><strong>出场时间：</strong>车辆驶出停车场的时间。</p></li><li><p><strong>车型：</strong>在本系统中有大型车与小型车两种，两类车依靠车牌颜色进行划分，黄底黑字为大型车，蓝底白字为小型车。</p></li><li><p><strong>进场模拟：</strong>指读入图片或者视频，模拟车辆进场的过程。</p></li><li><p><strong>出场模拟：</strong>指读入图片或者视频，模拟车辆出场的过程。</p></li><li><p><strong>缴费模拟：</strong>模拟车主缴费过程。</p></li><li><p><strong>报表：</strong>用表格、图表等格式来动态显示数据的表格。</p></li><li><p><strong>道闸杆：</strong>用于限制车辆进出停车场的升降杆</p></li></ul><h1 id="三、业务流程"><a href="#三、业务流程" class="headerlink" title="三、业务流程"></a>三、业务流程</h1><p>当车辆驶入停车场时，系统通过外置摄像头来获取图像信息（本系统通过读取视频或者图片来进行模拟），通过图像识别来获取车牌信息，进而获取车型信息（车型信息通过车牌的底色来判定，黄底黑字为大型车，蓝底白字为小型车）。</p><p>识别出车牌后，系统控制道闸杆升起（本系统通过播放抬杆动画来模拟），车辆驶入；若车辆只有临时车牌，管理员使用系统进行基本信息的登记后抬杆允许其进入。</p><p>车辆需要出场时，系统通过外置摄像头来获取图像信息（本系统通过读取视频或者图片来进行模拟），通过图像识别来获取车牌信息，根据之前存储的进场时间以及管理员设置的收费标准进行计费，将停车费用展示给车主。车主缴纳停车费用后，系统抬杆放行。</p><h1 id="四、用例图"><a href="#四、用例图" class="headerlink" title="四、用例图"></a>四、用例图</h1><p><img src="https://i.loli.net/2020/10/04/agfcpVnyWD1rC2u.png" alt="用例图"></p><h1 id="五、手绘原型"><a href="#五、手绘原型" class="headerlink" title="五、手绘原型"></a>五、手绘原型</h1><p><img src="https://i.loli.net/2020/10/04/exU1lgAf4s62Prt.png" alt="主页面"></p><p><img src="https://i.loli.net/2020/10/04/Cm7DHOfcGS31NqE.png" alt="显示历史记录"></p><p><img src="https://i.loli.net/2020/10/04/uf93EzjehkO8vsQ.png" alt="登记信息页面"></p><p><img src="https://i.loli.net/2020/10/04/s8AZkPQUgiatyXT.png" alt="设置收费标准"></p><p><img src="https://i.loli.net/2020/10/04/r3fhC4VaZuUxTDJ.png" alt="报表"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【项目复盘】网络软件开发综合实践</title>
       <link href="/posts/project-review-score-system/"/>
       <url>/posts/project-review-score-system/</url>
