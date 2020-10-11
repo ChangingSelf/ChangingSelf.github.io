@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-09-27T09:56:29.953Z</updated>
+  <updated>2020-09-27T09:40:30.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -21,23 +21,17 @@
     <link href="https://yxchangingself.xyz/posts/project-review-score-system/"/>
     <id>https://yxchangingself.xyz/posts/project-review-score-system/</id>
     <published>2020-09-27T09:40:30.000Z</published>
-    <updated>2020-09-27T09:56:29.953Z</updated>
+    <updated>2020-09-27T09:40:30.000Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;尝试使用规范化的复盘方法来进行复盘总结，本文使用的方法来自：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/225812258&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;尝试使用规范化的复盘方法来进行复盘总结，本文使用的方法来自：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/225812258&quot;&gt;如何做好一次复盘？这是我的经验-少数派&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -47,22 +41,21 @@
     <link href="https://yxchangingself.xyz/posts/graduate_internship_2/"/>
     <id>https://yxchangingself.xyz/posts/graduate_internship_2/</id>
     <published>2020-08-10T13:08:27.000Z</published>
-    <updated>2020-08-11T13:27:41.616Z</updated>
+    <updated>2020-08-10T13:08:27.000Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
+&lt;p&gt;前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。&lt;/p&gt;
+&lt;p&gt;学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。&lt;/p&gt;
+&lt;p&gt;2020 年 7 月 15 日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过 git 提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一开始想的是本系列先整理学习笔记，最后对本次项目进行总结。不过碍于时间不足，可能会直接将以前的旧项目改为 springboot 架构，实习最终完成的商城项目就不进行分析了，项目开源链接：&lt;a href=&quot;https://gitee.com/ChangingSelf/SpringBootMall&quot;&gt;SpringBootMall&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
@@ -76,21 +69,21 @@
     <link href="https://yxchangingself.xyz/posts/graduate_internship_1/"/>
     <id>https://yxchangingself.xyz/posts/graduate_internship_1/</id>
     <published>2020-08-10T12:59:13.000Z</published>
-    <updated>2020-08-11T13:25:25.303Z</updated>
+    <updated>2020-08-10T12:59:13.000Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
 &lt;p&gt;前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。&lt;/p&gt;
-&lt;p&gt;学习到的框架有mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立maven项目。&lt;/p&gt;
-&lt;p&gt;2020年7月15日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过git提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
+&lt;p&gt;学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。&lt;/p&gt;
+&lt;p&gt;2020 年 7 月 15 日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过 git 提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
 &lt;p&gt;本系列将会先整理学习笔记，最后对本次项目进行总结。&lt;/p&gt;
 &lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
@@ -104,7 +97,7 @@
     <link href="https://yxchangingself.xyz/posts/self-management-task-manage-v200423/"/>
     <id>https://yxchangingself.xyz/posts/self-management-task-manage-v200423/</id>
     <published>2020-04-23T15:02:27.000Z</published>
-    <updated>2020-04-23T15:56:45.620Z</updated>
+    <updated>2020-04-23T15:02:27.000Z</updated>
     
     <summary type="html">
     
@@ -114,7 +107,7 @@
     </summary>
     
     
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -124,7 +117,7 @@
     <link href="https://yxchangingself.xyz/posts/self-management-file-manage-v200417/"/>
     <id>https://yxchangingself.xyz/posts/self-management-file-manage-v200417/</id>
     <published>2020-04-17T12:05:25.000Z</published>
-    <updated>2020-04-17T14:37:15.316Z</updated>
+    <updated>2020-04-17T12:05:25.000Z</updated>
     
     <summary type="html">
     
@@ -133,7 +126,7 @@
     </summary>
     
     
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -143,14 +136,14 @@
     <link href="https://yxchangingself.xyz/posts/blog-catalogue/"/>
     <id>https://yxchangingself.xyz/posts/blog-catalogue/</id>
     <published>2020-04-16T05:56:12.000Z</published>
-    <updated>2020-08-09T09:16:53.640Z</updated>
+    <updated>2020-04-16T05:56:12.000Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始。&lt;/p&gt;
-&lt;p&gt;如果想要搜索特定内容，请结合标签、分类和站内搜索功能。部分博客有对应的B站视频，以及github库，详见各自文章的开头传送门。&lt;/p&gt;
+&lt;p&gt;如果想要搜索特定内容，请结合标签、分类和站内搜索功能。部分博客有对应的 B 站视频，以及 github 库，详见各自文章的开头传送门。&lt;/p&gt;
 &lt;p&gt;此目录并非包含本站所有文章，比如日志总结之类的不一定会放到目录。&lt;/p&gt;
-&lt;p&gt;如果觉得本站访问速度慢，可以在【友情链接】中找到&lt;a href=&quot;https://changingself.gitee.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;托管在gitee的本站链接&lt;/a&gt;，速度会快很多&lt;/p&gt;
+&lt;p&gt;如果觉得本站访问速度慢，可以在【友情链接】中找到&lt;a href=&quot;https://changingself.gitee.io/&quot;&gt;托管在 gitee 的本站链接&lt;/a&gt;，速度会快很多&lt;/p&gt;
     
     </summary>
     
@@ -165,25 +158,17 @@
     <link href="https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/"/>
     <id>https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/</id>
     <published>2020-04-05T13:50:18.000Z</published>
-    <updated>2020-04-05T15:47:15.440Z</updated>
+    <updated>2020-04-05T13:50:18.000Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;参考链接&quot;&gt;&lt;a href=&quot;#参考链接&quot; class=&quot;headerlink&quot; title=&quot;参考链接&quot;&gt;&lt;/a&gt;参考链接&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a
-        
-      
+      &lt;p&gt;2019 年 2 月 28 日的时候第一次换了主题，从从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是不实用，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
+&lt;p&gt;2020 年 4 月 5 日，也就是今天，我花了一个上午的时间将个人博客的主题换成闪烁之狐的&lt;a href=&quot;https://github.com/blinkfox/hexo-theme-matery&quot;&gt;Matery&lt;/a&gt;主题，既美观功能又丰富。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
@@ -192,21 +177,21 @@
   
   <entry>
     <title>【作业总结】python写的DES替代算法的gui小工具</title>
-    <link href="https://yxchangingself.xyz/posts/%E3%80%90%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93%E3%80%91python%E5%86%99%E7%9A%84DES%E6%9B%BF%E4%BB%A3%E7%AE%97%E6%B3%95%E7%9A%84gui%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
-    <id>https://yxchangingself.xyz/posts/%E3%80%90%E4%BD%9C%E4%B8%9A%E6%80%BB%E7%BB%93%E3%80%91python%E5%86%99%E7%9A%84DES%E6%9B%BF%E4%BB%A3%E7%AE%97%E6%B3%95%E7%9A%84gui%E5%B0%8F%E5%B7%A5%E5%85%B7/</id>
+    <link href="https://yxchangingself.xyz/posts/3043391445/"/>
+    <id>https://yxchangingself.xyz/posts/3043391445/</id>
     <published>2020-03-29T02:10:52.000Z</published>
-    <updated>2020-08-12T15:26:05.882Z</updated>
+    <updated>2020-03-29T02:10:52.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;信息安全的上机作业：实现DES替代算法，不限语言，可以调库&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/DES&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;github库传送门&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;信息安全的上机作业：实现 DES 替代算法，不限语言，可以调库&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/DES&quot;&gt;github 库传送门&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png&quot; alt=&quot;完成图&quot;&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
@@ -220,17 +205,16 @@
     <link href="https://yxchangingself.xyz/posts/self-management-archive/"/>
     <id>https://yxchangingself.xyz/posts/self-management-archive/</id>
     <published>2020-03-22T12:08:10.000Z</published>
-    <updated>2020-04-17T00:38:26.013Z</updated>
+    <updated>2020-03-22T12:08:10.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;记录2020年第12周的文件归档&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/04/05/kYWwGKu5RSsItbJ.jpg&quot; alt=&quot;我现在的桌面&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;记录 2020 年第 12 周的文件归档&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -240,17 +224,17 @@
     <link href="https://yxchangingself.xyz/posts/Reinstall_win10/"/>
     <id>https://yxchangingself.xyz/posts/Reinstall_win10/</id>
     <published>2020-03-14T13:01:12.000Z</published>
-    <updated>2020-04-06T09:38:34.487Z</updated>
+    <updated>2020-03-14T13:01:12.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;折腾了三个多小时终于把win10重装好了，这是我第二次自己装系统。&lt;/p&gt;
+      &lt;p&gt;折腾了三个多小时终于把 win10 重装好了，这是我第二次自己装系统。&lt;/p&gt;
 &lt;p&gt;本文记录了我这次重装系统的过程，以及一些从中学到的新知识，供参考。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="windows" scheme="https://yxChangingSelf.xyz/tags/windows/"/>
@@ -262,7 +246,7 @@
     <link href="https://yxchangingself.xyz/posts/sound-card-data-acquisition/"/>
     <id>https://yxchangingself.xyz/posts/sound-card-data-acquisition/</id>
     <published>2020-03-08T03:05:47.000Z</published>
-    <updated>2020-04-16T00:56:28.982Z</updated>
+    <updated>2020-03-08T03:05:47.000Z</updated>
     
     <summary type="html">
     
@@ -271,17 +255,17 @@
 &lt;ol&gt;
 &lt;li&gt;以曲线形式显示波形；&lt;/li&gt;
 &lt;li&gt;利用数字滤波器对数据进行平滑滤波；&lt;/li&gt;
-&lt;li&gt;对声音信号进行FFT变化，计算信号的主频。&lt;/li&gt;
+&lt;li&gt;对声音信号进行 FFT 变化，计算信号的主频。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对于缺乏很多前置知识的我们专业的学生来说，这确实非常有难度。&lt;/p&gt;
 &lt;p&gt;到编写本文的时候，已经进行了三天，基本功能编写完成，还需要进一步优化，&lt;del&gt;为了能够偷懒，&lt;/del&gt;为了让队员能够更加了解本次项目，以及我自己能够从中学到东西，撰写本文如下。&lt;/p&gt;
 &lt;p&gt;本文并不专业，作者本身不是控制专业，所以出现错误在所难免，&lt;strong&gt;本文不是教程，仅仅是一次作业的记录复盘，不能保证正确性。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://gitee.com/ChangingSelf/sound-card-data-acquisition&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;码云仓库开源链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gitee.com/ChangingSelf/sound-card-data-acquisition&quot;&gt;码云仓库开源链接&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
@@ -295,19 +279,19 @@
     <link href="https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/"/>
     <id>https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/</id>
     <published>2020-03-03T03:11:45.000Z</published>
-    <updated>2020-03-14T03:56:45.681Z</updated>
+    <updated>2020-03-03T03:11:45.000Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。&lt;/p&gt;
-&lt;p&gt;在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。&lt;/p&gt;
+&lt;p&gt;在这个练习中，我主要是打算熟悉一下 java 的文件操作，因为我发现我学了 java 之后基本没有写过文件读写。&lt;/p&gt;
 &lt;p&gt;本文主要总结一下本练习用到的一些知识点，方便下次使用。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/fileio-exercises&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本文对应的github库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/fileio-exercises&quot;&gt;本文对应的 github 库&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
@@ -319,19 +303,19 @@
     <link href="https://yxchangingself.xyz/posts/Scrapy_spider_1/"/>
     <id>https://yxchangingself.xyz/posts/Scrapy_spider_1/</id>
     <published>2020-02-18T04:22:13.000Z</published>
-    <updated>2020-03-14T03:56:45.681Z</updated>
+    <updated>2020-02-18T04:22:13.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;很久没写爬虫了，又重新开始使用scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。&lt;/p&gt;
-&lt;p&gt;本文将初级知识点简单梳理，实现了一个HelloWorld级别的Scrapy爬虫。&lt;/p&gt;
-&lt;p&gt;本文适用于Scrapy 1.6.0，结合了自己的理解，可能理解有错误，欢迎在下面评论区指出。&lt;/p&gt;
+      &lt;p&gt;很久没写爬虫了，又重新开始使用 scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。&lt;/p&gt;
+&lt;p&gt;本文将初级知识点简单梳理，实现了一个 HelloWorld 级别的 Scrapy 爬虫。&lt;/p&gt;
+&lt;p&gt;本文适用于 Scrapy 1.6.0，结合了自己的理解，可能理解有错误，欢迎在下面评论区指出。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;不包含安装教程。&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="spider" scheme="https://yxChangingSelf.xyz/tags/spider/"/>
@@ -347,17 +331,17 @@
     <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_2/"/>
     <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_2/</id>
     <published>2020-02-04T14:24:41.000Z</published>
-    <updated>2020-03-14T03:56:45.681Z</updated>
+    <updated>2020-02-04T14:24:41.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;为了修改与添加方便，将干员的信息放在简历类Resume中，简历信息使用xml文件存储，在启动时加载进来。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本项目连载github库地址&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;为了修改与添加方便，将干员的信息放在简历类 Resume 中，简历信息使用 xml 文件存储，在启动时加载进来。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot;&gt;本项目连载 github 库地址&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
@@ -371,15 +355,15 @@
     <link href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"/>
     <id>https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/</id>
     <published>2020-01-28T04:15:33.000Z</published>
-    <updated>2020-03-14T03:56:45.680Z</updated>
+    <updated>2020-01-28T04:15:33.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。&lt;/p&gt;
-&lt;p&gt;问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
-fatal: Could not read from remote repository.                                         
-Please make sure you have the correct access rights                             `    &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;大意是我没有权限，也就是ssh没有配好。&lt;/p&gt;
+      &lt;p&gt;我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。&lt;/p&gt;
+&lt;p&gt;问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ERROR: Permission to HaneChiri&amp;#x2F;HaneChiri.github.io.git denied to ChangingSelf.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fatal: Could not read from remote repository.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Please make sure you have the correct access rights                             &amp;#96;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;大意是我没有权限，也就是 ssh 没有配好。&lt;/p&gt;
     
     </summary>
     
@@ -398,18 +382,18 @@ Please make sure you have the correct access rights                             
     <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_1/"/>
     <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_1/</id>
     <published>2020-01-27T14:20:48.000Z</published>
-    <updated>2020-03-14T03:56:45.680Z</updated>
+    <updated>2020-01-27T14:20:48.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;好友封掣写了一个&lt;a href=&quot;https://github.com/lollipopnougat/arknights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;明日方舟模拟寻访&lt;/a&gt;，于是也想做一个来作为java的练手，这学期写课设的时候就体现出我平时写代码写太少了。&lt;/p&gt;
+      &lt;p&gt;好友封掣写了一个&lt;a href=&quot;https://github.com/lollipopnougat/arknights&quot;&gt;明日方舟模拟寻访&lt;/a&gt;，于是也想做一个来作为 java 的练手，这学期写课设的时候就体现出我平时写代码写太少了。&lt;/p&gt;
 &lt;p&gt;当然，经过这学期末的编码轰炸，我现在可不敢像以前一样没有计划地直接开始，先想好它的架构，随后再开始编写，并留下系列博文记录，供以后参考。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;本项目连载github库地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot;&gt;本项目连载 github 库地址&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
@@ -421,11 +405,11 @@ Please make sure you have the correct access rights                             
     <link href="https://yxchangingself.xyz/posts/git_amend_commited_info/"/>
     <id>https://yxchangingself.xyz/posts/git_amend_commited_info/</id>
     <published>2020-01-15T03:05:44.000Z</published>
-    <updated>2020-03-14T03:56:45.679Z</updated>
+    <updated>2020-01-15T03:05:44.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;换了一个github账号，想把以前的仓库push到新的账号上，但是commit的用户名和邮箱信息还是以前的，想修改成新的用户信息。&lt;/p&gt;
+      &lt;p&gt;换了一个 github 账号，想把以前的仓库 push 到新的账号上，但是 commit 的用户名和邮箱信息还是以前的，想修改成新的用户信息。&lt;/p&gt;
     
     </summary>
     
@@ -442,28 +426,28 @@ Please make sure you have the correct access rights                             
     <link href="https://yxchangingself.xyz/posts/IMS_base_on_LAN/"/>
     <id>https://yxchangingself.xyz/posts/IMS_base_on_LAN/</id>
     <published>2020-01-02T07:06:27.000Z</published>
-    <updated>2020-03-14T03:56:45.678Z</updated>
+    <updated>2020-01-02T07:06:27.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。&lt;/p&gt;
-&lt;p&gt;由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更好维护一些，但是python写起来应该会更加轻松（个人看法）。&lt;/p&gt;
+      &lt;p&gt;本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于 LAN 的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。&lt;/p&gt;
+&lt;p&gt;由于以前自学过 c++网络编程，写了个简易的聊天室（bug 百出），所有刚开始也想用 c++来写，新建了 MFC 项目正在画界面的时候，才想起今时不同往日，我会的语言不止 c++了，还有 java 和 python。最后决定用 python，虽说 java 写的可能以后会更好扩展更好维护一些，但是 python 写起来应该会更加轻松（个人看法）。&lt;/p&gt;
 &lt;p&gt;本文基于我当时写的课设报告，在之后可能会将其中学到的知识整理成其他的博文，并在此文中列出。&lt;/p&gt;
-&lt;p&gt;b站视频已上传：&lt;a href=&quot;https://www.bilibili.com/video/av83477871/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;【课设思路分享】基于LAN的即时通讯软件&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;对应github库传送门：&lt;a href=&quot;https://github.com/ChangingSelf/simuqq&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;simuqq&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;b 站视频已上传：&lt;a href=&quot;https://www.bilibili.com/video/av83477871/&quot;&gt;【课设思路分享】基于 LAN 的即时通讯软件&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对应 github 库传送门：&lt;a href=&quot;https://github.com/ChangingSelf/simuqq&quot;&gt;simuqq&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;比较长，配合侧边栏目录食用。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="过程复盘" scheme="https://yxChangingSelf.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+      <category term="复盘总结" scheme="https://yxChangingSelf.xyz/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/"/>
     
     
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
-      <category term="internet" scheme="https://yxChangingSelf.xyz/tags/internet/"/>
-    
       <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
+    
+      <category term="internet" scheme="https://yxChangingSelf.xyz/tags/internet/"/>
     
   </entry>
   
@@ -472,7 +456,7 @@ Please make sure you have the correct access rights                             
     <link href="https://yxchangingself.xyz/posts/categories_description/"/>
     <id>https://yxchangingself.xyz/posts/categories_description/</id>
     <published>2019-12-31T12:30:06.000Z</published>
-    <updated>2020-03-14T03:56:45.678Z</updated>
+    <updated>2019-12-31T12:30:06.000Z</updated>
     
     <summary type="html">
     
@@ -500,7 +484,7 @@ Please make sure you have the correct access rights                             
     <link href="https://yxchangingself.xyz/posts/hello_world/"/>
     <id>https://yxchangingself.xyz/posts/hello_world/</id>
     <published>2019-12-30T13:01:12.000Z</published>
-    <updated>2020-03-14T13:14:32.130Z</updated>
+    <updated>2019-12-30T13:01:12.000Z</updated>
     
     <summary type="html">
     

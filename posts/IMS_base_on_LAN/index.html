@@ -1,448 +1,16 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-
-
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="【课设总结】基于LAN的即时通信软件, 憧憬少的个人博客">
-    <meta name="description" content="本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。
-由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>【课设总结】基于LAN的即时通信软件 | 憧憬少的个人博客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
-    
-    <script src="/libs/jquery/jquery.min.js"></script>
-    
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
-
-
-<body>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
-    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
-
-
-
-
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">憧憬少的个人博客</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">憧憬少的个人博客</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
-</div>
-
-        </div>
-
-        
-    </nav>
-
-</header>
-
-    
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">【课设总结】基于LAN的即时通信软件</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<main class="post-container content">
-
-    
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        height: calc(100vh - 250px);
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
-                            </a>
-                        
-                            <a href="/tags/internet/">
-                                <span class="chip bg-color">internet</span>
-                            </a>
-                        
-                            <a href="/tags/tkinter/">
-                                <span class="chip bg-color">tkinter</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                过程复盘
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-02
-                </div>
-                
-
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-14
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.6k
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    21 分
-                </div>
-                
-				
-                
-            </div>
-            
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <p>本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于LAN的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。</p>
-<p>由于以前自学过c++网络编程，写了个简易的聊天室（bug百出），所有刚开始也想用c++来写，新建了MFC项目正在画界面的时候，才想起今时不同往日，我会的语言不止c++了，还有java和python。最后决定用python，虽说java写的可能以后会更好扩展更好维护一些，但是python写起来应该会更加轻松（个人看法）。</p>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【课设总结】基于LAN的即时通信软件 - 憧憬少的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="憧憬少的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="憧憬少的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于 LAN 的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。 由于以前自学过 c++网络编程，写了个简易的聊天室（bug 百出），所有刚开始也想用 c++来写，新建了 MFC 项目正在画界面的时候，才想起今时不同往日，我会的语言不止 c++了，还有 java 和 python。最后决定用 python，虽说 jav"><meta property="og:type" content="blog"><meta property="og:title" content="【课设总结】基于LAN的即时通信软件"><meta property="og:url" content="https://yxchangingself.xyz/posts/IMS_base_on_LAN/"><meta property="og:site_name" content="憧憬少的个人博客"><meta property="og:description" content="本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于 LAN 的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。 由于以前自学过 c++网络编程，写了个简易的聊天室（bug 百出），所有刚开始也想用 c++来写，新建了 MFC 项目正在画界面的时候，才想起今时不同往日，我会的语言不止 c++了，还有 java 和 python。最后决定用 python，虽说 jav"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102200520.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201641.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201905.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102202345.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102151916.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png"><meta property="og:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png"><meta property="article:published_time" content="2020-01-02T07:06:27.000Z"><meta property="article:modified_time" content="2020-01-02T07:06:27.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="python"><meta property="article:tag" content="tkinter"><meta property="article:tag" content="internet"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/IMS_base_on_LAN/"},"headline":"憧憬少的个人博客","image":["https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154415.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102200520.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201641.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102201905.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102202345.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102151916.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png","https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png"],"datePublished":"2020-01-02T07:06:27.000Z","dateModified":"2020-01-02T07:06:27.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于 LAN 的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。 由于以前自学过 c++网络编程，写了个简易的聊天室（bug 百出），所有刚开始也想用 c++来写，新建了 MFC 项目正在画界面的时候，才想起今时不同往日，我会的语言不止 c++了，还有 java 和 python。最后决定用 python，虽说 jav"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/IMS_base_on_LAN/"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.0.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-01-02T07:06:27.000Z" title="2020-01-02T07:06:27.000Z">2020-01-02</time>发表</span><span class="level-item"><time dateTime="2020-01-02T07:06:27.000Z" title="2020-01-02T07:06:27.000Z">2020-01-02</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/">复盘总结</a></span><span class="level-item">41 分钟读完 (大约6118个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">【课设总结】基于LAN的即时通信软件</h1><div class="content"><p>本学期开了计算机网络课程，期末的课程设计我选了这个题目——基于 LAN 的即时通讯软件，题目就只有这么短，剩下的全部自己发挥，不限平台不限语言。</p>
+<p>由于以前自学过 c++网络编程，写了个简易的聊天室（bug 百出），所有刚开始也想用 c++来写，新建了 MFC 项目正在画界面的时候，才想起今时不同往日，我会的语言不止 c++了，还有 java 和 python。最后决定用 python，虽说 java 写的可能以后会更好扩展更好维护一些，但是 python 写起来应该会更加轻松（个人看法）。</p>
 <p>本文基于我当时写的课设报告，在之后可能会将其中学到的知识整理成其他的博文，并在此文中列出。</p>
-<p>b站视频已上传：<a href="https://www.bilibili.com/video/av83477871/" target="_blank" rel="noopener">【课设思路分享】基于LAN的即时通讯软件</a></p>
-<p>对应github库传送门：<a href="https://github.com/ChangingSelf/simuqq" target="_blank" rel="noopener">simuqq</a></p>
+<p>b 站视频已上传：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av83477871/">【课设思路分享】基于 LAN 的即时通讯软件</a></p>
+<p>对应 github 库传送门：<a target="_blank" rel="noopener" href="https://github.com/ChangingSelf/simuqq">simuqq</a></p>
 <p>比较长，配合侧边栏目录食用。</p>
 <a id="more"></a>
 
@@ -491,78 +59,12 @@
 </ul>
 <h1 id="概要设计及对应代码"><a href="#概要设计及对应代码" class="headerlink" title="概要设计及对应代码"></a>概要设计及对应代码</h1><p>为了方便阅读，就将代码部分与设计部分放在一起。</p>
 <h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102154630.png" alt="类图"></p>
-<h3 id="界面类"><a href="#界面类" class="headerlink" title="界面类"></a>界面类</h3><p>图形界面使用的是python自带的tkinter模块。对每个界面，单独编写一个类，放在单独的模块中，存放在代码根目录下的gui文件夹内。而业务逻辑另外编写client类和server类。</p>
-<p>令界面与业务逻辑结合的方式是，在client类中初始化界面时，将自身的处理函数作为回调函数传入界面类中，从而使界面的组件与回调函数绑定。</p>
+<h3 id="界面类"><a href="#界面类" class="headerlink" title="界面类"></a>界面类</h3><p>图形界面使用的是 python 自带的 tkinter 模块。对每个界面，单独编写一个类，放在单独的模块中，存放在代码根目录下的 gui 文件夹内。而业务逻辑另外编写 client 类和 server 类。</p>
+<p>令界面与业务逻辑结合的方式是，在 client 类中初始化界面时，将自身的处理函数作为回调函数传入界面类中，从而使界面的组件与回调函数绑定。</p>
 <h3 id="登录界面代码示例"><a href="#登录界面代码示例" class="headerlink" title="登录界面代码示例"></a>登录界面代码示例</h3><p>因为界面不是重点，故仅放出登录界面代码，其他两个界面类类似。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token triple-quoted-string string">'''
-登录模块login_dlg.py
-展示登录窗口并实现登录功能
-'''</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">登录模块login_dlg.py</span></span><br><span class="line"><span class="string">展示登录窗口并实现登录功能</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">import</span> gui.chat_dlg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginDlg</span>(<span class="params">tk.Frame</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, loginCallback, regCallback, master=None</span>):</span></span><br><span class="line">        super().__init__(master=master)</span><br><span class="line">        self.master = master</span><br><span class="line">        self.geometry()</span><br><span class="line">        <span class="comment"># 设置按钮回调函数</span></span><br><span class="line">        self.loginCallback = loginCallback</span><br><span class="line">        self.regCallback = regCallback</span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        self.userName = tk.StringVar()  <span class="comment"># 与文本框双向绑定</span></span><br><span class="line">        self.password = tk.StringVar()</span><br><span class="line">        <span class="comment"># self.pack()</span></span><br><span class="line">        <span class="comment"># self.grid(row=0,column=0)</span></span><br><span class="line">        self.createWidgets()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createWidgets</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 登录框架=============</span></span><br><span class="line">        loginLF = tk.LabelFrame(self, text=<span class="string">&#x27;登录&#x27;</span>)</span><br><span class="line">        loginLF.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, sticky=tk.E+tk.W)</span><br><span class="line">        self.loginLF = loginLF  <span class="comment"># 这里需要将它保存为属性，否则这个函数结束后会出问题</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用户名</span></span><br><span class="line">        self.userNameLab = tk.Label(loginLF, text=<span class="string">&#x27;用户名&#x27;</span>)</span><br><span class="line">        self.userNameLab.grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.userNameEntry = tk.Entry(loginLF, textvariable=self.userName)</span><br><span class="line">        self.userNameEntry.grid(row=<span class="number">0</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 密码框</span></span><br><span class="line">        self.passwdLab = tk.Label(loginLF, text=<span class="string">&#x27;密码&#x27;</span>)</span><br><span class="line">        self.passwdLab.grid(row=<span class="number">1</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.passwdEntry = tk.Entry(</span><br><span class="line">            loginLF, show=<span class="string">&#x27;*&#x27;</span>, textvariable=self.password)</span><br><span class="line">        self.passwdEntry.grid(row=<span class="number">1</span>, column=<span class="number">1</span>, columnspan=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 登录按钮</span></span><br><span class="line">        self.loginBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">&#x27;登录&#x27;</span>, command=self.loginCallback)</span><br><span class="line">        self.loginBtn.grid(row=<span class="number">2</span>, column=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 注册按钮</span></span><br><span class="line">        self.signupBtn = tk.Button(</span><br><span class="line">            loginLF, text=<span class="string">&#x27;注册&#x27;</span>, command=self.regCallback)</span><br><span class="line">        self.signupBtn.grid(row=<span class="number">2</span>, column=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(self.userName.get())</span><br><span class="line">        print(self.password.get())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">geometry</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.master.geometry(<span class="string">&#x27;300x100&#x27;</span>)<span class="comment">#用于调整窗口大小</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span>():</span></span><br><span class="line">    <span class="keyword">pass</span><span class="comment">#用于在本模块内测试用的函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    window = tk.Tk()</span><br><span class="line">    loginDlg = LoginDlg(test2, test2, window)</span><br><span class="line">    loginDlg.mainloop()</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">import</span> tkinter <span class="token keyword">as</span> tk
-<span class="token keyword">import</span> gui<span class="token punctuation">.</span>chat_dlg
-
-
-<span class="token keyword">class</span> <span class="token class-name">LoginDlg</span><span class="token punctuation">(</span>tk<span class="token punctuation">.</span>Frame<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> loginCallback<span class="token punctuation">,</span> regCallback<span class="token punctuation">,</span> master<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        super<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>master<span class="token operator">=</span>master<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>master <span class="token operator">=</span> master
-        self<span class="token punctuation">.</span>geometry<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 设置按钮回调函数</span>
-        self<span class="token punctuation">.</span>loginCallback <span class="token operator">=</span> loginCallback
-        self<span class="token punctuation">.</span>regCallback <span class="token operator">=</span> regCallback
-        <span class="token comment" spellcheck="true"># 初始化</span>
-        self<span class="token punctuation">.</span>userName <span class="token operator">=</span> tk<span class="token punctuation">.</span>StringVar<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 与文本框双向绑定</span>
-        self<span class="token punctuation">.</span>password <span class="token operator">=</span> tk<span class="token punctuation">.</span>StringVar<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># self.pack()</span>
-        <span class="token comment" spellcheck="true"># self.grid(row=0,column=0)</span>
-        self<span class="token punctuation">.</span>createWidgets<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">createWidgets</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true"># 登录框架=============</span>
-        loginLF <span class="token operator">=</span> tk<span class="token punctuation">.</span>LabelFrame<span class="token punctuation">(</span>self<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'登录'</span><span class="token punctuation">)</span>
-        loginLF<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> sticky<span class="token operator">=</span>tk<span class="token punctuation">.</span>E<span class="token operator">+</span>tk<span class="token punctuation">.</span>W<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>loginLF <span class="token operator">=</span> loginLF  <span class="token comment" spellcheck="true"># 这里需要将它保存为属性，否则这个函数结束后会出问题</span>
-
-        <span class="token comment" spellcheck="true"># 用户名</span>
-        self<span class="token punctuation">.</span>userNameLab <span class="token operator">=</span> tk<span class="token punctuation">.</span>Label<span class="token punctuation">(</span>loginLF<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'用户名'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>userNameLab<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>userNameEntry <span class="token operator">=</span> tk<span class="token punctuation">.</span>Entry<span class="token punctuation">(</span>loginLF<span class="token punctuation">,</span> textvariable<span class="token operator">=</span>self<span class="token punctuation">.</span>userName<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>userNameEntry<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> columnspan<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 密码框</span>
-        self<span class="token punctuation">.</span>passwdLab <span class="token operator">=</span> tk<span class="token punctuation">.</span>Label<span class="token punctuation">(</span>loginLF<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'密码'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>passwdLab<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>passwdEntry <span class="token operator">=</span> tk<span class="token punctuation">.</span>Entry<span class="token punctuation">(</span>
-            loginLF<span class="token punctuation">,</span> show<span class="token operator">=</span><span class="token string">'*'</span><span class="token punctuation">,</span> textvariable<span class="token operator">=</span>self<span class="token punctuation">.</span>password<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>passwdEntry<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> columnspan<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 登录按钮</span>
-        self<span class="token punctuation">.</span>loginBtn <span class="token operator">=</span> tk<span class="token punctuation">.</span>Button<span class="token punctuation">(</span>
-            loginLF<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'登录'</span><span class="token punctuation">,</span> command<span class="token operator">=</span>self<span class="token punctuation">.</span>loginCallback<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>loginBtn<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 注册按钮</span>
-        self<span class="token punctuation">.</span>signupBtn <span class="token operator">=</span> tk<span class="token punctuation">.</span>Button<span class="token punctuation">(</span>
-            loginLF<span class="token punctuation">,</span> text<span class="token operator">=</span><span class="token string">'注册'</span><span class="token punctuation">,</span> command<span class="token operator">=</span>self<span class="token punctuation">.</span>regCallback<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>signupBtn<span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>userName<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>password<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">geometry</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        self<span class="token punctuation">.</span>master<span class="token punctuation">.</span>geometry<span class="token punctuation">(</span><span class="token string">'300x100'</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#用于调整窗口大小</span>
-
-
-
-<span class="token keyword">def</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">pass</span><span class="token comment" spellcheck="true">#用于在本模块内测试用的函数</span>
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    window <span class="token operator">=</span> tk<span class="token punctuation">.</span>Tk<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    loginDlg <span class="token operator">=</span> LoginDlg<span class="token punctuation">(</span>test2<span class="token punctuation">,</span> test2<span class="token punctuation">,</span> window<span class="token punctuation">)</span>
-    loginDlg<span class="token punctuation">.</span>mainloop<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="客户端类Client"><a href="#客户端类Client" class="headerlink" title="客户端类Client"></a>客户端类Client</h3><p>客户端掌握着界面对象的引用，在初始化它们时，将自身的处理函数传入给它们，以便在触发界面事件时调用。</p>
+<h3 id="客户端类-Client"><a href="#客户端类-Client" class="headerlink" title="客户端类 Client"></a>客户端类 Client</h3><p>客户端掌握着界面对象的引用，在初始化它们时，将自身的处理函数传入给它们，以便在触发界面事件时调用。</p>
 <p>客户端主要提供了以下方法：</p>
 <table>
 <thead>
@@ -577,7 +79,7 @@
 </tr>
 <tr>
 <td>login</td>
-<td>登录，需要调用connect，由服务端进行合法性检测</td>
+<td>登录，需要调用 connect，由服务端进行合法性检测</td>
 </tr>
 <tr>
 <td>register</td>
@@ -593,22 +95,14 @@
 </tr>
 </tbody></table>
 <p>为了客户端与服务端交流的便利，我自定义了消息格式，所以发送时需要封装，接收时需要解析，下文会讲。</p>
-<h3 id="服务端类Server"><a href="#服务端类Server" class="headerlink" title="服务端类Server"></a>服务端类Server</h3><p>服务端没有界面（做了就做不完了），负责接收连接以及转发客户端之间的聊天消息。ip以及端口是固定的。</p>
-<h2 id="数据文件格式"><a href="#数据文件格式" class="headerlink" title="数据文件格式"></a>数据文件格式</h2><p>已经注册的账号信息使用json文件保存（即<code>account_database.json</code>），保存格式如下：</p>
-<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
-    <span class="token property">"用户名1"</span><span class="token operator">:</span><span class="token punctuation">{</span>
-        <span class="token property">"password"</span><span class="token operator">:</span><span class="token string">"密码1"</span><span class="token punctuation">,</span>
-        <span class="token property">"registerTime"</span><span class="token operator">:</span>注册时间<span class="token number">1</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token property">"用户名2"</span><span class="token operator">:</span><span class="token punctuation">{</span>
-        <span class="token property">"password"</span><span class="token operator">:</span><span class="token string">"密码2"</span><span class="token punctuation">,</span>
-        <span class="token property">"registerTime"</span><span class="token operator">:</span>注册时间<span class="token number">2</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="服务端类-Server"><a href="#服务端类-Server" class="headerlink" title="服务端类 Server"></a>服务端类 Server</h3><p>服务端没有界面（做了就做不完了），负责接收连接以及转发客户端之间的聊天消息。ip 以及端口是固定的。</p>
+<h2 id="数据文件格式"><a href="#数据文件格式" class="headerlink" title="数据文件格式"></a>数据文件格式</h2><p>已经注册的账号信息使用 json 文件保存（即<code>account_database.json</code>），保存格式如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;用户名1&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="string">&quot;密码1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;registerTime&quot;</span>: 注册时间<span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;用户名2&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="string">&quot;密码2&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;registerTime&quot;</span>: 注册时间<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>使用用户名作为键，每个用户对应一个密码以及一个注册时间。</p>
 <h2 id="自定义消息"><a href="#自定义消息" class="headerlink" title="自定义消息"></a>自定义消息</h2><p><strong>（这个是我自己规定的服务端和客户端之间交换信息的格式）</strong></p>
 <p>客户端不直接与另一个客户端通信，而是通过服务端转发。</p>
-<p>客户端与服务端之间发送规定格式的json字符串来交流，此字符串以下称之为“消息”，聊天的文字称作“聊天消息”。此格式解析出来是python的一个字典，也就是json里面的对象，可以方便地使用键值对来找到需要的字段值。字段如下（不是所有的字段都同时被设置）：</p>
+<p>客户端与服务端之间发送规定格式的 json 字符串来交流，此字符串以下称之为“消息”，聊天的文字称作“聊天消息”。此格式解析出来是 python 的一个字典，也就是 json 里面的对象，可以方便地使用键值对来找到需要的字段值。字段如下（不是所有的字段都同时被设置）：</p>
 <table>
 <thead>
 <tr>
@@ -645,70 +139,20 @@
 <td>传递的数据</td>
 </tr>
 </tbody></table>
-<p>其中type字段的值以及对应的必选字段如下：</p>
+<p>其中 type 字段的值以及对应的必选字段如下：</p>
 <ul>
-<li>登录login：必须设置userName和password，用于客户端发送登录请求以及服务端发送确认；</li>
-<li>数据刷新data：必须设置data，且为字典，用于服务端给客户端发送更新后的当前在线列表；</li>
-<li>聊天消息msg: 必须设置message和userName，用于客户端向另一个客户端发送聊天消息时使用，其中message是聊天消息的内容。当源客户端向服务端发送此消息时，userName是目的客户端的用户名，服务端接收到消息之后，将userName改为源客户端的用户名，然后转发消息给目的客户端；</li>
-<li>提示info: 必须设置infoStr，发送提示信息</li>
-<li>错误err:必须设置errStr，发送错误信息</li>
+<li>登录 login：必须设置 userName 和 password，用于客户端发送登录请求以及服务端发送确认；</li>
+<li>数据刷新 data：必须设置 data，且为字典，用于服务端给客户端发送更新后的当前在线列表；</li>
+<li>聊天消息 msg: 必须设置 message 和 userName，用于客户端向另一个客户端发送聊天消息时使用，其中 message 是聊天消息的内容。当源客户端向服务端发送此消息时，userName 是目的客户端的用户名，服务端接收到消息之后，将 userName 改为源客户端的用户名，然后转发消息给目的客户端；</li>
+<li>提示 info: 必须设置 infoStr，发送提示信息</li>
+<li>错误 err:必须设置 errStr，发送错误信息</li>
 </ul>
 <h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册时客户端读取数据文件并检查注册信息合法性，用户名不可重复，密码可以重复，用户名和密码都是字符串。</p>
-<p>当注册信息合法，就组装json字符串，并写入数据文件。</p>
+<p>当注册信息合法，就组装 json 字符串，并写入数据文件。</p>
 <p><strong>注意：这里本来应该是客户端将注册信息发送给服务端，然后服务端修改数据文件的，但是我为了防止自己写不完，就简化了这个流程</strong></p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#...</span>
-<span class="token keyword">import</span> utility<span class="token comment" spellcheck="true">#只强调一下这个是自定义模块</span>
-<span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true">#...</span>
-    <span class="token keyword">def</span> <span class="token function">register</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        注册
-        在填写了用户名和密码之后，如果信息合法，则将信息写入数据文件
-        :return: 注册成功返回0,失败返回-1
-        '''</span>
-        <span class="token comment" spellcheck="true"># 从登录对话框获取信息</span>
-        userName <span class="token operator">=</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'loginDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>userName<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        password <span class="token operator">=</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'loginDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>password<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#...</span></span><br><span class="line"><span class="keyword">import</span> utility<span class="comment">#只强调一下这个是自定义模块</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="comment">#...</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        注册</span></span><br><span class="line"><span class="string">        在填写了用户名和密码之后，如果信息合法，则将信息写入数据文件</span></span><br><span class="line"><span class="string">        :return: 注册成功返回0,失败返回-1</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">&#x27;loginDlg&#x27;</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">&#x27;loginDlg&#x27;</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            utility.showerror(<span class="string">&#x27;用户名不能为空&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            utility.showerror(<span class="string">&#x27;密码不能为空&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> open(self.dataFile, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">            <span class="comment"># 使用a+方式打开，防止文件内容被覆盖</span></span><br><span class="line">            fp.seek(<span class="number">0</span>)  <span class="comment"># 调整指针到开头</span></span><br><span class="line">            accountStr = fp.read()</span><br><span class="line">            <span class="keyword">if</span> accountStr == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">                <span class="comment"># 如果文件内没有内容，即刚刚创建</span></span><br><span class="line">                accountData = &#123;&#125;</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 否则读取文件内容</span></span><br><span class="line">                fp.seek(<span class="number">0</span>)</span><br><span class="line">                accountData = json.loads(accountStr)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> userName <span class="keyword">in</span> accountData.keys():</span><br><span class="line">                utility.showerror(<span class="string">&#x27;该用户名已经被注册&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 写入数据文件</span></span><br><span class="line">            accountData.update(&#123;</span><br><span class="line">                userName: &#123;</span><br><span class="line">                    <span class="string">&#x27;password&#x27;</span>: password,</span><br><span class="line">                    <span class="string">&#x27;registerTime&#x27;</span>: time.time()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            utility.showinfo(<span class="string">&#x27;注册成功！&#x27;</span>)</span><br><span class="line">            fp.seek(<span class="number">0</span>)</span><br><span class="line">            fp.truncate()  <span class="comment"># 只保留从开头到当前位置，其余删除#当前位置为开头，故为全部删除</span></span><br><span class="line">            json.dump(accountData, fp, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
-        <span class="token comment" spellcheck="true"># 检查合法性</span>
-        <span class="token keyword">if</span> userName <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">:</span>
-            utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span><span class="token string">'用户名不能为空'</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">if</span> password <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">:</span>
-            utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span><span class="token string">'密码不能为空'</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-
-        <span class="token keyword">with</span> open<span class="token punctuation">(</span>self<span class="token punctuation">.</span>dataFile<span class="token punctuation">,</span> <span class="token string">'a+'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> fp<span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 使用a+方式打开，防止文件内容被覆盖</span>
-            fp<span class="token punctuation">.</span>seek<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 调整指针到开头</span>
-            accountStr <span class="token operator">=</span> fp<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> accountStr <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">:</span>
-                <span class="token comment" spellcheck="true"># 如果文件内没有内容，即刚刚创建</span>
-                accountData <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span>
-                <span class="token comment" spellcheck="true"># 否则读取文件内容</span>
-                fp<span class="token punctuation">.</span>seek<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-                accountData <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>accountStr<span class="token punctuation">)</span>
-
-            <span class="token keyword">if</span> userName <span class="token keyword">in</span> accountData<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span><span class="token string">'该用户名已经被注册'</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-
-            <span class="token comment" spellcheck="true"># 写入数据文件</span>
-            accountData<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">{</span>
-                userName<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-                    <span class="token string">'password'</span><span class="token punctuation">:</span> password<span class="token punctuation">,</span>
-                    <span class="token string">'registerTime'</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-            utility<span class="token punctuation">.</span>showinfo<span class="token punctuation">(</span><span class="token string">'注册成功！'</span><span class="token punctuation">)</span>
-            fp<span class="token punctuation">.</span>seek<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-            fp<span class="token punctuation">.</span>truncate<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 只保留从开头到当前位置，其余删除#当前位置为开头，故为全部删除</span>
-            json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>accountData<span class="token punctuation">,</span> fp<span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> separators<span class="token operator">=</span><span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">,</span> <span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-        <span class="token keyword">return</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这一部分的要点在于，文件中存储的是json字符串，不能简单地添加到文件末尾，而是需要将数据先读取出来，添加完数据后，再将整个文件覆盖。</p>
+<p>这一部分的要点在于，文件中存储的是 json 字符串，不能简单地添加到文件末尾，而是需要将数据先读取出来，添加完数据后，再将整个文件覆盖。</p>
 <h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>客户端首先尝试连接服务端，如果成功再进行下一步。</p>
 <h3 id="请求登录"><a href="#请求登录" class="headerlink" title="请求登录"></a>请求登录</h3><p>客户端向服务端发送登录请求消息，并等待服务端的确认消息。</p>
 <p><strong>登录请求消息的结构：</strong></p>
@@ -732,22 +176,11 @@
 <td>密码输入框中的值</td>
 </tr>
 </tbody></table>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">sendLoginData</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> userName<span class="token punctuation">:</span> str<span class="token punctuation">,</span> password<span class="token punctuation">:</span> str<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        发送登录数据
-        '''</span>
-        <span class="token comment" spellcheck="true"># 构造并发送消息</span>
-        accountData <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token string">'type'</span><span class="token punctuation">:</span> <span class="token string">'login'</span><span class="token punctuation">,</span>
-            <span class="token string">'userName'</span><span class="token punctuation">:</span> userName<span class="token punctuation">,</span>
-            <span class="token string">'password'</span><span class="token punctuation">:</span> password
-        <span class="token punctuation">}</span>
-        accountStr <span class="token operator">=</span> utility<span class="token punctuation">.</span>dumpJson<span class="token punctuation">(</span>accountData<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>accountStr<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">sendLoginData</span>(<span class="params">self, userName: str, password: str</span>):</span></span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">       发送登录数据</span></span><br><span class="line"><span class="string">       &#x27;&#x27;&#x27;</span></span><br><span class="line">       <span class="comment"># 构造并发送消息</span></span><br><span class="line">       accountData = &#123;</span><br><span class="line">           <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;login&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;userName&#x27;</span>: userName,</span><br><span class="line">           <span class="string">&#x27;password&#x27;</span>: password</span><br><span class="line">       &#125;</span><br><span class="line">       accountStr = utility.dumpJson(accountData)</span><br><span class="line">       self.send(accountStr)</span><br></pre></td></tr></table></figure>
+
 <p>服务端收到登录请求消息之后，检查账号信息的合法性。会向客户端回复两种消息，错误消息或者登录确认消息。</p>
 <h3 id="处理登录请求"><a href="#处理登录请求" class="headerlink" title="处理登录请求"></a>处理登录请求</h3><h4 id="登录失败"><a href="#登录失败" class="headerlink" title="登录失败"></a>登录失败</h4><p>如果账号信息错误，服务端向此客户端发送错误消息，并断开与它的连接。错误消息包含以下字段：</p>
-<p> <strong>err消息的结构：</strong></p>
+<p><strong>err 消息的结构：</strong></p>
 <table>
 <thead>
 <tr>
@@ -764,8 +197,8 @@
 <td>错误信息</td>
 </tr>
 </tbody></table>
-<p>客户端收到此错误消息后，显示警告对话框，并重置socket。</p>
-<h4 id="登录成功"><a href="#登录成功" class="headerlink" title="登录成功"></a>登录成功</h4><p>若服务端检测到账号信息无误，则向此客户端发送确认消息，并将它的socket、地址以及登录时间加入到在线列表中，并向其他在线的客户端发送数据刷新消息（见下文）。</p>
+<p>客户端收到此错误消息后，显示警告对话框，并重置 socket。</p>
+<h4 id="登录成功"><a href="#登录成功" class="headerlink" title="登录成功"></a>登录成功</h4><p>若服务端检测到账号信息无误，则向此客户端发送确认消息，并将它的 socket、地址以及登录时间加入到在线列表中，并向其他在线的客户端发送数据刷新消息（见下文）。</p>
 <p><strong>登录确认消息的结构：</strong></p>
 <table>
 <thead>
@@ -796,170 +229,25 @@
 </tr>
 </tbody></table>
 <p>这是服务端处理登录请求的代码</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Server</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">acceptLogin</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cliSock<span class="token punctuation">,</span> cliAddr<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        接受已连接的客户端的登录请求
-        :return: 登录成功返回0，失败返回-1
-        '''</span>
-        <span class="token comment" spellcheck="true"># 获取客户端提交的账号密码，客户端以json字符串的形式发送过来</span>
-        loginStr <span class="token operator">=</span> cliSock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bufsize<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        loginDict <span class="token operator">=</span> utility<span class="token punctuation">.</span>loadJson<span class="token punctuation">(</span>loginStr<span class="token punctuation">)</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">acceptLogin</span>(<span class="params">self, cliSock, cliAddr</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        接受已连接的客户端的登录请求</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 获取客户端提交的账号密码，客户端以json字符串的形式发送过来</span></span><br><span class="line">        loginStr = cliSock.recv(self.bufsize).decode()</span><br><span class="line">        loginDict = utility.loadJson(loginStr)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查登录消息是否正确</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(loginDict):</span><br><span class="line">            errStr = <span class="string">&#x27;数据有误，请重新连接&#x27;</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查账号</span></span><br><span class="line">        cliUserName = loginDict[<span class="string">&#x27;userName&#x27;</span>]</span><br><span class="line">        cliPassword = loginDict[<span class="string">&#x27;password&#x27;</span>]</span><br><span class="line">        res = self.checkAccount(cliUserName, cliPassword)</span><br><span class="line">        <span class="keyword">if</span> res == <span class="number">-1</span>:</span><br><span class="line">            errStr = <span class="string">&#x27;账号不存在&#x27;</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res == <span class="number">-2</span>:</span><br><span class="line">            errStr = <span class="string">&#x27;密码错误&#x27;</span></span><br><span class="line">            self.closeLink(cliSock, errStr)  <span class="comment"># 关闭连接</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.info(<span class="string">&#x27;用户[userName=&#123;&#125;]登录成功&#x27;</span>.format(cliUserName))</span><br><span class="line">            <span class="comment"># 将新用户加入在线列表</span></span><br><span class="line">            self.onlineClients.update(&#123;</span><br><span class="line">                cliUserName: &#123;</span><br><span class="line">                    <span class="string">&#x27;socket&#x27;</span>: cliSock,  <span class="comment"># 客户端socket</span></span><br><span class="line">                    <span class="string">&#x27;address&#x27;</span>: cliAddr,  <span class="comment"># 客户端地址</span></span><br><span class="line">                    <span class="string">&#x27;loginTime&#x27;</span>: time.time()  <span class="comment"># 登录时间</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment"># 登录成功，向该客户端发送确认消息</span></span><br><span class="line">            self.sendLoginAck(cliSock)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendLoginAck</span>(<span class="params">self, cliSock</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        登录成功之后向客户端发送确认消息以及当前在线客户端列表</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        curOnline = self.getCurOnline()  <span class="comment"># 获取当前在线列表</span></span><br><span class="line"></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;login&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;infoStr&#x27;</span>: <span class="string">&#x27;登录成功！&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;data&#x27;</span>: curOnline,</span><br><span class="line">            <span class="string">&#x27;userName&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        self.send(cliSock, **msgDict)</span><br></pre></td></tr></table></figure>
 
-        <span class="token comment" spellcheck="true"># 检查登录消息是否正确</span>
-        <span class="token keyword">if</span> <span class="token operator">not</span> utility<span class="token punctuation">.</span>isCorrectMsg<span class="token punctuation">(</span>loginDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            errStr <span class="token operator">=</span> <span class="token string">'数据有误，请重新连接'</span>
-            self<span class="token punctuation">.</span>closeLink<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> errStr<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 关闭连接</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-
-        <span class="token comment" spellcheck="true"># 检查账号</span>
-        cliUserName <span class="token operator">=</span> loginDict<span class="token punctuation">[</span><span class="token string">'userName'</span><span class="token punctuation">]</span>
-        cliPassword <span class="token operator">=</span> loginDict<span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span>
-        res <span class="token operator">=</span> self<span class="token punctuation">.</span>checkAccount<span class="token punctuation">(</span>cliUserName<span class="token punctuation">,</span> cliPassword<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> res <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
-            errStr <span class="token operator">=</span> <span class="token string">'账号不存在'</span>
-            self<span class="token punctuation">.</span>closeLink<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> errStr<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 关闭连接</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">elif</span> res <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">:</span>
-            errStr <span class="token operator">=</span> <span class="token string">'密码错误'</span>
-            self<span class="token punctuation">.</span>closeLink<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> errStr<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 关闭连接</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'用户[userName={}]登录成功'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>cliUserName<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true"># 将新用户加入在线列表</span>
-            self<span class="token punctuation">.</span>onlineClients<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">{</span>
-                cliUserName<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-                    <span class="token string">'socket'</span><span class="token punctuation">:</span> cliSock<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 客户端socket</span>
-                    <span class="token string">'address'</span><span class="token punctuation">:</span> cliAddr<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 客户端地址</span>
-                    <span class="token string">'loginTime'</span><span class="token punctuation">:</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 登录时间</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true"># 登录成功，向该客户端发送确认消息</span>
-            self<span class="token punctuation">.</span>sendLoginAck<span class="token punctuation">(</span>cliSock<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token number">0</span>
-    <span class="token keyword">def</span> <span class="token function">sendLoginAck</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> cliSock<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        登录成功之后向客户端发送确认消息以及当前在线客户端列表
-        '''</span>
-        curOnline <span class="token operator">=</span> self<span class="token punctuation">.</span>getCurOnline<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 获取当前在线列表</span>
-
-        msgDict <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token string">'type'</span><span class="token punctuation">:</span> <span class="token string">'login'</span><span class="token punctuation">,</span>
-            <span class="token string">'infoStr'</span><span class="token punctuation">:</span> <span class="token string">'登录成功！'</span><span class="token punctuation">,</span>
-            <span class="token string">'data'</span><span class="token punctuation">:</span> curOnline<span class="token punctuation">,</span>
-            <span class="token string">'userName'</span><span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
-            <span class="token string">'password'</span><span class="token punctuation">:</span> <span class="token string">''</span>
-        <span class="token punctuation">}</span>
-
-        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> <span class="token operator">**</span>msgDict<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="等待确认"><a href="#等待确认" class="headerlink" title="等待确认"></a>等待确认</h3><p>发送了登录请求消息之后，客户端会等待服务端发来的登录确认消息或者错误消息。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">recvLoginAck</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        等待服务端传回确认
-        :return: 成功返回0，失败返回-1
-        '''</span>
-        res <span class="token operator">=</span> self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        res <span class="token operator">=</span> utility<span class="token punctuation">.</span>loadJson<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 检查消息合法性</span>
-        <span class="token keyword">if</span> <span class="token operator">not</span> utility<span class="token punctuation">.</span>isCorrectMsg<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>resetSock<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recvLoginAck</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        等待服务端传回确认</span></span><br><span class="line"><span class="string">        :return: 成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        res = self.recv()</span><br><span class="line">        res = utility.loadJson(res)</span><br><span class="line">        <span class="comment"># 检查消息合法性</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(res):</span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> res[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;err&#x27;</span>:</span><br><span class="line">            <span class="comment"># 如果收到的是服务端的错误消息</span></span><br><span class="line">            utility.showerror(res[<span class="string">&#x27;errStr&#x27;</span>])</span><br><span class="line">            self.resetSock()  <span class="comment"># 重启socket</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">elif</span> res[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;login&#x27;</span>:</span><br><span class="line">            <span class="comment"># 登录成功，输出信息</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;infoStr&#x27;</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                utility.showinfo(res[<span class="string">&#x27;infoStr&#x27;</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                utility.showinfo(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;data&#x27;</span> <span class="keyword">in</span> res.keys():</span><br><span class="line">                self.contactList = res[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;curOnline&#x27;</span>]</span><br><span class="line">                self.gui[<span class="string">&#x27;homePage&#x27;</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                contactList = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不是err消息也不是确认消息，则登录失败</span></span><br><span class="line">            self.resetSock()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-        <span class="token keyword">if</span> res<span class="token punctuation">[</span><span class="token string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'err'</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 如果收到的是服务端的错误消息</span>
-            utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token string">'errStr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>resetSock<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 重启socket</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">elif</span> res<span class="token punctuation">[</span><span class="token string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'login'</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 登录成功，输出信息</span>
-            <span class="token keyword">if</span> <span class="token string">'infoStr'</span> <span class="token keyword">in</span> res<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                utility<span class="token punctuation">.</span>showinfo<span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token string">'infoStr'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span>
-                utility<span class="token punctuation">.</span>showinfo<span class="token punctuation">(</span><span class="token string">'登录成功'</span><span class="token punctuation">)</span>
+<h3 id="客户端登录代码"><a href="#客户端登录代码" class="headerlink" title="客户端登录代码"></a>客户端登录代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        登录</span></span><br><span class="line"><span class="string">        :return: 登录成功返回0，失败返回-1</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 从登录对话框获取信息</span></span><br><span class="line">        userName = self.gui[<span class="string">&#x27;loginDlg&#x27;</span>].userName.get()</span><br><span class="line">        password = self.gui[<span class="string">&#x27;loginDlg&#x27;</span>].password.get()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查合法性</span></span><br><span class="line">        <span class="keyword">if</span> userName == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            utility.showerror(<span class="string">&#x27;用户名不能为空&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">if</span> password == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            utility.showerror(<span class="string">&#x27;密码不能为空&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果连接成功，向服务器发送信息</span></span><br><span class="line">        res = self.connect()</span><br><span class="line">        <span class="keyword">if</span> res != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="comment"># 构造并发送消息</span></span><br><span class="line">        self.sendLoginData(userName, password)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果发送信息成功，且账号信息正确，则弹出好友列表页面</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 等待服务端的确认信息</span></span><br><span class="line">        <span class="keyword">if</span> self.recvLoginAck() == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 跳转到主页面</span></span><br><span class="line">            self.userName = userName</span><br><span class="line">            self.gotoHomePage()</span><br><span class="line">            <span class="comment"># 开启接收消息线程</span></span><br><span class="line">            self.recvThread = threading.Thread(target=self.recvLoop)</span><br><span class="line">            self.recvThread.setDaemon(<span class="literal">True</span>)</span><br><span class="line">            self.recvThread.start()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
-            <span class="token keyword">if</span> <span class="token string">'data'</span> <span class="token keyword">in</span> res<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                self<span class="token punctuation">.</span>contactList <span class="token operator">=</span> res<span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'curOnline'</span><span class="token punctuation">]</span>
-                self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'homePage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>refreshList<span class="token punctuation">(</span>self<span class="token punctuation">.</span>contactList<span class="token punctuation">)</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span>
-                contactList <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-
-            <span class="token keyword">return</span> <span class="token number">0</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 如果不是err消息也不是确认消息，则登录失败</span>
-            self<span class="token punctuation">.</span>resetSock<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="客户端登录代码"><a href="#客户端登录代码" class="headerlink" title="客户端登录代码"></a>客户端登录代码</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">login</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        登录
-        :return: 登录成功返回0，失败返回-1
-        '''</span>
-        <span class="token comment" spellcheck="true"># 从登录对话框获取信息</span>
-        userName <span class="token operator">=</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'loginDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>userName<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        password <span class="token operator">=</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'loginDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>password<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 检查合法性</span>
-        <span class="token keyword">if</span> userName <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">:</span>
-            utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span><span class="token string">'用户名不能为空'</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">if</span> password <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">:</span>
-            utility<span class="token punctuation">.</span>showerror<span class="token punctuation">(</span><span class="token string">'密码不能为空'</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-
-        <span class="token comment" spellcheck="true"># 如果连接成功，向服务器发送信息</span>
-        res <span class="token operator">=</span> self<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> res <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token comment" spellcheck="true"># 构造并发送消息</span>
-        self<span class="token punctuation">.</span>sendLoginData<span class="token punctuation">(</span>userName<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
-
-        <span class="token comment" spellcheck="true"># 如果发送信息成功，且账号信息正确，则弹出好友列表页面</span>
-
-        <span class="token comment" spellcheck="true"># 等待服务端的确认信息</span>
-        <span class="token keyword">if</span> self<span class="token punctuation">.</span>recvLoginAck<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            <span class="token comment" spellcheck="true"># 跳转到主页面</span>
-            self<span class="token punctuation">.</span>userName <span class="token operator">=</span> userName
-            self<span class="token punctuation">.</span>gotoHomePage<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true"># 开启接收消息线程</span>
-            self<span class="token punctuation">.</span>recvThread <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>self<span class="token punctuation">.</span>recvLoop<span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>recvThread<span class="token punctuation">.</span>setDaemon<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>recvThread<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>登录的流程如下图所示：</p>
 <p><img src="https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200102173045.png" alt="客户端登录-活动图"></p>
 <h2 id="客户端界面跳转"><a href="#客户端界面跳转" class="headerlink" title="客户端界面跳转"></a>客户端界面跳转</h2><p>登录成功后，会从登陆界面跳转到主页面。</p>
 <p>原理是将登录界面隐藏，再显示主界面。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">gotoHomePage</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        跳转到主页面
-        '''</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gotoHomePage</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        跳转到主页面</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> self.gui.keys():</span><br><span class="line">            self.gui[page].grid_forget()</span><br><span class="line"></span><br><span class="line">        self.window.title(<span class="string">&#x27;SimuQQ主页面&#x27;</span>)</span><br><span class="line">        self.gui[<span class="string">&#x27;homePage&#x27;</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.gui[<span class="string">&#x27;homePage&#x27;</span>].userName.set(self.userName)</span><br><span class="line">        self.gui[<span class="string">&#x27;homePage&#x27;</span>].geometry()</span><br></pre></td></tr></table></figure>
 
-        <span class="token keyword">for</span> page <span class="token keyword">in</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span>page<span class="token punctuation">]</span><span class="token punctuation">.</span>grid_forget<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>window<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'SimuQQ主页面'</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'homePage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'homePage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>userName<span class="token punctuation">.</span>set<span class="token punctuation">(</span>self<span class="token punctuation">.</span>userName<span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'homePage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>geometry<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>打开聊天窗口：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">openChatWindow</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> userName<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        打开聊天窗口
-        :param userName: 聊天对象的用户名
-        '''</span>
-        self<span class="token punctuation">.</span>chatWith <span class="token operator">=</span> userName  <span class="token comment" spellcheck="true"># 设置聊天对象</span>
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'chatDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>grid<span class="token punctuation">(</span>row<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> column<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>chatWindow<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'[{}]向[{}]发起的聊天'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>self<span class="token punctuation">.</span>userName<span class="token punctuation">,</span> userName<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>chatWindow<span class="token punctuation">.</span>deiconify<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># self.chatWindow.mainloop()</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">openChatWindow</span>(<span class="params">self, userName</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        打开聊天窗口</span></span><br><span class="line"><span class="string">        :param userName: 聊天对象的用户名</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        self.chatWith = userName  <span class="comment"># 设置聊天对象</span></span><br><span class="line">        self.gui[<span class="string">&#x27;chatDlg&#x27;</span>].grid(row=<span class="number">0</span>, column=<span class="number">0</span>)</span><br><span class="line">        self.chatWindow.title(<span class="string">&#x27;[&#123;&#125;]向[&#123;&#125;]发起的聊天&#x27;</span>.format(self.userName, userName))</span><br><span class="line">        self.chatWindow.deiconify()</span><br><span class="line">        <span class="comment"># self.chatWindow.mainloop()</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="发送聊天消息"><a href="#发送聊天消息" class="headerlink" title="发送聊天消息"></a>发送聊天消息</h2><p>用户在客户端的在线列表中双击选择一个在线客户端，会打开对选择对象的聊天窗口。</p>
-<p>用户在输入框中输入聊天消息并点击发送按钮后，客户端将会构建并发送msg消息给服务端，该消息的内容如下：</p>
-<p><strong>msg消息的结构：</strong></p>
+<p>用户在输入框中输入聊天消息并点击发送按钮后，客户端将会构建并发送 msg 消息给服务端，该消息的内容如下：</p>
+<p><strong>msg 消息的结构：</strong></p>
 <table>
 <thead>
 <tr>
@@ -980,37 +268,14 @@
 <td>聊天对象的用户名</td>
 </tr>
 </tbody></table>
-<p>服务端在收到客户端的msg消息后，将userName字段修改为发送端的用户名，并转发给目的端。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">sendChatMsg</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        发送聊天消息
-        '''</span>
-        <span class="token comment" spellcheck="true"># 获取聊天窗口的输入框内文字</span>
-        chatMsg <span class="token operator">=</span> self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'chatDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>getInputContent<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<p>服务端在收到客户端的 msg 消息后，将 userName 字段修改为发送端的用户名，并转发给目的端。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sendChatMsg</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        发送聊天消息</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 获取聊天窗口的输入框内文字</span></span><br><span class="line">        chatMsg = self.gui[<span class="string">&#x27;chatDlg&#x27;</span>].getInputContent()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 构造消息</span></span><br><span class="line">        msgDict = &#123;</span><br><span class="line">            <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;msg&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;userName&#x27;</span>: self.chatWith,</span><br><span class="line">            <span class="string">&#x27;message&#x27;</span>: chatMsg</span><br><span class="line">        &#125;</span><br><span class="line">        msgStr = utility.dumpJson(msgDict)</span><br><span class="line">        <span class="comment"># 发送消息</span></span><br><span class="line">        self.send(msgStr)</span><br><span class="line">        <span class="comment"># 同时在自己这边显示自己说的话</span></span><br><span class="line">        <span class="comment"># 构建输出内容</span></span><br><span class="line">        outputContent = <span class="string">&#x27;[&#123;&#125;]&#123;&#125;\n&#123;&#125;&#x27;</span>.format(</span><br><span class="line">            self.userName, time.strftime(<span class="string">&#x27;%Y/%m/%d %H:%M:%S&#x27;</span>), chatMsg)</span><br><span class="line"></span><br><span class="line">        self.gui[<span class="string">&#x27;chatDlg&#x27;</span>].addOutputContent(outputContent)</span><br><span class="line">        <span class="comment"># 清空输入框</span></span><br><span class="line">        self.gui[<span class="string">&#x27;chatDlg&#x27;</span>].clearInputContent()</span><br></pre></td></tr></table></figure>
 
-        <span class="token comment" spellcheck="true"># 构造消息</span>
-        msgDict <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token string">'type'</span><span class="token punctuation">:</span> <span class="token string">'msg'</span><span class="token punctuation">,</span>
-            <span class="token string">'userName'</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>chatWith<span class="token punctuation">,</span>
-            <span class="token string">'message'</span><span class="token punctuation">:</span> chatMsg
-        <span class="token punctuation">}</span>
-        msgStr <span class="token operator">=</span> utility<span class="token punctuation">.</span>dumpJson<span class="token punctuation">(</span>msgDict<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 发送消息</span>
-        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>msgStr<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 同时在自己这边显示自己说的话</span>
-        <span class="token comment" spellcheck="true"># 构建输出内容</span>
-        outputContent <span class="token operator">=</span> <span class="token string">'[{}]{}\n{}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
-            self<span class="token punctuation">.</span>userName<span class="token punctuation">,</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y/%m/%d %H:%M:%S'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> chatMsg<span class="token punctuation">)</span>
-
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'chatDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>addOutputContent<span class="token punctuation">(</span>outputContent<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true"># 清空输入框</span>
-        self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'chatDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>clearInputContent<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="客户端消息处理"><a href="#客户端消息处理" class="headerlink" title="客户端消息处理"></a>客户端消息处理</h2><p>客户端在登录成功后，开启消息接收线程，它的线程体是一个无限循环，并将其置为守护线程（Deamon Thread），在所有前台线程结束之后，消息接收线程也随之结束。</p>
-<p>在没有注意到这一点前，我调试了这个bug很久——关闭窗口会无响应，后来才知道不是tkinter的问题，而是我开的这个线程没有随之关闭。</p>
-<p>客户端主要会收到两种消息，数据刷新消息和聊天消息。同样的，这里本来还应该处理err消息以及info消息的，担心做不完就简化了。</p>
+<p>在没有注意到这一点前，我调试了这个 bug 很久——关闭窗口会无响应，后来才知道不是 tkinter 的问题，而是我开的这个线程没有随之关闭。</p>
+<p>客户端主要会收到两种消息，数据刷新消息和聊天消息。同样的，这里本来还应该处理 err 消息以及 info 消息的，担心做不完就简化了。</p>
 <h3 id="数据刷新消息"><a href="#数据刷新消息" class="headerlink" title="数据刷新消息"></a>数据刷新消息</h3><p>在服务端接收一个新的连接时，或是服务端检测到一个旧有连接断开时，会向当前在线的客户端发送一个数据刷新消息，该消息包含以下字段：</p>
-<p><strong>data消息的结构：</strong></p>
+<p><strong>data 消息的结构：</strong></p>
 <table>
 <thead>
 <tr>
@@ -1028,728 +293,90 @@
 </tr>
 </tbody></table>
 <p>客户端收到此消息时，调用界面类的对应方法刷新主页面的在线列表。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Client</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">recvLoop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        接收消息的循环
-        '''</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            msgStr <span class="token operator">=</span> self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            msgDict <span class="token operator">=</span> utility<span class="token punctuation">.</span>loadJson<span class="token punctuation">(</span>msgStr<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> <span class="token operator">not</span> utility<span class="token punctuation">.</span>isCorrectMsg<span class="token punctuation">(</span>msgDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                <span class="token keyword">continue</span>  <span class="token comment" spellcheck="true"># 如果消息不正确，忽略这个消息</span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recvLoop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        接收消息的循环</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            msgStr = self.recv()</span><br><span class="line">            msgDict = utility.loadJson(msgStr)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> utility.isCorrectMsg(msgDict):</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># 如果消息不正确，忽略这个消息</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;data&#x27;</span>:</span><br><span class="line">                <span class="comment"># 如果接收到数据刷新消息</span></span><br><span class="line">                self.contactList = msgDict[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;curOnline&#x27;</span>]</span><br><span class="line">                self.gui[<span class="string">&#x27;homePage&#x27;</span>].refreshList(self.contactList)</span><br><span class="line">            <span class="keyword">if</span> msgDict[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;msg&#x27;</span>:</span><br><span class="line">                <span class="comment"># 如果接收到聊天消息</span></span><br><span class="line">                self.openChatWindow(msgDict[<span class="string">&#x27;userName&#x27;</span>])</span><br><span class="line">                <span class="comment"># 构建输出内容</span></span><br><span class="line">                outputContent = <span class="string">&#x27;[&#123;&#125;]&#123;&#125;\n&#123;&#125;&#x27;</span>.format(</span><br><span class="line">                    msgDict[<span class="string">&#x27;userName&#x27;</span>], time.strftime(<span class="string">&#x27;%Y/%m/%d %H:%M:%S&#x27;</span>), msgDict[<span class="string">&#x27;message&#x27;</span>])</span><br><span class="line"></span><br><span class="line">                self.gui[<span class="string">&#x27;chatDlg&#x27;</span>].addOutputContent(outputContent)</span><br></pre></td></tr></table></figure>
 
-            <span class="token keyword">if</span> msgDict<span class="token punctuation">[</span><span class="token string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'data'</span><span class="token punctuation">:</span>
-                <span class="token comment" spellcheck="true"># 如果接收到数据刷新消息</span>
-                self<span class="token punctuation">.</span>contactList <span class="token operator">=</span> msgDict<span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'curOnline'</span><span class="token punctuation">]</span>
-                self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'homePage'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>refreshList<span class="token punctuation">(</span>self<span class="token punctuation">.</span>contactList<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> msgDict<span class="token punctuation">[</span><span class="token string">'type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'msg'</span><span class="token punctuation">:</span>
-                <span class="token comment" spellcheck="true"># 如果接收到聊天消息</span>
-                self<span class="token punctuation">.</span>openChatWindow<span class="token punctuation">(</span>msgDict<span class="token punctuation">[</span><span class="token string">'userName'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                <span class="token comment" spellcheck="true"># 构建输出内容</span>
-                outputContent <span class="token operator">=</span> <span class="token string">'[{}]{}\n{}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
-                    msgDict<span class="token punctuation">[</span><span class="token string">'userName'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y/%m/%d %H:%M:%S'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msgDict<span class="token punctuation">[</span><span class="token string">'message'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-
-                self<span class="token punctuation">.</span>gui<span class="token punctuation">[</span><span class="token string">'chatDlg'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>addOutputContent<span class="token punctuation">(</span>outputContent<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="服务端消息处理"><a href="#服务端消息处理" class="headerlink" title="服务端消息处理"></a>服务端消息处理</h2><p>接下来是比较核心的部分。</p>
 <p>在编写客户端时，为了专注于客户端的编写，对于服务端，我采用的是比较简单的无限循环：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Server</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">acceptLoop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        接受连接的线程循环
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">acceptLoop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        接受连接的线程循环</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        刚开始的时候测试客户端用的，</span></span><br><span class="line"><span class="string">        客户端的登录测试完毕之后，将其中的代码提取出来封成另一个函数acceptLogin()，</span></span><br><span class="line"><span class="string">        供selectLoop使用</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.info(<span class="string">&#x27;正在等待新的连接&#x27;</span>)</span><br><span class="line">            <span class="comment"># 接受新的连接请求</span></span><br><span class="line">            cliSock, cliAddr = self.serSock.accept()</span><br><span class="line">            self.acceptLogin(cliSock, cliAddr)</span><br></pre></td></tr></table></figure>
 
-        刚开始的时候测试客户端用的，
-        客户端的登录测试完毕之后，将其中的代码提取出来封成另一个函数acceptLogin()，
-        供selectLoop使用
-        '''</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'正在等待新的连接'</span><span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true"># 接受新的连接请求</span>
-            cliSock<span class="token punctuation">,</span> cliAddr <span class="token operator">=</span> self<span class="token punctuation">.</span>serSock<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            self<span class="token punctuation">.</span>acceptLogin<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> cliAddr<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>客户端大致成型之后，我开始编写服务端的这一部分。</p>
-<p>我想起来之前在编写c++聊天室的时候，用到了一个事件模型，可以解决以上线程循环遇到的问题。</p>
+<p>我想起来之前在编写 c++聊天室的时候，用到了一个事件模型，可以解决以上线程循环遇到的问题。</p>
 <p>上面这个写法会出现的问题，以前我就遇到过。</p>
-<p>如果服务端想要监听多个客户端发送过来的聊天消息，第一种方法是遍历每个客户端，recv每个客户端（将客户端socket改成非阻塞的就行）；第二种方法是为每个客户端建立单独的接收消息线程。</p>
-<p>这两个方案其实都不太好。后来我找到了一个叫做事件选择模型的东西（<code>WSAEventSelect</code>），解决了一部分问题，当时知识还是太浅薄，不能完全理解那东西，所以还是写出了一堆bug。</p>
-<p>现在回想起来，python里面应该也有类似的东西吧？我就记着个select了，一搜，还真是叫做select。</p>
-<p>找到可用的资料好像并不太多，其中一个对我很有用的文章的链接是这个：<a href="https://www.jianshu.com/p/e26594304e11" target="_blank" rel="noopener">python Select模块简单使用</a></p>
-<p>后来翻了一下文档，找到了关于select的英文原版<a href="https://docs.python.org/3.7/library/select.html#select.select" target="_blank" rel="noopener">简介</a></p>
-<p><strong>我简单描述一下我在这个项目里面是如何使用select模型的：</strong></p>
-<p>设置三个需要处理消息的队列，分别存放所有的socket（包括服务端socket和客户端socket）、用于存放存在待处理消息的socket的等待队列、需要检查错误的socket的队列。</p>
-<p>select函数接收上述三个队列，并在阻塞timeout时间后返回三个队列，分别是可读取队列、可写入队列和错误队列。</p>
-<p>可读取队列中的socket是已经接收到消息的socket，即接收缓冲区中存在消息，需要处理。如果是服务端socket，表明有新的客户端连接请求到达，对连接请求进行处理；如果是客户端socket，表明有已经连接的客户端发送消息过来，先将它们放入对应的消息队列中，并将它们加入到第二个监听队列即等待消息处理的队列。</p>
-<p>可写入队列中的socket是从等待消息处理的队列中选择出目前能够接受消息、即接收缓冲区可用的socket。遍历这个队列，对其中的socket进行消息处理，处理完毕后删除它的消息队列，以及将它移出等待队列。</p>
-<p>错误队列存放从需要检查错误的socket队列中选择出的出错的socket，在本项目中将需要检查设置为存放所有socket的队列，即检查所有的socket。遍历此队列，将错误的socket移除。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Server</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">selectLoop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">'''
-        使用select函数来进行处理的循环
-        '''</span>
-        readList <span class="token operator">=</span> <span class="token punctuation">[</span>self<span class="token punctuation">.</span>serSock<span class="token punctuation">]</span>
-        writeList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-        message_dict <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true"># 存储消息用的字典，键为socket，值为消息列表</span>
-        i <span class="token operator">=</span> <span class="token number">0</span>
+<p>如果服务端想要监听多个客户端发送过来的聊天消息，第一种方法是遍历每个客户端，recv 每个客户端（将客户端 socket 改成非阻塞的就行）；第二种方法是为每个客户端建立单独的接收消息线程。</p>
+<p>这两个方案其实都不太好。后来我找到了一个叫做事件选择模型的东西（<code>WSAEventSelect</code>），解决了一部分问题，当时知识还是太浅薄，不能完全理解那东西，所以还是写出了一堆 bug。</p>
+<p>现在回想起来，python 里面应该也有类似的东西吧？我就记着个 select 了，一搜，还真是叫做 select。</p>
+<p>找到可用的资料好像并不太多，其中一个对我很有用的文章的链接是这个：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e26594304e11">python Select 模块简单使用</a></p>
+<p>后来翻了一下文档，找到了关于 select 的英文原版<a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/select.html#select.select">简介</a></p>
+<p><strong>我简单描述一下我在这个项目里面是如何使用 select 模型的：</strong></p>
+<p>设置三个需要处理消息的队列，分别存放所有的 socket（包括服务端 socket 和客户端 socket）、用于存放存在待处理消息的 socket 的等待队列、需要检查错误的 socket 的队列。</p>
+<p>select 函数接收上述三个队列，并在阻塞 timeout 时间后返回三个队列，分别是可读取队列、可写入队列和错误队列。</p>
+<p>可读取队列中的 socket 是已经接收到消息的 socket，即接收缓冲区中存在消息，需要处理。如果是服务端 socket，表明有新的客户端连接请求到达，对连接请求进行处理；如果是客户端 socket，表明有已经连接的客户端发送消息过来，先将它们放入对应的消息队列中，并将它们加入到第二个监听队列即等待消息处理的队列。</p>
+<p>可写入队列中的 socket 是从等待消息处理的队列中选择出目前能够接受消息、即接收缓冲区可用的 socket。遍历这个队列，对其中的 socket 进行消息处理，处理完毕后删除它的消息队列，以及将它移出等待队列。</p>
+<p>错误队列存放从需要检查错误的 socket 队列中选择出的出错的 socket，在本项目中将需要检查设置为存放所有 socket 的队列，即检查所有的 socket。遍历此队列，将错误的 socket 移除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">selectLoop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        使用select函数来进行处理的循环</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        readList = [self.serSock]</span><br><span class="line">        writeList = []</span><br><span class="line">        message_dict = &#123;&#125;  <span class="comment"># 存储消息用的字典，键为socket，值为消息列表</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        logging.info(<span class="string">&#x27;服务器已经启动，正在等待客户端的连接&#x27;</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            logging.debug(<span class="string">&#x27;循环数：&#x27;</span>+str(i))</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="comment"># select函数阻塞timeout时间，从参数的三个列表中，选择出此时可读取、可写入、出现错误的元素返回</span></span><br><span class="line">            readableList, writableList, exceptionList = select.select(</span><br><span class="line">                readList, writeList, readList, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 1. 遍历当前可读取的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> readableList:</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> sock <span class="keyword">is</span> self.serSock:</span><br><span class="line">                    <span class="comment"># 如果是服务端socket，那么就是有客户端来连接了</span></span><br><span class="line">                    cliSock, cliAddr = sock.accept()</span><br><span class="line">                    <span class="keyword">if</span> self.acceptLogin(cliSock, cliAddr) == <span class="number">0</span>:</span><br><span class="line">                        <span class="comment"># 如果登录成功</span></span><br><span class="line">                        readList.append(cliSock)  <span class="comment"># 将新的客户端socket加入监听列表</span></span><br><span class="line">                        message_dict[cliSock] = []  <span class="comment"># 为新的socket创建消息列表</span></span><br><span class="line">                        self.refreshCurOnline()  <span class="comment"># 给所有在线客户端刷新在线信息</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 已连接的用户发送消息过来</span></span><br><span class="line">                    <span class="comment"># 接收一下</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        data = sock.recv(self.bufsize)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                        readList.remove(sock)</span><br><span class="line">                        <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line"></span><br><span class="line">                        logging.info(<span class="string">&#x27;客户端[userName=&#123;&#125;]断开了连接&#x27;</span>.format(</span><br><span class="line">                            self.getUserNameBySock(sock)))</span><br><span class="line">                        self.closeLink(sock)</span><br><span class="line">                    <span class="keyword">else</span>:  <span class="comment"># 如果没有出现异常，再检查是否收到空数据</span></span><br><span class="line">                        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                            <span class="comment"># 如果收到空数据，代表客户端已经断开连接</span></span><br><span class="line">                            readList.remove(sock)</span><br><span class="line">                            <span class="keyword">del</span> message_dict[sock]  <span class="comment"># 删除对应的消息队列</span></span><br><span class="line">                            self.closeLink(sock)</span><br><span class="line">                            print(<span class="string">&#x27;客户端[&#123;&#125;]断开了连接&#x27;</span>.format(</span><br><span class="line">                                self.getUserNameBySock(sock)))</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="comment"># 收到老用户的消息</span></span><br><span class="line">                            dataStr = data.decode()</span><br><span class="line">                            <span class="comment"># 将消息加入对应的消息队列</span></span><br><span class="line">                            message_dict[sock].append(dataStr)</span><br><span class="line">                            writeList.append(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 2.处理待回复的消息</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> writableList:</span><br><span class="line">                <span class="keyword">while</span> len(message_dict[sock]) &gt; <span class="number">0</span>:</span><br><span class="line">                    dataStr = message_dict[sock][<span class="number">0</span>]  <span class="comment"># 取出消息队列中第一个消息</span></span><br><span class="line">                    <span class="keyword">del</span> message_dict[sock][<span class="number">0</span>]</span><br><span class="line">                    self.addressMsg(sock, dataStr)  <span class="comment"># 处理消息</span></span><br><span class="line">                    <span class="comment"># 测试代码：测试消息处理是否可用</span></span><br><span class="line">                    <span class="comment"># sock.sendall((&#x27;echo:&#x27;+dataStr).encode())</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 将消息队列中所有消息处理完毕，则将它从待回复队列中删除</span></span><br><span class="line">                writeList.remove(sock)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 3.处理出错的socket</span></span><br><span class="line">            <span class="keyword">for</span> sock <span class="keyword">in</span> exceptionList:</span><br><span class="line">                readList.remove(sock)</span><br></pre></td></tr></table></figure>
 
-        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'服务器已经启动，正在等待客户端的连接'</span><span class="token punctuation">)</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            logging<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">'循环数：'</span><span class="token operator">+</span>str<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            i <span class="token operator">+=</span> <span class="token number">1</span>
-            <span class="token comment" spellcheck="true"># select函数阻塞timeout时间，从参数的三个列表中，选择出此时可读取、可写入、出现错误的元素返回</span>
-            readableList<span class="token punctuation">,</span> writableList<span class="token punctuation">,</span> exceptionList <span class="token operator">=</span> select<span class="token punctuation">.</span>select<span class="token punctuation">(</span>
-                readList<span class="token punctuation">,</span> writeList<span class="token punctuation">,</span> readList<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-
-            <span class="token comment" spellcheck="true"># 1. 遍历当前可读取的socket</span>
-            <span class="token keyword">for</span> sock <span class="token keyword">in</span> readableList<span class="token punctuation">:</span>
-
-                <span class="token keyword">if</span> sock <span class="token keyword">is</span> self<span class="token punctuation">.</span>serSock<span class="token punctuation">:</span>
-                    <span class="token comment" spellcheck="true"># 如果是服务端socket，那么就是有客户端来连接了</span>
-                    cliSock<span class="token punctuation">,</span> cliAddr <span class="token operator">=</span> sock<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                    <span class="token keyword">if</span> self<span class="token punctuation">.</span>acceptLogin<span class="token punctuation">(</span>cliSock<span class="token punctuation">,</span> cliAddr<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-                        <span class="token comment" spellcheck="true"># 如果登录成功</span>
-                        readList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>cliSock<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 将新的客户端socket加入监听列表</span>
-                        message_dict<span class="token punctuation">[</span>cliSock<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 为新的socket创建消息列表</span>
-                        self<span class="token punctuation">.</span>refreshCurOnline<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 给所有在线客户端刷新在线信息</span>
-                <span class="token keyword">else</span><span class="token punctuation">:</span>
-                    <span class="token comment" spellcheck="true"># 已连接的用户发送消息过来</span>
-                    <span class="token comment" spellcheck="true"># 接收一下</span>
-
-                    <span class="token keyword">try</span><span class="token punctuation">:</span>
-                        data <span class="token operator">=</span> sock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bufsize<span class="token punctuation">)</span>
-                    <span class="token keyword">except</span><span class="token punctuation">:</span>
-                        <span class="token comment" spellcheck="true"># 如果收到空数据，代表客户端已经断开连接</span>
-                        readList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-                        <span class="token keyword">del</span> message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 删除对应的消息队列</span>
-
-                        logging<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'客户端[userName={}]断开了连接'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
-                            self<span class="token punctuation">.</span>getUserNameBySock<span class="token punctuation">(</span>sock<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        self<span class="token punctuation">.</span>closeLink<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-                    <span class="token keyword">else</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 如果没有出现异常，再检查是否收到空数据</span>
-                        <span class="token keyword">if</span> <span class="token operator">not</span> data<span class="token punctuation">:</span>
-                            <span class="token comment" spellcheck="true"># 如果收到空数据，代表客户端已经断开连接</span>
-                            readList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-                            <span class="token keyword">del</span> message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 删除对应的消息队列</span>
-                            self<span class="token punctuation">.</span>closeLink<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-                            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'客户端[{}]断开了连接'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>
-                                self<span class="token punctuation">.</span>getUserNameBySock<span class="token punctuation">(</span>sock<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token keyword">else</span><span class="token punctuation">:</span>
-                            <span class="token comment" spellcheck="true"># 收到老用户的消息</span>
-                            dataStr <span class="token operator">=</span> data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                            <span class="token comment" spellcheck="true"># 将消息加入对应的消息队列</span>
-                            message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>dataStr<span class="token punctuation">)</span>
-                            writeList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-
-            <span class="token comment" spellcheck="true"># 2.处理待回复的消息</span>
-            <span class="token keyword">for</span> sock <span class="token keyword">in</span> writableList<span class="token punctuation">:</span>
-                <span class="token keyword">while</span> len<span class="token punctuation">(</span>message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
-                    dataStr <span class="token operator">=</span> message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment" spellcheck="true"># 取出消息队列中第一个消息</span>
-                    <span class="token keyword">del</span> message_dict<span class="token punctuation">[</span>sock<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-                    self<span class="token punctuation">.</span>addressMsg<span class="token punctuation">(</span>sock<span class="token punctuation">,</span> dataStr<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 处理消息</span>
-                    <span class="token comment" spellcheck="true"># 测试代码：测试消息处理是否可用</span>
-                    <span class="token comment" spellcheck="true"># sock.sendall(('echo:'+dataStr).encode())</span>
-
-                <span class="token comment" spellcheck="true"># 将消息队列中所有消息处理完毕，则将它从待回复队列中删除</span>
-                writeList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>sock<span class="token punctuation">)</span>
-
-            <span class="token comment" spellcheck="true"># 3.处理出错的socket</span>
-            <span class="token keyword">for</span> sock <span class="token keyword">in</span> exceptionList<span class="token punctuation">:</span>
-                readList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>sock<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>待我更加理解这个东西，可能会回来补充完善这个部分。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>以上便是我的计算机网络课设的核心思路以及核心代码了，其他未列出的方法，读者看方法名字大致也能猜到它们的作用，就不浪费篇幅去说了。</p>
-<p>本文耗费5个小时完成（结合课设报告）。</p>
+<p>本文耗费 5 个小时完成（结合课设报告）。</p>
 <p>如有错漏欢迎在下方评论区指出。</p>
-
-            </div>
-            <hr/>
-
+</div><div class="article-licensing box"><div class="licensing-title"><p>【课设总结】基于LAN的即时通信软件</p><p><a href="https://yxchangingself.xyz/posts/IMS_base_on_LAN/">https://yxchangingself.xyz/posts/IMS_base_on_LAN/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-02</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-01-02</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a><a class="link-muted mr-2" rel="tag" href="/tags/tkinter/">tkinter</a><a class="link-muted mr-2" rel="tag" href="/tags/internet/">internet</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/git_amend_commited_info/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">更改git仓库已经commit的用户名和邮箱信息</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/categories_description/"><span class="level-item">文章分类说明</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "231ac886a5d18ef673b8bdc5cea6241b",
+            repo: "blog-comments",
+            owner: "ChangingSelf",
+            clientID: "2c2d9b5607027ef5684f",
+            clientSecret: "b974e75a7b4f1d80dee5e2ada5abad43526a05fc",
+            admin: ["ChangingSelf"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
             
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz/posts/IMS_base_on_LAN/">https://yxChangingSelf.xyz/posts/IMS_base_on_LAN/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#效果展示"><span class="level-left"><span class="level-item">1</span><span class="level-item">效果展示</span></span></a></li><li><a class="level is-mobile" href="#环境"><span class="level-left"><span class="level-item">2</span><span class="level-item">环境</span></span></a></li><li><a class="level is-mobile" href="#需求分析"><span class="level-left"><span class="level-item">3</span><span class="level-item">需求分析</span></span></a></li><li><a class="level is-mobile" href="#代码文件结构"><span class="level-left"><span class="level-item">4</span><span class="level-item">代码文件结构</span></span></a></li><li><a class="level is-mobile" href="#概要设计及对应代码"><span class="level-left"><span class="level-item">5</span><span class="level-item">概要设计及对应代码</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#类"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#界面类"><span class="level-left"><span class="level-item">5.1.1</span><span class="level-item">界面类</span></span></a></li><li><a class="level is-mobile" href="#登录界面代码示例"><span class="level-left"><span class="level-item">5.1.2</span><span class="level-item">登录界面代码示例</span></span></a></li><li><a class="level is-mobile" href="#客户端类-Client"><span class="level-left"><span class="level-item">5.1.3</span><span class="level-item">客户端类 Client</span></span></a></li><li><a class="level is-mobile" href="#服务端类-Server"><span class="level-left"><span class="level-item">5.1.4</span><span class="level-item">服务端类 Server</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数据文件格式"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">数据文件格式</span></span></a></li><li><a class="level is-mobile" href="#自定义消息"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">自定义消息</span></span></a></li><li><a class="level is-mobile" href="#注册"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">注册</span></span></a></li><li><a class="level is-mobile" href="#登录"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">登录</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#请求登录"><span class="level-left"><span class="level-item">5.5.1</span><span class="level-item">请求登录</span></span></a></li><li><a class="level is-mobile" href="#登录成功"><span class="level-left"><span class="level-item">5.5.2</span><span class="level-item">登录成功</span></span></a></li><li><a class="level is-mobile" href="#等待确认"><span class="level-left"><span class="level-item">5.5.3</span><span class="level-item">等待确认</span></span></a></li><li><a class="level is-mobile" href="#客户端登录代码"><span class="level-left"><span class="level-item">5.5.4</span><span class="level-item">客户端登录代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#客户端界面跳转"><span class="level-left"><span class="level-item">5.6</span><span class="level-item">客户端界面跳转</span></span></a></li><li><a class="level is-mobile" href="#发送聊天消息"><span class="level-left"><span class="level-item">5.7</span><span class="level-item">发送聊天消息</span></span></a></li><li><a class="level is-mobile" href="#客户端消息处理"><span class="level-left"><span class="level-item">5.8</span><span class="level-item">客户端消息处理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数据刷新消息"><span class="level-left"><span class="level-item">5.8.1</span><span class="level-item">数据刷新消息</span></span></a></li></ul></li><li><a class="level is-mobile" href="#服务端消息处理"><span class="level-left"><span class="level-item">5.9</span><span class="level-item">服务端消息处理</span></span></a></li></ul></li><li><a class="level is-mobile" href="#小结"><span class="level-left"><span class="level-item">6</span><span class="level-item">小结</span></span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2020 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'folded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
       });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
-                                </a>
-                            
-                                <a href="/tags/internet/">
-                                    <span class="chip bg-color">internet</span>
-                                </a>
-                            
-                                <a href="/tags/tkinter/">
-                                    <span class="chip bg-color">tkinter</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-
-<div id="article-share">
-    
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: '2c2d9b5607027ef5684f',
-        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
-        repo: 'blog-comments',
-        owner: 'ChangingSelf',
-        admin: "ChangingSelf",
-        id: '2020-01-02T15-06-27',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/posts/git_amend_commited_info/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="更改git仓库已经commit的用户名和邮箱信息">
-                        
-                        <span class="card-title">更改git仓库已经commit的用户名和邮箱信息</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            换了一个github账号，想把以前的仓库push到新的账号上，但是commit的用户名和邮箱信息还是以前的，想修改成新的用户信息。
-
-
-参考链接
-图文详解如何修改git已提交记录的邮箱？ ：关于如何使用git rebase -i来修改com
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-15
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-category">
-                                    解决方案
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/posts/categories_description/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="文章分类说明">
-                        
-                        <span class="card-title">文章分类说明</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            为了对文章进行更好的管理，需要提前确定好文章的分类。将本博客内的文章分为以下七类：
-
-过程复盘
-知识整理
-解决方案
-算法理解
-工具使用
-目录索引
-日志随笔
-
-
-
- 分类定好了基本就不变了：
-
-
-
-分类
-内容
-
-
-
-过程复盘
-记录学习实践一个
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/" class="post-category">
-                                    目录索引
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 憧憬少的个人博客<br />'
-            + '文章作者: 憧憬少<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-    
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h1, h2, h3, h4, h5, h6'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
             }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
             }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-    <footer class="page-footer bg-color">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            <span id="year">2020</span>
-            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.1k</span>&nbsp;字
-            
-            
-            
-            
-            
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
-            </span>
-            
-            <br>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
-});
-</script>
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    
-
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-    <!-- Baidu Analytics -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
-    
-
-    
-    
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-</body>
-
-</html>
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

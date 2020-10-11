@@ -1,452 +1,27 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-
-
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="【编程练习】java简易学生管理系统, 憧憬少的个人博客">
-    <meta name="description" content="上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。
-在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。
-本文主要总结一下本练习用到的一些知识点，方">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>【编程练习】java简易学生管理系统 | 憧憬少的个人博客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
-    
-    <script src="/libs/jquery/jquery.min.js"></script>
-    
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
-
-
-<body>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
-    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
-
-
-
-
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">憧憬少的个人博客</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">憧憬少的个人博客</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
-</div>
-
-        </div>
-
-        
-    </nav>
-
-</header>
-
-    
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">【编程练习】java简易学生管理系统</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<main class="post-container content">
-
-    
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        height: calc(100vh - 250px);
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                过程复盘
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-03
-                </div>
-                
-
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-14
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
-                </div>
-                
-				
-                
-            </div>
-            
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <p>上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。</p>
-<p>在这个练习中，我主要是打算熟悉一下java的文件操作，因为我发现我学了java之后基本没有写过文件读写。</p>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【编程练习】java简易学生管理系统 - 憧憬少的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="憧憬少的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="憧憬少的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。 在这个练习中，我主要是打算熟悉一下 java 的文件操作，因为我发现我学了 java 之后基本没有写过文件读写。 本文主要总结一下本练习用到的一些知识点，方便下次使用。 本文对应的 github 库"><meta property="og:type" content="blog"><meta property="og:title" content="【编程练习】java简易学生管理系统"><meta property="og:url" content="https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/"><meta property="og:site_name" content="憧憬少的个人博客"><meta property="og:description" content="上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。 在这个练习中，我主要是打算熟悉一下 java 的文件操作，因为我发现我学了 java 之后基本没有写过文件读写。 本文主要总结一下本练习用到的一些知识点，方便下次使用。 本文对应的 github 库"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2020-03-03T03:11:45.000Z"><meta property="article:modified_time" content="2020-03-03T03:11:45.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="java"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/"},"headline":"憧憬少的个人博客","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2020-03-03T03:11:45.000Z","dateModified":"2020-03-03T03:11:45.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。 在这个练习中，我主要是打算熟悉一下 java 的文件操作，因为我发现我学了 java 之后基本没有写过文件读写。 本文主要总结一下本练习用到的一些知识点，方便下次使用。 本文对应的 github 库"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.0.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-03-03T03:11:45.000Z" title="2020-03-03T03:11:45.000Z">2020-03-03</time>发表</span><span class="level-item"><time dateTime="2020-03-03T03:11:45.000Z" title="2020-03-03T03:11:45.000Z">2020-03-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">21 分钟读完 (大约3125个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">【编程练习】java简易学生管理系统</h1><div class="content"><p>上周一个数据库作业，用文件读写的方式来实现学生信息的读写，从而与数据库编程的方式进行对比。</p>
+<p>在这个练习中，我主要是打算熟悉一下 java 的文件操作，因为我发现我学了 java 之后基本没有写过文件读写。</p>
 <p>本文主要总结一下本练习用到的一些知识点，方便下次使用。</p>
-<p><a href="https://github.com/ChangingSelf/fileio-exercises" target="_blank" rel="noopener">本文对应的github库</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ChangingSelf/fileio-exercises">本文对应的 github 库</a></p>
 <a id="more"></a>
 
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
-<li><a href="https://www.cnblogs.com/kaml8/p/9853595.html" target="_blank" rel="noopener">java输入和输出函数</a></li>
-<li><a href="https://www.cnblogs.com/oneboi/articles/8615331.html" target="_blank" rel="noopener">java文件和文件夹的创建</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/87560794" target="_blank" rel="noopener">Java I/O包 读写文件</a>：有关各种文件流、Reader和Writer之间关系的解释</li>
-<li><a href="https://blog.csdn.net/ai_bao_zi/article/details/81097898" target="_blank" rel="noopener">java基础知识之FileInputStream流</a></li>
-<li><a href="https://www.cnblogs.com/ywzbky/p/10697414.html" target="_blank" rel="noopener">JAVA中字符流详解</a></li>
-<li><a href="https://www.jianshu.com/p/ec76c4394a00" target="_blank" rel="noopener">Java 实现文件随机读写-RandomAccessFile</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/68598753" target="_blank" rel="noopener">流-文件操作（1）-Java高级知识（4）</a>：讲了流的原理和分类</li>
-<li><a href="https://zhuanlan.zhihu.com/p/98911542" target="_blank" rel="noopener">Java语言的输入与输出与文件处理</a>：常用文件处理类的API列表</li>
-<li><a href="https://cloud.tencent.com/developer/ask/48910" target="_blank" rel="noopener">如何检查Java字符串并不是所有空白？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kaml8/p/9853595.html">java 输入和输出函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/oneboi/articles/8615331.html">java 文件和文件夹的创建</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87560794">Java I/O 包 读写文件</a>：有关各种文件流、Reader 和 Writer 之间关系的解释</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ai_bao_zi/article/details/81097898">java 基础知识之 FileInputStream 流</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ywzbky/p/10697414.html">JAVA 中字符流详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ec76c4394a00">Java 实现文件随机读写-RandomAccessFile</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68598753">流-文件操作（1）-Java 高级知识（4）</a>：讲了流的原理和分类</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98911542">Java 语言的输入与输出与文件处理</a>：常用文件处理类的 API 列表</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/ask/48910">如何检查 Java 字符串并不是所有空白？</a></li>
 </ul>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ul>
 <li>1.建两个文本文件</li>
@@ -454,7 +29,7 @@
 <li>3.查询学生对应的奖励</li>
 <li>4.增删改信息</li>
 </ul>
-<h2 id="文件1-学生基本信息"><a href="#文件1-学生基本信息" class="headerlink" title="文件1 学生基本信息"></a>文件1 学生基本信息</h2><table>
+<h2 id="文件-1-学生基本信息"><a href="#文件-1-学生基本信息" class="headerlink" title="文件 1 学生基本信息"></a>文件 1 学生基本信息</h2><table>
 <thead>
 <tr>
 <th>学号</th>
@@ -489,7 +64,7 @@
 <li>位置：奖励文件内对应的位置</li>
 <li>长度：奖励文件内对应的奖励字段的长度</li>
 </ul>
-<h2 id="文件2-奖励"><a href="#文件2-奖励" class="headerlink" title="文件2 奖励"></a>文件2 奖励</h2><p>记录学生获得的奖励</p>
+<h2 id="文件-2-奖励"><a href="#文件-2-奖励" class="headerlink" title="文件 2 奖励"></a>文件 2 奖励</h2><p>记录学生获得的奖励</p>
 <table>
 <thead>
 <tr>
@@ -497,914 +72,150 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">2011校奖学金，2012国家奖学金</td>
+<td align="center">2011 校奖学金，2012 国家奖学金</td>
 </tr>
 <tr>
-<td align="center">2012校优秀学生</td>
+<td align="center">2012 校优秀学生</td>
 </tr>
 </tbody></table>
 <h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><ul>
-<li>model包<ul>
-<li>Gender枚举类：枚举值为“男”和“女”</li>
-<li>StudentInfo类：作为学生信息结点，存储学生信息的六个字段。后来写着写着觉得这个类名太长了，不该加Info后缀的，写起来怪怪的。</li>
-<li>StudentInfoSystem类：用于实现整个系统的逻辑功能，包括录入信息，查找信息，保存数据，读取数据等。</li>
+<li>model 包<ul>
+<li>Gender 枚举类：枚举值为“男”和“女”</li>
+<li>StudentInfo 类：作为学生信息结点，存储学生信息的六个字段。后来写着写着觉得这个类名太长了，不该加 Info 后缀的，写起来怪怪的。</li>
+<li>StudentInfoSystem 类：用于实现整个系统的逻辑功能，包括录入信息，查找信息，保存数据，读取数据等。</li>
 </ul>
 </li>
-<li>view包<ul>
-<li>ConsoleMenu类：控制台菜单类，作为与用户交互的界面。</li>
+<li>view 包<ul>
+<li>ConsoleMenu 类：控制台菜单类，作为与用户交互的界面。</li>
 </ul>
 </li>
 </ul>
-<h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><h2 id="Gender枚举类"><a href="#Gender枚举类" class="headerlink" title="Gender枚举类"></a>Gender枚举类</h2><p>在录入学生性别的时候，会涉及到输入什么的问题，输入0或1？输入“男”或“女”？如果用整数或者字符串都可能会产生非法数据，导致一些问题，这些问题在很久以前我拿C++写的时候就遇到过一些。</p>
-<p>最好的方式不是用布尔类型这种二值类型，而是使用枚举类型，因为有可能用到别的值，比如UNSET（未设置）。</p>
-<p>在这次练习之前，我会的java枚举大概是下面这样：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> Gender <span class="token punctuation">{</span>
-    MALE<span class="token punctuation">,</span>
-    FAMALE
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如同C++枚举一样列出枚举值，然后当成常量一样使用。</p>
+<h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><h2 id="Gender-枚举类"><a href="#Gender-枚举类" class="headerlink" title="Gender 枚举类"></a>Gender 枚举类</h2><p>在录入学生性别的时候，会涉及到输入什么的问题，输入 0 或 1？输入“男”或“女”？如果用整数或者字符串都可能会产生非法数据，导致一些问题，这些问题在很久以前我拿 C++写的时候就遇到过一些。</p>
+<p>最好的方式不是用布尔类型这种二值类型，而是使用枚举类型，因为有可能用到别的值，比如 UNSET（未设置）。</p>
+<p>在这次练习之前，我会的 java 枚举大概是下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Gender</span> </span>&#123;</span><br><span class="line">    MALE,</span><br><span class="line">    FAMALE</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如同 C++枚举一样列出枚举值，然后当成常量一样使用。</p>
 <p>后面变成了这样：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//Gender.java</span>
-<span class="token keyword">package</span> model<span class="token punctuation">;</span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Gender.java</span></span><br><span class="line"><span class="keyword">package</span> model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Gender</span> </span>&#123;</span><br><span class="line">    MALE(<span class="string">&quot;男&quot;</span>),</span><br><span class="line">    FAMALE(<span class="string">&quot;女&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String m_genderString;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Gender</span><span class="params">(String gender)</span> </span>&#123;</span><br><span class="line">        m_genderString = gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getGenderString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_genderString;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据字符串的值返回对应的枚举值</span></span><br><span class="line"><span class="comment">     * TODO：应该可以优化成不用手动写switch的</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> genderString</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 返回字符串对应的枚举值，找不到则返回null</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Gender <span class="title">newGender</span><span class="params">(String genderString)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (genderString) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;男&quot;</span>:</span><br><span class="line">            <span class="keyword">return</span> Gender.MALE;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;女&quot;</span>:</span><br><span class="line">            <span class="keyword">return</span> Gender.FAMALE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">public</span> <span class="token keyword">enum</span> Gender <span class="token punctuation">{</span>
-    <span class="token function">MALE</span><span class="token punctuation">(</span><span class="token string">"男"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">FAMALE</span><span class="token punctuation">(</span><span class="token string">"女"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">private</span> String m_genderString<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token function">Gender</span><span class="token punctuation">(</span>String gender<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        m_genderString <span class="token operator">=</span> gender<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> String <span class="token function">getGenderString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> m_genderString<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     * 根据字符串的值返回对应的枚举值
-     * TODO：应该可以优化成不用手动写switch的
-     * @param genderString
-     * @return 返回字符串对应的枚举值，找不到则返回null
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Gender <span class="token function">newGender</span><span class="token punctuation">(</span>String genderString<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">switch</span> <span class="token punctuation">(</span>genderString<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token string">"男"</span><span class="token operator">:</span>
-            <span class="token keyword">return</span> Gender<span class="token punctuation">.</span>MALE<span class="token punctuation">;</span>
-        <span class="token keyword">case</span> <span class="token string">"女"</span><span class="token operator">:</span>
-            <span class="token keyword">return</span> Gender<span class="token punctuation">.</span>FAMALE<span class="token punctuation">;</span>
-
-        <span class="token keyword">default</span><span class="token operator">:</span>
-            <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>百度了几篇博客之后（当时没收藏，找不到了），知道了枚举类一点点原理。</p>
-<p>拿上面这个代码举例：写<code>MALE(&quot;男&quot;)</code>其实像是为Gender类的构造方法传入一个值为“男”的字符串，而默认的构造方法是没有参数的，所以你需要写一个以字符串为参数的构造方法。</p>
-<p>为了保留下这个传入的字符串，需要定义一个字符串类型的属性；为了获取它，再定义一个getter。</p>
+<p>拿上面这个代码举例：写<code>MALE(&quot;男&quot;)</code>其实像是为 Gender 类的构造方法传入一个值为“男”的字符串，而默认的构造方法是没有参数的，所以你需要写一个以字符串为参数的构造方法。</p>
+<p>为了保留下这个传入的字符串，需要定义一个字符串类型的属性；为了获取它，再定义一个 getter。</p>
 <p>这样做的目的是，在输出学生性别时，可以调用性别属性的<code>getGenderString()</code>方法获取对应的字符串。</p>
 <p>最下面那个<code>newGender()</code>方法则是在录入学生性别时使用。</p>
-<h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><p>java中的File类是对文件的抽象，它可以是文件，也可以是目录。</p>
-<pre class="line-numbers language-java"><code class="language-java">File dir <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>dir<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果传入的不是目录字符串，则返回</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="File-类"><a href="#File-类" class="headerlink" title="File 类"></a>File 类</h2><p>java 中的 File 类是对文件的抽象，它可以是文件，也可以是目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br></pre></td></tr></table></figure>
+
 <p>它拥有的方法主要是用于检测文件的信息的，比如它是文件还是目录，是否存在，绝对路径是什么等等，它不能直接读写文件（创建倒是可以）。</p>
 <p>读写文件得需要其他类，这一部分的类太多了，我找了挺久才找到合适的类。</p>
-<h2 id="FileOutputStream类"><a href="#FileOutputStream类" class="headerlink" title="FileOutputStream类"></a>FileOutputStream类</h2><p>首先是保存数据到文件中。用到了这个类，它是文件输出流，以字节流的形式输出到文件。意思就是给他传入的参数是字节数组而不是字符串。不过字符串转字节数组非常简单，用字符串的<code>getBytes()</code>就好。</p>
+<h2 id="FileOutputStream-类"><a href="#FileOutputStream-类" class="headerlink" title="FileOutputStream 类"></a>FileOutputStream 类</h2><p>首先是保存数据到文件中。用到了这个类，它是文件输出流，以字节流的形式输出到文件。意思就是给他传入的参数是字节数组而不是字符串。不过字符串转字节数组非常简单，用字符串的<code>getBytes()</code>就好。</p>
 <p>打开文件输出流：</p>
-<pre class="line-numbers language-java"><code class="language-java">File dir <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>dir<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果传入的不是目录字符串，则返回</span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line"><span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line"></span><br><span class="line">File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">&quot;/StudentInfoList.csv&quot;</span>);<span class="comment">//学生信息文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line"></span><br><span class="line">FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br></pre></td></tr></table></figure>
 
-File infoFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName <span class="token operator">+</span> <span class="token string">"/StudentInfoList.csv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//学生信息文件</span>
-
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>infoFile<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> infoFile<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-FileOutputStream infoFOS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>infoFile<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>随后拼接好学生信息的字符串，转换为字节数组，传入即可：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> infoBuf <span class="token operator">=</span> studentInfoString<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-infoFOS<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>infoBuf<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//写入文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>最后记得close</p>
-<pre class="line-numbers language-java"><code class="language-java">infoFOS<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="FileReader类和BufferedReader类"><a href="#FileReader类和BufferedReader类" class="headerlink" title="FileReader类和BufferedReader类"></a>FileReader类和BufferedReader类</h2><p>一行一个学生信息，所以读取时打算直接readline，需要<code>BufferedReader</code>类，进而需要<code>FileReader</code>类。</p>
-<pre class="line-numbers language-java"><code class="language-java">BufferedReader bufReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>infoFile<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开缓冲字符流</span>
-String tmpString <span class="token operator">=</span> null<span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>tmpString <span class="token operator">=</span> bufReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line">infoFOS.write(infoBuf);<span class="comment">//写入文件</span></span><br></pre></td></tr></table></figure>
 
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后记得 close</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">infoFOS.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="FileReader-类和-BufferedReader-类"><a href="#FileReader-类和-BufferedReader-类" class="headerlink" title="FileReader 类和 BufferedReader 类"></a>FileReader 类和 BufferedReader 类</h2><p>一行一个学生信息，所以读取时打算直接 readline，需要<code>BufferedReader</code>类，进而需要<code>FileReader</code>类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">String tmpString = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>因为基本信息文件中保存的是奖励在奖励文件中的位置与长度，所以在读取时需要设置文件指针。</p>
 <p>这个需要用到<code>RandomAccessFile</code>类。</p>
-<pre class="line-numbers language-java"><code class="language-java">RandomAccessFile randomAccessFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RandomAccessFile</span><span class="token punctuation">(</span>rewardFile<span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开随机读写</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">&quot;r&quot;</span>);<span class="comment">//打开随机读写</span></span><br></pre></td></tr></table></figure>
+
 <p>设置文件指针到指定位置，读取对应长度的字节。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//从Reward文件中读取奖励信息</span>
-randomAccessFile<span class="token punctuation">.</span><span class="token function">seek</span><span class="token punctuation">(</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> tmpBytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-randomAccessFile<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>tmpBytes<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> rewardLen<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//读取指定长度的奖励信息</span>
-String rewardString <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>tmpBytes<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">randomAccessFile.seek(position);</span><br><span class="line"><span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes);</span><br></pre></td></tr></table></figure>
+
 <p>写到这里我还遇到了一个问题，就是读取到字符串后，无法判断字符串是否为空，如果用<code>rewardString.equals(&quot;&quot;)</code>或者``rewardString.isEmpty()`，发现字符串的长度是和我设置的缓冲区大小有关的。虽然全部是空白，但是并不为空字符串。用长度判断也不行。</p>
 <p>后来找到了一个方法：</p>
-<pre class="line-numbers language-java"><code class="language-java">String rewardString <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>tmpBytes<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//转换为字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><code>trim()</code>可以去掉首尾空白，那么1024长度的空字符串就会变成0长度的普通的空字符串，就可以用刚刚的方式来判断学生是否有奖励了。</p>
-<h2 id="录入学生信息"><a href="#录入学生信息" class="headerlink" title="录入学生信息"></a>录入学生信息</h2><p>java的控制台输入我也是没弄过，这次就来试试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br></pre></td></tr></table></figure>
+
+<p><code>trim()</code>可以去掉首尾空白，那么 1024 长度的空字符串就会变成 0 长度的普通的空字符串，就可以用刚刚的方式来判断学生是否有奖励了。</p>
+<h2 id="录入学生信息"><a href="#录入学生信息" class="headerlink" title="录入学生信息"></a>录入学生信息</h2><p>java 的控制台输入我也是没弄过，这次就来试试。</p>
 <p>会了之后发现蛮简单的。创建一个<code>Scanner</code>对象，传入源输入流，要从控制台输入，所以输入流设置为<code>System.in</code>。</p>
-<pre class="line-numbers language-java"><code class="language-java">Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
+
 <p>需要读取一行数据，可以使用<code>next()</code>或者<code>nextLine()</code>方法，区别详情见百度</p>
 <p>录入普通字符串搞定：</p>
-<pre class="line-numbers language-java"><code class="language-java">System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的学号"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String studentId <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入学生的学号&quot;</span>);</span><br><span class="line">String studentId = scanner.nextLine();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;请输入学生的姓名&quot;</span>);</span><br><span class="line">String name = scanner.nextLine();</span><br></pre></td></tr></table></figure>
 
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的姓名"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String name <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>录入性别则需要判断合法性（其实上面的学号，姓名也需要判断合法性，不过不是本次练习的核心，就没弄了）</p>
-<pre class="line-numbers language-java"><code class="language-java">String genderString <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-Gender gender <span class="token operator">=</span> null<span class="token punctuation">;</span>
-<span class="token keyword">do</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的性别,输入\"男\" 或者\"女\""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    genderString <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    gender <span class="token operator">=</span>  Gender<span class="token punctuation">.</span><span class="token function">newGender</span><span class="token punctuation">(</span>genderString<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token keyword">while</span><span class="token punctuation">(</span>gender <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这里用了一个do-while循环，如果输入的不是枚举类里面有的值，就要求再次输入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String genderString = <span class="string">&quot;&quot;</span>;</span><br><span class="line">Gender gender = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;请输入学生的性别,输入\&quot;男\&quot; 或者\&quot;女\&quot;&quot;</span>);</span><br><span class="line">    genderString = scanner.nextLine();</span><br><span class="line">    gender =  Gender.newGender(genderString);</span><br><span class="line">&#125;<span class="keyword">while</span>(gender == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里用了一个 do-while 循环，如果输入的不是枚举类里面有的值，就要求再次输入。</p>
 <p>接着是年龄，年龄是一个正整数，需要<code>nextInt()</code>来获取整数，如果输入的不是整数，就会抛出异常。处理完这个异常之后继续要求输入，直到输入正确的年龄为止。</p>
-<pre class="line-numbers language-java"><code class="language-java">System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的年龄"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> age <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        age <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>age<span class="token operator">&lt;=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"年龄必须是正数"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"年龄必须是整数"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//清空错误数据</span>
-    <span class="token punctuation">}</span>        
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在输入完整数类型的年龄后，需要输入字符串类型的专业了，这里会遇到和C++输入一样的情况，那就是你还没输入就当你输入了，最后得到的是空字符串。这是因为在输入整数后按下回车键确定时，这个换行符还留存在输入缓冲区，下一个<code>nextLine()</code>将其当成了结束标志，从而结束字符串的输入。所以需要清空一下缓冲区，清空方式就是读取一个值并丢弃：</p>
-<pre class="line-numbers language-java"><code class="language-java">scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//清除缓冲区空行</span>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入学生的年龄&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> age = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        age = scanner.nextInt();</span><br><span class="line">        <span class="keyword">if</span>(age&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;年龄必须是正数&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;年龄必须是整数&quot;</span>);</span><br><span class="line">        scanner.next();<span class="comment">//清空错误数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的专业"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String major <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>最后是录入学生的奖励，这个部分加深了我对“String的相等比较不能用<code>==</code>而要用<code>equals()</code>”的知识点的印象。</p>
-<pre class="line-numbers language-java"><code class="language-java">System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的专业"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String major <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>在输入完整数类型的年龄后，需要输入字符串类型的专业了，这里会遇到和 C++输入一样的情况，那就是你还没输入就当你输入了，最后得到的是空字符串。这是因为在输入整数后按下回车键确定时，这个换行符还留存在输入缓冲区，下一个<code>nextLine()</code>将其当成了结束标志，从而结束字符串的输入。所以需要清空一下缓冲区，清空方式就是读取一个值并丢弃：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scanner.nextLine();<span class="comment">//清除缓冲区空行</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;请输入学生的专业&quot;</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br></pre></td></tr></table></figure>
 
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入学生的奖励，每输入完一项换行，输入\"done\"结束输入"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-String rewardString <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-Vector<span class="token operator">&lt;</span>String<span class="token operator">></span> reward <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">do</span> <span class="token punctuation">{</span>
-    rewardString <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rewardString<span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span><span class="token string">"done"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> reward<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>rewardString<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>rewardString<span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span><span class="token string">"done"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><h2 id="保存数据到文件"><a href="#保存数据到文件" class="headerlink" title="保存数据到文件"></a>保存数据到文件</h2><pre class="line-numbers language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 保存到文件中
-     * @param pathName 数据文件所在的路径字符串
-     * @return 保存的记录数，如果出错返回-1
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">saveData</span><span class="token punctuation">(</span>String pathName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>最后是录入学生的奖励，这个部分加深了我对“String 的相等比较不能用<code>==</code>而要用<code>equals()</code>”的知识点的印象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入学生的专业&quot;</span>);</span><br><span class="line">String major = scanner.nextLine();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;请输入学生的奖励，每输入完一项换行，输入\&quot;done\&quot;结束输入&quot;</span>);</span><br><span class="line">String rewardString = <span class="string">&quot;&quot;</span>;</span><br><span class="line">Vector&lt;String&gt; reward = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    rewardString = scanner.nextLine();</span><br><span class="line">    <span class="keyword">if</span>(!rewardString.equalsIgnoreCase(<span class="string">&quot;done&quot;</span>)) reward.add(rewardString);</span><br><span class="line">&#125; <span class="keyword">while</span> (!rewardString.equalsIgnoreCase(<span class="string">&quot;done&quot;</span>));</span><br></pre></td></tr></table></figure>
 
+<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><h2 id="保存数据到文件"><a href="#保存数据到文件" class="headerlink" title="保存数据到文件"></a>保存数据到文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 保存到文件中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 保存的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">saveData</span><span class="params">(String pathName)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">        <span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line"></span><br><span class="line">        File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">&quot;/StudentInfoList.csv&quot;</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">        File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">&quot;/Rewards.csv&quot;</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!infoFile.exists()) infoFile.createNewFile();</span><br><span class="line">        <span class="keyword">if</span>(!rewardFile.exists()) rewardFile.createNewFile();</span><br><span class="line"></span><br><span class="line">        FileOutputStream infoFOS = <span class="keyword">new</span> FileOutputStream(infoFile);</span><br><span class="line">        FileOutputStream rewardFOS = <span class="keyword">new</span> FileOutputStream(rewardFile);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> curPosition = <span class="number">0</span>;<span class="comment">//“奖励”文件指针当前位置</span></span><br><span class="line">        <span class="keyword">for</span>(StudentInfo studentInfo:m_studentInfoList) &#123;</span><br><span class="line"></span><br><span class="line">            String studentInfoString = String.format(<span class="string">&quot;%s,%s,%s,%d,%s,&quot;</span>,</span><br><span class="line">                    studentInfo.getStudentId(),</span><br><span class="line">                    studentInfo.getName(),</span><br><span class="line">                    studentInfo.getGender().getGenderString(),</span><br><span class="line">                    studentInfo.getAge(),</span><br><span class="line">                    studentInfo.getMajor()</span><br><span class="line">                    );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String rewardString = String.join(<span class="string">&quot;,&quot;</span>, studentInfo.getReward());<span class="comment">//拼接奖励字符串</span></span><br><span class="line">            <span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">                <span class="comment">//奖励字符串不为空，则添加换行符</span></span><br><span class="line">                rewardString += <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] rewardBuf = rewardString.getBytes();<span class="comment">//转换为字节数组</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            studentInfoString += String.format(<span class="string">&quot;%s,%s\n&quot;</span>, curPosition,rewardBuf.length);</span><br><span class="line">            curPosition += rewardBuf.length;<span class="comment">//计算下一个位置</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] infoBuf = studentInfoString.getBytes();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//写入文件</span></span><br><span class="line">            infoFOS.write(infoBuf);</span><br><span class="line">            rewardFOS.write(rewardBuf);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.printf(<span class="string">&quot;成功保存%d条记录到以下文件中：\n[%s]\n[%s]\n&quot;</span>,</span><br><span class="line">                m_studentInfoList.size(),</span><br><span class="line">                infoFile.getCanonicalPath(),</span><br><span class="line">                rewardFile.getCanonicalPath()</span><br><span class="line">                );</span><br><span class="line"></span><br><span class="line">        rewardFOS.close();</span><br><span class="line">        infoFOS.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> m_studentInfoList.size();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            File dir <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>dir<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果传入的不是目录字符串，则返回</span>
-
-            File infoFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName <span class="token operator">+</span> <span class="token string">"/StudentInfoList.csv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//学生信息文件</span>
-            File rewardFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName <span class="token operator">+</span> <span class="token string">"/Rewards.csv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//学生奖励文件</span>
-
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>infoFile<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> infoFile<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rewardFile<span class="token punctuation">.</span><span class="token function">exists</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> rewardFile<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            FileOutputStream infoFOS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>infoFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            FileOutputStream rewardFOS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileOutputStream</span><span class="token punctuation">(</span>rewardFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">int</span> curPosition <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//“奖励”文件指针当前位置</span>
-            <span class="token keyword">for</span><span class="token punctuation">(</span>StudentInfo studentInfo<span class="token operator">:</span>m_studentInfoList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-                String studentInfoString <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"%s,%s,%s,%d,%s,"</span><span class="token punctuation">,</span> 
-                        studentInfo<span class="token punctuation">.</span><span class="token function">getStudentId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                        studentInfo<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                        studentInfo<span class="token punctuation">.</span><span class="token function">getGender</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getGenderString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                        studentInfo<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                        studentInfo<span class="token punctuation">.</span><span class="token function">getMajor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                        <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-                String rewardString <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">,</span> studentInfo<span class="token punctuation">.</span><span class="token function">getReward</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//拼接奖励字符串</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rewardString<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token comment" spellcheck="true">//奖励字符串不为空，则添加换行符</span>
-                    rewardString <span class="token operator">+=</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-
-
-
-                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> rewardBuf <span class="token operator">=</span> rewardString<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//转换为字节数组</span>
-
-
-
-                studentInfoString <span class="token operator">+=</span> String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"%s,%s\n"</span><span class="token punctuation">,</span> curPosition<span class="token punctuation">,</span>rewardBuf<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                curPosition <span class="token operator">+=</span> rewardBuf<span class="token punctuation">.</span>length<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//计算下一个位置</span>
-
-                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> infoBuf <span class="token operator">=</span> studentInfoString<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token comment" spellcheck="true">//写入文件        </span>
-                infoFOS<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>infoBuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                rewardFOS<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>rewardBuf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"成功保存%d条记录到以下文件中：\n[%s]\n[%s]\n"</span><span class="token punctuation">,</span>
-                    m_studentInfoList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                    infoFile<span class="token punctuation">.</span><span class="token function">getCanonicalPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                    rewardFile<span class="token punctuation">.</span><span class="token function">getCanonicalPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                    <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            rewardFOS<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            infoFOS<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-            <span class="token keyword">return</span> m_studentInfoList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="从文件中加载数据"><a href="#从文件中加载数据" class="headerlink" title="从文件中加载数据"></a>从文件中加载数据</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
-     * 从文件中加载
-     * @param pathName 数据文件所在的路径字符串
-     * @param clearFlag 是否清空内存中原有数据
-     * @return 读取的记录数，如果出错返回-1
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">loadData</span><span class="token punctuation">(</span>String pathName<span class="token punctuation">,</span><span class="token keyword">boolean</span> clearFlag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>clearFlag<span class="token punctuation">)</span> m_studentInfoList<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            File dir <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>dir<span class="token punctuation">.</span><span class="token function">isDirectory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果传入的不是目录字符串，则返回</span>
-
-            File infoFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName <span class="token operator">+</span> <span class="token string">"/StudentInfoList.csv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//学生信息文件</span>
-            File rewardFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>pathName <span class="token operator">+</span> <span class="token string">"/Rewards.csv"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//学生奖励文件</span>
-
-
-            BufferedReader bufReader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span>infoFile<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开缓冲字符流</span>
-            RandomAccessFile randomAccessFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RandomAccessFile</span><span class="token punctuation">(</span>rewardFile<span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开随机读写</span>
-
-            String tmpString <span class="token operator">=</span> null<span class="token punctuation">;</span>
-            <span class="token keyword">int</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>tmpString <span class="token operator">=</span> bufReader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-                <span class="token comment" spellcheck="true">//按行读取</span>
-                String<span class="token punctuation">[</span><span class="token punctuation">]</span> infoStrings <span class="token operator">=</span> tmpString<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//按照分隔符分割</span>
-
-                <span class="token keyword">if</span><span class="token punctuation">(</span>infoStrings<span class="token punctuation">.</span>length <span class="token operator">!=</span> <span class="token number">7</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果字段数对不上，说明文件格式有问题</span>
-                <span class="token punctuation">}</span>
-
-                <span class="token comment" spellcheck="true">//从StudentInfo文件中读取学生信息</span>
-                String studentId <span class="token operator">=</span> infoStrings<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                String name <span class="token operator">=</span> infoStrings<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                Gender gender <span class="token operator">=</span> Gender<span class="token punctuation">.</span><span class="token function">newGender</span><span class="token punctuation">(</span>infoStrings<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>gender <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-
-                <span class="token keyword">int</span> age <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>infoStrings<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                String major <span class="token operator">=</span> infoStrings<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-                <span class="token keyword">long</span> position <span class="token operator">=</span> Long<span class="token punctuation">.</span><span class="token function">parseLong</span><span class="token punctuation">(</span>infoStrings<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> rewardLen <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>infoStrings<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token comment" spellcheck="true">//从Reward文件中读取奖励信息</span>
-                randomAccessFile<span class="token punctuation">.</span><span class="token function">seek</span><span class="token punctuation">(</span>position<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> tmpBytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                randomAccessFile<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>tmpBytes<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> rewardLen<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//读取指定长度的奖励信息</span>
-
-                String rewardString <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>tmpBytes<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//转换为字符串</span>
-
-
-                Vector<span class="token operator">&lt;</span>String<span class="token operator">></span> rewardList <span class="token operator">=</span> null<span class="token punctuation">;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>rewardString<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token comment" spellcheck="true">//如果奖励不为空则添加</span>
-                    rewardList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    String<span class="token punctuation">[</span><span class="token punctuation">]</span> rewardArr <span class="token operator">=</span> rewardString<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">for</span><span class="token punctuation">(</span>String reward <span class="token operator">:</span> rewardArr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                        rewardList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>reward<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-
-                <span class="token punctuation">}</span>
-
-
-                StudentInfo newStudentInfo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StudentInfo</span><span class="token punctuation">(</span>studentId<span class="token punctuation">,</span> name<span class="token punctuation">,</span> gender<span class="token punctuation">,</span> age<span class="token punctuation">,</span> major<span class="token punctuation">,</span> rewardList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                m_studentInfoList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>newStudentInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                counter<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-
-
-            bufReader<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            randomAccessFile<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-            <span class="token keyword">return</span> counter<span class="token punctuation">;</span>
-
-
-
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-
-
-
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-            </div>
-            <hr/>
-
+<h2 id="从文件中加载数据"><a href="#从文件中加载数据" class="headerlink" title="从文件中加载数据"></a>从文件中加载数据</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从文件中加载</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pathName 数据文件所在的路径字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clearFlag 是否清空内存中原有数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 读取的记录数，如果出错返回-1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">loadData</span><span class="params">(String pathName,<span class="keyword">boolean</span> clearFlag)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(clearFlag) m_studentInfoList.clear();</span><br><span class="line"></span><br><span class="line">            File dir = <span class="keyword">new</span> File(pathName);</span><br><span class="line">            <span class="keyword">if</span>(!dir.isDirectory()) <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果传入的不是目录字符串，则返回</span></span><br><span class="line"></span><br><span class="line">            File infoFile = <span class="keyword">new</span> File(pathName + <span class="string">&quot;/StudentInfoList.csv&quot;</span>);<span class="comment">//学生信息文件</span></span><br><span class="line">            File rewardFile = <span class="keyword">new</span> File(pathName + <span class="string">&quot;/Rewards.csv&quot;</span>);<span class="comment">//学生奖励文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            BufferedReader bufReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(infoFile));<span class="comment">//打开缓冲字符流</span></span><br><span class="line">            RandomAccessFile randomAccessFile = <span class="keyword">new</span> RandomAccessFile(rewardFile, <span class="string">&quot;r&quot;</span>);<span class="comment">//打开随机读写</span></span><br><span class="line"></span><br><span class="line">            String tmpString = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>((tmpString = bufReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//按行读取</span></span><br><span class="line">                String[] infoStrings = tmpString.split(<span class="string">&quot;,&quot;</span>);<span class="comment">//按照分隔符分割</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(infoStrings.length != <span class="number">7</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//如果字段数对不上，说明文件格式有问题</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//从StudentInfo文件中读取学生信息</span></span><br><span class="line">                String studentId = infoStrings[<span class="number">0</span>];</span><br><span class="line">                String name = infoStrings[<span class="number">1</span>];</span><br><span class="line">                Gender gender = Gender.newGender(infoStrings[<span class="number">2</span>]);</span><br><span class="line">                <span class="keyword">if</span>(gender == <span class="keyword">null</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> age = Integer.parseInt(infoStrings[<span class="number">3</span>]);</span><br><span class="line">                String major = infoStrings[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">long</span> position = Long.parseLong(infoStrings[<span class="number">5</span>]);</span><br><span class="line">                <span class="keyword">int</span> rewardLen = Integer.parseInt(infoStrings[<span class="number">6</span>]);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//从Reward文件中读取奖励信息</span></span><br><span class="line">                randomAccessFile.seek(position);</span><br><span class="line">                <span class="keyword">byte</span>[] tmpBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                randomAccessFile.read(tmpBytes,<span class="number">0</span>, rewardLen);<span class="comment">//读取指定长度的奖励信息</span></span><br><span class="line"></span><br><span class="line">                String rewardString = <span class="keyword">new</span> String(tmpBytes).trim();<span class="comment">//转换为字符串</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                Vector&lt;String&gt; rewardList = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">if</span>(!rewardString.isEmpty()) &#123;</span><br><span class="line">                    <span class="comment">//如果奖励不为空则添加</span></span><br><span class="line">                    rewardList = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line">                    String[] rewardArr = rewardString.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">                    <span class="keyword">for</span>(String reward : rewardArr) &#123;</span><br><span class="line">                        rewardList.add(reward);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                StudentInfo newStudentInfo = <span class="keyword">new</span> StudentInfo(studentId, name, gender, age, major, rewardList);</span><br><span class="line"></span><br><span class="line">                m_studentInfoList.add(newStudentInfo);</span><br><span class="line">                counter++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            bufReader.close();</span><br><span class="line">            randomAccessFile.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> counter;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>【编程练习】java简易学生管理系统</p><p><a href="https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/">https://yxchangingself.xyz/posts/java_simple_studentInfoSystem/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-03-03</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-03-03</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/java/">java</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/sound-card-data-acquisition/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">【作业总结】声卡数据采集及处理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/Scrapy_spider_1/"><span class="level-item">Scrapy爬虫框架（1）一个简单的可用的爬虫</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "10944dc029352673ab491a94c0dc7890",
+            repo: "blog-comments",
+            owner: "ChangingSelf",
+            clientID: "2c2d9b5607027ef5684f",
+            clientSecret: "b974e75a7b4f1d80dee5e2ada5abad43526a05fc",
+            admin: ["ChangingSelf"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
             
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz/posts/java_simple_studentInfoSystem/">https://yxChangingSelf.xyz/posts/java_simple_studentInfoSystem/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">1</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#题目"><span class="level-left"><span class="level-item">2</span><span class="level-item">题目</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#文件-1-学生基本信息"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">文件 1 学生基本信息</span></span></a></li><li><a class="level is-mobile" href="#文件-2-奖励"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">文件 2 奖励</span></span></a></li></ul></li><li><a class="level is-mobile" href="#结构"><span class="level-left"><span class="level-item">3</span><span class="level-item">结构</span></span></a></li><li><a class="level is-mobile" href="#知识点总结"><span class="level-left"><span class="level-item">4</span><span class="level-item">知识点总结</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Gender-枚举类"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">Gender 枚举类</span></span></a></li><li><a class="level is-mobile" href="#File-类"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">File 类</span></span></a></li><li><a class="level is-mobile" href="#FileOutputStream-类"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">FileOutputStream 类</span></span></a></li><li><a class="level is-mobile" href="#FileReader-类和-BufferedReader-类"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">FileReader 类和 BufferedReader 类</span></span></a></li><li><a class="level is-mobile" href="#录入学生信息"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">录入学生信息</span></span></a></li></ul></li><li><a class="level is-mobile" href="#核心代码"><span class="level-left"><span class="level-item">5</span><span class="level-item">核心代码</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#保存数据到文件"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">保存数据到文件</span></span></a></li><li><a class="level is-mobile" href="#从文件中加载数据"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">从文件中加载数据</span></span></a></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2020 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'folded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
       });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-
-<div id="article-share">
-    
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: '2c2d9b5607027ef5684f',
-        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
-        repo: 'blog-comments',
-        owner: 'ChangingSelf',
-        admin: "ChangingSelf",
-        id: '2020-03-03T11-11-45',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/posts/sound-card-data-acquisition/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="【作业总结】声卡数据采集及处理">
-                        
-                        <span class="card-title">【作业总结】声卡数据采集及处理</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            这学期开了网络化测控课，第二周开头就布置了一个相当有难度的作业：
-以小组为单位，写一个声卡数据采集程序，功能要求：
-
-以曲线形式显示波形；
-利用数字滤波器对数据进行平滑滤波；
-对声音信号进行FFT变化，计算信号的主频。
-
-对于缺乏很多前置知
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/cpp/">
-                        <span class="chip bg-color">cpp</span>
-                    </a>
-                    
-                    <a href="/tags/mfc/">
-                        <span class="chip bg-color">mfc</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/posts/Scrapy_spider_1/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Scrapy爬虫框架（1）一个简单的可用的爬虫">
-                        
-                        <span class="card-title">Scrapy爬虫框架（1）一个简单的可用的爬虫</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            很久没写爬虫了，又重新开始使用scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。
-本文将初级知识点简单梳理，实现了一个HelloWorld级别的Scrapy爬虫。
-本文适用于Scrapy 1.6.0，结合了
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/spider/">
-                        <span class="chip bg-color">spider</span>
-                    </a>
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/scrapy/">
-                        <span class="chip bg-color">scrapy</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 憧憬少的个人博客<br />'
-            + '文章作者: 憧憬少<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-    
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h1, h2, h3, h4, h5, h6'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
             }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
             }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-    <footer class="page-footer bg-color">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            <span id="year">2020</span>
-            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.1k</span>&nbsp;字
-            
-            
-            
-            
-            
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
-            </span>
-            
-            <br>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
-});
-</script>
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    
-
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-    <!-- Baidu Analytics -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
-    
-
-    
-    
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-</body>
-
-</html>
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

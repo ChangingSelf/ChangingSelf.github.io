@@ -1,478 +1,51 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>建新hexo博客后继续更新旧hexo博客的方法 - 憧憬少的个人博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="憧憬少的个人博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="憧憬少的个人博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"><meta property="og:type" content="blog"><meta property="og:title" content="建新hexo博客后继续更新旧hexo博客的方法"><meta property="og:url" content="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"><meta property="og:site_name" content="憧憬少的个人博客"><meta property="og:description" content="我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2020-01-28T04:15:33.000Z"><meta property="article:modified_time" content="2020-01-28T04:15:33.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="hexo"><meta property="article:tag" content="ssh"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"},"headline":"憧憬少的个人博客","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2020-01-28T04:15:33.000Z","dateModified":"2020-01-28T04:15:33.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.0.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-01-28T04:15:33.000Z" title="2020-01-28T04:15:33.000Z">2020-01-28</time>发表</span><span class="level-item"><time dateTime="2020-01-28T04:15:33.000Z" title="2020-01-28T04:15:33.000Z">2020-01-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a></span><span class="level-item">14 分钟读完 (大约2150个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">建新hexo博客后继续更新旧hexo博客的方法</h1><div class="content"><p>我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
+<p>问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights                             &#96;</span><br></pre></td></tr></table></figure>
 
-
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="建新hexo博客后继续更新旧hexo博客的方法, 憧憬少的个人博客">
-    <meta name="description" content="我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。
-问题在于，为了部署新博客，我">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>建新hexo博客后继续更新旧hexo博客的方法 | 憧憬少的个人博客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
-    
-    <script src="/libs/jquery/jquery.min.js"></script>
-    
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="憧憬少的个人博客" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
-
-
-<body>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
-    <script src="https://ChangingSelf.github.io/live2d-widget/autoload.js"></script>
-
-
-
-
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">憧憬少的个人博客</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">憧憬少的个人博客</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
-</div>
-
-        </div>
-
-        
-    </nav>
-
-</header>
-
-    
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">建新hexo博客后继续更新旧hexo博客的方法</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<main class="post-container content">
-
-    
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        height: calc(100vh - 250px);
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
-                            </a>
-                        
-                            <a href="/tags/ssh/">
-                                <span class="chip bg-color">ssh</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-category">
-                                解决方案
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-28
-                </div>
-                
-
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-14
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
-                </div>
-                
-				
-                
-            </div>
-            
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <p>我创建了一个新的github账号ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
-<p>问题在于，为了部署新博客，我将原本的ssh密钥对文件删掉了，重新生成了新的ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
-<pre><code>ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
-fatal: Could not read from remote repository.                                         
-Please make sure you have the correct access rights                             `    </code></pre><p>大意是我没有权限，也就是ssh没有配好。</p>
+<p>大意是我没有权限，也就是 ssh 没有配好。</p>
 <a id="more"></a>
 
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
-<li><a href="https://blog.csdn.net/skylin19840101/article/details/98616205" target="_blank" rel="noopener">github支持多个账号</a></li>
-<li><a href="https://www.cnblogs.com/yanglang/p/9563496.html" target="_blank" rel="noopener">SSH-keygen用法</a></li>
-<li><a href="https://www.awaimai.com/2200.html" target="_blank" rel="noopener">git配置多个SSH-key</a></li>
-<li><a href="https://blog.csdn.net/hao495430759/article/details/80673568" target="_blank" rel="noopener">git配置多个SSH-key-多图易理解版</a></li>
-<li><a href="https://www.centos.bz/2018/06/%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E5%AF%B9%E5%B9%B6%E4%B8%94%E6%B0%B8%E4%B9%85%E5%A4%9Assh%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener">配置多个ssh密钥对并且永久多ssh管理</a></li>
-<li><a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a></li>
-<li><a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">ssh百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/skylin19840101/article/details/98616205">github 支持多个账号</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yanglang/p/9563496.html">SSH-keygen 用法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.awaimai.com/2200.html">git 配置多个 SSH-key</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hao495430759/article/details/80673568">git 配置多个 SSH-key-多图易理解版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.centos.bz/2018/06/%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E5%AF%B9%E5%B9%B6%E4%B8%94%E6%B0%B8%E4%B9%85%E5%A4%9Assh%E7%AE%A1%E7%90%86/">配置多个 ssh 密钥对并且永久多 ssh 管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34377919/article/details/91857803">是否必须每次添加 ssh-add</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SSH/10407">ssh 百度百科</a></li>
 </ul>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="目前状况"><a href="#目前状况" class="headerlink" title="目前状况"></a>目前状况</h2><p>操作系统是win10（找到的资料很多linux的，不过没关系，有git-bash）</p>
-<p>github上有两个账号，一个旧账号（HaneChiri），一个新账号（ChangingSelf）。本地有两个hexo博客源代码文件夹，分别对应两个账号上搭建的博客。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="目前状况"><a href="#目前状况" class="headerlink" title="目前状况"></a>目前状况</h2><p>操作系统是 win10（找到的资料很多 linux 的，不过没关系，有 git-bash）</p>
+<p>github 上有两个账号，一个旧账号（HaneChiri），一个新账号（ChangingSelf）。本地有两个 hexo 博客源代码文件夹，分别对应两个账号上搭建的博客。</p>
 <p>本地<code>C:\Users\Administrator\.ssh</code>文件夹内有：</p>
 <ul>
-<li>id_rsa.pub：公钥文件，已添加到ChangingSelf账号的ssh-key</li>
+<li>id_rsa.pub：公钥文件，已添加到 ChangingSelf 账号的 ssh-key</li>
 <li>id_rsa：私钥文件</li>
 <li>known_hosts</li>
 </ul>
-<p>现在在ChangingSelf博客文件夹内使用<code>hexo d</code>部署博客，可以部署到对应账号的仓库，而在HaneChiri博客文件夹内部署博客，则权限不足。</p>
-<p>（现在回想起来也许直接将现在新的公钥添加到旧账号中就搞定了呀，搞那么麻烦QAQ，等写完这篇文再试试这个方法）</p>
-<h2 id="过程复盘"><a href="#过程复盘" class="headerlink" title="过程复盘"></a>过程复盘</h2><h3 id="生成新密钥对"><a href="#生成新密钥对" class="headerlink" title="生成新密钥对"></a>生成新密钥对</h3><p>先来看看<a href="https://baike.baidu.com/item/SSH/10407" target="_blank" rel="noopener">百度百科</a>关于SSH（安全外壳协议）的介绍：</p>
+<p>现在在 ChangingSelf 博客文件夹内使用<code>hexo d</code>部署博客，可以部署到对应账号的仓库，而在 HaneChiri 博客文件夹内部署博客，则权限不足。</p>
+<p>（现在回想起来也许直接将现在新的公钥添加到旧账号中就搞定了呀，搞那么麻烦 QAQ，等写完这篇文再试试这个方法）</p>
+<h2 id="过程复盘"><a href="#过程复盘" class="headerlink" title="过程复盘"></a>过程复盘</h2><h3 id="生成新密钥对"><a href="#生成新密钥对" class="headerlink" title="生成新密钥对"></a>生成新密钥对</h3><p>先来看看<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SSH/10407">百度百科</a>关于 SSH（安全外壳协议）的介绍：</p>
 <blockquote>
-<p>从客户端来看，SSH提供两种级别的安全验证。</p>
+<p>从客户端来看，SSH 提供两种级别的安全验证。</p>
 <p><strong>第一种级别（基于口令的安全验证）</strong></p>
-<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的<a href="https://baike.baidu.com/item/服务器" target="_blank" rel="noopener">服务器</a>。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/服务器">服务器</a>。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
 <p><strong>第二种级别（基于密匙的安全验证）</strong></p>
-<p>需要依靠<a href="https://baike.baidu.com/item/密匙" target="_blank" rel="noopener">密匙</a>，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。</p>
-<p>用这种方式，你必须知道自己密匙的<a href="https://baike.baidu.com/item/口令" target="_blank" rel="noopener">口令</a>。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
-<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要10秒 [2] 。</p>
+<p>需要依靠<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/密匙">密匙</a>，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到 SSH 服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。</p>
+<p>用这种方式，你必须知道自己密匙的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/口令">口令</a>。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
+<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要 10 秒 [2] 。</p>
 </blockquote>
-<p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在github服务器上，本地保留私钥。</p>
-<p>首先，打开git-bash，生成新的ssh密钥对：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">$ssh-keygen -t rsa -C "youremail@xxx.com" -f keyfileName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在 github 服务器上，本地保留私钥。</p>
+<p>首先，打开 git-bash，生成新的 ssh 密钥对：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ssh-keygen -t rsa -C <span class="string">&quot;youremail@xxx.com&quot;</span> -f keyfileName</span></span><br></pre></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -482,7 +55,7 @@ Please make sure you have the correct access rights                             
 </thead>
 <tbody><tr>
 <td>-t</td>
-<td>生成的密钥类型，默认rsa</td>
+<td>生成的密钥类型，默认 rsa</td>
 </tr>
 <tr>
 <td>-C</td>
@@ -490,34 +63,36 @@ Please make sure you have the correct access rights                             
 </tr>
 <tr>
 <td>-f</td>
-<td>指定密钥文件名，默认为id_rsa</td>
+<td>指定密钥文件名，默认为 id_rsa</td>
 </tr>
 </tbody></table>
-<p>由于.ssh目录下已经存在默认文件名的密钥，所以换一个名字。我想要生成旧账号HaneChiri的密钥，所以文件名就起名为<code>id_rsa_hanechiri</code>，当然，这个并无影响。</p>
-<p>最后会生成两个文件，.pub后缀的是公钥，另一个是私钥。</p>
-<h3 id="添加公钥到github账号"><a href="#添加公钥到github账号" class="headerlink" title="添加公钥到github账号"></a>添加公钥到github账号</h3><p>在网页右上角账号设置中找到SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
-<p>添加完毕后再次部署HaneChiri的博客，发现仍然是这个错误：</p>
-<pre><code>ERROR: Permission to HaneChiri/HaneChiri.github.io.git denied to ChangingSelf.   
-fatal: Could not read from remote repository.                                         
-Please make sure you have the correct access rights       </code></pre><p>也对，现在有两个密钥对，可能是配对错误了。</p>
-<p>仔细看错误内容，HaneChiri库拒绝了用户ChangingSelf的访问，也就是说，用的是HaneChiri的公钥，与新账号ChangingSelf的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
-<h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到ssh-agent的高速缓存中，我打开另一个git-bash的时候就不行了（参考：<a href="https://blog.csdn.net/weixin_34377919/article/details/91857803" target="_blank" rel="noopener">是否必须每次添加ssh-add</a>）</p>
-<h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开ssh-agent服务，即输入命令：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-agent <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>由于.ssh 目录下已经存在默认文件名的密钥，所以换一个名字。我想要生成旧账号 HaneChiri 的密钥，所以文件名就起名为<code>id_rsa_hanechiri</code>，当然，这个并无影响。</p>
+<p>最后会生成两个文件，.pub 后缀的是公钥，另一个是私钥。</p>
+<h3 id="添加公钥到-github-账号"><a href="#添加公钥到-github-账号" class="headerlink" title="添加公钥到 github 账号"></a>添加公钥到 github 账号</h3><p>在网页右上角账号设置中找到 SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
+<p>添加完毕后再次部署 HaneChiri 的博客，发现仍然是这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
+
+<p>也对，现在有两个密钥对，可能是配对错误了。</p>
+<p>仔细看错误内容，HaneChiri 库拒绝了用户 ChangingSelf 的访问，也就是说，用的是 HaneChiri 的公钥，与新账号 ChangingSelf 的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
+<h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到 ssh-agent 的高速缓存中，我打开另一个 git-bash 的时候就不行了（参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34377919/article/details/91857803">是否必须每次添加 ssh-add</a>）</p>
+<h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开 ssh-agent 服务，即输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-agent bash</span><br></pre></td></tr></table></figure>
+
 <p>然后添加私钥：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri</span><br></pre></td></tr></table></figure>
+
 <p>这里的地址是需要使用的私钥文件的绝对地址。</p>
-<p>可以通过-l选项查看所有已经添加的私钥：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>使用-D选项清空私钥列表：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">$ssh</span>-add -D<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>接着在这个git-bash里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
-<h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件config，这个文件长这样：</p>
-<pre><code>Host github.com
-    HostName github.com
-    IdentityFile C:/Users/Administrator/.ssh/id_rsa_hanechiri
-    PreferredAuthentications publickey
-    User HaneChiri</code></pre><table>
+<p>可以通过-l 选项查看所有已经添加的私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -l</span><br></pre></td></tr></table></figure>
+
+<p>使用-D 选项清空私钥列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -D</span><br></pre></td></tr></table></figure>
+
+<p>接着在这个 git-bash 里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
+<h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件 config，这个文件长这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:&#x2F;Users&#x2F;Administrator&#x2F;.ssh&#x2F;id_rsa_hanechiri</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User HaneChiri</span><br></pre></td></tr></table></figure>
+
+<table>
 <thead>
 <tr>
 <th>字段</th>
@@ -526,7 +101,7 @@ Please make sure you have the correct access rights       </code></pre><p>也对
 </thead>
 <tbody><tr>
 <td>Host</td>
-<td>网站别名，最好和HostName一致</td>
+<td>网站别名，最好和 HostName 一致</td>
 </tr>
 <tr>
 <td>HostName</td>
@@ -538,602 +113,80 @@ Please make sure you have the correct access rights       </code></pre><p>也对
 </tr>
 <tr>
 <td>PreferredAuthentications</td>
-<td>验证方式，填publickey就是公钥验证</td>
+<td>验证方式，填 publickey 就是公钥验证</td>
 </tr>
 <tr>
 <td>User</td>
 <td>用户名</td>
 </tr>
 </tbody></table>
-<p>可以配置多个网站，每个网站都有上面这些字段。在你使用ssh访问这个文件内存在的某个网站时，ssh就会拿这个文件里面指定的私钥来进行验证。</p>
-<p>在.ssh目录下找，如果存在这个名为<code>config</code>的文件，就打开来编辑，没有的话就新建一个。</p>
-<p>配置好文件之后，打开git-bash再使用<code>hexo d</code>就搞定部署了。</p>
-<p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了config文件的方法，写本文时才尝试临时性的方法，成功了）</p>
-<h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对ssh更加了解之后，才想到的简便方法：直接把新账号ChangingSelf的公钥添加到旧账号的ssh-key中。</p>
+<p>可以配置多个网站，每个网站都有上面这些字段。在你使用 ssh 访问这个文件内存在的某个网站时，ssh 就会拿这个文件里面指定的私钥来进行验证。</p>
+<p>在.ssh 目录下找，如果存在这个名为<code>config</code>的文件，就打开来编辑，没有的话就新建一个。</p>
+<p>配置好文件之后，打开 git-bash 再使用<code>hexo d</code>就搞定部署了。</p>
+<p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了 config 文件的方法，写本文时才尝试临时性的方法，成功了）</p>
+<h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对 ssh 更加了解之后，才想到的简便方法：直接把新账号 ChangingSelf 的公钥添加到旧账号的 ssh-key 中。</p>
 <p>结果给我显示：</p>
-<pre><code>Key is already in use</code></pre><p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure>
 
-            </div>
-            <hr/>
-
+<p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>建新hexo博客后继续更新旧hexo博客的方法</p><p><a href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/">https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-28</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-01-28</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/hexo/">hexo</a><a class="link-muted mr-2" rel="tag" href="/tags/ssh/">ssh</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/Africanights_simu_hr_2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">【编程练习】明日非舟抽卡模拟器（2）xml文件解析</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/Africanights_simu_hr_1/"><span class="level-item">【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "627f9100626afc53a554ad79783f5269",
+            repo: "blog-comments",
+            owner: "ChangingSelf",
+            clientID: "2c2d9b5607027ef5684f",
+            clientSecret: "b974e75a7b4f1d80dee5e2ada5abad43526a05fc",
+            admin: ["ChangingSelf"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
             
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz" rel="external nofollow noreferrer">憧憬少</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://yxChangingSelf.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/">https://yxChangingSelf.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">1</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#解决方案"><span class="level-left"><span class="level-item">2</span><span class="level-item">解决方案</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目前状况"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">目前状况</span></span></a></li><li><a class="level is-mobile" href="#过程复盘"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">过程复盘</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#生成新密钥对"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">生成新密钥对</span></span></a></li><li><a class="level is-mobile" href="#添加公钥到-github-账号"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">添加公钥到 github 账号</span></span></a></li><li><a class="level is-mobile" href="#永久性保存"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">永久性保存</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#最后做个试验"><span class="level-left"><span class="level-item">3</span><span class="level-item">最后做个试验</span></span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2020 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'folded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
       });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
-                                </a>
-                            
-                                <a href="/tags/ssh/">
-                                    <span class="chip bg-color">ssh</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-
-<div id="article-share">
-    
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: '2c2d9b5607027ef5684f',
-        clientSecret: 'b974e75a7b4f1d80dee5e2ada5abad43526a05fc',
-        repo: 'blog-comments',
-        owner: 'ChangingSelf',
-        admin: "ChangingSelf",
-        id: '2020-01-28T12-15-33',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/posts/Africanights_simu_hr_2/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="【编程练习】明日非舟抽卡模拟器（2）xml文件解析">
-                        
-                        <span class="card-title">【编程练习】明日非舟抽卡模拟器（2）xml文件解析</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            为了修改与添加方便，将干员的信息放在简历类Resume中，简历信息使用xml文件存储，在启动时加载进来。
-本项目连载github库地址
-
-
-参考链接
-细说java解析XML文档的常用方法（含实例）-知乎
-
-Java千百问_02基本使用（01
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-04
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                    <a href="/tags/xml/">
-                        <span class="chip bg-color">xml</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/posts/Africanights_simu_hr_1/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级">
-                        
-                        <span class="card-title">【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            好友封掣写了一个明日方舟模拟寻访，于是也想做一个来作为java的练手，这学期写课设的时候就体现出我平时写代码写太少了。
-当然，经过这学期末的编码轰炸，我现在可不敢像以前一样没有计划地直接开始，先想好它的架构，随后再开始编写，并留下系列博文记
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-27
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/" class="post-category">
-                                    过程复盘
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 憧憬少的个人博客<br />'
-            + '文章作者: 憧憬少<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-    
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h1, h2, h3, h4, h5, h6'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
             }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
             }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-    <footer class="page-footer bg-color">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            <span id="year">2020</span>
-            <a href="https://yxChangingSelf.xyz" target="_blank">憧憬少</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">97.1k</span>&nbsp;字
-            
-            
-            
-            
-            
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
-            </span>
-            
-            <br>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/ChangingSelf" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:ChangingSelf@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=913620659" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 913620659" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
-});
-</script>
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    
-
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-    <!-- Baidu Analytics -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
-    
-
-    
-    
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-</body>
-
-</html>
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
