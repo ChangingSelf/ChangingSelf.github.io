@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-10-11T04:57:09.000Z</updated>
+  <updated>2020-10-11T13:48:35.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vscode中python自定义包的模块如何导入其子包模块</title>
+    <link href="https://yxchangingself.xyz/posts/python-the-module-of-parentpkg-import-the-module-of-childpkg/"/>
+    <id>https://yxchangingself.xyz/posts/python-the-module-of-parentpkg-import-the-module-of-childpkg/</id>
+    <published>2020-10-11T13:48:35.000Z</published>
+    <updated>2020-10-11T13:48:35.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;如图所示，对于python，有一个自定义包&lt;code&gt;parent&lt;/code&gt;，它里面还有一个子包&lt;code&gt;child&lt;/code&gt;，当你在&lt;code&gt;parent.module1&lt;/code&gt;中&lt;code&gt;import child.module2&lt;/code&gt;时，vscode会给你报错，说找不到这个包。&lt;/p&gt;
+&lt;p&gt;当你单独运行&lt;code&gt;module1.py&lt;/code&gt;的时候，可以正常运行，但是当你在&lt;code&gt;parent&lt;/code&gt;包外层的&lt;code&gt;main.py&lt;/code&gt;中&lt;code&gt;import parent.module1&lt;/code&gt;时，就会报错。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    
+      <category term="vscode" scheme="https://yxChangingSelf.xyz/tags/vscode/"/>
+    
+  </entry>
   
   <entry>
     <title>记第三次博客切换主题以及主题优化</title>
@@ -471,34 +495,6 @@
       <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
     
       <category term="internet" scheme="https://yxChangingSelf.xyz/tags/internet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文章分类说明</title>
-    <link href="https://yxchangingself.xyz/posts/categories_description/"/>
-    <id>https://yxchangingself.xyz/posts/categories_description/</id>
-    <published>2019-12-31T12:30:06.000Z</published>
-    <updated>2019-12-31T12:30:06.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为了对文章进行更好的管理，需要提前确定好文章的分类。将本博客内的文章分为以下七类：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;过程复盘&lt;/li&gt;
-&lt;li&gt;知识整理&lt;/li&gt;
-&lt;li&gt;解决方案&lt;/li&gt;
-&lt;li&gt;算法理解&lt;/li&gt;
-&lt;li&gt;工具使用&lt;/li&gt;
-&lt;li&gt;目录索引&lt;/li&gt;
-&lt;li&gt;日志随笔&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="目录索引" scheme="https://yxChangingSelf.xyz/categories/%E7%9B%AE%E5%BD%95%E7%B4%A2%E5%BC%95/"/>
-    
     
   </entry>
   
