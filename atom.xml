@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2020-11-22T14:07:16.000Z</updated>
+  <updated>2021-01-07T11:04:16.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在hexo的Icarus主题页面底部加入备案号</title>
+    <link href="https://yxchangingself.xyz/posts/hexo-Icarus-beian-in-footer/"/>
+    <id>https://yxchangingself.xyz/posts/hexo-Icarus-beian-in-footer/</id>
+    <published>2021-01-07T11:04:16.000Z</published>
+    <updated>2021-01-07T11:04:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2020年12月31日提交的ICP备案申请，在今天（2020年1月7日）通过啦！&lt;/p&gt;
+&lt;p&gt;接着就是要把备案号添加到博客页脚。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>scrapy+selenium爬取智联招聘</title>
@@ -474,27 +496,6 @@
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>更改git仓库已经commit的用户名和邮箱信息</title>
-    <link href="https://yxchangingself.xyz/posts/git_amend_commited_info/"/>
-    <id>https://yxchangingself.xyz/posts/git_amend_commited_info/</id>
-    <published>2020-01-15T03:05:44.000Z</published>
-    <updated>2020-01-15T03:05:44.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;换了一个 github 账号，想把以前的仓库 push 到新的账号上，但是 commit 的用户名和邮箱信息还是以前的，想修改成新的用户信息。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    
-    
-      <category term="git" scheme="https://yxChangingSelf.xyz/tags/git/"/>
     
   </entry>
   
