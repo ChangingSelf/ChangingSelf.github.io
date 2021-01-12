@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2021-01-07T11:04:16.000Z</updated>
+  <updated>2021-01-12T01:57:25.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于React+Electron的CraftTweaker脚本生成器</title>
+    <link href="https://yxchangingself.xyz/posts/CraftTweaker-Assistant/"/>
+    <id>https://yxchangingself.xyz/posts/CraftTweaker-Assistant/</id>
+    <published>2021-01-12T01:57:25.000Z</published>
+    <updated>2021-01-12T01:57:25.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在看到好友&lt;a href=&quot;https://gitee.com/StringOD&quot;&gt;StringOD&lt;/a&gt;的一篇博客&lt;a href=&quot;https://stringod.gitee.io/2020/11/26/wo-de-shi-jie-zi-ding-yi-pei-fang-jiao-ben-sheng-cheng-qi/&quot;&gt;《我的世界自定义配方脚本生成器》&lt;/a&gt;之后，我有了些想法。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;CraftTweaker&lt;/code&gt;是沙盒游戏&lt;code&gt;Minecraft&lt;/code&gt;的一个Mod（&lt;strong&gt;Mod&lt;/strong&gt;ification，模组，游戏的一种修改或增强程序），通过使用一种名为&lt;code&gt;ZenScript&lt;/code&gt;的自定义脚本语言，修改游戏中的合成配方。&lt;/p&gt;
+&lt;p&gt;不过这个mod的最新版本是没有对应的GUI程序的，所以要生成想要的合成配方不是那么容易，得手动编写&lt;code&gt;ZenScript&lt;/code&gt;脚本。StringOD的那篇博客中，用易语言实现了一个功能比较完善的GUI程序——&lt;code&gt;AutoSpawnZScript&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;恰好我在大四的第一个综合实践中使用过React+Antd来编写前端界面，而且之前用&lt;a href=&quot;https://gitee.com/gaoyoubo/hexo-client&quot;&gt;hexo-client&lt;/a&gt;的时候了解到了Electron这个东西可以把web程序变为桌面应用程序，所以就想用React+Antd+Electron来尝试编写一下这个逻辑简单的脚本生成器，以巩固React的知识，以及学习一下Electron怎么用。&lt;/p&gt;
+&lt;p&gt;本文主要讲一下本项目（&lt;a href=&quot;https://gitee.com/ChangingSelf/crafttweaker-assistant&quot;&gt;CraftTweaker-Assistant&lt;/a&gt;，托管于gitee）的大致情况与设计思路。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>在hexo的Icarus主题页面底部加入备案号</title>
@@ -473,29 +494,6 @@
       <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
     
       <category term="ssh" scheme="https://yxChangingSelf.xyz/tags/ssh/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</title>
-    <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_1/"/>
-    <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_1/</id>
-    <published>2020-01-27T14:20:48.000Z</published>
-    <updated>2020-01-27T14:20:48.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;好友封掣写了一个&lt;a href=&quot;https://github.com/lollipopnougat/arknights&quot;&gt;明日方舟模拟寻访&lt;/a&gt;，于是也想做一个来作为 java 的练手，这学期写课设的时候就体现出我平时写代码写太少了。&lt;/p&gt;
-&lt;p&gt;当然，经过这学期末的编码轰炸，我现在可不敢像以前一样没有计划地直接开始，先想好它的架构，随后再开始编写，并留下系列博文记录，供以后参考。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot;&gt;本项目连载 github 库地址&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
     
   </entry>
   
