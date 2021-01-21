@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2021-01-20T13:21:54.000Z</updated>
+  <updated>2021-01-21T00:16:41.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第四次博客文章分类调整</title>
+    <link href="https://yxchangingself.xyz/posts/adjust_categories_4/"/>
+    <id>https://yxchangingself.xyz/posts/adjust_categories_4/</id>
+    <published>2021-01-21T00:16:41.000Z</published>
+    <updated>2021-01-21T00:16:41.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前的分类过于模糊，导致写完文章不知道该放在哪个分类，所以再次调整分类。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/adjust_categories/&quot;&gt;第一次分类调整&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/categories_description/&quot;&gt;第二次分类调整&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_3/#more&quot;&gt;第三次分类调整&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="博客站务" scheme="https://yxChangingSelf.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>《认知觉醒》chp1读书笔记：避免“避难趋易，急于求成”</title>
@@ -110,9 +132,9 @@
     
       <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
     
-      <category term="selenium" scheme="https://yxChangingSelf.xyz/tags/selenium/"/>
-    
       <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="selenium" scheme="https://yxChangingSelf.xyz/tags/selenium/"/>
     
   </entry>
   
@@ -254,7 +276,7 @@
     </summary>
     
     
-      <category term="思路分享" scheme="https://yxChangingSelf.xyz/categories/%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -273,7 +295,7 @@
     </summary>
     
     
-      <category term="思路分享" scheme="https://yxChangingSelf.xyz/categories/%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -361,7 +383,7 @@
     </summary>
     
     
-      <category term="思路分享" scheme="https://yxChangingSelf.xyz/categories/%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -470,30 +492,6 @@
       <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
     
       <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【编程练习】明日非舟抽卡模拟器（2）xml文件解析</title>
-    <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_2/"/>
-    <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_2/</id>
-    <published>2020-02-04T14:24:41.000Z</published>
-    <updated>2020-02-04T14:24:41.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为了修改与添加方便，将干员的信息放在简历类 Resume 中，简历信息使用 xml 文件存储，在启动时加载进来。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot;&gt;本项目连载 github 库地址&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
-    
-      <category term="xml" scheme="https://yxChangingSelf.xyz/tags/xml/"/>
     
   </entry>
   

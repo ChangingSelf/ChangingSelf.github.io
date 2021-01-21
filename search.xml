@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>第四次博客文章分类调整</title>
+      <link href="posts/adjust_categories_4/"/>
+      <url>posts/adjust_categories_4/</url>
+      
+        <content type="html"><![CDATA[<p>之前的分类过于模糊，导致写完文章不知道该放在哪个分类，所以再次调整分类。</p><p><a href="https://yxchangingself.xyz/posts/adjust_categories/">第一次分类调整</a></p><p><a href="https://yxchangingself.xyz/posts/categories_description/">第二次分类调整</a></p><p><a href="https://yxchangingself.xyz/posts/hexo_blog_switch_theme_3/#more">第三次分类调整</a></p><a id="more"></a><h1 id="原本的文章分类"><a href="#原本的文章分类" class="headerlink" title="原本的文章分类"></a>原本的文章分类</h1><table><thead><tr><th>分类</th><th>内容</th></tr></thead><tbody><tr><td>复盘总结</td><td>对过程进行回顾，总结经验，优化流程。</td></tr><tr><td>学习笔记</td><td>知识点总结等都放在这里。</td></tr><tr><td>解决方案</td><td>对某个特定问题的解决办法。</td></tr><tr><td>日志随笔</td><td>随笔，博客更新日志等。</td></tr><tr><td>目录索引</td><td>将本博客的文章定期进行汇总分类。</td></tr></tbody></table><p>分类之间的一些区别：</p><p><strong>复盘总结：</strong>以叙述过程与思路为主，一般含有步骤总结，思路记录（比如：我是如何想到这一步的？），一般不含对知识点的讲解。该分类下是比较抽象的文章</p><p><strong>学习笔记：</strong>以介绍结果与设计为主，长的像教程。可能含有大量代码，一般含有新知识点的总结说明，我在b站上面录了视频的项目对应的博客文章一般也属于这个。该分类下是比较具体的文章。</p><p><strong>解决方案：</strong>以介绍问题及其解决方法为主，比起学习笔记，更适合作为教程。它将复盘总结中的一些经验提取出来，又不像学习笔记一样冗长复杂。</p><p>调整分类前，“过程复盘”这个分类占了五分之三的内容，而其他分类比较少，比较不平衡，而且分类的标准太模糊，以至于我经常不知道该放到哪里去。</p><p>调整之后，“知识整理”、“算法理解”归入“学习笔记”，“工具使用”归入“解决方案”，减少了分类数量，并且明确了分类标准。按照新标准对文章调整分类，“学习笔记”和“复盘总结”各占二十多篇，不再是“指南针面板”了</p><h1 id="调整后的文章分类"><a href="#调整后的文章分类" class="headerlink" title="调整后的文章分类"></a>调整后的文章分类</h1><table><thead><tr><th>分类</th><th>内容</th></tr></thead><tbody><tr><td>项目总结</td><td>课设、练习等或大或小的项目的总结，一般会写设计思路，遇到的问题等</td></tr><tr><td>学习笔记</td><td>目的是回顾知识的笔记</td></tr><tr><td>解决方案</td><td>对某个特定问题的解决办法。</td></tr><tr><td>读书笔记</td><td>记录对书的内容的理解、感悟</td></tr><tr><td>博客站务</td><td>与该博客站点的搭建、部署、修改、索引相关的文章</td></tr><tr><td>日志随笔</td><td>杂记、随笔（定期总结之类的一般发我公众号不发这里）</td></tr></tbody></table><h1 id="分类变化说明"><a href="#分类变化说明" class="headerlink" title="分类变化说明"></a>分类变化说明</h1><p>有些分类名称没变，但是含义变了。</p><p><strong>“复盘总结”变成了“项目总结”</strong>。考虑到所有的博客都有一定的复盘性质，不好分，所以改为“项目总结”，从而“内容包括项目”的文章就要放在该分类下。</p><p>何谓项目？美国项目管理协会（PMI）对项目的定义是：“为创造独特的产品、服务或成果而进行的一次性努力。”，具有目的性、一次性、临时性、独特性、整体性的特点。（参考：<a href="https://zhuanlan.zhihu.com/p/120182287">项目到底是什么-知乎</a>）</p><p>我写的课设以及一些练习就有这样的特点，能产出代码成果、做完之后就结束、有规定的完成时间等，这些项目的总结文章，写完之后不一定会再去看，写完了发出来类似归档。</p><p><strong>“学习笔记”名称未变，但是内容划分规则变了。</strong>不再介绍成果，而是纯粹的知识点笔记梳理，有成果的文章都归类到“项目总结”中去了。这样可以避免两个分类难以区分的情况。这里的文章不同于“项目总结”归档式的文章，而是可以时时回顾的“笔记”。</p><p>“<strong>解决方案”未变。</strong></p><p><strong>“目录索引”并入新建的分类“博客站务”。</strong>目录索引这一分类文章不多，没必要单独开一个分类，而博客站点相关的内容不能仅仅使用一个<code>hexo</code>标签来标记。</p><p><strong>“日志随笔”中博客更新相关内容并入“博客站务”。</strong></p><p><strong>新增“读书笔记”分类。</strong></p><p>调整之后，除了“项目总结”仍然是二十多篇、读书笔记是新增的只有一篇之外，其他的分类下文章数目大部分是十篇左右，比起调整前分布更加均匀。</p><h1 id="文章分类流程"><a href="#文章分类流程" class="headerlink" title="文章分类流程"></a>文章分类流程</h1><p>按顺序判定：</p><ul><li><p>是否与博客站点相关？是，则归类“博客站务”；</p></li><li><p>是否是读书笔记？是，则归类“读书笔记”；</p></li><li><p>是否含有成品？是，则归类“项目总结”；</p></li><li><p>是否是某个特定问题的解决方案？是，则归类“解决方案”；</p></li><li><p>是否需要回顾或者以后可能用的到？是，则归类“学习笔记”；</p></li><li><p>以上全否，放入“日志随笔”</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客站务 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《认知觉醒》chp1读书笔记：避免“避难趋易，急于求成”</title>
       <link href="posts/reading-note-cognitive-arousal-1/"/>
       <url>posts/reading-note-cognitive-arousal-1/</url>
@@ -87,9 +106,9 @@
             
             <tag> scrapy </tag>
             
-            <tag> selenium </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> selenium </tag>
             
         </tags>
       
@@ -232,7 +251,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -251,7 +270,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -341,7 +360,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -771,9 +790,9 @@
             
             <tag> python </tag>
             
-            <tag> selenium </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> selenium </tag>
             
         </tags>
       
@@ -819,9 +838,9 @@
             
             <tag> python </tag>
             
-            <tag> ajax </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> ajax </tag>
             
         </tags>
       
@@ -943,7 +962,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -968,7 +987,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -1097,7 +1116,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -1257,7 +1276,7 @@
       
       <categories>
           
-          <category> 思路分享 </category>
+          <category> 日志随笔 </category>
           
       </categories>
       
@@ -1364,9 +1383,9 @@
             
             <tag> python </tag>
             
-            <tag> mysql </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> mysql </tag>
             
         </tags>
       
