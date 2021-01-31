@@ -39,31 +39,6 @@
   </entry>
   
   <entry>
-    <title>《认知觉醒》chp1读书笔记：避免“避难趋易，急于求成”</title>
-    <link href="https://yxchangingself.xyz/posts/reading-note-cognitive-arousal-1/"/>
-    <id>https://yxchangingself.xyz/posts/reading-note-cognitive-arousal-1/</id>
-    <published>2021-01-20T13:21:54.000Z</published>
-    <updated>2021-01-20T13:21:54.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;2020年底，在紧张备考的11月，我忍不住地又在手机上下载回知乎，无意义地刷碎片内容的过程中，我发现自己的会员竟然还在，原来是忘记取消自动勾上的连续包月，这几个月一直在我不知道的情况下扣钱，连忙取消，不过这个月的还是已经扣了。&lt;/p&gt;
-&lt;p&gt;正好当时刷到一个需要会员才能看完全部内容的答案，点进去就找到了这本书——周岭的《认知觉醒》。当时焦虑得无心学习，抱着不看不就亏了这会员的钱的心态，打开了这本书。&lt;/p&gt;
-&lt;p&gt;虽然只是粗略地看，但是也有一些让我感悟的地方。不过这个时间可不是什么看书的好时候，而且电子版虽然能方便地做笔记，但容易让我分心，所以我决定等到1月再买一本纸质版来看。&lt;/p&gt;
-&lt;p&gt;今天上午（1月20日）阅读完之前浏览的第一章后，又有了些新的感悟。&lt;/p&gt;
-&lt;p&gt;原本打算看完全书之后写一篇读书笔记，但是现在我打算分为好几篇来写。一来分解了任务，让我不太容易放弃；二来我想及时将感悟记录下来。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;我写这本书的读书笔记的方式是，归纳书中的内容，并辅以自己的理解，除非标记为引用或者特别说明，否则都是我重新组织语言描述而不是原文。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;这一篇是第一章“大脑——一切问题的起源”的读书笔记。主要给读者讲解了大脑的机制，让我们理解成长的本质以及焦虑的根源。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="读书笔记" scheme="https://yxChangingSelf.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>基于React+Electron的CraftTweaker脚本生成器</title>
     <link href="https://yxchangingself.xyz/posts/CraftTweaker-Assistant/"/>
     <id>https://yxchangingself.xyz/posts/CraftTweaker-Assistant/</id>
@@ -128,11 +103,11 @@
       <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
+      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
       <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
-    
-      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
     
       <category term="selenium" scheme="https://yxChangingSelf.xyz/tags/selenium/"/>
     
@@ -487,11 +462,35 @@
       <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
       <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
     
       <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
     
-      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+  </entry>
+  
+  <entry>
+    <title>【编程练习】明日非舟抽卡模拟器（2）xml文件解析</title>
+    <link href="https://yxchangingself.xyz/posts/Africanights_simu_hr_2/"/>
+    <id>https://yxchangingself.xyz/posts/Africanights_simu_hr_2/</id>
+    <published>2020-02-04T14:24:41.000Z</published>
+    <updated>2020-02-04T14:24:41.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了修改与添加方便，将干员的信息放在简历类 Resume 中，简历信息使用 xml 文件存储，在启动时加载进来。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/Africanights&quot;&gt;本项目连载 github 库地址&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
+    
+      <category term="xml" scheme="https://yxChangingSelf.xyz/tags/xml/"/>
     
   </entry>
   
