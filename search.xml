@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>git管理的Android项目忽略密码或token的方法</title>
+      <link href="posts/3686608473/"/>
+      <url>posts/3686608473/</url>
+      
+        <content type="html"><![CDATA[<p>在照着Android教材《第一行代码 第三版》写天气预报app项目的时候，我发现如果把开发者token写在代码里面，用git管理的时候就会把token暴露出来，即使后面删掉，也会留在commit历史中。而<code>.gitignore</code>一般是忽略整个文件，没办法忽略单独一行。</p><p>所以可以将密码或者开发者token单独放在一个文件中，用<code>.gitignore</code>忽略它，并且在使用的时候读取其中的token。</p><a id="more"></a><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol><li><p>在<code>app/src/main/res/values</code>目录下新建一个资源文件<code>tokens.xml</code>，内容如下：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;token&quot;</span>&gt;</span>TAkhjf8d1nlSlspN（这里改成你的token）<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>在使用的时候可以用<code>R.string.token</code>来直接访问，也可以将它存在一个全局可得的地方。</p></li><li><p>把上面那个文件加入<code>.gitignore</code>。</p></li></ol><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>创建好之后不要让你的IDE自动把这个文件<code>git add</code>了，否则<code>.gitignore</code>不起作用，如果你已经<code>git add</code>了，就使用下面这条命令恢复。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$git</span> reset HEAD app/src/main/res/values/tokens.xml</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 解决方案 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第四次博客文章分类调整</title>
       <link href="posts/adjust_categories_4/"/>
       <url>posts/adjust_categories_4/</url>
