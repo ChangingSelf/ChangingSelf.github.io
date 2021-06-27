@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2021-03-06T03:51:26.000Z</updated>
+  <updated>2021-06-27T06:24:00.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</title>
+    <link href="https://yxchangingself.xyz/posts/2028856356/"/>
+    <id>https://yxchangingself.xyz/posts/2028856356/</id>
+    <published>2021-06-27T06:24:00.000Z</published>
+    <updated>2021-06-27T06:24:00.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="word" scheme="https://yxChangingSelf.xyz/tags/word/"/>
+    
+  </entry>
   
   <entry>
     <title>git管理的Android项目忽略密码或token的方法</title>
@@ -463,34 +485,6 @@
     
     
       <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scrapy爬虫框架（1）一个简单的可用的爬虫</title>
-    <link href="https://yxchangingself.xyz/posts/Scrapy_spider_1/"/>
-    <id>https://yxchangingself.xyz/posts/Scrapy_spider_1/</id>
-    <published>2020-02-18T04:22:13.000Z</published>
-    <updated>2020-02-18T04:22:13.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很久没写爬虫了，又重新开始使用 scrapy，之前学习的内容基本上都忘了，重新复习一遍，发现对它的理解又加深了一些。&lt;/p&gt;
-&lt;p&gt;本文将初级知识点简单梳理，实现了一个 HelloWorld 级别的 Scrapy 爬虫。&lt;/p&gt;
-&lt;p&gt;本文适用于 Scrapy 1.6.0，结合了自己的理解，可能理解有错误，欢迎在下面评论区指出。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;不包含安装教程。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
-    
-      <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
     
   </entry>
   

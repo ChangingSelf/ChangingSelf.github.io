@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</title>
+      <link href="posts/2028856356/"/>
+      <url>posts/2028856356/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。</p><p><img src="https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png" alt=""></p><a id="more"></a><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul><li><a href="https://www.zhihu.com/question/23512189">word里面，如何在章节编号为第一章、第二章这种情况，实现图根据章节编号并且形式为图1.1、图2.1？</a></li><li><a href="https://blog.csdn.net/jingss_3/article/details/6424899">Word 自动更改题注章节编号格式“图一.1”为“图1.1”</a></li><li><a href="https://blog.csdn.net/h8178/article/details/78919418">[word技巧]把标题、图表题注编号由“一.1”改为”1.1”</a></li><li><a href="https://blog.csdn.net/songchuwang1868/article/details/104816016">一篇文章教会你使用word域代码（seq field code ）</a> ：这个方法也是可以的，不过本文没有采用。</li><li><a href="https://support.microsoft.com/zh-cn/office/设置域结果的格式-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=日期-时间格式开关_(@)">设置域显示格式的开关-微软官方</a></li><li><a href="https://www.bilibili.com/video/av755180281/">word将“图一.x”修改为“图1.x”-Bilibili</a></li><li><a href="https://support.microsoft.com/zh-cn/office/域代码：quote-域-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></li><li><a href="https://support.microsoft.com/zh-cn/office/域代码：styleref-域-4ad557c2-c8ab-48ba-8fe3-901d0a5775d0?ui=zh-CN&rs=zh-CN&ad=CN">STYLEREF域代码官方文档链接</a></li></ul><h1 id="什么是域代码"><a href="#什么是域代码" class="headerlink" title="什么是域代码"></a>什么是域代码</h1><p>使用组合键 <code>Alt+F9</code> ，可以<strong>显示或隐藏文档中所有域代码</strong> ：</p><p><img src="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png" alt=""></p><p>从上图中可以看到，原本的“图 一-1”已经变成了“图 { STYLEREF 1 \s }-{SEQ 图 * ARABIC \s 1}”，如果你此时直接复制它们，会发现粘贴出来的仍然是“图 一-1”，而将光标放在花括号中，则会将花括号括住的内容选中成为一个整体。其中花括号括住的部分就是<strong>“域代码”</strong> 。</p><p>你使用“添加题注”的对话框为图片添加题注时，插入的实际上就是这些“域代码”，你使用 <code>Ctrl+F9</code>组合键（会生成域代码的花括号，手动输入花括号是不行的）插入题注效果是一样的。</p><p>在这里 <code>&#123;STYLEREF 1 \s&#125;</code> 代表了章节号，也就是汉字数字“一”和“二”， <code>&#123;SEQ 图 \* ARABIC \s 1&#125;</code>代表了图的题注编号。</p><p>其中 <code>STYLEREF</code> 和<code>SEQ</code> 是“域”的名字，而后面的内容则是“域”的参数与“格式开关”（即域的格式选项）。</p><ul><li><p><code>&#123;STYLEREF 1 \s&#125;</code> 代表“插入具有样式名为‘1’的文本，并在指定标题级别下面重新开始（ <code>\s</code>，此处未指定标题级别）”。</p></li><li><p><code>&#123;SEQ 图 \* ARABIC \s 1&#125;</code>代表“插入名为’图’的序列的下一个编号，将结果显示为阿拉伯基数（ <code>\* ARABIC</code>），并在一级标题下面重新开始编号（ <code>\s</code>，此处标题级别为1，即若是到了下一个一级标题下，则会重新从1开始编号）”。</p></li></ul><p>得知了word题注是用“域代码”实现的事实后，现在我们要做的事情就是将<code>&#123;STYLEREF 1 \s&#125;</code>的输出结果从汉字数字转变为阿拉伯数字，尝试将<code>\* ARABIC</code>开关加入其中，似乎并没有效果。</p><p>我在网上搜索到了另一个解决方案，利用迂回的方式将其转化，见：<a href="https://blog.csdn.net/h8178/article/details/78919418">[word技巧]把标题、图表题注编号由“一.1”改为”1.1”</a></p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将<code>&#123;STYLEREF 1 \s&#125;</code>修改为 <code>&#123; QUOTE &quot;一九一一年一月&#123; STYLEREF 1 \s &#125;日&quot; \@&quot;D&quot; &#125;</code>就可以了，注意花括号仍然得是使用 <code>Ctrl+F9</code>组合键生成的花括号。</p><p>我找到的文章并未说明其原理，但了解了域代码相关知识后，也不难理解原理。</p><p>首先找到 <code>QUOTE</code>域的相关说明：<a href="https://support.microsoft.com/zh-cn/office/域代码：quote-域-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; QUOTE &quot;LiteralText&quot; &#125;</span><br></pre></td></tr></table></figure><blockquote><p>“LiteralText”：插入的文本，必须加引号。它可以包含除 AutoNum、AutoNumLgl、AutoNumOut 或 Symbol 以外的所有其他域。</p></blockquote><p>也就是说，<code>QUOTE &quot;一九一一年一月&#123; STYLEREF 1 \s &#125;日&quot;</code> 这一部分是将“<code>一九一一年一月&#123; STYLEREF 1 \s &#125;日</code>”插入到域代码所在位置，如果是第一章，那么最终结果就是<code>一九一一年一月一日</code>。</p><p>看到这里，也许你已经猜到后面那个<code>\@&quot;D&quot;</code>开关是在干什么了：</p><blockquote><p><a href="https://support.microsoft.com/zh-cn/office/设置域结果的格式-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=日期-时间格式开关_(@)">设置域结果格式-微软官方</a><br>日期-时间格式开关 (\ @) 指定如何显示日期或时间。</p><p>例如, switch \ @ “dddd, mmmm d, yyyy” 字段{ DATE \ @ “dddd, MMMM d, yyyy” }显示 “星期五, 2019 年11月23日”。结合以下日期和时间说明: day (d)、month (M) 和 year (y);小时 (h) 和分钟 (m)-生成日期时间格式。你还可以包含文本、标点和空格。</p><p>字母 <strong>d</strong>  显示月份中的日期或一个星期中的某一天。 字母 <strong>d</strong>  可以大写或小写。此格式项目将某个星期或月份的某一天显示为数字；对于单位数日子，数字前面不加 0（零）。 例如，某月的第 6 天显示为 <strong>6</strong> 。</p></blockquote><p>所以该开关的意思是，将最终结果中的“天”给显示出来，而我们前面的内容得到的是<code>一九一一年一月一日</code>，那么输出结果就是 <code>1</code>，这样就通过日期转换将汉字数字转换为阿拉伯数字了。</p><p>这个日期无关紧要，只要格式是中文日期即可，例如我改为 <code>&#123;QUOTE “二零二一年四月&#123; STYLEREF 1 \s &#125;日” \@”D”&#125;</code>也没有关系。</p><p>之后再使用组合键 <code>Alt+F9</code> ，就可以隐藏域代码，只显示域代码的结果了。</p><h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>虽然问题解决了，但是每次都要输入这样的域代码非常费劲。我在B站找到了一个视频，up主的解决方案很好：<a href="https://www.bilibili.com/video/av755180281/">word将“图一.x”修改为“图1.x”-Bilibili</a>。</p><p>他使用了word的另一个好用的功能——构建基块。</p><p><img src="https://i.loli.net/2021/06/27/8AO913otHiBYSQU.png" alt=""></p><ol><li><p>选中刚刚写好的题注</p></li><li><p>使用组合键 <code>Alt+F3</code> ，会弹出一个名为“新建构建基块”的对话框，修改构建基块的名称。例如修改为“图注”。</p></li><li><p>点击“确定”保存</p></li></ol><p>之后如果想要插入这样的题注，那么直接输入该构建基块的名称（此处为“图注”二字），word就会在你输入的地方显示一个提示“按Enter插入”，此时按下Enter键，就可以插入这一个构建基块了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 解决方案 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> word </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git管理的Android项目忽略密码或token的方法</title>
       <link href="posts/android-project-gitignore-token/"/>
       <url>posts/android-project-gitignore-token/</url>
