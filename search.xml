@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>从markdown到nga bbscode的转换程序</title>
+      <link href="posts/markdown-bbscode-converter/"/>
+      <url>posts/markdown-bbscode-converter/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://nga.178.com/">NGA（艾泽拉斯国家地理）</a>论坛使用一种自定义的名为 <code>bbscode</code> 的代码来排版帖子内容，类似HTML，它也是一种标记语言，对bbscode的详细介绍可见：<a href="https://nga.178.com/read.php?tid=9268613">[NGA常用BBS代码][奥运帖]Project N —— 《从入门到精通：排版的艺术 Ver.3》</a>。</p><p>这种论坛自定义标记语言可以和markdown、html进行相互转换。例子如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[h]标题[&#x2F;h]</span><br><span class="line">[b]加粗文字[&#x2F;b]</span><br><span class="line">[list]</span><br><span class="line">[*] 列表项</span><br><span class="line">[*] 列表项</span><br><span class="line">[&#x2F;list]</span><br><span class="line">[quote]引用块[&#x2F;quote] </span><br></pre></td></tr></table></figure><p>在使用NGA论坛的时候遇到了将markdown文本转换为bbscode的需求，所以打算用python写一个简单的转换程序。由于不涉及复杂的GUI，本项目使用tkinter来编写界面。</p><p>项目地址：</p><ul><li><p>[<a href="https://github.com/ChangingSelf/nga-bbscode-converter">github仓库地址</a>]</p></li><li><p>[<a href="https://gitee.com/ChangingSelf/nga-bbscode-converter">gitee仓库地址</a>]</p></li><li><p><a href="https://nga.178.com/read.php?tid=27512061">NGA论坛内本工具软件的发布帖</a></p></li></ul><a id="more"></a><h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><img src="https://i.loli.net/2021/07/09/S8VpBGRCgb6yIlA.gif" alt=""></p><h1 id="自定义包"><a href="#自定义包" class="headerlink" title="自定义包"></a>自定义包</h1><p>自定义包 <code>bbscode</code>结构非常简单，只含有 <code>__init__.py</code>和一个python文件 <code>converter.py</code> 。</p><p><code>converter.py</code>中含有 <code>md_to_bbscode</code>这一核心转换方法，参数为markdown文本字符串，返回bbscode字符串。</p><p>这个转换函数的原理非常简单，只用到了python的一个正则表达式替换方法 <code>re.sub</code>，它的参数分别为：</p><ul><li><p><code>pattern</code>：用于匹配替换内容的正则表达式</p></li><li><p><code>repl</code>：用于替换匹配结果的字符串（在其中可以使用<code>\匹配组下标</code>表示匹配组，从1开始），或者用于处理匹配结果的函数</p></li><li><p><code>string</code>：被处理的字符串</p></li><li><p><code>count</code>：可选，模式匹配后替换的最大次数，默认 0 表示替换所有的匹配。</p></li><li><p><code>flags</code>：可选，正则匹配模式</p></li></ul><p>代码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">replace_quote</span>(<span class="params">matched</span>):</span></span><br><span class="line">    quote = matched.group(<span class="number">1</span>)</span><br><span class="line">    quote = re.sub(<span class="string">r&quot;&gt; (.*?)&quot;</span>,<span class="string">&quot;&quot;</span>,quote)</span><br><span class="line">    quote = <span class="string">&quot;[quote]\n&#123;&#125;\n[/quote]&quot;</span>.format(quote)</span><br><span class="line">    <span class="keyword">return</span> quote</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">replace_list</span>(<span class="params">matched</span>):</span></span><br><span class="line">    l = matched.group(<span class="number">1</span>)</span><br><span class="line">    l = re.sub(<span class="string">r&quot;[-*] &quot;</span>,<span class="string">&quot;[*]&quot;</span>,l)</span><br><span class="line">    l = <span class="string">&quot;[list]\n&#123;&#125;\n[/list]&quot;</span>.format(l)</span><br><span class="line">    <span class="keyword">return</span> l</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">replace_italic</span>(<span class="params">matched</span>):</span></span><br><span class="line">    <span class="comment"># 到了第53个中文字符的时候NGA论坛就会报错：一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三/* bbscode i too long */</span></span><br><span class="line">    <span class="comment"># 所以需要每50个字符就分一个[i]标签</span></span><br><span class="line">    italic = matched.group(<span class="number">1</span>)</span><br><span class="line">    step = <span class="number">50</span></span><br><span class="line">    italics = [italic[i:i+step] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(italic),step)]</span><br><span class="line">    italic = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> italics:</span><br><span class="line">        italic +=<span class="string">&quot;[i]&#123;&#125;[/i]&quot;</span>.format(item)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> italic</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md_to_bbscode</span>(<span class="params">md_str:str</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    将markdown字符串转换为bbscode字符串</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    bbscode = md_str</span><br><span class="line">    <span class="comment"># 链接</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;[^!]\[(.*?)\]\((.*?)\)&quot;</span>,<span class="string">r&quot;[url=\2]\1[/url]&quot;</span>,bbscode)</span><br><span class="line">    <span class="comment"># 图片</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;\!\[(.*?)\]\((.*?)\)&quot;</span>,<span class="string">r&quot;[img]\2[/img]&quot;</span>,bbscode)</span><br><span class="line">    <span class="comment"># 标题，注意设置flag为MULTILINE以改变^的语义</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;^(#+)\s?(.*)&quot;</span>,<span class="string">r&quot;[h]\2[/h]&quot;</span>,bbscode,flags=re.MULTILINE)</span><br><span class="line">    <span class="comment"># 加粗</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;\*\*(.*?)\*\*&quot;</span>,<span class="string">r&quot;[b]\1[/b]&quot;</span>,bbscode)</span><br><span class="line">    <span class="comment"># 斜体</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;\*(.*?)\*&quot;</span>,replace_italic,bbscode)</span><br><span class="line">    <span class="comment"># 下划线</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;&lt;u&gt;(.*?)&lt;/u&gt;&quot;</span>,<span class="string">r&quot;[u]\1[/u]&quot;</span>,bbscode)</span><br><span class="line">    <span class="comment"># 删除线</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;~~(.*?)~~&quot;</span>,<span class="string">r&quot;[del]\1[/del]&quot;</span>,bbscode)</span><br><span class="line">    <span class="comment"># 引用块</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;((&gt; (.*)\n?)+)&quot;</span>,replace_quote,bbscode)</span><br><span class="line">    <span class="comment"># 列表</span></span><br><span class="line">    bbscode = re.sub(<span class="string">r&quot;(([-|*] (.*)\n?)+)&quot;</span>,replace_list,bbscode)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> bbscode</span><br></pre></td></tr></table></figure><h2 id="无序列表的替换"><a href="#无序列表的替换" class="headerlink" title="无序列表的替换"></a>无序列表的替换</h2><p>从代码可以看出，大部分markdown代码都可以直接转换为bbscode，但对于列表、引用块来说，它们对应的bbscode除了项目符号之外，还需要在两侧加上对应的标签，这就无法直接替换，需要编写自定义repl函数了。</p><p>以无序列表的转换为例，markdown的无序列表代码如下：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> 列表项1</span><br><span class="line"><span class="bullet">-</span> 列表项2</span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> 列表项a</span><br><span class="line"><span class="bullet">*</span> 列表项b </span><br></pre></td></tr></table></figure><p>以上两种方式都是无序列表。需要将它们转换为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[list]</span><br><span class="line">[*] 列表项1</span><br><span class="line">[*] 列表项2</span><br><span class="line">[&#x2F;list]</span><br><span class="line"></span><br><span class="line">[list]</span><br><span class="line">[*] 列表项a</span><br><span class="line">[*] 列表项b</span><br><span class="line">[&#x2F;list] </span><br></pre></td></tr></table></figure><p>首先需要用正则表达式匹配到每一个列表项，匹配单个列表项： <code>[-|*] (.*)\n?</code></p><p>如果想要匹配多行列表项，就需要使用循环匹配符号 <code>+</code>，至少匹配一项。即：<code>([-|*] (.*)\n?)+</code></p><p>但是此时取匹配组1是取不到所有列表项的，在外面再套一层括号，这时的匹配组1就是我们要的整个无序列表了。</p><p>在替换函数 <code>replace_list</code>中，参数为正则表达式的匹配对象，将项目符号替换并在前后添加 <code>[list]</code>标签即可。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">replace_list</span>(<span class="params">matched</span>):</span></span><br><span class="line">    l = matched.group(<span class="number">1</span>)</span><br><span class="line">    l = re.sub(<span class="string">r&quot;[-*] &quot;</span>,<span class="string">&quot;[*]&quot;</span>,l)</span><br><span class="line">    l = <span class="string">&quot;[list]\n&#123;&#125;\n[/list]&quot;</span>.format(l)</span><br><span class="line">    <span class="keyword">return</span> l</span><br></pre></td></tr></table></figure><p>多行引用转bbscode引用块的原理相同，不赘述。</p><h1 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h1><p>需要编写的界面只有一个多行输入框加上按钮，直接放代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"><span class="keyword">from</span> bbscode <span class="keyword">import</span> converter</span><br><span class="line"></span><br><span class="line">root = tk.Tk()</span><br><span class="line"></span><br><span class="line">root.title(<span class="string">&quot;bbscode转换器&quot;</span>)</span><br><span class="line"><span class="comment"># 输入框</span></span><br><span class="line">inputText = tk.Text(root,height=<span class="number">20</span>,width=<span class="number">100</span>)</span><br><span class="line">inputText.pack()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转换按钮</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md_to_bbscode</span>():</span></span><br><span class="line">    md_str = inputText.get(<span class="string">&#x27;1.0&#x27;</span>,tk.END)</span><br><span class="line">    bbscode = converter.md_to_bbscode(md_str)</span><br><span class="line">    inputText.delete(<span class="string">&#x27;1.0&#x27;</span>, tk.END)</span><br><span class="line">    inputText.insert(<span class="string">&#x27;1.0&#x27;</span>,bbscode)</span><br><span class="line"></span><br><span class="line">convertBtn = tk.Button(root,text=<span class="string">&quot;markdown转换为bbscode&quot;</span>,command=md_to_bbscode)</span><br><span class="line">convertBtn.pack()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">root.mainloop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目总结 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> tkinter </tag>
+            
+            <tag> markdown </tag>
+            
+            <tag> 正则表达式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</title>
       <link href="posts/2028856356/"/>
       <url>posts/2028856356/</url>
@@ -135,11 +166,11 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
             
             <tag> scrapy </tag>
+            
+            <tag> 爬虫 </tag>
             
             <tag> selenium </tag>
             
@@ -496,11 +527,11 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
             
             <tag> scrapy </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -756,9 +787,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -821,9 +852,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
             <tag> selenium </tag>
             
@@ -869,9 +900,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
             <tag> ajax </tag>
             
@@ -923,9 +954,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -950,9 +981,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1102,11 +1133,11 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
             
             <tag> scrapy </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1181,11 +1212,11 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
             
             <tag> scrapy </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1237,9 +1268,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1264,9 +1295,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1387,9 +1418,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
@@ -1414,9 +1445,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
             <tag> mysql </tag>
             
@@ -1512,9 +1543,9 @@
       
         <tags>
             
-            <tag> 爬虫 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
             
         </tags>
       
