@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>憧憬少的个人博客</title>
+  <title>编程技术笔记</title>
   <icon>https://yxchangingself.xyz/icon.png</icon>
   <subtitle>ChangingSelf&#39;s blog</subtitle>
   <link href="/atom.xml" rel="self"/>
