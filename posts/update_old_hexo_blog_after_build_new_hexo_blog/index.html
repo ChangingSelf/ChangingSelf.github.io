@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>建新hexo博客后继续更新旧hexo博客的方法 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"><meta property="og:type" content="blog"><meta property="og:title" content="建新hexo博客后继续更新旧hexo博客的方法"><meta property="og:url" content="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2020-01-28T04:15:33.000Z"><meta property="article:modified_time" content="2020-01-28T04:15:33.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="hexo"><meta property="article:tag" content="ssh"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"},"headline":"编程技术笔记","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2020-01-28T04:15:33.000Z","dateModified":"2020-01-28T04:15:33.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。 问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误： 123ERROR: Permission to"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.0.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-01-28T04:15:33.000Z" title="2020-01-28T04:15:33.000Z">2020-01-28</time>发表</span><span class="level-item"><time dateTime="2020-01-28T04:15:33.000Z" title="2020-01-28T04:15:33.000Z">2020-01-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a></span><span class="level-item">14 分钟读完 (大约2150个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">建新hexo博客后继续更新旧hexo博客的方法</h1><div class="content"><p>我创建了一个新的 github 账号 ChangingSelf（憧憬少）来搭建新的博客，旧的博客搭建在旧账号 HaneChiri（羽尘）上，原本的博客已经有一些人知道了，所以我用这个方式来将以前的访客带到我的新博客来。</p>
+<p>问题在于，为了部署新博客，我将原本的 ssh 密钥对文件删掉了，重新生成了新的 ssh，现在想要部署旧博客就会出现类似下面的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights                             &#96;</span><br></pre></td></tr></table></figure>
+
+<p>大意是我没有权限，也就是 ssh 没有配好。</p>
+<a id="more"></a>
+
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/skylin19840101/article/details/98616205">github 支持多个账号</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yanglang/p/9563496.html">SSH-keygen 用法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.awaimai.com/2200.html">git 配置多个 SSH-key</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hao495430759/article/details/80673568">git 配置多个 SSH-key-多图易理解版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.centos.bz/2018/06/%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E5%AF%B9%E5%B9%B6%E4%B8%94%E6%B0%B8%E4%B9%85%E5%A4%9Assh%E7%AE%A1%E7%90%86/">配置多个 ssh 密钥对并且永久多 ssh 管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34377919/article/details/91857803">是否必须每次添加 ssh-add</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SSH/10407">ssh 百度百科</a></li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="目前状况"><a href="#目前状况" class="headerlink" title="目前状况"></a>目前状况</h2><p>操作系统是 win10（找到的资料很多 linux 的，不过没关系，有 git-bash）</p>
+<p>github 上有两个账号，一个旧账号（HaneChiri），一个新账号（ChangingSelf）。本地有两个 hexo 博客源代码文件夹，分别对应两个账号上搭建的博客。</p>
+<p>本地<code>C:\Users\Administrator\.ssh</code>文件夹内有：</p>
+<ul>
+<li>id_rsa.pub：公钥文件，已添加到 ChangingSelf 账号的 ssh-key</li>
+<li>id_rsa：私钥文件</li>
+<li>known_hosts</li>
+</ul>
+<p>现在在 ChangingSelf 博客文件夹内使用<code>hexo d</code>部署博客，可以部署到对应账号的仓库，而在 HaneChiri 博客文件夹内部署博客，则权限不足。</p>
+<p>（现在回想起来也许直接将现在新的公钥添加到旧账号中就搞定了呀，搞那么麻烦 QAQ，等写完这篇文再试试这个方法）</p>
+<h2 id="过程复盘"><a href="#过程复盘" class="headerlink" title="过程复盘"></a>过程复盘</h2><h3 id="生成新密钥对"><a href="#生成新密钥对" class="headerlink" title="生成新密钥对"></a>生成新密钥对</h3><p>先来看看<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SSH/10407">百度百科</a>关于 SSH（安全外壳协议）的介绍：</p>
+<blockquote>
+<p>从客户端来看，SSH 提供两种级别的安全验证。</p>
+<p><strong>第一种级别（基于口令的安全验证）</strong></p>
+<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/服务器">服务器</a>。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p><strong>第二种级别（基于密匙的安全验证）</strong></p>
+<p>需要依靠<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/密匙">密匙</a>，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到 SSH 服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的私人密匙解密再把它发送给服务器。</p>
+<p>用这种方式，你必须知道自己密匙的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/口令">口令</a>。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
+<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程可能需要 10 秒 [2] 。</p>
+</blockquote>
+<p>我们现在弄的就是第二种，基于密钥的安全验证。本地创建一个密钥对，将公钥放在 github 服务器上，本地保留私钥。</p>
+<p>首先，打开 git-bash，生成新的 ssh 密钥对：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ssh-keygen -t rsa -C <span class="string">&quot;youremail@xxx.com&quot;</span> -f keyfileName</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-t</td>
+<td>生成的密钥类型，默认 rsa</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>注释文字，应该不会影响密钥内容，这里设置成邮箱</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定密钥文件名，默认为 id_rsa</td>
+</tr>
+</tbody></table>
+<p>由于.ssh 目录下已经存在默认文件名的密钥，所以换一个名字。我想要生成旧账号 HaneChiri 的密钥，所以文件名就起名为<code>id_rsa_hanechiri</code>，当然，这个并无影响。</p>
+<p>最后会生成两个文件，.pub 后缀的是公钥，另一个是私钥。</p>
+<h3 id="添加公钥到-github-账号"><a href="#添加公钥到-github-账号" class="headerlink" title="添加公钥到 github 账号"></a>添加公钥到 github 账号</h3><p>在网页右上角账号设置中找到 SSH key，添加公钥文件的内容即可，添加过程很简单，不详细叙述。</p>
+<p>添加完毕后再次部署 HaneChiri 的博客，发现仍然是这个错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Permission to HaneChiri&#x2F;HaneChiri.github.io.git denied to ChangingSelf.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br></pre></td></tr></table></figure>
+
+<p>也对，现在有两个密钥对，可能是配对错误了。</p>
+<p>仔细看错误内容，HaneChiri 库拒绝了用户 ChangingSelf 的访问，也就是说，用的是 HaneChiri 的公钥，与新账号 ChangingSelf 的私钥，难怪无法配对了。因此我们需要改变私钥的选择。</p>
+<h3 id="改变使用的私钥"><a href="#改变使用的私钥" class="headerlink" title="改变使用的私钥"></a>改变使用的私钥</h3><p>我查到的参考博客里面基本上都说要使用<code>ssh-add</code>命令来将私钥添加管理，不过我后来发现，这个添加并不是永久保存，而是添加到 ssh-agent 的高速缓存中，我打开另一个 git-bash 的时候就不行了（参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34377919/article/details/91857803">是否必须每次添加 ssh-add</a>）</p>
+<h4 id="临时性保存"><a href="#临时性保存" class="headerlink" title="临时性保存"></a>临时性保存</h4><p>打开 ssh-agent 服务，即输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-agent bash</span><br></pre></td></tr></table></figure>
+
+<p>然后添加私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add C:/Users/Administrator/.ssh/id_rsa_hanechiri</span><br></pre></td></tr></table></figure>
+
+<p>这里的地址是需要使用的私钥文件的绝对地址。</p>
+<p>可以通过-l 选项查看所有已经添加的私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -l</span><br></pre></td></tr></table></figure>
+
+<p>使用-D 选项清空私钥列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ssh</span>-add -D</span><br></pre></td></tr></table></figure>
+
+<p>接着在这个 git-bash 里面来操作就行了（如果退出就得再弄一次），此时用<code>hexo d</code>命令部署，就部署成功了。</p>
+<h4 id="永久性保存"><a href="#永久性保存" class="headerlink" title="永久性保存"></a>永久性保存</h4><p>需要永久保存私钥的选择，则需要一个配置文件 config，这个文件长这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile C:&#x2F;Users&#x2F;Administrator&#x2F;.ssh&#x2F;id_rsa_hanechiri</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    User HaneChiri</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host</td>
+<td>网站别名，最好和 HostName 一致</td>
+</tr>
+<tr>
+<td>HostName</td>
+<td>网站域名</td>
+</tr>
+<tr>
+<td>IdentityFile</td>
+<td>私钥文件的绝对路径</td>
+</tr>
+<tr>
+<td>PreferredAuthentications</td>
+<td>验证方式，填 publickey 就是公钥验证</td>
+</tr>
+<tr>
+<td>User</td>
+<td>用户名</td>
+</tr>
+</tbody></table>
+<p>可以配置多个网站，每个网站都有上面这些字段。在你使用 ssh 访问这个文件内存在的某个网站时，ssh 就会拿这个文件里面指定的私钥来进行验证。</p>
+<p>在.ssh 目录下找，如果存在这个名为<code>config</code>的文件，就打开来编辑，没有的话就新建一个。</p>
+<p>配置好文件之后，打开 git-bash 再使用<code>hexo d</code>就搞定部署了。</p>
+<p>由于我只是需要临时将博客地址转移的公告发上旧博客，使用临时的方法就好了。（不过我是先用了 config 文件的方法，写本文时才尝试临时性的方法，成功了）</p>
+<h1 id="最后做个试验"><a href="#最后做个试验" class="headerlink" title="最后做个试验"></a>最后做个试验</h1><p>最后再来试试我写本文时，对 ssh 更加了解之后，才想到的简便方法：直接把新账号 ChangingSelf 的公钥添加到旧账号的 ssh-key 中。</p>
+<p>结果给我显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure>
+
+<p>果然没这么简单。找解决方法，也就是上文我写的那些。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>建新hexo博客后继续更新旧hexo博客的方法</p><p><a href="https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/">https://yxchangingself.xyz/posts/update_old_hexo_blog_after_build_new_hexo_blog/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-28</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-01-28</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/hexo/">hexo</a><a class="link-muted mr-2" rel="tag" href="/tags/ssh/">ssh</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/Africanights_simu_hr_2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">【编程练习】明日非舟抽卡模拟器（2）xml文件解析</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/Africanights_simu_hr_1/"><span class="level-item">【编程练习】明日非舟抽卡模拟器（1）按照概率抽取干员星级</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">1</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#解决方案"><span class="level-left"><span class="level-item">2</span><span class="level-item">解决方案</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目前状况"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">目前状况</span></span></a></li><li><a class="level is-mobile" href="#过程复盘"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">过程复盘</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#生成新密钥对"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">生成新密钥对</span></span></a></li><li><a class="level is-mobile" href="#添加公钥到-github-账号"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">添加公钥到 github 账号</span></span></a></li><li><a class="level is-mobile" href="#永久性保存"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">永久性保存</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#最后做个试验"><span class="level-left"><span class="level-item">3</span><span class="level-item">最后做个试验</span></span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2022 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

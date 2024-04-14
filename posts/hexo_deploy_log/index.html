@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Hexo部署博客的过程记录 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="建立 Hexo 博客的相关知识整理成的笔记，不太全面。"><meta property="og:type" content="blog"><meta property="og:title" content="Hexo部署博客的过程记录"><meta property="og:url" content="https://yxchangingself.xyz/posts/hexo_deploy_log/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="建立 Hexo 博客的相关知识整理成的笔记，不太全面。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2019-02-06T15:37:51.000Z"><meta property="article:modified_time" content="2019-02-06T15:37:51.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="hexo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/hexo_deploy_log/"},"headline":"编程技术笔记","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2019-02-06T15:37:51.000Z","dateModified":"2019-02-06T15:37:51.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"建立 Hexo 博客的相关知识整理成的笔记，不太全面。"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/hexo_deploy_log/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.0.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-02-06T15:37:51.000Z" title="2019-02-06T15:37:51.000Z">2019-02-06</time>发表</span><span class="level-item"><time dateTime="2019-02-06T15:37:51.000Z" title="2019-02-06T15:37:51.000Z">2019-02-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/">博客站务</a></span><span class="level-item">24 分钟读完 (大约3639个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Hexo部署博客的过程记录</h1><div class="content"><p>建立 Hexo 博客的相关知识整理成的笔记，不太全面。</p>
+<a id="more"></a>
+
+<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p><strong>这部分算是年终总结一样的东西吧。</strong></p>
+<p>在 2018 年 8 月底的时候，我还是对域名、服务器等名词没有了解的一个 web 小白，那时一个朋友在群里发了一个非常好看的个人博客，我一下子就被吸引了，羡慕但是又没有能力自己弄，感觉太难了。当时我只学过一点 HTML 和 CSS，javaScript 还未怎么学，而且已经很久没有练习过，已经忘得差不多。</p>
+<p>那个朋友东给我发了一个《基于 CentOS 搭建 WordPress 个人博客》的页面，东说他想弄，已经租了个腾讯云服务器，问我有没有兴趣。我当时还是蛮犹豫的，对于我来说难度还是很大的，那个网页上并不是个教程，说的内容我大部分看不懂。不过我还是想整一个的，于是尝试去学。</p>
+<p>我属于那种“如果不能基本上理解一个概念，那么就会完全拒绝相关的知识输入，即便已经记住了也不会长久”的学习类型，而且以前又比较自闭，不想问别人，只在网上查找已有的问题答案，所以学习起来特别困难。</p>
+<p>买了域名，备了案，租了学生价服务器，照着教程<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/5b6587b95901">《新手如何用腾讯云服务器搭建一个 wordPress 博客-简书》</a>鼓捣了好久终于弄出来一个 wordPress 博客。但我当时仅仅是“知其然而不知其所以然”，并不认为自己学到了什么，弄好了主页就一直搁置在那里，感觉心疼租服务器的钱但是又没办法。开学了又有很多事情要忙，大学并不像高中的时候想象的那么悠闲。</p>
+<hr>
+<p>直到一个学期结束我才考虑起开始重新弄个博客。经过了一个学期，我学会了更多的东西，把上个暑假的建博客的流程给理解了应该没什么问题。</p>
+<p>我开始整理以前编程留下的笔记。以前使用的是 vnote，但是我觉得界面不太好看，而且功能大多用不上，遇到问题百度也搜不到，碰巧它这时又不知道出了什么毛病，于是换成了 Typora，把笔记重新筛选了一遍。分类尽可能少，渐渐地开始“一元化”笔记。</p>
+<p>随后又想起了以前只学了一点的 git。没有一次性学完它，导致我没有去用它，顶多只是使用网页版 github 上传一下代码点亮小绿块让自己爽一下，也搁置了很久。说起来我真是喜欢半途而废。</p>
+<p>不如把这整理好的笔记传到 github 上面备份吧，感觉比网盘备份 b 格高。刚好前几天学 Python 的时候找到了廖雪峰的 git 教程，这让我有些后悔没有听另一个朋友朱的推荐。</p>
+<p>整 github 的时候又发现了 github page 的功能，想起来 github 也可以搭博客，所以今天（2019-2-6）就研究了一整天搭好了这个博客。挑了个和我以前羡慕的个人博客相同的主题，美滋滋，成就感爆棚。</p>
+<hr>
+<p>好了，接下来我来分享一下我是如何搭建这样一个博客的。不保证零基础能看懂。</p>
+<h1 id="Hexo——一个博客框架"><a href="#Hexo——一个博客框架" class="headerlink" title="Hexo——一个博客框架"></a>Hexo——一个博客框架</h1><p>和 WordPress 差不多，都是用来搭建博客的一个框架。但是问题来了——</p>
+<p><strong>框架</strong>，又是啥？</p>
+<p>自学计算机类的知识最大的问题就在于百度到的东西需要各种各样的前置知识，很难一下子理解那是什么意思，越听越迷糊。不管在看这篇博客的你知不知道框架的意思，反正上个暑假的我是不明白的。而且这是简称，光百度一个“框架”好像又搜不到明确的定义。</p>
+<p>这个障碍一直妨碍着我对<code>bootstrap</code>、<code>vue</code>、<code>MFC</code>、<code>QT</code>等框架的准确理解，后来我才知道，<strong>软件框架</strong>到底是个啥</p>
+<p>简而言之，在我的理解里面，框架，就是<strong>可以复用的代码</strong>，就是“不要重复造轮子”中的<strong>“轮子”</strong>，就是别人已经写好的封装了各种复杂 API 的<strong>库</strong>。框架可以帮你完成一些基础语法本身也可以完成的事情，让你不必在建房子的时候从烧砖开始，而是可以解放思维直接开始画楼房设计图。</p>
+<p>Hexo，就是一个可以帮助你生成静态网页的一个工具，所有的核心功能比如打标签归档加时间，以及界面美化工作都帮你做好了，你可以专注于博客内容的创作，而不必学习如何“烧砖”（写前端代码）。网上搜索“hexo”，可以找到它的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">官网</a>。hexo 的官网文档做得非常好，不仅提供准确的中文版文档，还附有视频，让我学得非常之愉快。</p>
+<p>不过作为一个“楼房设计工程师”，你还是需要一些其他的帮手来帮助你“建房子”。</p>
+<p>在 Hexo 官网的文档里面有详细的教程教你如何安装必须的东西，我在这里只讲一些理解性的东西，详细的指令不多讲。</p>
+<hr>
+<p>安装 Hexo 的时候你需要俩工具：</p>
+<ul>
+<li>node.js</li>
+<li>git</li>
+</ul>
+<h1 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h1><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/node.js/7567977">node.js-百度百科</a></p>
+<blockquote>
+<p>Node.js 是一个让 JavaScript 运行在服务端的开发平台，实质是对 Chrome V8 引擎进行了封装。</p>
+</blockquote>
+<p>引用自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/thinkam/p/8262743.html"><a target="_blank" rel="noopener" href="https://www.cnblogs.com/thinkam/p/8262743.html">node.js 和 JavaScript 的关系-博客园</a></a></p>
+<blockquote>
+<ul>
+<li>JavaScript 是一门语言</li>
+<li>node.js 不是一门语言，也不是一种特殊的 JavaScript 方言 - 它仅仅就是用于运行普通 JavaScript 代码的东西</li>
+<li>所有浏览器都有运行网页上 JavaScript 的 JavaScript 引擎。Firefox 有叫做 Spidermonkey 的引擎，Safari 有 JavaScriptCore，Chrome 有 V8</li>
+<li>node.js 就是带有能操作 I/O 和网络库的 V8 引擎，因此你能够在浏览器之外使用 JavaScript 创建 shell 脚本和后台服务或者运行在硬件上</li>
+</ul>
+</blockquote>
+<p><strong>个人理解：node.js 是 javaScript 的解释器</strong></p>
+<p>为啥要安装它呢？应该是为了使用 node.js 的 npm（Node Package Manager，是一个 node.jS 包管理和分发工具）,可以理解为一个安装程序，可以给你安装官方已经整合好的包。当然其他作用我也不知道。</p>
+<p>如果已经有 git 和 node.js，直接使用下面指令进行安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ npm install -g hexo-cli&#96;</span><br></pre></td></tr></table></figure>
+
+<p>虽然前面有个 linux 系统的 shell 的命令提示符，但是安装好 node.js 之后用 windows 系统的 cmd 里面也是可以用的。至于打开 cmd，win+R 打开运行窗口输入“cmd”，回车就出现了。记得输入时不要输入前面的$符号，那是命令提示符。</p>
+<h1 id="git——版本控制系统"><a href="#git——版本控制系统" class="headerlink" title="git——版本控制系统"></a>git——版本控制系统</h1><p>git 的<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">安装</a>和<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">使用</a>就不多说了。用于将 Hexo 生成好的页面给推送到 github 这个远程库里。至少要知道 git 的一些基本概念。</p>
+<h1 id="Hexo-的使用"><a href="#Hexo-的使用" class="headerlink" title="Hexo 的使用"></a>Hexo 的使用</h1><p>这 Hexo 安装好之后你可以在 cmd 使用它的指令。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>初始化 Hexo 的指令（命令提示符不写了，下同）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init 指定目录（省略则初始化当前目录）</span><br></pre></td></tr></table></figure>
+
+<p>初始化 hexo 之后会在你指定的目录生成一大堆文件，这些文件和文件夹是从它的官方 github 库里面 clone 下来的，这也是一开始要下好 git 的原因。</p>
+<p>比较重要的几个文件是：</p>
+<table>
+<thead>
+<tr>
+<th>_config.yml</th>
+<th align="left">配置文件，使用 YAML 来写的数据文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scaffolds</td>
+<td align="left">模板文件夹，存放新文章的模板</td>
+</tr>
+<tr>
+<td>source</td>
+<td align="left">文章，图片，草稿等资源都放在这里</td>
+</tr>
+<tr>
+<td>themes</td>
+<td align="left">主题文件夹，Hexo 根据主题生成静态页面</td>
+</tr>
+</tbody></table>
+<h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>或者简写成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>前文说过，Hexo 是用来帮助你生成静态网页的一个工具，就是用这个指令。这个指令将目前编写好的文章以及主题等东西给包装好，生成用于上传到你的网站上（这里我们用 github page）的网页。至于此命令的详细说明，请看 Hexo 文档。</p>
+<h2 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h2><p>说实话我在看文档的时候没看懂“部署网站”是啥意思，后来知道了，这就是将<code>hexo generate</code>生成的静态页面推送到你的 github 库里面去的意思。</p>
+<p>指令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>也可以简写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p><code>deploy</code>可以与<code>generate</code>共同简写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>一个意思，都是先生成静态页面，再部署网站。</p>
+<h2 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ hexo server&#96;</span><br></pre></td></tr></table></figure>
+
+<p>在自己电脑上运行服务器来查看博客的效果，默认情况下，访问网址为： <code>http://localhost:4000/</code></p>
+<p>其余指令我目前还没用到，详情请见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">Hexo 文档</a></p>
+<h1 id="github-page"><a href="#github-page" class="headerlink" title="github page"></a>github page</h1><p>在 github 仓库的 setting 里面，有一栏叫做 github page，在其中的 source 选项内选择作为数据源的分支，一般将博客部署在 master 分支，所以选择 master 作为数据源。</p>
+<p>你可以选择两种方式来给你用来存放博客数据的仓库起名字，第一种就是你百度经常看到的：<code>你的用户名.github.io</code>的形式，这种形式会让你在选择好数据源之后提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your site is published at https:&#x2F;&#x2F;你的用户名.github.io&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>然后你可以使用给出的链接来打开你的博客，点击链接，会默认打开你数据源分支内的 index.html 文件作为主页，如果没有这个文件就会<code>404：找不到页面</code>，当然，Hexo 会帮你生成好 index.html，只要你把生成好的页面给 push 上 github 就可以。如果你知道包含哪些文件的话，自己手动上传应该也 ok。</p>
+<p>有了这种方式，其实你甚至可以不需要 Hexo，自己写 html 页面也能做一个博客，不过这样就像前文说的从“烧砖”开始建楼了。</p>
+<p>第二种起名方式就是不按照第一种来，随便起，比如用户名是<code>HaneChiri</code>，创建的仓库名叫<code>blog</code>,那么选择完数据源分支之后呢，得到的提示可能是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your site is published at https:&#x2F;&#x2F;hanechiri.github.io&#x2F;blog&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>这样需要写的网址就会长一些，要加上仓库名。试了一下这样是可以的。我的两个仓库就分别使用了以上两种方式。</p>
+<h1 id="markdown-的图片"><a href="#markdown-的图片" class="headerlink" title="markdown 的图片"></a>markdown 的图片</h1><p>这里的文章使用的是 markdown 语法，一个比较容易学习的标记语言，可以让你手不离键盘地完成排版，我现在就是在用 markdown 来写.md 文件，然后放进 source 文件夹的_post 子文件夹里面，之后再上传。</p>
+<p>markdown 可以方便的插入图片和超链接。但是图片一般来说是利用相对路径放在.md 文件的附近的，生成静态页面的时候图片的路径又会被打乱，导致图片显示失败。</p>
+<p>Hexo 文档里面提供了几种方式来插入图片，比如插件。但是那种方式无法实时预览，而且难弄。</p>
+<p>所以干脆使用外部图片链接，在 github 上面再建立一个仓库用来存放图片，提供链接给博客使用。</p>
+<p>要这样使用的前提是去开启 github page 这个设置。</p>
+<p>比如用户名是<code>HaneChiri</code>，创建的仓库名叫<code>blog_images</code>，那么在这个仓库根目录下的图片<code>avatar.jpg</code>的链接就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;hanechiri.github.io&#x2F;blog_images&#x2F;avatar.jpg</span><br></pre></td></tr></table></figure>
+
+<p>而不是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;HaneChiri&#x2F;blog_images&#x2F;avatar.jpg</span><br></pre></td></tr></table></figure>
+
+<p>后者是浏览编辑这个图片的链接，而不是图片本身。</p>
+<p>上传之后无法访问这个链接也不要急，等几分钟就可以了。</p>
+<h1 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.simon96.online/2018/10/12/hexo-tutorial/">【持续更新】最全 Hexo 博客搭建+主题优化+插件配置+常用操作+错误分析-遇见西门</a></li>
+</ul>
+<h1 id="步骤总结"><a href="#步骤总结" class="headerlink" title="步骤总结"></a>步骤总结</h1><p>由于网上教程很多，我在这里只是简单把我部署博客的步骤总结一下：</p>
+<ol>
+<li>开一个 github 空仓库（注册和新建仓库应该不用多说）</li>
+<li>在一个本地空文件夹内初始化 hexo</li>
+<li>此文件夹内，与远程库建立关联（其实这一步可以不必，不过以后可能用得到，先弄着吧）</li>
+<li>给<code>_config.yml</code>文件内<code>deploy</code>属性设置好<code>type</code>（: git，记得冒号后面有个空格）、<code>url</code>（github 仓库的链接）和<code>branch</code>（推送到的分支，一般用 master）</li>
+<li>修改其他配置比如<code>title</code>、<code>author</code>、<code>new_post_name</code>、<code>language</code>、<code>post_asset_folder</code></li>
+<li>安装一个 git 部署的东西<code>npm install --save hexo-deployer-git</code></li>
+<li>生成并在本地测试页面效果</li>
+<li>生成并部署网站<code>hexo d -g</code></li>
+<li>新建，编辑文章然后重复上一步</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Hexo部署博客的过程记录</p><p><a href="https://yxchangingself.xyz/posts/hexo_deploy_log/">https://yxchangingself.xyz/posts/hexo_deploy_log/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-02-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-02-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/hexo/">hexo</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/hexo_visit_count/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">为博客增加访问统计</span></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#缘起"><span class="level-left"><span class="level-item">1</span><span class="level-item">缘起</span></span></a></li><li><a class="level is-mobile" href="#Hexo——一个博客框架"><span class="level-left"><span class="level-item">2</span><span class="level-item">Hexo——一个博客框架</span></span></a></li><li><a class="level is-mobile" href="#node-js"><span class="level-left"><span class="level-item">3</span><span class="level-item">node.js</span></span></a></li><li><a class="level is-mobile" href="#git——版本控制系统"><span class="level-left"><span class="level-item">4</span><span class="level-item">git——版本控制系统</span></span></a></li><li><a class="level is-mobile" href="#Hexo-的使用"><span class="level-left"><span class="level-item">5</span><span class="level-item">Hexo 的使用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#初始化"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">初始化</span></span></a></li><li><a class="level is-mobile" href="#新建文章"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">新建文章</span></span></a></li><li><a class="level is-mobile" href="#生成静态页面"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">生成静态页面</span></span></a></li><li><a class="level is-mobile" href="#部署网站"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">部署网站</span></span></a></li><li><a class="level is-mobile" href="#本地测试"><span class="level-left"><span class="level-item">5.5</span><span class="level-item">本地测试</span></span></a></li></ul></li><li><a class="level is-mobile" href="#github-page"><span class="level-left"><span class="level-item">6</span><span class="level-item">github page</span></span></a></li><li><a class="level is-mobile" href="#markdown-的图片"><span class="level-left"><span class="level-item">7</span><span class="level-item">markdown 的图片</span></span></a></li><li><a class="level is-mobile" href="#参考教程"><span class="level-left"><span class="level-item">8</span><span class="level-item">参考教程</span></span></a></li><li><a class="level is-mobile" href="#步骤总结"><span class="level-left"><span class="level-item">9</span><span class="level-item">步骤总结</span></span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2022 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
