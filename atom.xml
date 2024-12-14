@@ -136,9 +136,9 @@
     <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-    <category term="git" scheme="https://yxchangingself.xyz/tags/git/"/>
-    
     <category term="android" scheme="https://yxchangingself.xyz/tags/android/"/>
+    
+    <category term="git" scheme="https://yxchangingself.xyz/tags/git/"/>
     
   </entry>
   
@@ -221,9 +221,9 @@
     <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-    <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
     <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
+    
+    <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
     
     <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
     
