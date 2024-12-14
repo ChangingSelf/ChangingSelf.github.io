@@ -1,12 +1,42 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>python爬虫学习笔记2模拟登录与数据库 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"><meta property="og:type" content="blog"><meta property="og:title" content="python爬虫学习笔记2模拟登录与数据库"><meta property="og:url" content="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"><meta property="article:published_time" content="2019-03-09T05:30:43.000Z"><meta property="article:modified_time" content="2019-03-09T05:30:43.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="python"><meta property="article:tag" content="爬虫"><meta property="article:tag" content="mysql"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"},"headline":"编程技术笔记","image":["https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"],"datePublished":"2019-03-09T05:30:43.000Z","dateModified":"2019-03-09T05:30:43.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>python爬虫学习笔记2模拟登录与数据库 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"><meta property="og:type" content="blog"><meta property="og:title" content="python爬虫学习笔记2模拟登录与数据库"><meta property="og:url" content="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"><meta property="article:published_time" content="2019-03-09T05:30:43.000Z"><meta property="article:modified_time" content="2019-03-09T05:30:43.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="爬虫"><meta property="article:tag" content="python"><meta property="article:tag" content="mysql"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"},"headline":"python爬虫学习笔记2模拟登录与数据库","image":["https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"],"datePublished":"2019-03-09T05:30:43.000Z","dateModified":"2019-03-09T05:30:43.000Z","author":{"@type":"Person","name":"憧憬少"},"publisher":{"@type":"Organization","name":"编程技术笔记","logo":{"@type":"ImageObject","url":{"text":"ChangingSelf"}}},"description":"为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。 本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。 传送门：爬虫学习笔记 1"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-03-09T05:30:43.000Z" title="2019-03-09T05:30:43.000Z">2019-03-09</time>发表</span><span class="level-item"><time dateTime="2019-03-09T05:30:43.000Z" title="2019-03-09T05:30:43.000Z">2019-03-09</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a></span><span class="level-item">1 小时读完 (大约7563个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">python爬虫学习笔记2模拟登录与数据库</h1><div class="content"><p>为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。</p>
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-03-09T05:30:43.000Z" title="2019/3/9 13:30:43">2019-03-09</time>发表</span><span class="level-item"><time dateTime="2019-03-09T05:30:43.000Z" title="2019/3/9 13:30:43">2019-03-09</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a></span><span class="level-item">1 小时读完 (大约7563个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">python爬虫学习笔记2模拟登录与数据库</h1><div class="content"><p>为了加入学校里面一个技术小组，我接受了写一个爬取学校网站通知公告的任务。这个任务比以前写的爬虫更难的地方在于，需要模拟登录才能获得页面，以及将得到的数据存入数据库。</p>
 <p>本文按照日期来记录我完成任务的过程，然后再整理一遍全部代码。读者可以通过侧栏目录跳转阅读。不介绍库的安装。</p>
 <p>传送门：<a href="https://yxchangingself.xyz/posts/python_spider_note1simple_spider/#more">爬虫学习笔记 1</a></p>
 <span id="more"></span>
@@ -114,7 +144,7 @@
 </ul>
 <h4 id="使用-MySQL-Workbench"><a href="#使用-MySQL-Workbench" class="headerlink" title="使用 MySQL Workbench"></a>使用 MySQL Workbench</h4><p>MySQL Workbench 是一个可视化工具，安装 MySQL 的时候自带（我安装的是最新版的），在安装目录找到它的 exe 然后加个快捷方式在桌面，可以方便地查看数据和执行 SQL 查询指令，具体使用方法可以问度娘。我现在也不是很会。</p>
 <p>我创建的数据库名为 news，里面创建了一个数据表 chdnews。</p>
-<h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><p>和大多数数据库一样，MySQL 是 C/S 模式的，也就是客户端（client）/服务端（server）模式的。数据库有可能在远程服务器上。想要使用数据库，就需要连接到数据库。</p>
+<h4 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h4><p>和大多数数据库一样，MySQL 是 C&#x2F;S 模式的，也就是客户端（client）&#x2F;服务端（server）模式的。数据库有可能在远程服务器上。想要使用数据库，就需要连接到数据库。</p>
 <p>python 中要使用数据库需要一个 pymysql 库。</p>
 <p>下面是连接的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment">#连接数据库</span></span><br><span class="line">db = pymysql.connect(host=<span class="string">&#x27;127.0.0.1&#x27;</span>, port=<span class="number">3306</span>, user=<span class="string">&#x27;root&#x27;</span>, passwd=<span class="string">&#x27;root&#x27;</span>, db=<span class="string">&#x27;news&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -161,7 +191,7 @@
 <li>至于头部信息，在下图也可以看到我折叠起来的几个栏目，有一个是<code>Request Headers</code>，这是我们在点击登录按钮时发送的 POST 请求信息的信息头。将里面的<code>User-Agent</code>给复制到你代码里面存在一个字典里面等会用</li>
 <li>把头部信息和表单数据都看一下，准备一下</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/HaneChiri/PicBed/master/blog_images/spider_f12_form_data.png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#登录前的准备</span></span><br><span class="line">login_url = <span class="string">&#x27;http://xxxx.xxx&#x27;</span><span class="comment">#登录页面的url</span></span><br><span class="line"><span class="comment">#头部信息</span></span><br><span class="line">headers=&#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#x27;</span></span><br><span class="line">    <span class="comment">#加上后面这些会后悔的，别加。</span></span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>:<span class="string">&#x27;xx.xx.xx.xx&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Referer&#x27;</span>:<span class="string">&#x27;http://xxx.xxx?xxx=http://xxx.xx&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Origin&#x27;</span>:<span class="string">&#x27;http://xxx.xxx.xx&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#登录用的数据</span></span><br><span class="line">login_data=&#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;你的账号&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;你的密码&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;btn&#x27;</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;lt&#x27;</span>: LT-<span class="number">790162</span>-J9kW2aEFsK3ihu4AzXcovdsJy6cYBM1552123884047-D1Nx-cas，</span><br><span class="line">    <span class="comment">#实际上lt并不能这样写上去，下文会解释。这里记录我自己的错误</span></span><br><span class="line">        <span class="string">&#x27;dllt&#x27;</span>: <span class="string">&#x27;userNamePasswordLogin&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;execution&#x27;</span>: <span class="string">&#x27;e1s1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;_eventId&#x27;</span>: <span class="string">&#x27;submit&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rmShown&#x27;</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>数据准备好之后就开始登录，使用的是 requests 的另一个方法——post。</p>
@@ -235,7 +265,7 @@
 <p>我将成为<del>新世界的卡密</del>小组里面最快完成的人！</p>
 <p>解决了这个问题，剩下的就特别简单了。</p>
 <p>当时我有一个下午的时间，于是我将进度迅速推进。</p>
-<h3 id="爬取通知公告"><a href="#爬取通知公告" class="headerlink" title="爬取通知公告"></a>爬取通知公告</h3><p>设登录页面为 pageA，登录之后的页面跳转到 pageB，而 pageB 有一个按钮跳转到 pageC，这个 pageC 就是 day1 的时候的目录页面，里面有着 pageC1、pageC2、pageC3……等页面的链接，而这个 pageC 最后面还有个按钮用于跳转到目录的下一页，也就是 pageC?pageIndex=2，还有 137 页公告栏目录。</p>
+<h3 id="爬取通知公告"><a href="#爬取通知公告" class="headerlink" title="爬取通知公告"></a>爬取通知公告</h3><p>设登录页面为 pageA，登录之后的页面跳转到 pageB，而 pageB 有一个按钮跳转到 pageC，这个 pageC 就是 day1 的时候的目录页面，里面有着 pageC1、pageC2、pageC3……等页面的链接，而这个 pageC 最后面还有个按钮用于跳转到目录的下一页，也就是 pageC?pageIndex&#x3D;2，还有 137 页公告栏目录。</p>
 <p>没有什么新的东西，和 day1 说的爬取方式差不多，只是页面正文的格式和 day1 的新闻不太一样。核心结构如下，我省略了很多：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bulletin-content&quot;</span> <span class="attr">id</span>=<span class="string">&quot;bulletin-contentpe65&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;;background: white&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">name</span>=<span class="string">&quot;_GoBack&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 20px;font-family: 仿宋&quot;</span>&gt;</span> 校属各单位： <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -282,14 +312,14 @@
 <li>将学习中写的测试代码重新构造整理，添加函数注释，提交任务</li>
 </ol>
 <h2 id="190309-周六"><a href="#190309-周六" class="headerlink" title="190309 周六"></a>190309 周六</h2><h3 id="day7-进度"><a href="#day7-进度" class="headerlink" title="day7 进度"></a>day7 进度</h3><p>写了本篇博客进行总结</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>python爬虫学习笔记2模拟登录与数据库</p><p><a href="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/">https://yxchangingself.xyz/posts/python_spider_note2login_and_database/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-03-09</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-03-09</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a><a class="link-muted mr-2" rel="tag" href="/tags/mysql/">mysql</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/python_spider_note3class_spider/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">python爬虫学习笔记3封装爬虫类</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/hexo_blog_switch_theme_1/"><span class="level-item">换了一个主题</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#转载声明"><span class="level-left"><span class="level-item">1</span><span class="level-item">转载声明</span></span></a></li><li><a class="level is-mobile" href="#任务介绍"><span class="level-left"><span class="level-item">2</span><span class="level-item">任务介绍</span></span></a></li><li><a class="level is-mobile" href="#过程记录"><span class="level-left"><span class="level-item">3</span><span class="level-item">过程记录</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#190303-周日"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">190303 周日</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#练习爬取公开页面"><span class="level-left"><span class="level-item">3.1.1</span><span class="level-item">练习爬取公开页面</span></span></a></li><li><a class="level is-mobile" href="#day1-进度"><span class="level-left"><span class="level-item">3.1.2</span><span class="level-item">day1 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190304-周一"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">190304 周一</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#将数据存入数据库"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">将数据存入数据库</span></span></a></li><li><a class="level is-mobile" href="#day2-进度"><span class="level-left"><span class="level-item">3.2.2</span><span class="level-item">day2 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190305-周二"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">190305 周二</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#初步了解模拟登录"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">初步了解模拟登录</span></span></a></li><li><a class="level is-mobile" href="#cookie-和-session"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">cookie 和 session</span></span></a></li><li><a class="level is-mobile" href="#day3-进度"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">day3 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190306-周三"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">190306 周三</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#表单校验码（非验证码）"><span class="level-left"><span class="level-item">3.4.1</span><span class="level-item">表单校验码（非验证码）</span></span></a></li><li><a class="level is-mobile" href="#利用-session-保持校验码"><span class="level-left"><span class="level-item">3.4.2</span><span class="level-item">利用 session 保持校验码</span></span></a></li><li><a class="level is-mobile" href="#day4-进度"><span class="level-left"><span class="level-item">3.4.3</span><span class="level-item">day4 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190307-周四"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">190307 周四</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#多余的头部信息"><span class="level-left"><span class="level-item">3.5.1</span><span class="level-item">多余的头部信息</span></span></a></li><li><a class="level is-mobile" href="#爬取通知公告"><span class="level-left"><span class="level-item">3.5.2</span><span class="level-item">爬取通知公告</span></span></a></li><li><a class="level is-mobile" href="#day5-进度"><span class="level-left"><span class="level-item">3.5.3</span><span class="level-item">day5 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190308-周五"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">190308 周五</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#更多的目录页"><span class="level-left"><span class="level-item">3.6.1</span><span class="level-item">更多的目录页</span></span></a></li><li><a class="level is-mobile" href="#整理代码"><span class="level-left"><span class="level-item">3.6.2</span><span class="level-item">整理代码</span></span></a></li><li><a class="level is-mobile" href="#day6-进度"><span class="level-left"><span class="level-item">3.6.3</span><span class="level-item">day6 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190309-周六"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">190309 周六</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#day7-进度"><span class="level-left"><span class="level-item">3.7.1</span><span class="level-item">day7 进度</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div><div class="article-licensing box"><div class="licensing-title"><p>python爬虫学习笔记2模拟登录与数据库</p><p><a href="https://yxchangingself.xyz/posts/python_spider_note2login_and_database/">https://yxchangingself.xyz/posts/python_spider_note2login_and_database/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-03-09</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-03-09</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a><a class="link-muted mr-2" rel="tag" href="/tags/mysql/">mysql</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/python_spider_note3class_spider/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">python爬虫学习笔记3封装爬虫类</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/hexo_blog_switch_theme_1/"><span class="level-item">换了一个主题</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#转载声明"><span class="level-left"><span class="level-item">1</span><span class="level-item">转载声明</span></span></a></li><li><a class="level is-mobile" href="#任务介绍"><span class="level-left"><span class="level-item">2</span><span class="level-item">任务介绍</span></span></a></li><li><a class="level is-mobile" href="#过程记录"><span class="level-left"><span class="level-item">3</span><span class="level-item">过程记录</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#190303-周日"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">190303 周日</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#练习爬取公开页面"><span class="level-left"><span class="level-item">3.1.1</span><span class="level-item">练习爬取公开页面</span></span></a></li><li><a class="level is-mobile" href="#day1-进度"><span class="level-left"><span class="level-item">3.1.2</span><span class="level-item">day1 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190304-周一"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">190304 周一</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#将数据存入数据库"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">将数据存入数据库</span></span></a></li><li><a class="level is-mobile" href="#day2-进度"><span class="level-left"><span class="level-item">3.2.2</span><span class="level-item">day2 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190305-周二"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">190305 周二</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#初步了解模拟登录"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">初步了解模拟登录</span></span></a></li><li><a class="level is-mobile" href="#cookie-和-session"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">cookie 和 session</span></span></a></li><li><a class="level is-mobile" href="#day3-进度"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">day3 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190306-周三"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">190306 周三</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#表单校验码（非验证码）"><span class="level-left"><span class="level-item">3.4.1</span><span class="level-item">表单校验码（非验证码）</span></span></a></li><li><a class="level is-mobile" href="#利用-session-保持校验码"><span class="level-left"><span class="level-item">3.4.2</span><span class="level-item">利用 session 保持校验码</span></span></a></li><li><a class="level is-mobile" href="#day4-进度"><span class="level-left"><span class="level-item">3.4.3</span><span class="level-item">day4 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190307-周四"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">190307 周四</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#多余的头部信息"><span class="level-left"><span class="level-item">3.5.1</span><span class="level-item">多余的头部信息</span></span></a></li><li><a class="level is-mobile" href="#爬取通知公告"><span class="level-left"><span class="level-item">3.5.2</span><span class="level-item">爬取通知公告</span></span></a></li><li><a class="level is-mobile" href="#day5-进度"><span class="level-left"><span class="level-item">3.5.3</span><span class="level-item">day5 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190308-周五"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">190308 周五</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#更多的目录页"><span class="level-left"><span class="level-item">3.6.1</span><span class="level-item">更多的目录页</span></span></a></li><li><a class="level is-mobile" href="#整理代码"><span class="level-left"><span class="level-item">3.6.2</span><span class="level-item">整理代码</span></span></a></li><li><a class="level is-mobile" href="#day6-进度"><span class="level-left"><span class="level-item">3.6.3</span><span class="level-item">day6 进度</span></span></a></li></ul></li><li><a class="level is-mobile" href="#190309-周六"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">190309 周六</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#day7-进度"><span class="level-left"><span class="level-item">3.7.1</span><span class="level-item">day7 进度</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7"><a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000400号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480" target="_blank">粤公网安备 44200002444480号</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
                     fold: 'unfolded'
                 }
             }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
       window.cookieconsent.initialise({
         type: "info",
         theme: "edgeless",
@@ -314,7 +344,7 @@
           },
         },
       });
-    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
             if (typeof $.fn.lightGallery === 'function') {
                 $('.article').lightGallery({ selector: '.gallery-item' });
             }
@@ -324,22 +354,180 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+        });</script><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        <!-- ECharts 图表容器 -->
+        
+        <script>
+            if(document.getElementById('heatmapChart')) {
+                const heatmapChart = echarts.init(document.getElementById('heatmapChart'), 'light');
+                const containerWidth = document.getElementById('heatmapChart').offsetWidth;
+                const cellSize = Math.max(Math.floor(containerWidth / 60));
+                heatmapChart.setOption({
+                    tooltip: {
+                        position: 'top',
+                        formatter: params => `${params.value[0]}: ${params.value[1]} Articles`
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...[["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]].map(item => item[1])),
+                        calculable: false,
+                        orient: 'horizontal', // 横向布局
+                        right: '5%',
+                        bottom: '5%',
+                        inRange: { color: ['#FFEFD5', '#FFA07A', '#FF4500'] }
+                    },
+                    calendar: {
+                        top: '20%',
+                        left: 'center',
+                        range: new Date().getFullYear(),
+                        cellSize: cellSize, // 方格大小
+                        splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } },
+                        itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' },
+                        dayLabel: { firstDay: 1, fontSize: 12, color: '#333', show: false },
+                        monthLabel: { fontSize: 12, color: '#555' }
+                    },
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: [["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]]
+                    }]
+                });
+                // hexo热力图点击跳转到月份页面
+                heatmapChart.on('click', function(params) {
+                       if (params.componentType === 'series') {
+                        const dateStr = params.value[0];
+                        const dateParts = dateStr.split('-');
+                        const year = parseInt(dateParts[0], 10);
+                        const month = parseInt(dateParts[1], 10);
+                        const formattedMonth = `${year}/${String(month).padStart(2, '0')}`;
+                        window.location.href = '/archives/' + formattedMonth; // 一般归档页面路径为/archives/YYYY-MM
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('monthlyChart')) {
+                const monthlyChart = echarts.init(document.getElementById('monthlyChart'), 'light');
+                monthlyChart.setOption({
+                    xAxis: {
+                        type: 'category',
+                        data: ["2019-02","2019-03","2019-04","2019-06","2019-07","2019-08","2019-09","2019-12","2020-01","2020-02","2020-03","2020-04","2020-08","2020-09","2020-10","2020-11","2021-01","2021-03","2021-06","2021-07","2022-02","2022-06"],
+                        axisLabel: { fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    series: [{
+                        name: 'Articles',
+                        type: 'line',
+                        data: [6,4,4,7,5,6,3,2,4,2,5,4,2,1,2,1,3,1,1,1,1,1],
+                        smooth: true,
+                        lineStyle: { color: '#5470C6', width: 2 },
+                        itemStyle: { color: '#5470C6' },
+                        areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                        symbolSize: 10, //圆点大一点，方便点击
+                        animationDuration: 1000
+                    }]
+                });
+                // 跳转到月份页面
+                 monthlyChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const year = params.name.split('-')[0];
+                        const month = params.name.split('-')[1];
+                        window.location.href = '/archives/' + year + '/' + month; 
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('tagsChart')){    
+                const tagsChart = echarts.init(document.getElementById('tagsChart'), 'light');
+                tagsChart.setOption({
+                    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                    series: [{
+                        type: 'pie',
+                        radius: '60%',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}],
+                        label: {
+                            position: 'outside',
+                            formatter: '{b} {c} ({d}%)',
+                            fontSize: 12
+                        },
+                        color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4'],
+                        animationDuration: 1000
+                    }],
+                    legend: {
+                        bottom: '0',
+                        left: 'center',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}].map(tag => tag.name),
+                        textStyle: { fontSize: 12 }
+                    }
+                });
+                tagsChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const tag = params.name;
+                        window.location.href = '/tags/' + tag;
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('categoriesChart')){
+                const categoriesChart = echarts.init(document.getElementById('categoriesChart'), 'light');
+                categoriesChart.setOption({
+                    xAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.name).reverse(),
+                        axisLabel: { fontSize: 12 }
+                    },
+                    series: [{
+                        name: 'Category Count',
+                        type: 'bar',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.value).reverse(),
+                        label: {
+                            show: true,
+                            position: 'right',
+                            fontSize: 12
+                        },
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#91CC75' },
+                                { offset: 1, color: '#73C0DE' }
+                            ])
+                        },
+                        animationDuration: 1000
+                    }]
+                });
+                categoriesChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const category = params.name;
+                        window.location.href = '/categories/' + category;
+                    }
+                });
+            }
+        </script>
+    
+    </body></html>

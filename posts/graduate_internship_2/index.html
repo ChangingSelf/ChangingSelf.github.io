@@ -1,12 +1,42 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【毕业实习总结】（2）mybatis框架的基本使用 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"><meta property="og:type" content="blog"><meta property="og:title" content="【毕业实习总结】（2）mybatis框架的基本使用"><meta property="og:url" content="https://yxchangingself.xyz/posts/graduate_internship_2/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2020-08-10T13:08:27.000Z"><meta property="article:modified_time" content="2020-08-10T13:08:27.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="java"><meta property="article:tag" content="mybatis"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/graduate_internship_2/"},"headline":"编程技术笔记","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2020-08-10T13:08:27.000Z","dateModified":"2020-08-10T13:08:27.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/graduate_internship_2/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【毕业实习总结】（2）mybatis框架的基本使用 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"><meta property="og:type" content="blog"><meta property="og:title" content="【毕业实习总结】（2）mybatis框架的基本使用"><meta property="og:url" content="https://yxchangingself.xyz/posts/graduate_internship_2/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2020-08-10T13:08:27.000Z"><meta property="article:modified_time" content="2020-08-10T13:08:27.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="java"><meta property="article:tag" content="mybatis"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://yxchangingself.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/graduate_internship_2/"},"headline":"【毕业实习总结】（2）mybatis框架的基本使用","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2020-08-10T13:08:27.000Z","dateModified":"2020-08-10T13:08:27.000Z","author":{"@type":"Person","name":"憧憬少"},"publisher":{"@type":"Organization","name":"编程技术笔记","logo":{"@type":"ImageObject","url":{"text":"ChangingSelf"}}},"description":"前言大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。 前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。 学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。 2020 年 7 月 15 日，我"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/graduate_internship_2/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-10T13:08:27.000Z" title="2020-08-10T13:08:27.000Z">2020-08-10</time>发表</span><span class="level-item"><time dateTime="2020-08-10T13:08:27.000Z" title="2020-08-10T13:08:27.000Z">2020-08-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">26 分钟读完 (大约3846个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">【毕业实习总结】（2）mybatis框架的基本使用</h1><div class="content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。</p>
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-10T13:08:27.000Z" title="2020/8/10 21:08:27">2020-08-10</time>发表</span><span class="level-item"><time dateTime="2020-08-10T13:08:27.000Z" title="2020/8/10 21:08:27">2020-08-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">26 分钟读完 (大约3846个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">【毕业实习总结】（2）mybatis框架的基本使用</h1><div class="content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。</p>
 <p>前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。</p>
 <p>学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。</p>
 <p>2020 年 7 月 15 日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过 git 提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。</p>
@@ -44,7 +74,7 @@
 <h2 id="增删改查举例"><a href="#增删改查举例" class="headerlink" title="增删改查举例"></a>增删改查举例</h2><p>以教务管理系统的学生信息的增删改查为例。本地 mysql 的<code>test</code>数据库中的<code>student</code>表中存放着学生信息，<code>grade</code>表中存放着班级信息。</p>
 <p><strong><u>为了便于讲解，本例中的代码和上文给出的码云仓库的代码可能会有所不同。</u></strong></p>
 <h3 id="目录结构一览"><a href="#目录结构一览" class="headerlink" title="目录结构一览"></a>目录结构一览</h3><ul>
-<li>src/main/java<ul>
+<li>src&#x2F;main&#x2F;java<ul>
 <li>com.test<ul>
 <li>bean<ul>
 <li>Student.java：用于存储学生信息的 javabean</li>
@@ -62,7 +92,7 @@
 </li>
 </ul>
 </li>
-<li>src/main/resource<ul>
+<li>src&#x2F;main&#x2F;resource<ul>
 <li>mapper<ul>
 <li>StudentMapper.xml：SQL 映射文件，SQL 语句写在这里</li>
 </ul>
@@ -82,7 +112,7 @@
 <p>SqlSessionFactory 的实例可以通过 SqlSessionFactoryBuilder 获得。</p>
 <p>而 SqlSessionFactoryBuilder 则可以从 XML 配置文件或一个预先配置的 Configuration 实例来构建出 SqlSessionFactory 实例。</p>
 </blockquote>
-<p>这个类在静态块里面读取了我们刚刚写的配置文件，并将其传给<code>SqlSessionFactoryBuilder</code>以创建<code>SqlSessionFactory</code>对象。</p>
+<p>这个类在静态块里面读取了我们刚刚写的配置文件，并将其传给<code>SqlSessionFactoryBuilder </code>以创建<code>SqlSessionFactory </code>对象。</p>
 <p>这个类的主要作用就是读取 mybatis 配置文件，并提供获取<code>SqlSession</code>对象的静态方法。我们可以使用<code>SqlSession</code>对象的方法，来使用 sql 映射文件中的 sql 语句。</p>
 <h4 id="com-test-dao"><a href="#com-test-dao" class="headerlink" title="com.test.dao"></a>com.test.dao</h4><p>再新建一个名为<code>dao</code>的包，它的含义为 DAO(Data Access Object)数据访问对象，它是这个项目的数据访问层，业务代码通过它对数据库进行访问，有了这一层抽象，业务逻辑和数据访问就分开了。</p>
 <p><code>dao</code>包中新建一个<code>StudentMapper</code>类，它用来和 SQL 映射文件产生联系。它的代码如下：</p>
@@ -134,14 +164,14 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">  <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.dao.GradeMapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getStudentListById&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;GradeMapper&quot;</span>&gt;</span></span><br><span class="line">		select grade.*,student.* from grade left join student</span><br><span class="line">		on grade.gid=student.gid</span><br><span class="line">		where grade.gid=#&#123;gid&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;com.bean.Grade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;GradeMapper&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;gid&quot;</span> <span class="attr">column</span>=<span class="string">&quot;gid&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;gname&quot;</span> <span class="attr">column</span>=<span class="string">&quot;gname&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;list&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;com.bean.Student&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;sid&quot;</span> <span class="attr">column</span>=<span class="string">&quot;sid&quot;</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;sname&quot;</span> <span class="attr">column</span>=<span class="string">&quot;sname&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>用的是<code>collection</code>标签，它的<code>ofType</code>属性是集合类中所装元素的类型，其他的和上面差不多</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>【毕业实习总结】（2）mybatis框架的基本使用</p><p><a href="https://yxchangingself.xyz/posts/graduate_internship_2/">https://yxchangingself.xyz/posts/graduate_internship_2/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-08-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-08-10</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/java/">java</a><a class="link-muted mr-2" rel="tag" href="/tags/mybatis/">mybatis</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/project-review-score-system/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">【项目复盘】网络软件开发综合实践</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/graduate_internship_1/"><span class="level-item">【毕业实习总结】（1）maven环境配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">1</span><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#仓库链接"><span class="level-left"><span class="level-item">2</span><span class="level-item">仓库链接</span></span></a></li><li><a class="level is-mobile" href="#mybatis-框架的基本使用"><span class="level-left"><span class="level-item">3</span><span class="level-item">mybatis 框架的基本使用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#什么是-mybatis"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">什么是 mybatis</span></span></a></li><li><a class="level is-mobile" href="#配置-mybatis"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">配置 mybatis</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#添加-mybatis-依赖"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">添加 mybatis 依赖</span></span></a></li><li><a class="level is-mobile" href="#新建-mybatis-配置文件"><span class="level-left"><span class="level-item">3.2.2</span><span class="level-item">新建 mybatis 配置文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#增删改查举例"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">增删改查举例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目录结构一览"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">目录结构一览</span></span></a></li><li><a class="level is-mobile" href="#新建包"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">新建包</span></span></a></li><li><a class="level is-mobile" href="#新建-sql-映射文件"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">新建 sql 映射文件</span></span></a></li><li><a class="level is-mobile" href="#测试用建表语句"><span class="level-left"><span class="level-item">3.3.4</span><span class="level-item">测试用建表语句</span></span></a></li><li><a class="level is-mobile" href="#增删改测试"><span class="level-left"><span class="level-item">3.3.5</span><span class="level-item">增删改测试</span></span></a></li><li><a class="level is-mobile" href="#查询操作"><span class="level-left"><span class="level-item">3.3.6</span><span class="level-item">查询操作</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div><div class="article-licensing box"><div class="licensing-title"><p>【毕业实习总结】（2）mybatis框架的基本使用</p><p><a href="https://yxchangingself.xyz/posts/graduate_internship_2/">https://yxchangingself.xyz/posts/graduate_internship_2/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-08-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-08-10</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/java/">java</a><a class="link-muted mr-2" rel="tag" href="/tags/mybatis/">mybatis</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/project-review-score-system/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">【项目复盘】网络软件开发综合实践</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/graduate_internship_1/"><span class="level-item">【毕业实习总结】（1）maven环境配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">1</span><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#仓库链接"><span class="level-left"><span class="level-item">2</span><span class="level-item">仓库链接</span></span></a></li><li><a class="level is-mobile" href="#mybatis-框架的基本使用"><span class="level-left"><span class="level-item">3</span><span class="level-item">mybatis 框架的基本使用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#什么是-mybatis"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">什么是 mybatis</span></span></a></li><li><a class="level is-mobile" href="#配置-mybatis"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">配置 mybatis</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#添加-mybatis-依赖"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">添加 mybatis 依赖</span></span></a></li><li><a class="level is-mobile" href="#新建-mybatis-配置文件"><span class="level-left"><span class="level-item">3.2.2</span><span class="level-item">新建 mybatis 配置文件</span></span></a></li></ul></li><li><a class="level is-mobile" href="#增删改查举例"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">增删改查举例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目录结构一览"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">目录结构一览</span></span></a></li><li><a class="level is-mobile" href="#新建包"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">新建包</span></span></a></li><li><a class="level is-mobile" href="#新建-sql-映射文件"><span class="level-left"><span class="level-item">3.3.3</span><span class="level-item">新建 sql 映射文件</span></span></a></li><li><a class="level is-mobile" href="#测试用建表语句"><span class="level-left"><span class="level-item">3.3.4</span><span class="level-item">测试用建表语句</span></span></a></li><li><a class="level is-mobile" href="#增删改测试"><span class="level-left"><span class="level-item">3.3.5</span><span class="level-item">增删改测试</span></span></a></li><li><a class="level is-mobile" href="#查询操作"><span class="level-left"><span class="level-item">3.3.6</span><span class="level-item">查询操作</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7"><a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000400号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480" target="_blank">粤公网安备 44200002444480号</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
                     fold: 'unfolded'
                 }
             }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
       window.cookieconsent.initialise({
         type: "info",
         theme: "edgeless",
@@ -166,7 +196,7 @@
           },
         },
       });
-    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
             if (typeof $.fn.lightGallery === 'function') {
                 $('.article').lightGallery({ selector: '.gallery-item' });
             }
@@ -176,22 +206,180 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+        });</script><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        <!-- ECharts 图表容器 -->
+        
+        <script>
+            if(document.getElementById('heatmapChart')) {
+                const heatmapChart = echarts.init(document.getElementById('heatmapChart'), 'light');
+                const containerWidth = document.getElementById('heatmapChart').offsetWidth;
+                const cellSize = Math.max(Math.floor(containerWidth / 60));
+                heatmapChart.setOption({
+                    tooltip: {
+                        position: 'top',
+                        formatter: params => `${params.value[0]}: ${params.value[1]} Articles`
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...[["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]].map(item => item[1])),
+                        calculable: false,
+                        orient: 'horizontal', // 横向布局
+                        right: '5%',
+                        bottom: '5%',
+                        inRange: { color: ['#FFEFD5', '#FFA07A', '#FF4500'] }
+                    },
+                    calendar: {
+                        top: '20%',
+                        left: 'center',
+                        range: new Date().getFullYear(),
+                        cellSize: cellSize, // 方格大小
+                        splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } },
+                        itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' },
+                        dayLabel: { firstDay: 1, fontSize: 12, color: '#333', show: false },
+                        monthLabel: { fontSize: 12, color: '#555' }
+                    },
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: [["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]]
+                    }]
+                });
+                // hexo热力图点击跳转到月份页面
+                heatmapChart.on('click', function(params) {
+                       if (params.componentType === 'series') {
+                        const dateStr = params.value[0];
+                        const dateParts = dateStr.split('-');
+                        const year = parseInt(dateParts[0], 10);
+                        const month = parseInt(dateParts[1], 10);
+                        const formattedMonth = `${year}/${String(month).padStart(2, '0')}`;
+                        window.location.href = '/archives/' + formattedMonth; // 一般归档页面路径为/archives/YYYY-MM
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('monthlyChart')) {
+                const monthlyChart = echarts.init(document.getElementById('monthlyChart'), 'light');
+                monthlyChart.setOption({
+                    xAxis: {
+                        type: 'category',
+                        data: ["2019-02","2019-03","2019-04","2019-06","2019-07","2019-08","2019-09","2019-12","2020-01","2020-02","2020-03","2020-04","2020-08","2020-09","2020-10","2020-11","2021-01","2021-03","2021-06","2021-07","2022-02","2022-06"],
+                        axisLabel: { fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    series: [{
+                        name: 'Articles',
+                        type: 'line',
+                        data: [6,4,4,7,5,6,3,2,4,2,5,4,2,1,2,1,3,1,1,1,1,1],
+                        smooth: true,
+                        lineStyle: { color: '#5470C6', width: 2 },
+                        itemStyle: { color: '#5470C6' },
+                        areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                        symbolSize: 10, //圆点大一点，方便点击
+                        animationDuration: 1000
+                    }]
+                });
+                // 跳转到月份页面
+                 monthlyChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const year = params.name.split('-')[0];
+                        const month = params.name.split('-')[1];
+                        window.location.href = '/archives/' + year + '/' + month; 
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('tagsChart')){    
+                const tagsChart = echarts.init(document.getElementById('tagsChart'), 'light');
+                tagsChart.setOption({
+                    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                    series: [{
+                        type: 'pie',
+                        radius: '60%',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}],
+                        label: {
+                            position: 'outside',
+                            formatter: '{b} {c} ({d}%)',
+                            fontSize: 12
+                        },
+                        color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4'],
+                        animationDuration: 1000
+                    }],
+                    legend: {
+                        bottom: '0',
+                        left: 'center',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}].map(tag => tag.name),
+                        textStyle: { fontSize: 12 }
+                    }
+                });
+                tagsChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const tag = params.name;
+                        window.location.href = '/tags/' + tag;
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('categoriesChart')){
+                const categoriesChart = echarts.init(document.getElementById('categoriesChart'), 'light');
+                categoriesChart.setOption({
+                    xAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.name).reverse(),
+                        axisLabel: { fontSize: 12 }
+                    },
+                    series: [{
+                        name: 'Category Count',
+                        type: 'bar',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.value).reverse(),
+                        label: {
+                            show: true,
+                            position: 'right',
+                            fontSize: 12
+                        },
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#91CC75' },
+                                { offset: 1, color: '#73C0DE' }
+                            ])
+                        },
+                        animationDuration: 1000
+                    }]
+                });
+                categoriesChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const category = params.name;
+                        window.location.href = '/categories/' + category;
+                    }
+                });
+            }
+        </script>
+    
+    </body></html>

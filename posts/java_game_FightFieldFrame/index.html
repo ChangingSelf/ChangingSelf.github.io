@@ -1,12 +1,42 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>java基于AWT的对战小游戏 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"><meta property="og:type" content="blog"><meta property="og:title" content="java基于AWT的对战小游戏"><meta property="og:url" content="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2019-06-13T12:39:29.000Z"><meta property="article:modified_time" content="2019-06-13T12:39:29.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="java"><meta property="article:tag" content="awt"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"},"headline":"编程技术笔记","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2019-06-13T12:39:29.000Z","dateModified":"2019-06-13T12:39:29.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>java基于AWT的对战小游戏 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"><meta property="og:type" content="blog"><meta property="og:title" content="java基于AWT的对战小游戏"><meta property="og:url" content="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yxchangingself.xyz/img/og_image.png"><meta property="article:published_time" content="2019-06-13T12:39:29.000Z"><meta property="article:modified_time" content="2019-06-13T12:39:29.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="java"><meta property="article:tag" content="awt"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://yxchangingself.xyz/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"},"headline":"java基于AWT的对战小游戏","image":["https://yxchangingself.xyz/img/og_image.png"],"datePublished":"2019-06-13T12:39:29.000Z","dateModified":"2019-06-13T12:39:29.000Z","author":{"@type":"Person","name":"憧憬少"},"publisher":{"@type":"Organization","name":"编程技术笔记","logo":{"@type":"ImageObject","url":{"text":"ChangingSelf"}}},"description":"这学期的 java 课设弄完了，写个博客总结一下。 哔哩哔哩对应视频的传送门"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-06-13T12:39:29.000Z" title="2019-06-13T12:39:29.000Z">2019-06-13</time>发表</span><span class="level-item"><time dateTime="2019-06-13T12:39:29.000Z" title="2019-06-13T12:39:29.000Z">2019-06-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a></span><span class="level-item">29 分钟读完 (大约4292个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">java基于AWT的对战小游戏</h1><div class="content"><p>这学期的 java 课设弄完了，写个博客总结一下。</p>
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-06-13T12:39:29.000Z" title="2019/6/13 20:39:29">2019-06-13</time>发表</span><span class="level-item"><time dateTime="2019-06-13T12:39:29.000Z" title="2019/6/13 20:39:29">2019-06-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a></span><span class="level-item">29 分钟读完 (大约4292个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">java基于AWT的对战小游戏</h1><div class="content"><p>这学期的 java 课设弄完了，写个博客总结一下。</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av54526303/">哔哩哔哩对应视频的传送门</a></p>
 <span id="more"></span>
 
@@ -73,7 +103,7 @@
 <li><strong>玩家 1 操作：</strong>键盘上 A 键 D 键分别对应左右移动，J 键使用武器攻击，K 键使用魔法，L 键切换武器，O 键切换魔法；</li>
 <li><strong>玩家 2 操作：</strong>键盘上 ← 键 → 键分别对应左右移动，小键盘上，1 键使用武器攻击，2 键使用魔法，3 键切换武器，6 键切换魔法；</li>
 <li>每把武器有自己的攻击威力和攻击距离，只有在两个角色的距离在武器的攻击范围内时，才能够攻击成功；</li>
-<li>伤害计算公式为：被攻击者受到的最终伤害=攻击者攻击力+攻击者武器威力-被攻击者的防御力。若伤害小于等于 0，则不予扣除；</li>
+<li>伤害计算公式为：被攻击者受到的最终伤害&#x3D;攻击者攻击力+攻击者武器威力-被攻击者的防御力。若伤害小于等于 0，则不予扣除；</li>
 <li>每秒钟会恢复一定量的 HP 和 MP；</li>
 <li>一方死亡（HP 降为 0 及以下）则游戏结束。</li>
 </ol>
@@ -133,20 +163,20 @@
 </ul>
 <h1 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h1><p>这次课设对我来说是个挑战，首先时间比较紧张，和考试放在了一周，并且用的是学了几周还没私底下练习多少的 JAVA。不过还是做的让我自己比较满意。</p>
 <p>我选择的是看上去较为简单的一道题目，虽然简单，但是这个题目的可扩展性很强，可以尽情开脑洞，我看中的就是这一点。我在高中的时候就尝试使用 Visual Basic 来编写类似的小游戏，一些可能会遇到的困难在那时已经思考过了，所以总体来说没有遇到太过麻烦的地方。</p>
-<p>随着经验的增长，我逐渐开始一边编程一边整理，让以后的自己也能够回顾这一次的项目。在写完这个课设之后，我用录屏软件录制了一个视频来整体讲述我编写过程中的思路，并上传到了 Bilibili 弹幕视频网站，总结经验，分享思路，以及为了便于以后回顾。地址是（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av54526303/）">https://www.bilibili.com/video/av54526303/）</a></p>
+<p>随着经验的增长，我逐渐开始一边编程一边整理，让以后的自己也能够回顾这一次的项目。在写完这个课设之后，我用录屏软件录制了一个视频来整体讲述我编写过程中的思路，并上传到了 Bilibili 弹幕视频网站，总结经验，分享思路，以及为了便于以后回顾。地址是（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av54526303/%EF%BC%89">https://www.bilibili.com/video/av54526303/）</a></p>
 <p>当然，过程中也遇到了一些问题。</p>
 <p>比如绘制图片的时候遇到了只能使用绝对路径的问题，在老师上课演示的过程中也遇到过这个问题，后来我知道了 JAVA 相对路径是以项目根目录为基准而不是以文件目录为基准的。</p>
 <p>比如角色控制按键冲突。解决方法是使用多线程，两个线程控制分别控制两个角色。</p>
 <p>比如游戏周期性事件。在以前我使用 Visual Basic 的时候，是利用时钟控件来解决这个问题的，而 JAVA 里面可以使用线程来模拟那个时钟控件。这让我对时钟控件的原理有了比较好的认识。</p>
 <p>在假期里面，我可能会通过继续完善这个小游戏，来更加深入地学习 JAVA。</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>java基于AWT的对战小游戏</p><p><a href="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/">https://yxchangingself.xyz/posts/java_game_FightFieldFrame/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-06-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-06-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/java/">java</a><a class="link-muted mr-2" rel="tag" href="/tags/awt/">awt</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/Scrapy_spider_bilibiliRank/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">练习利用Scrapy爬取b站排行榜</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/python_spider_note5optimization_of_the_spider_class/"><span class="level-item">python爬虫学习笔记5爬虫类结构优化</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#课设目的与要求"><span class="level-left"><span class="level-item">1</span><span class="level-item">课设目的与要求</span></span></a></li><li><a class="level is-mobile" href="#内容"><span class="level-left"><span class="level-item">2</span><span class="level-item">内容</span></span></a></li><li><a class="level is-mobile" href="#涉及的主要内容"><span class="level-left"><span class="level-item">3</span><span class="level-item">涉及的主要内容</span></span></a></li><li><a class="level is-mobile" href="#基本逻辑流程"><span class="level-left"><span class="level-item">4</span><span class="level-item">基本逻辑流程</span></span></a></li><li><a class="level is-mobile" href="#游戏说明"><span class="level-left"><span class="level-item">5</span><span class="level-item">游戏说明</span></span></a></li><li><a class="level is-mobile" href="#设计与实现"><span class="level-left"><span class="level-item">6</span><span class="level-item">设计与实现</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#主要框架"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">主要框架</span></span></a></li><li><a class="level is-mobile" href="#单例模式"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">单例模式</span></span></a></li><li><a class="level is-mobile" href="#双缓冲"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">双缓冲</span></span></a></li><li><a class="level is-mobile" href="#玩家操纵"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">玩家操纵</span></span></a></li><li><a class="level is-mobile" href="#角色移动线程"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">角色移动线程</span></span></a></li><li><a class="level is-mobile" href="#武器攻击实现机制"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">武器攻击实现机制</span></span></a></li><li><a class="level is-mobile" href="#武器切换和魔法切换"><span class="level-left"><span class="level-item">6.7</span><span class="level-item">武器切换和魔法切换</span></span></a></li><li><a class="level is-mobile" href="#时钟线程"><span class="level-left"><span class="level-item">6.8</span><span class="level-item">时钟线程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">7</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#体会"><span class="level-left"><span class="level-item">8</span><span class="level-item">体会</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div><div class="article-licensing box"><div class="licensing-title"><p>java基于AWT的对战小游戏</p><p><a href="https://yxchangingself.xyz/posts/java_game_FightFieldFrame/">https://yxchangingself.xyz/posts/java_game_FightFieldFrame/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-06-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-06-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/java/">java</a><a class="link-muted mr-2" rel="tag" href="/tags/awt/">awt</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/Scrapy_spider_bilibiliRank/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">练习利用Scrapy爬取b站排行榜</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/python_spider_note5optimization_of_the_spider_class/"><span class="level-item">python爬虫学习笔记5爬虫类结构优化</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#课设目的与要求"><span class="level-left"><span class="level-item">1</span><span class="level-item">课设目的与要求</span></span></a></li><li><a class="level is-mobile" href="#内容"><span class="level-left"><span class="level-item">2</span><span class="level-item">内容</span></span></a></li><li><a class="level is-mobile" href="#涉及的主要内容"><span class="level-left"><span class="level-item">3</span><span class="level-item">涉及的主要内容</span></span></a></li><li><a class="level is-mobile" href="#基本逻辑流程"><span class="level-left"><span class="level-item">4</span><span class="level-item">基本逻辑流程</span></span></a></li><li><a class="level is-mobile" href="#游戏说明"><span class="level-left"><span class="level-item">5</span><span class="level-item">游戏说明</span></span></a></li><li><a class="level is-mobile" href="#设计与实现"><span class="level-left"><span class="level-item">6</span><span class="level-item">设计与实现</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#主要框架"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">主要框架</span></span></a></li><li><a class="level is-mobile" href="#单例模式"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">单例模式</span></span></a></li><li><a class="level is-mobile" href="#双缓冲"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">双缓冲</span></span></a></li><li><a class="level is-mobile" href="#玩家操纵"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">玩家操纵</span></span></a></li><li><a class="level is-mobile" href="#角色移动线程"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">角色移动线程</span></span></a></li><li><a class="level is-mobile" href="#武器攻击实现机制"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">武器攻击实现机制</span></span></a></li><li><a class="level is-mobile" href="#武器切换和魔法切换"><span class="level-left"><span class="level-item">6.7</span><span class="level-item">武器切换和魔法切换</span></span></a></li><li><a class="level is-mobile" href="#时钟线程"><span class="level-left"><span class="level-item">6.8</span><span class="level-item">时钟线程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">7</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#体会"><span class="level-left"><span class="level-item">8</span><span class="level-item">体会</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7"><a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000400号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480" target="_blank">粤公网安备 44200002444480号</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
                     fold: 'unfolded'
                 }
             }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
       window.cookieconsent.initialise({
         type: "info",
         theme: "edgeless",
@@ -171,7 +201,7 @@
           },
         },
       });
-    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
             if (typeof $.fn.lightGallery === 'function') {
                 $('.article').lightGallery({ selector: '.gallery-item' });
             }
@@ -181,22 +211,180 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+        });</script><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        <!-- ECharts 图表容器 -->
+        
+        <script>
+            if(document.getElementById('heatmapChart')) {
+                const heatmapChart = echarts.init(document.getElementById('heatmapChart'), 'light');
+                const containerWidth = document.getElementById('heatmapChart').offsetWidth;
+                const cellSize = Math.max(Math.floor(containerWidth / 60));
+                heatmapChart.setOption({
+                    tooltip: {
+                        position: 'top',
+                        formatter: params => `${params.value[0]}: ${params.value[1]} Articles`
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...[["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]].map(item => item[1])),
+                        calculable: false,
+                        orient: 'horizontal', // 横向布局
+                        right: '5%',
+                        bottom: '5%',
+                        inRange: { color: ['#FFEFD5', '#FFA07A', '#FF4500'] }
+                    },
+                    calendar: {
+                        top: '20%',
+                        left: 'center',
+                        range: new Date().getFullYear(),
+                        cellSize: cellSize, // 方格大小
+                        splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } },
+                        itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' },
+                        dayLabel: { firstDay: 1, fontSize: 12, color: '#333', show: false },
+                        monthLabel: { fontSize: 12, color: '#555' }
+                    },
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: [["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]]
+                    }]
+                });
+                // hexo热力图点击跳转到月份页面
+                heatmapChart.on('click', function(params) {
+                       if (params.componentType === 'series') {
+                        const dateStr = params.value[0];
+                        const dateParts = dateStr.split('-');
+                        const year = parseInt(dateParts[0], 10);
+                        const month = parseInt(dateParts[1], 10);
+                        const formattedMonth = `${year}/${String(month).padStart(2, '0')}`;
+                        window.location.href = '/archives/' + formattedMonth; // 一般归档页面路径为/archives/YYYY-MM
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('monthlyChart')) {
+                const monthlyChart = echarts.init(document.getElementById('monthlyChart'), 'light');
+                monthlyChart.setOption({
+                    xAxis: {
+                        type: 'category',
+                        data: ["2019-02","2019-03","2019-04","2019-06","2019-07","2019-08","2019-09","2019-12","2020-01","2020-02","2020-03","2020-04","2020-08","2020-09","2020-10","2020-11","2021-01","2021-03","2021-06","2021-07","2022-02","2022-06"],
+                        axisLabel: { fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    series: [{
+                        name: 'Articles',
+                        type: 'line',
+                        data: [6,4,4,7,5,6,3,2,4,2,5,4,2,1,2,1,3,1,1,1,1,1],
+                        smooth: true,
+                        lineStyle: { color: '#5470C6', width: 2 },
+                        itemStyle: { color: '#5470C6' },
+                        areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                        symbolSize: 10, //圆点大一点，方便点击
+                        animationDuration: 1000
+                    }]
+                });
+                // 跳转到月份页面
+                 monthlyChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const year = params.name.split('-')[0];
+                        const month = params.name.split('-')[1];
+                        window.location.href = '/archives/' + year + '/' + month; 
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('tagsChart')){    
+                const tagsChart = echarts.init(document.getElementById('tagsChart'), 'light');
+                tagsChart.setOption({
+                    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                    series: [{
+                        type: 'pie',
+                        radius: '60%',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}],
+                        label: {
+                            position: 'outside',
+                            formatter: '{b} {c} ({d}%)',
+                            fontSize: 12
+                        },
+                        color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4'],
+                        animationDuration: 1000
+                    }],
+                    legend: {
+                        bottom: '0',
+                        left: 'center',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}].map(tag => tag.name),
+                        textStyle: { fontSize: 12 }
+                    }
+                });
+                tagsChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const tag = params.name;
+                        window.location.href = '/tags/' + tag;
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('categoriesChart')){
+                const categoriesChart = echarts.init(document.getElementById('categoriesChart'), 'light');
+                categoriesChart.setOption({
+                    xAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.name).reverse(),
+                        axisLabel: { fontSize: 12 }
+                    },
+                    series: [{
+                        name: 'Category Count',
+                        type: 'bar',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.value).reverse(),
+                        label: {
+                            show: true,
+                            position: 'right',
+                            fontSize: 12
+                        },
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#91CC75' },
+                                { offset: 1, color: '#73C0DE' }
+                            ])
+                        },
+                        animationDuration: 1000
+                    }]
+                });
+                categoriesChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const category = params.name;
+                        window.location.href = '/categories/' + category;
+                    }
+                });
+            }
+        </script>
+    
+    </body></html>

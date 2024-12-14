@@ -3,7 +3,7 @@
   <title>编程技术笔记</title>
   <icon>https://yxchangingself.xyz/icon.png</icon>
   <subtitle>ChangingSelf&#39;s blog</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
   <updated>2022-06-01T07:00:00.000Z</updated>
@@ -23,20 +23,18 @@
     <published>2022-06-01T07:00:00.000Z</published>
     <updated>2022-06-01T07:00:00.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;最近迷上了TRPG（Tabletop Role-playing game，桌上角色扮演游戏），即俗称的“跑团”。玩家在主持人的引导下，扮演自己的游戏角色进行冒险。在结束之后，会有想要将这个过程记录下来的欲望，从而有了各种各样的“跑团replay视频”。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;最近迷上了TRPG（Tabletop Role-playing game，桌上角色扮演游戏），即俗称的“跑团”。玩家在主持人的引导下，扮演自己的游戏角色进行冒险。在结束之后，会有想要将这个过程记录下来的欲望，从而有了各种各样的“跑团replay视频”。&lt;/p&gt;
 &lt;p&gt;制作跑团replay视频比较复杂，但&lt;a href=&quot;https://www.bilibili.com/video/BV1GY4y1H7wK/&quot;&gt;回声工坊&lt;/a&gt;这一高效工具的出现，让这个过程变得非常简单，只需要找好媒体素材（角色立绘、背景图片、BGM、音效等）以及处理一下跑团Log（即跑团游戏记录）就可以很快输出一集视频。&lt;/p&gt;
 &lt;p&gt;为了更加方便跑团replay视频的制作，我编写了一个vscode插件——&lt;code&gt;TRPG Replay Generator Log&lt;/code&gt;——来方便跑团Log的处理。&lt;/p&gt;
-&lt;p&gt;本文对编写这个插件的过程做一个记录和总结。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;本文对编写这个插件的过程做一个记录和总结。&lt;/p&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-      <category term="vscode" scheme="https://yxChangingSelf.xyz/tags/vscode/"/>
+    <category term="vscode" scheme="https://yxchangingself.xyz/tags/vscode/"/>
     
   </entry>
   
@@ -47,21 +45,19 @@
     <published>2022-02-08T08:46:26.000Z</published>
     <updated>2022-02-08T08:46:26.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;这是一篇学习笔记，基于胡凡主编的《算法笔记》的第二章“C/C++快速入门”。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;这是一篇学习笔记，基于胡凡主编的《算法笔记》的第二章“C&amp;#x2F;C++快速入门”。&lt;/p&gt;
 &lt;p&gt;在学习那一章的过程中，我将其中之后用的到的内容整理为这篇笔记，适合了解C和C++语言的人用于复习其语法中与做算法题相关的特性与技巧。&lt;/p&gt;
-&lt;p&gt;本文中部分内容经过顺序调整和补充，不完全按照原书内容。&lt;strong&gt;详细内容请看原书。&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;本文中部分内容经过顺序调整和补充，不完全按照原书内容。&lt;strong&gt;详细内容请看原书。&lt;/strong&gt;&lt;/p&gt;</summary>
     
     
-      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="学习笔记" scheme="https://yxchangingself.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="cpp" scheme="https://yxChangingSelf.xyz/tags/cpp/"/>
+    <category term="cpp" scheme="https://yxchangingself.xyz/tags/cpp/"/>
     
-      <category term="算法学习" scheme="https://yxChangingSelf.xyz/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    <category term="算法学习" scheme="https://yxchangingself.xyz/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -72,9 +68,8 @@
     <published>2021-07-09T10:58:00.000Z</published>
     <updated>2021-07-09T10:58:00.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;https://nga.178.com/&quot;&gt;NGA（艾泽拉斯国家地理）&lt;/a&gt;论坛使用一种自定义的名为 &lt;code&gt;bbscode&lt;/code&gt; 的代码来排版帖子内容，类似HTML，它也是一种标记语言，对bbscode的详细介绍可见：&lt;a href=&quot;https://nga.178.com/read.php?tid=9268613&quot;&gt;[NGA常用BBS代码][奥运帖]Project N —— 《从入门到精通：排版的艺术 Ver.3》&lt;/a&gt;。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://nga.178.com/&quot;&gt;NGA（艾泽拉斯国家地理）&lt;/a&gt;论坛使用一种自定义的名为 &lt;code&gt;bbscode&lt;/code&gt; 的代码来排版帖子内容，类似HTML，它也是一种标记语言，对bbscode的详细介绍可见：&lt;a href=&quot;https://nga.178.com/read.php?tid=9268613&quot;&gt;[NGA常用BBS代码][奥运帖]Project N —— 《从入门到精通：排版的艺术 Ver.3》&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;这种论坛自定义标记语言可以和markdown、html进行相互转换。例子如下:&lt;/p&gt;
 &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[h]标题[/h]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[b]加粗文字[/b]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[list]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[*] 列表项&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[*] 列表项&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[/list]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[quote]引用块[/quote] &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
@@ -88,21 +83,20 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://nga.178.com/read.php?tid=27512061&quot;&gt;NGA论坛内本工具软件的发布帖&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
+&lt;/ul&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
-      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
+    <category term="tkinter" scheme="https://yxchangingself.xyz/tags/tkinter/"/>
     
-      <category term="markdown" scheme="https://yxChangingSelf.xyz/tags/markdown/"/>
+    <category term="markdown" scheme="https://yxchangingself.xyz/tags/markdown/"/>
     
-      <category term="正则表达式" scheme="https://yxChangingSelf.xyz/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <category term="正则表达式" scheme="https://yxchangingself.xyz/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
@@ -113,18 +107,16 @@
     <published>2021-06-27T06:24:00.000Z</published>
     <updated>2021-06-27T06:24:00.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png&quot;&gt;&lt;/p&gt;</summary>
     
     
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="word" scheme="https://yxChangingSelf.xyz/tags/word/"/>
+    <category term="word" scheme="https://yxchangingself.xyz/tags/word/"/>
     
   </entry>
   
@@ -135,20 +127,18 @@
     <published>2021-03-06T03:51:26.000Z</published>
     <updated>2021-03-06T03:51:26.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;在照着Android教材《第一行代码 第三版》写天气预报app项目的时候，我发现如果把开发者token写在代码里面，用git管理的时候就会把token暴露出来，即使后面删掉，也会留在commit历史中。而&lt;code&gt;.gitignore&lt;/code&gt;一般是忽略整个文件，没办法忽略单独一行。&lt;/p&gt;
-&lt;p&gt;所以可以将密码或者开发者token单独放在一个文件中，用&lt;code&gt;.gitignore&lt;/code&gt;忽略它，并且在使用的时候读取其中的token。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;在照着Android教材《第一行代码 第三版》写天气预报app项目的时候，我发现如果把开发者token写在代码里面，用git管理的时候就会把token暴露出来，即使后面删掉，也会留在commit历史中。而&lt;code&gt;.gitignore&lt;/code&gt;一般是忽略整个文件，没办法忽略单独一行。&lt;/p&gt;
+&lt;p&gt;所以可以将密码或者开发者token单独放在一个文件中，用&lt;code&gt;.gitignore&lt;/code&gt;忽略它，并且在使用的时候读取其中的token。&lt;/p&gt;</summary>
     
     
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="android" scheme="https://yxChangingSelf.xyz/tags/android/"/>
+    <category term="git" scheme="https://yxchangingself.xyz/tags/git/"/>
     
-      <category term="git" scheme="https://yxChangingSelf.xyz/tags/git/"/>
+    <category term="android" scheme="https://yxchangingself.xyz/tags/android/"/>
     
   </entry>
   
@@ -159,17 +149,15 @@
     <published>2021-01-21T00:16:41.000Z</published>
     <updated>2021-01-21T00:16:41.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;之前的分类过于模糊，导致写完文章不知道该放在哪个分类，所以再次调整分类。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;之前的分类过于模糊，导致写完文章不知道该放在哪个分类，所以再次调整分类。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/adjust_categories/&quot;&gt;第一次分类调整&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/categories_description/&quot;&gt;第二次分类调整&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_3/#more&quot;&gt;第三次分类调整&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_3/#more&quot;&gt;第三次分类调整&lt;/a&gt;&lt;/p&gt;</summary>
     
     
-      <category term="博客站务" scheme="https://yxChangingSelf.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
   </entry>
@@ -181,18 +169,16 @@
     <published>2021-01-12T01:57:25.000Z</published>
     <updated>2021-01-12T01:57:25.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;在看到好友&lt;a href=&quot;https://gitee.com/StringOD&quot;&gt;StringOD&lt;/a&gt;的一篇博客&lt;a href=&quot;https://stringod.gitee.io/2020/11/26/wo-de-shi-jie-zi-ding-yi-pei-fang-jiao-ben-sheng-cheng-qi/&quot;&gt;《我的世界自定义配方脚本生成器》&lt;/a&gt;之后，我有了些想法。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;在看到好友&lt;a href=&quot;https://gitee.com/StringOD&quot;&gt;StringOD&lt;/a&gt;的一篇博客&lt;a href=&quot;https://stringod.gitee.io/2020/11/26/wo-de-shi-jie-zi-ding-yi-pei-fang-jiao-ben-sheng-cheng-qi/&quot;&gt;《我的世界自定义配方脚本生成器》&lt;/a&gt;之后，我有了些想法。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;CraftTweaker&lt;/code&gt;是沙盒游戏&lt;code&gt;Minecraft&lt;/code&gt;的一个Mod（&lt;strong&gt;Mod&lt;/strong&gt;ification，模组，游戏的一种修改或增强程序），通过使用一种名为&lt;code&gt;ZenScript&lt;/code&gt;的自定义脚本语言，修改游戏中的合成配方。&lt;/p&gt;
 &lt;p&gt;不过这个mod的最新版本是没有对应的GUI程序的，所以要生成想要的合成配方不是那么容易，得手动编写&lt;code&gt;ZenScript&lt;/code&gt;脚本。StringOD的那篇博客中，用易语言实现了一个功能比较完善的GUI程序——&lt;code&gt;AutoSpawnZScript&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;恰好我在大四的第一个综合实践中使用过React+Antd来编写前端界面，而且之前用&lt;a href=&quot;https://gitee.com/gaoyoubo/hexo-client&quot;&gt;hexo-client&lt;/a&gt;的时候了解到了Electron这个东西可以把web程序变为桌面应用程序，所以就想用React+Antd+Electron来尝试编写一下这个逻辑简单的脚本生成器，以巩固React的知识，以及学习一下Electron怎么用。&lt;/p&gt;
-&lt;p&gt;本文主要讲一下本项目（&lt;a href=&quot;https://gitee.com/ChangingSelf/crafttweaker-assistant&quot;&gt;CraftTweaker-Assistant&lt;/a&gt;，托管于gitee）的大致情况与设计思路。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;本文主要讲一下本项目（&lt;a href=&quot;https://gitee.com/ChangingSelf/crafttweaker-assistant&quot;&gt;CraftTweaker-Assistant&lt;/a&gt;，托管于gitee）的大致情况与设计思路。&lt;/p&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -204,18 +190,16 @@
     <published>2021-01-07T11:04:16.000Z</published>
     <updated>2021-01-07T11:04:16.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;2020年12月31日提交的ICP备案申请，在今天（2020年1月7日）通过啦！&lt;/p&gt;
-&lt;p&gt;接着就是要把备案号添加到博客页脚。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;2020年12月31日提交的ICP备案申请，在今天（2020年1月7日）通过啦！&lt;/p&gt;
+&lt;p&gt;接着就是要把备案号添加到博客页脚。&lt;/p&gt;</summary>
     
     
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
   </entry>
   
@@ -226,26 +210,24 @@
     <published>2020-11-22T14:07:16.000Z</published>
     <updated>2020-11-22T14:07:16.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;这是第三个大四综合实践——数据处理与分析。我们小组打算爬取各个招聘网站进行数据分析。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;这是第三个大四综合实践——数据处理与分析。我们小组打算爬取各个招聘网站进行数据分析。&lt;/p&gt;
 &lt;p&gt;我负责其中的爬虫模块，教了两个队友怎么使用scrapy，打算我解决完爬取数据的一些难题之后，剩余的解析就交给他们。&lt;/p&gt;
 &lt;p&gt;我觉得解析数据只是苦力活，只要爬取到带有数据的html，剩下的就很轻松了。最后我选择使用selenium，这样就不用分析接口了，两个刚学爬虫的队友也能轻松搞定。&lt;/p&gt;
-&lt;p&gt;很快地搞定了前程无忧网和拉勾网之后，我在爬取&lt;a href=&quot;https://www.zhaopin.com/&quot;&gt;智联招聘网&lt;/a&gt;遇到了很多问题。本文将这些问题以及解决方案记录下来，供读者参考。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;很快地搞定了前程无忧网和拉勾网之后，我在爬取&lt;a href=&quot;https://www.zhaopin.com/&quot;&gt;智联招聘网&lt;/a&gt;遇到了很多问题。本文将这些问题以及解决方案记录下来，供读者参考。&lt;/p&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
     
-      <category term="爬虫" scheme="https://yxChangingSelf.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
-      <category term="scrapy" scheme="https://yxChangingSelf.xyz/tags/scrapy/"/>
+    <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
     
-      <category term="selenium" scheme="https://yxChangingSelf.xyz/tags/selenium/"/>
+    <category term="selenium" scheme="https://yxchangingself.xyz/tags/selenium/"/>
     
   </entry>
   
@@ -256,20 +238,18 @@
     <published>2020-10-11T13:48:35.000Z</published>
     <updated>2020-10-11T13:48:35.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;如图所示，对于python，有一个自定义包&lt;code&gt;parent&lt;/code&gt;，它里面还有一个子包&lt;code&gt;child&lt;/code&gt;，当你在&lt;code&gt;parent.module1&lt;/code&gt;中&lt;code&gt;import child.module2&lt;/code&gt;时，vscode会给你报错，说找不到这个包。&lt;/p&gt;
-&lt;p&gt;当你单独运行&lt;code&gt;module1.py&lt;/code&gt;的时候，可以正常运行，但是当你在&lt;code&gt;parent&lt;/code&gt;包外层的&lt;code&gt;main.py&lt;/code&gt;中&lt;code&gt;import parent.module1&lt;/code&gt;时，就会报错。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;如图所示，对于python，有一个自定义包&lt;code&gt;parent&lt;/code&gt;，它里面还有一个子包&lt;code&gt;child&lt;/code&gt;，当你在&lt;code&gt;parent.module1&lt;/code&gt;中&lt;code&gt;import child.module2&lt;/code&gt;时，vscode会给你报错，说找不到这个包。&lt;/p&gt;
+&lt;p&gt;当你单独运行&lt;code&gt;module1.py&lt;/code&gt;的时候，可以正常运行，但是当你在&lt;code&gt;parent&lt;/code&gt;包外层的&lt;code&gt;main.py&lt;/code&gt;中&lt;code&gt;import parent.module1&lt;/code&gt;时，就会报错。&lt;/p&gt;</summary>
     
     
-      <category term="解决方案" scheme="https://yxChangingSelf.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     
     
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
-      <category term="vscode" scheme="https://yxChangingSelf.xyz/tags/vscode/"/>
+    <category term="vscode" scheme="https://yxchangingself.xyz/tags/vscode/"/>
     
   </entry>
   
@@ -280,19 +260,17 @@
     <published>2020-10-11T04:57:09.000Z</published>
     <updated>2020-10-11T04:57:09.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;2019 年 2 月 28 日，&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_1/&quot;&gt;第一次换主题&lt;/a&gt;，从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是由于小众，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;2019 年 2 月 28 日，&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_1/&quot;&gt;第一次换主题&lt;/a&gt;，从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是由于小众，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
 &lt;p&gt;2020 年 4 月 5 日，&lt;a href=&quot;https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/&quot;&gt;第二次换主题&lt;/a&gt;，从NexT换成了&lt;a href=&quot;https://github.com/blinkfox/hexo-theme-matery&quot;&gt;Matery&lt;/a&gt;，原因是这个主题可以放很多图，并且我需要的功能也都有。&lt;/p&gt;
-&lt;p&gt;2020年10月11日，第三次换主题，也就是这次，换成了&lt;a href=&quot;https://github.com/ppoffice/hexo-theme-icarus&quot;&gt;Icarus&lt;/a&gt;（伊卡洛斯）。原因是，Matery的归档页面不能满足我回看历史文章的需求，以及我觉得整个页面太花哨了，封面图片也不是很好弄，所以还是换成图片量中等的Icarus。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;2020年10月11日，第三次换主题，也就是这次，换成了&lt;a href=&quot;https://github.com/ppoffice/hexo-theme-icarus&quot;&gt;Icarus&lt;/a&gt;（伊卡洛斯）。原因是，Matery的归档页面不能满足我回看历史文章的需求，以及我觉得整个页面太花哨了，封面图片也不是很好弄，所以还是换成图片量中等的Icarus。&lt;/p&gt;</summary>
     
     
-      <category term="博客站务" scheme="https://yxChangingSelf.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
-      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
   </entry>
   
@@ -303,15 +281,13 @@
     <published>2020-09-27T09:40:30.000Z</published>
     <updated>2020-09-27T09:40:30.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;尝试使用规范化的复盘方法来进行复盘总结，本文使用的方法来自：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/225812258&quot;&gt;如何做好一次复盘？这是我的经验-少数派&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;尝试使用规范化的复盘方法来进行复盘总结，本文使用的方法来自：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/225812258&quot;&gt;如何做好一次复盘？这是我的经验-少数派&lt;/a&gt;&lt;/p&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
   </entry>
@@ -323,24 +299,22 @@
     <published>2020-08-10T13:08:27.000Z</published>
     <updated>2020-08-10T13:08:27.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
 &lt;p&gt;前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。&lt;/p&gt;
 &lt;p&gt;学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。&lt;/p&gt;
 &lt;p&gt;2020 年 7 月 15 日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过 git 提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;一开始想的是本系列先整理学习笔记，最后对本次项目进行总结。不过碍于时间不足，可能会直接将以前的旧项目改为 springboot 架构，实习最终完成的商城项目就不进行分析了，项目开源链接：&lt;a href=&quot;https://gitee.com/ChangingSelf/SpringBootMall&quot;&gt;SpringBootMall&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;</summary>
     
     
-      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="学习笔记" scheme="https://yxchangingself.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
+    <category term="java" scheme="https://yxchangingself.xyz/tags/java/"/>
     
-      <category term="mybatis" scheme="https://yxChangingSelf.xyz/tags/mybatis/"/>
+    <category term="mybatis" scheme="https://yxchangingself.xyz/tags/mybatis/"/>
     
   </entry>
   
@@ -351,24 +325,22 @@
     <published>2020-08-10T12:59:13.000Z</published>
     <updated>2020-08-10T12:59:13.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;大三暑假有个毕业实习，是企业的人来我们学校带我们做项目，为期三周。&lt;/p&gt;
 &lt;p&gt;前半部分是教我们一些框架的基本使用，后面几天就是组成小组利用前面学习的知识开发一个商城项目。感觉和课设其实没有差的太多。&lt;/p&gt;
 &lt;p&gt;学习到的框架有 mybatis、springmvc、spring、springboot、shiro、mybatis-plus，还在一开始学习了如何建立 maven 项目。&lt;/p&gt;
 &lt;p&gt;2020 年 7 月 15 日，我们小组完成了答辩。在之前因为要学习框架、做项目，甚至中间夹杂着几场考试，所以抽不出空来写博客，现在结束了，我现在通过 git 提交记录以及幕布学习笔记、工作日报等记录来尝试还原这一次经历以及学习到的技术。&lt;/p&gt;
 &lt;p&gt;本系列将会先整理学习笔记，最后对本次项目进行总结。&lt;/p&gt;
-&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;笔者也是刚刚才学习这些东西，所以如果有问题可以给我留言。&lt;/p&gt;</summary>
     
     
-      <category term="学习笔记" scheme="https://yxChangingSelf.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="学习笔记" scheme="https://yxchangingself.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="java" scheme="https://yxChangingSelf.xyz/tags/java/"/>
+    <category term="java" scheme="https://yxchangingself.xyz/tags/java/"/>
     
-      <category term="maven" scheme="https://yxChangingSelf.xyz/tags/maven/"/>
+    <category term="maven" scheme="https://yxchangingself.xyz/tags/maven/"/>
     
   </entry>
   
@@ -379,15 +351,13 @@
     <published>2020-04-23T15:02:27.000Z</published>
     <updated>2020-04-23T15:02:27.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;梳理我现有的任务管理系统，以做出改进。&lt;/p&gt;
-&lt;p&gt;目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;梳理我现有的任务管理系统，以做出改进。&lt;/p&gt;
+&lt;p&gt;目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。&lt;/p&gt;</summary>
     
     
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -399,14 +369,12 @@
     <published>2020-04-17T12:05:25.000Z</published>
     <updated>2020-04-17T12:05:25.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;以此文梳理我的电脑文件管理系统，由于是我的文件管理系统，所以很多个性化的设置，读者建立自己的系统时可改为自己的。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;以此文梳理我的电脑文件管理系统，由于是我的文件管理系统，所以很多个性化的设置，读者建立自己的系统时可改为自己的。&lt;/p&gt;</summary>
     
     
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>
@@ -418,17 +386,15 @@
     <published>2020-04-16T05:56:12.000Z</published>
     <updated>2020-04-16T05:56:12.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始。&lt;/p&gt;
 &lt;p&gt;如果想要搜索特定内容，请结合标签、分类和站内搜索功能。部分博客有对应的 B 站视频，以及 github 库，详见各自文章的开头传送门。&lt;/p&gt;
 &lt;p&gt;此目录并非包含本站所有文章，比如日志总结之类的不一定会放到目录。&lt;/p&gt;
-&lt;p&gt;如果觉得本站访问速度慢，可以在【友情链接】中找到&lt;a href=&quot;https://changingself.gitee.io/&quot;&gt;托管在 gitee 的本站链接&lt;/a&gt;，速度会快很多&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;如果觉得本站访问速度慢，可以在【友情链接】中找到&lt;a href=&quot;https://changingself.gitee.io/&quot;&gt;托管在 gitee 的本站链接&lt;/a&gt;，速度会快很多&lt;/p&gt;</summary>
     
     
-      <category term="博客站务" scheme="https://yxChangingSelf.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
   </entry>
@@ -440,18 +406,16 @@
     <published>2020-04-05T13:50:18.000Z</published>
     <updated>2020-04-05T13:50:18.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;2019 年 2 月 28 日的时候第一次换了主题，从从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是不实用，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
-&lt;p&gt;2020 年 4 月 5 日，也就是今天，我花了一个上午的时间将个人博客的主题换成闪烁之狐的&lt;a href=&quot;https://github.com/blinkfox/hexo-theme-matery&quot;&gt;Matery&lt;/a&gt;主题，既美观功能又丰富。&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;2019 年 2 月 28 日的时候第一次换了主题，从从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是不实用，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
+&lt;p&gt;2020 年 4 月 5 日，也就是今天，我花了一个上午的时间将个人博客的主题换成闪烁之狐的&lt;a href=&quot;https://github.com/blinkfox/hexo-theme-matery&quot;&gt;Matery&lt;/a&gt;主题，既美观功能又丰富。&lt;/p&gt;</summary>
     
     
-      <category term="博客站务" scheme="https://yxChangingSelf.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
-      <category term="hexo" scheme="https://yxChangingSelf.xyz/tags/hexo/"/>
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
   </entry>
   
@@ -462,21 +426,19 @@
     <published>2020-03-29T02:10:52.000Z</published>
     <updated>2020-03-29T02:10:52.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;信息安全的上机作业：实现 DES 替代算法，不限语言，可以调库&lt;/p&gt;
+    <summary type="html">&lt;p&gt;信息安全的上机作业：实现 DES 替代算法，不限语言，可以调库&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/DES&quot;&gt;github 库传送门&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png&quot; alt=&quot;完成图&quot;&gt;&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png&quot; alt=&quot;完成图&quot;&gt;&lt;/p&gt;</summary>
     
     
-      <category term="项目总结" scheme="https://yxChangingSelf.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-      <category term="python" scheme="https://yxChangingSelf.xyz/tags/python/"/>
+    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
-      <category term="tkinter" scheme="https://yxChangingSelf.xyz/tags/tkinter/"/>
+    <category term="tkinter" scheme="https://yxchangingself.xyz/tags/tkinter/"/>
     
   </entry>
   
@@ -487,14 +449,12 @@
     <published>2020-03-22T12:08:10.000Z</published>
     <updated>2020-03-22T12:08:10.000Z</updated>
     
-    <summary type="html">
     
-      &lt;p&gt;记录 2020 年第 12 周的文件归档&lt;/p&gt;
-    
-    </summary>
+    <summary type="html">&lt;p&gt;记录 2020 年第 12 周的文件归档&lt;/p&gt;</summary>
     
     
-      <category term="日志随笔" scheme="https://yxChangingSelf.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
     
     
   </entry>

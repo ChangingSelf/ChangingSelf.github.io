@@ -1,27 +1,57 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1” - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"><meta property="og:type" content="blog"><meta property="og:title" content="利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”"><meta property="og:url" content="https://yxchangingself.xyz/posts/2028856356/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"><meta property="article:published_time" content="2021-06-27T06:24:00.000Z"><meta property="article:modified_time" content="2021-06-27T06:24:00.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="word"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/2028856356/"},"headline":"编程技术笔记","image":["https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"],"datePublished":"2021-06-27T06:24:00.000Z","dateModified":"2021-06-27T06:24:00.000Z","author":{"@type":"Person","name":"憧憬少"},"description":"问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/2028856356/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1” - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"><meta property="og:type" content="blog"><meta property="og:title" content="利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”"><meta property="og:url" content="https://yxchangingself.xyz/posts/2028856356/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"><meta property="article:published_time" content="2021-06-27T06:24:00.000Z"><meta property="article:modified_time" content="2021-06-27T06:24:00.000Z"><meta property="article:author" content="憧憬少"><meta property="article:tag" content="word"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/2028856356/"},"headline":"利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”","image":["https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"],"datePublished":"2021-06-27T06:24:00.000Z","dateModified":"2021-06-27T06:24:00.000Z","author":{"@type":"Person","name":"憧憬少"},"publisher":{"@type":"Organization","name":"编程技术笔记","logo":{"@type":"ImageObject","url":{"text":"ChangingSelf"}}},"description":"问题描述在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/2028856356/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png" alt="利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-06-27T06:24:00.000Z" title="2021-06-27T06:24:00.000Z">2021-06-27</time>发表</span><span class="level-item"><time dateTime="2021-06-27T06:24:00.000Z" title="2021-06-27T06:24:00.000Z">2021-06-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a></span><span class="level-item">13 分钟读完 (大约1931个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</h1><div class="content"><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。</p>
-<p><img src="https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png" alt=""></p>
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png" alt="利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-06-27T06:24:00.000Z" title="2021/6/27 14:24:00">2021-06-27</time>发表</span><span class="level-item"><time dateTime="2021-06-27T06:24:00.000Z" title="2021/6/27 14:24:00">2021-06-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">解决方案</a></span><span class="level-item">13 分钟读完 (大约1931个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</h1><div class="content"><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在用word编写毕业论文时，遇到了这样一个问题：通过多级列表的设置将一级标题设置为汉字数字之后，若需要设置包含章节号的题注（形如“图1-1”）时，则会变成“图一-1”的形式。本篇文章解决的就是将形如“图一-1”的题注通过设置域代码，在不修改一级标题格式的情况下改为“图1-1”。</p>
+<p><img src="https://i.loli.net/2021/06/27/zTUkBaNlcY8IxvG.png"></p>
 <span id="more"></span>
 
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23512189">word里面，如何在章节编号为第一章、第二章这种情况，实现图根据章节编号并且形式为图1.1、图2.1？</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jingss_3/article/details/6424899">Word 自动更改题注章节编号格式“图一.1”为“图1.1”</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h8178/article/details/78919418">[word技巧]把标题、图表题注编号由“一.1”改为”1.1”</a></li>
+<li>[<a target="_blank" rel="noopener" href="https://blog.csdn.net/h8178/article/details/78919418">word技巧]把标题、图表题注编号由“一.1”改为”1.1”</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/songchuwang1868/article/details/104816016">一篇文章教会你使用word域代码（seq field code ）</a> ：这个方法也是可以的，不过本文没有采用。</li>
-<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/设置域结果的格式-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=日期-时间格式开关_(@)">设置域显示格式的开关-微软官方</a></li>
+<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/%E8%AE%BE%E7%BD%AE%E5%9F%9F%E7%BB%93%E6%9E%9C%E7%9A%84%E6%A0%BC%E5%BC%8F-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=%E6%97%A5%E6%9C%9F-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%BC%80%E5%85%B3_(@)">设置域显示格式的开关-微软官方</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av755180281/">word将“图一.x”修改为“图1.x”-Bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/域代码：quote-域-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></li>
-<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/域代码：styleref-域-4ad557c2-c8ab-48ba-8fe3-901d0a5775d0?ui=zh-CN&rs=zh-CN&ad=CN">STYLEREF域代码官方文档链接</a></li>
+<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/%E5%9F%9F%E4%BB%A3%E7%A0%81%EF%BC%9Aquote-%E5%9F%9F-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></li>
+<li><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/%E5%9F%9F%E4%BB%A3%E7%A0%81%EF%BC%9Astyleref-%E5%9F%9F-4ad557c2-c8ab-48ba-8fe3-901d0a5775d0?ui=zh-CN&rs=zh-CN&ad=CN">STYLEREF域代码官方文档链接</a></li>
 </ul>
 <h1 id="什么是域代码"><a href="#什么是域代码" class="headerlink" title="什么是域代码"></a>什么是域代码</h1><p>使用组合键 <code>Alt+F9</code> ，可以<strong>显示或隐藏文档中所有域代码</strong> ：</p>
-<p><img src="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png" alt=""></p>
+<p><img src="https://i.loli.net/2021/06/27/S2s5zVQlyErwMIj.png"></p>
 <p>从上图中可以看到，原本的“图 一-1”已经变成了“图 { STYLEREF 1 \s }-{SEQ 图 * ARABIC \s 1}”，如果你此时直接复制它们，会发现粘贴出来的仍然是“图 一-1”，而将光标放在花括号中，则会将花括号括住的内容选中成为一个整体。其中花括号括住的部分就是<strong>“域代码”</strong> 。</p>
 <p>你使用“添加题注”的对话框为图片添加题注时，插入的实际上就是这些“域代码”，你使用 <code>Ctrl+F9</code>组合键（会生成域代码的花括号，手动输入花括号是不行的）插入题注效果是一样的。</p>
 <p>在这里 <code>&#123;STYLEREF 1 \s&#125;</code> 代表了章节号，也就是汉字数字“一”和“二”， <code>&#123;SEQ 图 \* ARABIC \s 1&#125;</code>代表了图的题注编号。</p>
@@ -36,7 +66,7 @@
 <p>我在网上搜索到了另一个解决方案，利用迂回的方式将其转化，见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/h8178/article/details/78919418">[word技巧]把标题、图表题注编号由“一.1”改为”1.1”</a></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将<code>&#123;STYLEREF 1 \s&#125;</code>修改为 <code>&#123; QUOTE &quot;一九一一年一月&#123; STYLEREF 1 \s &#125;日&quot; \@&quot;D&quot; &#125;</code>就可以了，注意花括号仍然得是使用 <code>Ctrl+F9</code>组合键生成的花括号。</p>
 <p>我找到的文章并未说明其原理，但了解了域代码相关知识后，也不难理解原理。</p>
-<p>首先找到 <code>QUOTE</code>域的相关说明：<a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/域代码：quote-域-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></p>
+<p>首先找到 <code>QUOTE</code>域的相关说明：<a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/%E5%9F%9F%E4%BB%A3%E7%A0%81%EF%BC%9Aquote-%E5%9F%9F-26f0d723-07a8-4076-9097-a71459f3d44c?ui=zh-cn&rs=zh-cn&ad=cn">域代码：Quote 域-微软官方</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; QUOTE &quot;LiteralText&quot; &#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -46,7 +76,7 @@
 <p>也就是说，<code>QUOTE &quot;一九一一年一月&#123; STYLEREF 1 \s &#125;日&quot;</code> 这一部分是将“<code>一九一一年一月&#123; STYLEREF 1 \s &#125;日</code>”插入到域代码所在位置，如果是第一章，那么最终结果就是<code>一九一一年一月一日</code>。</p>
 <p>看到这里，也许你已经猜到后面那个<code>\@&quot;D&quot;</code>开关是在干什么了：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/设置域结果的格式-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=日期-时间格式开关_(@)">设置域结果格式-微软官方</a><br>日期-时间格式开关 (\ @) 指定如何显示日期或时间。</p>
+<p><a target="_blank" rel="noopener" href="https://support.microsoft.com/zh-cn/office/%E8%AE%BE%E7%BD%AE%E5%9F%9F%E7%BB%93%E6%9E%9C%E7%9A%84%E6%A0%BC%E5%BC%8F-baa61f5a-5636-4f11-ab4f-6c36ae43508c?ui=zh-CN&rs=zh-CN&ad=CN#ID0EAABAAA=%E6%97%A5%E6%9C%9F-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%BC%80%E5%85%B3_(@)">设置域结果格式-微软官方</a><br>日期-时间格式开关 (\ @) 指定如何显示日期或时间。</p>
 <p>例如, switch \ @ “dddd, mmmm d, yyyy” 字段{ DATE \ @ “dddd, MMMM d, yyyy” }显示 “星期五, 2019 年11月23日”。结合以下日期和时间说明: day (d)、month (M) 和 year (y);小时 (h) 和分钟 (m)-生成日期时间格式。你还可以包含文本、标点和空格。</p>
 <p>字母 <strong>d</strong>  显示月份中的日期或一个星期中的某一天。 字母 <strong>d</strong>  可以大写或小写。此格式项目将某个星期或月份的某一天显示为数字；对于单位数日子，数字前面不加 0（零）。 例如，某月的第 6 天显示为 <strong>6</strong> 。</p>
 </blockquote>
@@ -55,7 +85,7 @@
 <p>之后再使用组合键 <code>Alt+F9</code> ，就可以隐藏域代码，只显示域代码的结果了。</p>
 <h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>虽然问题解决了，但是每次都要输入这样的域代码非常费劲。我在B站找到了一个视频，up主的解决方案很好：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av755180281/">word将“图一.x”修改为“图1.x”-Bilibili</a>。</p>
 <p>他使用了word的另一个好用的功能——构建基块。</p>
-<p><img src="https://i.loli.net/2021/06/27/8AO913otHiBYSQU.png" alt=""></p>
+<p><img src="https://i.loli.net/2021/06/27/8AO913otHiBYSQU.png"></p>
 <ol>
 <li><p>选中刚刚写好的题注</p>
 </li>
@@ -65,14 +95,14 @@
 </li>
 </ol>
 <p>之后如果想要插入这样的题注，那么直接输入该构建基块的名称（此处为“图注”二字），word就会在你输入的地方显示一个提示“按Enter插入”，此时按下Enter键，就可以插入这一个构建基块了。</p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</p><p><a href="https://yxchangingself.xyz/posts/2028856356/">https://yxchangingself.xyz/posts/2028856356/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-06-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-06-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/word/">word</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/markdown-bbscode-converter/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">从markdown到nga bbscode的转换程序</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/android-project-gitignore-token/"><span class="level-item">git管理的Android项目忽略密码或token的方法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#问题描述"><span class="level-left"><span class="level-item">1</span><span class="level-item">问题描述</span></span></a></li><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">2</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#什么是域代码"><span class="level-left"><span class="level-item">3</span><span class="level-item">什么是域代码</span></span></a></li><li><a class="level is-mobile" href="#解决方案"><span class="level-left"><span class="level-item">4</span><span class="level-item">解决方案</span></span></a></li><li><a class="level is-mobile" href="#优化"><span class="level-left"><span class="level-item">5</span><span class="level-item">优化</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480"><img src="/img/beian-icon.png" style="float:left;">粤公网安备 44200002444480号</a>    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">湘ICP备2021000400号-1</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div><div class="article-licensing box"><div class="licensing-title"><p>利用Word域代码实现将形如“图一-1”的题注修改为“图1-1”</p><p><a href="https://yxchangingself.xyz/posts/2028856356/">https://yxchangingself.xyz/posts/2028856356/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-06-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-06-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/word/">word</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/posts/markdown-bbscode-converter/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">从markdown到nga bbscode的转换程序</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/android-project-gitignore-token/"><span class="level-item">git管理的Android项目忽略密码或token的方法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#问题描述"><span class="level-left"><span class="level-item">1</span><span class="level-item">问题描述</span></span></a></li><li><a class="level is-mobile" href="#参考链接"><span class="level-left"><span class="level-item">2</span><span class="level-item">参考链接</span></span></a></li><li><a class="level is-mobile" href="#什么是域代码"><span class="level-left"><span class="level-item">3</span><span class="level-item">什么是域代码</span></span></a></li><li><a class="level is-mobile" href="#解决方案"><span class="level-left"><span class="level-item">4</span><span class="level-item">解决方案</span></span></a></li><li><a class="level is-mobile" href="#优化"><span class="level-left"><span class="level-item">5</span><span class="level-item">优化</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2024 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7"><a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000400号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480" target="_blank">粤公网安备 44200002444480号</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
                     fold: 'unfolded'
                 }
             }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
       window.cookieconsent.initialise({
         type: "info",
         theme: "edgeless",
@@ -97,7 +127,7 @@
           },
         },
       });
-    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
             if (typeof $.fn.lightGallery === 'function') {
                 $('.article').lightGallery({ selector: '.gallery-item' });
             }
@@ -107,22 +137,180 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+        });</script><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        <!-- ECharts 图表容器 -->
+        
+        <script>
+            if(document.getElementById('heatmapChart')) {
+                const heatmapChart = echarts.init(document.getElementById('heatmapChart'), 'light');
+                const containerWidth = document.getElementById('heatmapChart').offsetWidth;
+                const cellSize = Math.max(Math.floor(containerWidth / 60));
+                heatmapChart.setOption({
+                    tooltip: {
+                        position: 'top',
+                        formatter: params => `${params.value[0]}: ${params.value[1]} Articles`
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...[["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]].map(item => item[1])),
+                        calculable: false,
+                        orient: 'horizontal', // 横向布局
+                        right: '5%',
+                        bottom: '5%',
+                        inRange: { color: ['#FFEFD5', '#FFA07A', '#FF4500'] }
+                    },
+                    calendar: {
+                        top: '20%',
+                        left: 'center',
+                        range: new Date().getFullYear(),
+                        cellSize: cellSize, // 方格大小
+                        splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } },
+                        itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' },
+                        dayLabel: { firstDay: 1, fontSize: 12, color: '#333', show: false },
+                        monthLabel: { fontSize: 12, color: '#555' }
+                    },
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: [["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1]]
+                    }]
+                });
+                // hexo热力图点击跳转到月份页面
+                heatmapChart.on('click', function(params) {
+                       if (params.componentType === 'series') {
+                        const dateStr = params.value[0];
+                        const dateParts = dateStr.split('-');
+                        const year = parseInt(dateParts[0], 10);
+                        const month = parseInt(dateParts[1], 10);
+                        const formattedMonth = `${year}/${String(month).padStart(2, '0')}`;
+                        window.location.href = '/archives/' + formattedMonth; // 一般归档页面路径为/archives/YYYY-MM
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('monthlyChart')) {
+                const monthlyChart = echarts.init(document.getElementById('monthlyChart'), 'light');
+                monthlyChart.setOption({
+                    xAxis: {
+                        type: 'category',
+                        data: ["2019-02","2019-03","2019-04","2019-06","2019-07","2019-08","2019-09","2019-12","2020-01","2020-02","2020-03","2020-04","2020-08","2020-09","2020-10","2020-11","2021-01","2021-03","2021-06","2021-07","2022-02","2022-06"],
+                        axisLabel: { fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    series: [{
+                        name: 'Articles',
+                        type: 'line',
+                        data: [6,4,4,7,5,6,3,2,4,2,5,4,2,1,2,1,3,1,1,1,1,1],
+                        smooth: true,
+                        lineStyle: { color: '#5470C6', width: 2 },
+                        itemStyle: { color: '#5470C6' },
+                        areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                        symbolSize: 10, //圆点大一点，方便点击
+                        animationDuration: 1000
+                    }]
+                });
+                // 跳转到月份页面
+                 monthlyChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const year = params.name.split('-')[0];
+                        const month = params.name.split('-')[1];
+                        window.location.href = '/archives/' + year + '/' + month; 
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('tagsChart')){    
+                const tagsChart = echarts.init(document.getElementById('tagsChart'), 'light');
+                tagsChart.setOption({
+                    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                    series: [{
+                        type: 'pie',
+                        radius: '60%',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}],
+                        label: {
+                            position: 'outside',
+                            formatter: '{b} {c} ({d}%)',
+                            fontSize: 12
+                        },
+                        color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4'],
+                        animationDuration: 1000
+                    }],
+                    legend: {
+                        bottom: '0',
+                        left: 'center',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":11},{"name":"cpp","value":6},{"name":"java","value":6},{"name":"scrapy","value":4},{"name":"算法学习","value":3},{"name":"git","value":3}].map(tag => tag.name),
+                        textStyle: { fontSize: 12 }
+                    }
+                });
+                tagsChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const tag = params.name;
+                        window.location.href = '/tags/' + tag;
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('categoriesChart')){
+                const categoriesChart = echarts.init(document.getElementById('categoriesChart'), 'light');
+                categoriesChart.setOption({
+                    xAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.name).reverse(),
+                        axisLabel: { fontSize: 12 }
+                    },
+                    series: [{
+                        name: 'Category Count',
+                        type: 'bar',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"日志随笔","value":11},{"name":"博客站务","value":10},{"name":"学习笔记","value":6}].map(category => category.value).reverse(),
+                        label: {
+                            show: true,
+                            position: 'right',
+                            fontSize: 12
+                        },
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#91CC75' },
+                                { offset: 1, color: '#73C0DE' }
+                            ])
+                        },
+                        animationDuration: 1000
+                    }]
+                });
+                categoriesChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const category = params.name;
+                        window.location.href = '/categories/' + category;
+                    }
+                });
+            }
+        </script>
+    
+    </body></html>
