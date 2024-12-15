@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2022-06-01T07:00:00.000Z</updated>
+  <updated>2024-12-15T10:35:20.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2024年底，hexo博客的迁移部署、升级和重启</title>
+    <link href="https://yxchangingself.xyz/posts/hexo-blog-reboot-2024/"/>
+    <id>https://yxchangingself.xyz/posts/hexo-blog-reboot-2024/</id>
+    <published>2024-12-15T10:35:20.000Z</published>
+    <updated>2024-12-15T10:35:20.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;2024年底，以前学生价活动租的腾讯云服务器的续费次数已经用光，租了个新服务器，以前挂在上面的服务都得迁移，五年前搭建的Hexo博客也是如此。&lt;/p&gt;
+&lt;p&gt;迁移之后，将相关依赖全都升级了一遍，又加了一些新的功能，比如夜间模式。&lt;/p&gt;
+&lt;p&gt;以前部署的时候很多东西不了解，现在基本上都能弄明白是怎么回事了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
+    
+    <category term="nginx" scheme="https://yxchangingself.xyz/tags/nginx/"/>
+    
+    <category term="ssl" scheme="https://yxchangingself.xyz/tags/ssl/"/>
+    
+    <category term="ssh" scheme="https://yxchangingself.xyz/tags/ssh/"/>
+    
+    <category term="git" scheme="https://yxchangingself.xyz/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>自制的第一个vscode语言扩展插件</title>
@@ -221,9 +250,9 @@
     <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
-    
     <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
+    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
     <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
     
@@ -439,23 +468,6 @@
     <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
     <category term="tkinter" scheme="https://yxchangingself.xyz/tags/tkinter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【自我管理系统】归档文件</title>
-    <link href="https://yxchangingself.xyz/posts/self-management-archive/"/>
-    <id>https://yxchangingself.xyz/posts/self-management-archive/</id>
-    <published>2020-03-22T12:08:10.000Z</published>
-    <updated>2020-03-22T12:08:10.000Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;记录 2020 年第 12 周的文件归档&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   
