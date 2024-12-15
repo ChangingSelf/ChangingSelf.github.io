@@ -223,9 +223,9 @@
     
     <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
-    <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
-    
     <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
+    
+    <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
     
     <category term="selenium" scheme="https://yxchangingself.xyz/tags/selenium/"/>
     
