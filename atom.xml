@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2024-12-15T10:35:20.000Z</updated>
+  <updated>2024-12-20T09:58:37.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>部署若依管理系统到服务器</title>
+    <link href="https://yxchangingself.xyz/posts/ruoyi-deploy/"/>
+    <id>https://yxchangingself.xyz/posts/ruoyi-deploy/</id>
+    <published>2024-12-20T09:58:37.000Z</published>
+    <updated>2024-12-20T09:58:37.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;给新服务器搭建环境，以及部署一下若依后台管理系统，进一步熟悉部署流程，使用的是若依前后端分离版本。&lt;/p&gt;
+&lt;p&gt;因为主要是记录环境配置，所以若依部署的部分没那么详细。&lt;/p&gt;
+&lt;p&gt;服务器是腾讯云轻量应用服务器，Debian12。2核2G（但后面内存炸了，启动不起来，只能升级内存）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="过程复盘" scheme="https://yxchangingself.xyz/categories/%E8%BF%87%E7%A8%8B%E5%A4%8D%E7%9B%98/"/>
+    
+    
+    <category term="nginx" scheme="https://yxchangingself.xyz/tags/nginx/"/>
+    
+    <category term="mysql" scheme="https://yxchangingself.xyz/tags/mysql/"/>
+    
+    <category term="java" scheme="https://yxchangingself.xyz/tags/java/"/>
+    
+    <category term="linux" scheme="https://yxchangingself.xyz/tags/linux/"/>
+    
+    <category term="redis" scheme="https://yxchangingself.xyz/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>2024年底，hexo博客的迁移部署、升级和重启</title>
@@ -33,9 +62,9 @@
     <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
-    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
-    
     <category term="nginx" scheme="https://yxchangingself.xyz/tags/nginx/"/>
+    
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
     <category term="ssl" scheme="https://yxchangingself.xyz/tags/ssl/"/>
     
@@ -445,29 +474,6 @@
     
     
     <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【作业总结】python写的DES替代算法的gui小工具</title>
-    <link href="https://yxchangingself.xyz/posts/3043391445/"/>
-    <id>https://yxchangingself.xyz/posts/3043391445/</id>
-    <published>2020-03-29T02:10:52.000Z</published>
-    <updated>2020-03-29T02:10:52.000Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;信息安全的上机作业：实现 DES 替代算法，不限语言，可以调库&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ChangingSelf/DES&quot;&gt;github 库传送门&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/ChangingSelf/Figurebed/master/blog_images/20200402080056.png&quot; alt=&quot;完成图&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
-    
-    
-    <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
-    
-    <category term="tkinter" scheme="https://yxchangingself.xyz/tags/tkinter/"/>
     
   </entry>
   
