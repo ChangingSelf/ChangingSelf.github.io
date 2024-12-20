@@ -17,7 +17,7 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>部署若依管理系统到服务器</title>
+    <title>记录一次若依管理系统部署练习</title>
     <link href="https://yxchangingself.xyz/posts/ruoyi-deploy/"/>
     <id>https://yxchangingself.xyz/posts/ruoyi-deploy/</id>
     <published>2024-12-20T09:58:37.000Z</published>
@@ -26,7 +26,7 @@
     
     <summary type="html">&lt;p&gt;给新服务器搭建环境，以及部署一下若依后台管理系统，进一步熟悉部署流程，使用的是若依前后端分离版本。&lt;/p&gt;
 &lt;p&gt;因为主要是记录环境配置，所以若依部署的部分没那么详细。&lt;/p&gt;
-&lt;p&gt;服务器是腾讯云轻量应用服务器，Debian12。2核2G（但后面内存炸了，启动不起来，只能升级内存）&lt;/p&gt;</summary>
+&lt;p&gt;服务器是腾讯云轻量应用服务器，Debian12。2核2G（但后面内存炸了，启动不起来，只能含泪加钱升级内存）&lt;/p&gt;</summary>
     
     
     
