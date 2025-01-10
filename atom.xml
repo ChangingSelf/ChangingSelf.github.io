@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2024-12-20T09:58:37.000Z</updated>
+  <updated>2025-01-10T08:28:55.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>腾讯云对象存储COS自建图床并配置Obsidian自动上传</title>
+    <link href="https://yxchangingself.xyz/posts/bb200044/"/>
+    <id>https://yxchangingself.xyz/posts/bb200044/</id>
+    <published>2025-01-10T08:28:55.000Z</published>
+    <updated>2025-01-10T08:28:55.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;博客的图片如果存储在本地，那么博客将会越来越臃肿，于是还是转回使用图床。免费图床不知道什么时候就用不了了，还是自建比较稳妥，至少能够自己把控。&lt;/p&gt;
+&lt;p&gt;为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。&lt;/p&gt;
+&lt;p&gt;原本想使用“轻量对象存储”的，但一看功能有点简陋，还是选好一些的吧，不弄轻量的，应该也贵不了多少。&lt;/p&gt;
+&lt;p&gt;本文将使用腾讯云对象存储搭建一个图床，并配置Obsidian和PicGo实现便利的上传图片功能。&lt;/p&gt;
+&lt;p&gt;有了自己的图床后，终于不必在写博客的时候担心图片怎么存储了，可以放心地插图。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>记录一次若依管理系统部署练习</title>
@@ -62,9 +83,9 @@
     <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
-    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
-    
     <category term="nginx" scheme="https://yxchangingself.xyz/tags/nginx/"/>
+    
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
     <category term="ssl" scheme="https://yxchangingself.xyz/tags/ssl/"/>
     
@@ -279,11 +300,11 @@
     <category term="项目总结" scheme="https://yxchangingself.xyz/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/"/>
     
     
-    <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
     <category term="python" scheme="https://yxchangingself.xyz/tags/python/"/>
     
     <category term="scrapy" scheme="https://yxchangingself.xyz/tags/scrapy/"/>
+    
+    <category term="爬虫" scheme="https://yxchangingself.xyz/tags/%E7%88%AC%E8%99%AB/"/>
     
     <category term="selenium" scheme="https://yxchangingself.xyz/tags/selenium/"/>
     
@@ -454,26 +475,6 @@
     
     <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>记第二次博客切换主题以及主题优化</title>
-    <link href="https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/"/>
-    <id>https://yxchangingself.xyz/posts/hexo_blog_switch_theme_2/</id>
-    <published>2020-04-05T13:50:18.000Z</published>
-    <updated>2020-04-05T13:50:18.000Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;2019 年 2 月 28 日的时候第一次换了主题，从从&lt;a href=&quot;https://github.com/ShanaMaid/hexo-theme-shana&quot;&gt;shana&lt;/a&gt;（夏娜）换成了&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot;&gt;NexT&lt;/a&gt;，当时换主题的原因是：虽然二次元主题蛮好看的我挺喜欢，但是不实用，功能缺乏，而 NexT 作为一个使用人数非常多的主题，功能非常齐全，所以决定换主题。&lt;/p&gt;
-&lt;p&gt;2020 年 4 月 5 日，也就是今天，我花了一个上午的时间将个人博客的主题换成闪烁之狐的&lt;a href=&quot;https://github.com/blinkfox/hexo-theme-matery&quot;&gt;Matery&lt;/a&gt;主题，既美观功能又丰富。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
-    
-    
-    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
   </entry>
   

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>腾讯云对象存储COS自建图床并配置Obsidian自动上传 - 编程技术笔记</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="编程技术笔记"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="编程技术笔记"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="博客的图片如果存储在本地，那么博客将会越来越臃肿，于是还是转回使用图床。免费图床不知道什么时候就用不了了，还是自建比较稳妥，至少能够自己把控。 为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。"><meta property="og:type" content="blog"><meta property="og:title" content="腾讯云对象存储COS自建图床并配置Obsidian自动上传"><meta property="og:url" content="https://yxchangingself.xyz/posts/bb200044/"><meta property="og:site_name" content="编程技术笔记"><meta property="og:description" content="博客的图片如果存储在本地，那么博客将会越来越臃肿，于是还是转回使用图床。免费图床不知道什么时候就用不了了，还是自建比较稳妥，至少能够自己把控。 为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://images.yxchangingself.xyz/2025/01/20250110163923739.png"><meta property="article:published_time" content="2025-01-10T08:28:55.000Z"><meta property="article:modified_time" content="2025-01-10T08:28:55.000Z"><meta property="article:author" content="憧憬少"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://images.yxchangingself.xyz/2025/01/20250110163923739.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yxchangingself.xyz/posts/bb200044/"},"headline":"腾讯云对象存储COS自建图床并配置Obsidian自动上传","image":["https://images.yxchangingself.xyz/2025/01/20250110163923739.png"],"datePublished":"2025-01-10T08:28:55.000Z","dateModified":"2025-01-10T08:28:55.000Z","author":{"@type":"Person","name":"憧憬少"},"publisher":{"@type":"Organization","name":"编程技术笔记","logo":{"@type":"ImageObject","url":{"text":"ChangingSelf"}}},"description":"博客的图片如果存储在本地，那么博客将会越来越臃肿，于是还是转回使用图床。免费图床不知道什么时候就用不了了，还是自建比较稳妥，至少能够自己把控。 为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。"}</script><link rel="canonical" href="https://yxchangingself.xyz/posts/bb200044/"><link rel="alternate" href="/atom.xml" title="编程技术笔记" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?74d1c5bd37e68cef3ecacf9c903ec5a5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body class="is-2-column"><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">ChangingSelf</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/catalogue">目录</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/friends">友链</a><a class="navbar-item" href="/about">关于</a><a class="navbar-item" href="/statistics">统计</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ChangingSelf/ChangingSelf.github.io"><i class="fab fa-github"></i></a><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-01-10T08:28:55.000Z" title="2025/1/10 16:28:55">2025-01-10</time>发表</span><span class="level-item"><time dateTime="2025-01-10T08:28:55.000Z" title="2025/1/10 16:28:55">2025-01-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/">博客站务</a></span><span class="level-item">17 分钟读完 (大约2533个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">腾讯云对象存储COS自建图床并配置Obsidian自动上传</h1><div class="content"><p>博客的图片如果存储在本地，那么博客将会越来越臃肿，于是还是转回使用图床。免费图床不知道什么时候就用不了了，还是自建比较稳妥，至少能够自己把控。</p>
+<p>为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。</p>
+<p>原本想使用“轻量对象存储”的，但一看功能有点简陋，还是选好一些的吧，不弄轻量的，应该也贵不了多少。</p>
+<p>本文将使用腾讯云对象存储搭建一个图床，并配置Obsidian和PicGo实现便利的上传图片功能。</p>
+<p>有了自己的图床后，终于不必在写博客的时候担心图片怎么存储了，可以放心地插图。</p>
+<span id="more"></span>
+
+<h1 id="添加子账号"><a href="#添加子账号" class="headerlink" title="添加子账号"></a>添加子账号</h1><p>主要参考官方文档：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/74373">对象存储 使用 PicGo+Typora+COS 搭建图床服务-实践教程-文档中心-腾讯云</a></p>
+<p>添加子账号是为了进行key的权限管理，如果直接用主账号的key，被攻击了就完蛋了。</p>
+<p>添加子账号官方文档说得比较清楚，这里就不赘述了。</p>
+<p>登录子账号之后在<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam/capi">密钥管理</a>页面获取如下信息：</p>
+<ul>
+<li>Secretld：开发者拥有的项目身份识别 ID，用于身份认证</li>
+<li>SecretKey：开发者拥有的项目身份密钥</li>
+<li>AppId：开发者访问 COS 服务时拥有的用户维度唯一资源标识，用以标识资源</li>
+</ul>
+<p>其中，SecretKey只有在创建密钥的时候才能看到，需要自行保存下来。</p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163013368.png" alt="image.png"></p>
+<h1 id="创建存储桶"><a href="#创建存储桶" class="headerlink" title="创建存储桶"></a>创建存储桶</h1><p>存储桶的官方介绍：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/13312">对象存储 存储桶概述-开发者指南-文档中心-腾讯云</a></p>
+<blockquote>
+<p><strong>存储桶（Bucket）</strong> 是<strong>对象</strong>的载体，可理解为存放对象的“容器”，且该“容器”无容量上限。对象以扁平化结构存放在存储桶中，无文件夹和目录的概念，用户可选择将对象存放到单个或多个存储桶中。</p>
+</blockquote>
+<p>而对象就是我们要上传的图片文件。</p>
+<p>我新建了一个名为“image-host-自动生成的数字串”的存储桶，用来当做图床，同理，还可以创建其他的存储桶用于别的应用，比如同步思源笔记的数据等。</p>
+<p>一些设置：</p>
+<ul>
+<li><strong>所属地域：</strong> 我选择了存放博客的服务器的所属地域</li>
+<li><strong>多AZ（Availability Zone）：</strong> 简单来说就是花更多钱多地容灾，让你的数据更安全，且开启后无法关闭，一开始就得想好要不要选。我就不开启了，图床里面也不是特别重要的数据，省点钱，相信腾讯云的基础容灾能力。</li>
+<li><strong>访问权限：</strong> 这里一开始我是选了私有读写，不过后来改为了<strong>公有读私有写</strong>，这样才能让博客读者能够看到图片。告警策略和防盗链之类的配置记得创建好之后要开，具体看官方文档，这里不赘述。</li>
+<li><strong>版本控制：</strong> 作为图床，不需要修改图片，所以就不开版本控制，省存储空间。</li>
+<li><strong>极智压缩：</strong> 这个开了是用于节约下行流量的，也就是存储的是原图，但是别人看你图片的时候是压缩后的，节约了流量费用。当然也可以在上传时压缩，节约上传费用。</li>
+</ul>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163148704.png" alt="image.png"></p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163154003.png" alt="image.png"></p>
+<h1 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/102509">对象存储 存储桶切换自定义域名-实践教程-文档中心-腾讯云</a></p>
+<p>这个时候要访问里面的图片还是得使用指定的一长串域名，而且“2024年1月1日后创建的桶不支持使用默认域名在浏览器预览文件”，直接在浏览器访问会下载图片而不是预览图片。因此需要自定义源站域名。</p>
+<p>在桶管理页面的“域名与传输管理”里找到“自定义源站域名”，可以绑定已经备案的域名。</p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163221933.png" alt="image.png"></p>
+<p>我绑定了博客站点域名的子域名images，接着去额外申请了这个子域名的SSL免费证书。</p>
+<p>需要注意的是，你绑定完之后，还需要手动去DNS服务商（在这里是腾讯云）那里配置一个CNAME记录，指向此处显示的域名。否则仍然会解析失败，显示一个红色感叹号：“当前链路下未检测到该域名的CNAME记录”。</p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163434632.png" alt="image.png"></p>
+<h1 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h1><p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">PicGo</a>是一款支持多种云存储配置、快捷生成图片链接的工具。</p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163923739.png" alt="image.png"></p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110163447459.png" alt="image.png"></p>
+<p>将前面的信息都填进去，参考官方文档：</p>
+<ul>
+<li><strong>COS 版本：</strong> 选择 COS v5。</li>
+<li><strong>设定 Secretld：</strong> 开发者拥有的项目身份识别 ID，用于身份认证，可在 <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/capi">API 密钥管理</a> 页面中创建和获取。</li>
+<li><strong>设定 SecretKey：</strong> 开发者拥有的项目身份密钥，可在 <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/capi">API 密钥管理</a> 页面获取。</li>
+<li><strong>设定 Bucket：</strong> 存储桶，COS 中用于存储数据的容器。有关存储桶的进一步说明，请参见 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/13312">存储桶概述</a> 文档。</li>
+<li><strong>设定 AppId：</strong> 开发者访问 COS 服务时拥有的用户维度唯一资源标识，用以标识资源，可在 <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/capi">API 密钥管理</a> 页面获取。</li>
+<li><strong>设定存储区域：</strong> 存储桶所属地域信息，枚举值可参见 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/6224">可用地域</a> 文档，例如 ap-beijing、ap-hongkong、eu-frankfurt 等。</li>
+<li><strong>设定存储路径：</strong> 图片存放到 COS 存储桶中的路径。</li>
+<li><strong>设定自定义域名：</strong> 可选，若您为上方的存储空间配置了自定义源站域名，则可填写。相关介绍可参见 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/36638">开启自定义源站域名</a>。</li>
+<li><strong>设定网址后缀：</strong> 通过在网址后缀添加 COS 数据处理参数实现图片压缩、裁剪、格式转换等操作，相关介绍可参见 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/54049">图片处理</a>。</li>
+</ul>
+<p>这里说的存储路径，是图片上传后图片在存储桶内的文件路径。</p>
+<p>你可能会问，对象存储不是没有文件夹的吗？这个是为了让习惯了文件系统的用户更方便使用而加的，实际上并没有文件夹，我猜想实现方式是将同一个前缀的对象以文件夹的格式显示，或是存储了文件夹名作为对象的元数据。</p>
+<p>用子域名来区分图床和博客站之后，就没什么必要建一个images目录来区分了。存储桶的根目录下新建名为“2025”的文件夹，按照年份来管理上传的图片，每年手动改一下上传目录就行。</p>
+<p>为了避免重名图片覆盖掉已有的图片，设置为使用时间戳重命名图片。</p>
+<h2 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h2><p>博客中大多数图片都不需要很高的清晰度，只是用来展示大致操作、布局或样式，因此为了节约流量费用和存储费用，就需要将其压缩。</p>
+<p>不过创建存储桶时选择的图片“极智压缩”和我想象得不太一样，我以为是上传前压缩好，存储的是压缩后的图片，没想到是查看时压缩，节约的是流量而不是存储费用。</p>
+<p>看了文档之后得知也有上传时压缩，不过需要在请求体里面加参数，picgo在<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.4.0-beta.4">2.4.0-beta.4</a>开始支持极智压缩的配置，但实际使用中图片并没有被压缩，只是加了个已经可以被省略掉的参数。得找个别的办法。</p>
+<p><a target="_blank" rel="noopener" href="https://zi4dbek.github.io/posts/3849a396/index.html">图床杂谈：PicGo 安装图片压缩插件，减少图床原图大小 | zi4dbek 的小站</a></p>
+<p>安装插件商店中的<a target="_blank" rel="noopener" href="https://github.com/juzisang/picgo-plugin-compress">compress</a>插件后，选用imagemin本地压缩，可以把1.39MB压缩成251.67KB，不错。</p>
+<p>但需要注意的是，安装之后需要在插件设置里面手动启用transformer-compress，才会在上传后进行压缩操作。</p>
+<p><img src="https://images.yxchangingself.xyz/2025/01/20250110164157716.png" alt="20250110164109815.png"></p>
+<h2 id="Obsidian插件"><a href="#Obsidian插件" class="headerlink" title="Obsidian插件"></a>Obsidian插件</h2><p>我用于写博客的是obsidian这款笔记软件，它有个利用picgo来上传图片的插件Image Auto Upload Plugin。参见：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/627930429">Obsidian中图床自动上传设置-使用PicGo - 知乎</a></p>
+<p>安装好插件之后，只要开着PicGo，就可以实现粘贴的同时上传到COS了。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>腾讯云对象存储COS自建图床并配置Obsidian自动上传</p><p><a href="https://yxchangingself.xyz/posts/bb200044/">https://yxchangingself.xyz/posts/bb200044/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>憧憬少</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2025-01-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-01-10</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/ruoyi-deploy/"><span class="level-item">记录一次若依管理系统部署练习</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#添加子账号"><span class="level-left"><span class="level-item">1</span><span class="level-item">添加子账号</span></span></a></li><li><a class="level is-mobile" href="#创建存储桶"><span class="level-left"><span class="level-item">2</span><span class="level-item">创建存储桶</span></span></a></li><li><a class="level is-mobile" href="#自定义域名"><span class="level-left"><span class="level-item">3</span><span class="level-item">自定义域名</span></span></a></li><li><a class="level is-mobile" href="#配置PicGo"><span class="level-left"><span class="level-item">4</span><span class="level-item">配置PicGo</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#图片压缩"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">图片压缩</span></span></a></li><li><a class="level is-mobile" href="#Obsidian插件"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">Obsidian插件</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">ChangingSelf</a><p class="is-size-7"><span>&copy; 2025 憧憬少</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7"><a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000400号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44200002444480" target="_blank">粤公网安备 44200002444480号</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script src="/live2d-widget/autoload.js"></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/universe.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+        <!-- ECharts 图表容器 -->
+        
+        <script>
+            if(document.getElementById('heatmapChart')) {
+                const heatmapChart = echarts.init(document.getElementById('heatmapChart'), 'light');
+                const containerWidth = document.getElementById('heatmapChart').offsetWidth;
+                const cellSize = Math.max(Math.floor(containerWidth / 60));
+                heatmapChart.setOption({
+                    tooltip: {
+                        position: 'top',
+                        formatter: params => `${params.value[0]}: ${params.value[1]} Articles`
+                    },
+                    visualMap: {
+                        min: 0,
+                        max: Math.max(...[["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1],["2024-12-15",1],["2024-12-20",1],["2025-01-10",1]].map(item => item[1])),
+                        calculable: false,
+                        orient: 'horizontal', // 横向布局
+                        right: '5%',
+                        bottom: '5%',
+                        inRange: { color: ['#FFEFD5', '#FFA07A', '#FF4500'] }
+                    },
+                    calendar: {
+                        top: '20%',
+                        left: 'center',
+                        range: new Date().getFullYear(),
+                        cellSize: cellSize, // 方格大小
+                        splitLine: { lineStyle: { color: '#E0E0E0', width: 1 } },
+                        itemStyle: { borderWidth: 1, borderColor: '#E0E0E0' },
+                        dayLabel: { firstDay: 1, fontSize: 12, color: '#333', show: false },
+                        monthLabel: { fontSize: 12, color: '#555' }
+                    },
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: [["2019-02-06",1],["2019-02-07",1],["2019-02-08",1],["2019-02-18",1],["2019-02-27",1],["2019-02-28",1],["2019-03-09",1],["2019-03-15",1],["2019-03-19",1],["2019-03-30",1],["2019-04-07",1],["2019-04-11",1],["2019-04-12",1],["2019-04-21",1],["2019-06-13",1],["2019-06-25",1],["2019-06-26",2],["2019-06-27",1],["2019-06-28",1],["2019-06-30",1],["2019-07-01",2],["2019-07-09",1],["2019-07-18",1],["2019-07-20",1],["2019-08-06",1],["2019-08-07",1],["2019-08-10",1],["2019-08-11",1],["2019-08-18",1],["2019-08-20",1],["2019-09-06",1],["2019-09-10",1],["2019-09-14",1],["2019-12-30",1],["2019-12-31",1],["2020-01-02",1],["2020-01-15",1],["2020-01-27",1],["2020-01-28",1],["2020-02-04",1],["2020-02-18",1],["2020-03-03",1],["2020-03-08",1],["2020-03-14",1],["2020-03-22",1],["2020-03-29",1],["2020-04-05",1],["2020-04-16",1],["2020-04-17",1],["2020-04-23",1],["2020-08-10",2],["2020-09-27",1],["2020-10-11",2],["2020-11-22",1],["2021-01-07",1],["2021-01-12",1],["2021-01-21",1],["2021-03-06",1],["2021-06-27",1],["2021-07-09",1],["2022-02-08",1],["2022-06-01",1],["2024-12-15",1],["2024-12-20",1],["2025-01-10",1]]
+                    }]
+                });
+                // hexo热力图点击跳转到月份页面
+                heatmapChart.on('click', function(params) {
+                       if (params.componentType === 'series') {
+                        const dateStr = params.value[0];
+                        const dateParts = dateStr.split('-');
+                        const year = parseInt(dateParts[0], 10);
+                        const month = parseInt(dateParts[1], 10);
+                        const formattedMonth = `${year}/${String(month).padStart(2, '0')}`;
+                        window.location.href = '/archives/' + formattedMonth; // 一般归档页面路径为/archives/YYYY-MM
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('monthlyChart')) {
+                const monthlyChart = echarts.init(document.getElementById('monthlyChart'), 'light');
+                monthlyChart.setOption({
+                    xAxis: {
+                        type: 'category',
+                        data: ["2019-02","2019-03","2019-04","2019-06","2019-07","2019-08","2019-09","2019-12","2020-01","2020-02","2020-03","2020-04","2020-08","2020-09","2020-10","2020-11","2021-01","2021-03","2021-06","2021-07","2022-02","2022-06","2024-12","2025-01"],
+                        axisLabel: { fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    series: [{
+                        name: 'Articles',
+                        type: 'line',
+                        data: [6,4,4,7,5,6,3,2,4,2,5,4,2,1,2,1,3,1,1,1,1,1,2,1],
+                        smooth: true,
+                        lineStyle: { color: '#5470C6', width: 2 },
+                        itemStyle: { color: '#5470C6' },
+                        areaStyle: { color: 'rgba(84, 112, 198, 0.4)' },
+                        symbolSize: 10, //圆点大一点，方便点击
+                        animationDuration: 1000
+                    }]
+                });
+                // 跳转到月份页面
+                 monthlyChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const year = params.name.split('-')[0];
+                        const month = params.name.split('-')[1];
+                        window.location.href = '/archives/' + year + '/' + month; 
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('tagsChart')){    
+                const tagsChart = echarts.init(document.getElementById('tagsChart'), 'light');
+                tagsChart.setOption({
+                    tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+                    series: [{
+                        type: 'pie',
+                        radius: '60%',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":12},{"name":"java","value":7},{"name":"cpp","value":6},{"name":"git","value":4},{"name":"scrapy","value":4},{"name":"算法学习","value":3}],
+                        label: {
+                            position: 'outside',
+                            formatter: '{b} {c} ({d}%)',
+                            fontSize: 12
+                        },
+                        color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4'],
+                        animationDuration: 1000
+                    }],
+                    legend: {
+                        bottom: '0',
+                        left: 'center',
+                        data: [{"name":"python","value":20},{"name":"爬虫","value":14},{"name":"hexo","value":12},{"name":"java","value":7},{"name":"cpp","value":6},{"name":"git","value":4},{"name":"scrapy","value":4},{"name":"算法学习","value":3}].map(tag => tag.name),
+                        textStyle: { fontSize: 12 }
+                    }
+                });
+                tagsChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const tag = params.name;
+                        window.location.href = '/tags/' + tag;
+                    }
+                });
+            }
+        </script>
+    
+        
+        <script>
+            if(document.getElementById('categoriesChart')){
+                const categoriesChart = echarts.init(document.getElementById('categoriesChart'), 'light');
+                categoriesChart.setOption({
+                    xAxis: {
+                        type: 'value',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#ccc' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"博客站务","value":12},{"name":"日志随笔","value":11},{"name":"学习笔记","value":6}].map(category => category.name).reverse(),
+                        axisLabel: { fontSize: 12 }
+                    },
+                    series: [{
+                        name: 'Category Count',
+                        type: 'bar',
+                        data: [{"name":"项目总结","value":26},{"name":"解决方案","value":13},{"name":"博客站务","value":12},{"name":"日志随笔","value":11},{"name":"学习笔记","value":6}].map(category => category.value).reverse(),
+                        label: {
+                            show: true,
+                            position: 'right',
+                            fontSize: 12
+                        },
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#91CC75' },
+                                { offset: 1, color: '#73C0DE' }
+                            ])
+                        },
+                        animationDuration: 1000
+                    }]
+                });
+                categoriesChart.on('click', function(params) {
+                    if (params.componentType === 'series') {
+                        const category = params.name;
+                        window.location.href = '/categories/' + category;
+                    }
+                });
+            }
+        </script>
+    
+    </body></html>
