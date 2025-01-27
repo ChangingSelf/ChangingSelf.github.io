@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2025-01-10T08:53:55.000Z</updated>
+  <updated>2025-01-27T09:37:47.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在服务器上部署第二个hexo博客</title>
+    <link href="https://yxchangingself.xyz/posts/second-hexo-blog-deploy/"/>
+    <id>https://yxchangingself.xyz/posts/second-hexo-blog-deploy/</id>
+    <published>2025-01-27T09:37:47.000Z</published>
+    <updated>2025-01-27T09:37:47.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;老弟也开始接触编程了，所以打算给他也搭建一个hexo博客。&lt;/p&gt;
+&lt;p&gt;本文主要记录在同一个服务器上部署第二个hexo博客的过程，hexo及其配置环境的安装不赘述。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
+    
+    
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>腾讯云对象存储COS自建图床并配置Obsidian自动上传</title>
@@ -85,9 +105,9 @@
     <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
-    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
-    
     <category term="nginx" scheme="https://yxchangingself.xyz/tags/nginx/"/>
+    
+    <category term="hexo" scheme="https://yxchangingself.xyz/tags/hexo/"/>
     
     <category term="ssl" scheme="https://yxchangingself.xyz/tags/ssl/"/>
     
@@ -456,26 +476,6 @@
     
     
     <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>站点引导</title>
-    <link href="https://yxchangingself.xyz/posts/blog-catalogue/"/>
-    <id>https://yxchangingself.xyz/posts/blog-catalogue/</id>
-    <published>2020-04-16T05:56:12.000Z</published>
-    <updated>2020-04-16T05:56:12.000Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这是本博客站点的文章目录索引，如果你想在本站逛一逛，可以从这里开始。&lt;/p&gt;
-&lt;p&gt;如果想要搜索特定内容，请结合标签、分类和站内搜索功能。部分博客有对应的 B 站视频，以及 github 库，详见各自文章的开头传送门。&lt;/p&gt;
-&lt;p&gt;此目录并非包含本站所有文章，比如日志总结之类的不一定会放到目录。&lt;/p&gt;
-&lt;p&gt;如果觉得本站访问速度慢，可以在【友情链接】中找到&lt;a href=&quot;https://changingself.gitee.io/&quot;&gt;托管在 gitee 的本站链接&lt;/a&gt;，速度会快很多&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="博客站务" scheme="https://yxchangingself.xyz/categories/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/"/>
     
     
   </entry>
