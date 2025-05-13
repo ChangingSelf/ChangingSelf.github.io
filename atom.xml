@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2025-01-27T09:37:47.000Z</updated>
+  <updated>2025-05-13T11:57:00.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git提交敏感信息后如何撤回</title>
+    <link href="https://yxchangingself.xyz/posts/git_amend_commited_info_2/"/>
+    <id>https://yxchangingself.xyz/posts/git_amend_commited_info_2/</id>
+    <published>2025-05-13T11:57:00.000Z</published>
+    <updated>2025-05-13T11:57:00.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;今天用工作电脑时忘记修改git用户名和邮箱，推送了一个提交到github，因为不想泄露真名和公司邮箱，所以需要撤回修改。记录一下解决这个问题需要用到的命令。&lt;/p&gt;
+&lt;p&gt;编写过程中还翻到了自己以前的旧文章：&lt;a href=&quot;https://yxchangingself.xyz/posts/git_amend_commited_info/&quot;&gt;更改git仓库已经commit的用户名和邮箱信息&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+    <category term="git" scheme="https://yxchangingself.xyz/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>在服务器上部署第二个hexo博客</title>
@@ -48,7 +68,7 @@
 &lt;p&gt;为什么不在服务器上用minio之类的方案进行搭建，而是额外购买对象存储？因为服务器比较贵，说不定什么时候就不续费了，不想将太多东西绑在上面，对象存储则比较便宜，要是服务器不续租了图床也能继续用。算是一种“解耦”吧。而且服务器性能也有限，不想分出性能给图床。&lt;/p&gt;
 &lt;p&gt;原本想使用“轻量对象存储”的，但一看功能有点简陋，还是选好一些的吧，不弄轻量的，应该也贵不了多少。&lt;/p&gt;
 &lt;p&gt;本文将使用腾讯云对象存储搭建一个图床，并配置Obsidian和PicGo实现便利的上传图片功能。&lt;/p&gt;
-&lt;p&gt;有了自己的图床后，终于不必在写博客的时候担心图片怎么存储了，可以放心地插图&lt;/p&gt;</summary>
+&lt;p&gt;有了自己的图床后，终于不必在写博客的时候担心图片怎么存储了，可以放心地插图。&lt;/p&gt;</summary>
     
     
     
@@ -455,23 +475,6 @@
     
     <summary type="html">&lt;p&gt;梳理我现有的任务管理系统，以做出改进。&lt;/p&gt;
 &lt;p&gt;目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【自我管理系统】电脑文件管理系统v200417</title>
-    <link href="https://yxchangingself.xyz/posts/self-management-file-manage-v200417/"/>
-    <id>https://yxchangingself.xyz/posts/self-management-file-manage-v200417/</id>
-    <published>2020-04-17T12:05:25.000Z</published>
-    <updated>2020-04-17T12:05:25.000Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;以此文梳理我的电脑文件管理系统，由于是我的文件管理系统，所以很多个性化的设置，读者建立自己的系统时可改为自己的。&lt;/p&gt;</summary>
     
     
     
