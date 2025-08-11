@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>IDEA方法断点导致项目启动缓慢</title>
+      <link href="/posts/idea-method-breakpoint/"/>
+      <url>/posts/idea-method-breakpoint/</url>
+      
+        <content type="html"><![CDATA[<p>前几天遇到一个Springboot微服务项目启动缓慢的问题，表现很奇怪，其他服务都正常启动，最多也就耗时两分钟，某个服务启动得特别慢，甚至用了半小时。</p><p>启动后，涉及该服务的某个接口响应也很慢，甚至超过30秒，然而对应的sql语句在数据库中执行是秒出结果。</p><p>它以前并不会这么慢，最近也没有什么特殊的代码改动。一开始以为是环境和中间件的问题，排查了很久发现竟然发现是方法断点的问题！</p><p>找出问题耗费了我一个上午，记录一下。助我解决问题的文章：<a href="https://cloud.tencent.com/developer/article/2405396">IDEA DEBUG 启动慢，启动卡死，本地IDEA环境，千万千万不要在方法上打断点！太坑了！-腾讯云开发者社区-腾讯云</a></p><span id="more"></span><h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>最开始注意到的是接口慢的问题，接口返回数据超过限时导致连接断开报错，没法测试页面的功能。由于此处最近并没有后端代码修改，以为是用了很久的笔记本电脑终于开始卡了，但其他的接口又很快。</p><p>那是一个查询数据、进行一些计算后返回前端的接口。是SQL语句执行过慢？取SQL到数据库一执行，秒出。</p><p>是后端业务层代码太屎山？多打几个断点，用二分法不断逼近可能的导致速度慢的代码行，发现是调用Mapper的DAO层语句，不对劲啊！</p><p>抱着怀疑的心理，给对应的表加了索引，SQL语句在数据库执行快了些，但后端接口仍然会超时。</p><p>我尝试重启服务，更大的问题来了——这个服务竟然启动了半个多小时！这还怎么开发啊！</p><p>研究启动日志时发现，有几个地方会启动五分钟左右，加起来就半小时了。我以为找到了问题的关键，就开始研究日志里面的Redis、Nacos、数据库连接池、Flowable等组件为什么启动那么慢。</p><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>首先是数据库，启动日志中发现连接了5分钟，而我用其他数据库连接工具和以前一样可以秒连，为什么呢？</p><p>AI告诉我，在配置数据库连接池时减少等待时间。</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">dynamic:</span></span><br><span class="line">      <span class="attr">druid:</span></span><br><span class="line">        <span class="comment"># 减少连接池初始化时间</span></span><br><span class="line">        <span class="attr">initial-size:</span> <span class="number">1</span></span><br><span class="line">        <span class="attr">min-idle:</span> <span class="number">1</span></span><br><span class="line">        <span class="attr">max-active:</span> <span class="number">5</span></span><br><span class="line">        <span class="attr">max-wait:</span> <span class="number">10000</span>  <span class="comment"># 减少等待时间</span></span><br></pre></td></tr></table></figure><p>然后再开个懒加载：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">dynamic:</span></span><br><span class="line">      <span class="attr">datasource:</span></span><br><span class="line">        <span class="attr">master:</span></span><br><span class="line">          <span class="attr">lazy:</span> <span class="literal">true</span>  <span class="comment"># 开启懒加载，保证启动速度</span></span><br></pre></td></tr></table></figure><p>我一看，max-wait原本配置的时长是600000ms，也就是5分钟，尝试减少之后，确实启动瓶颈不在这里了。</p><p>虽然解决了一部分问题，但这还是令我摸不着头脑。</p><h3 id="Flowable"><a href="#Flowable" class="headerlink" title="Flowable"></a>Flowable</h3><p>工作流引擎那部分AI说也能优化，但我配置之后并没有多大变化。</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">flowable:</span></span><br><span class="line">  <span class="attr">async-executor-activate:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">database-schema-update:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">deployment-mode:</span> <span class="string">never-fail</span></span><br><span class="line">  <span class="attr">check-process-definitions:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure><h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>从启动日志看到有Feign相关的警告，思索会不会Feign扫描太多内容而卡了，但其他服务也有这个提示，应该影响不大，看日志打印时间也不是启动速度的瓶颈，就略过它了。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2025-08-08 08:09:25.008 |  INFO 18804 | main [TID: N/A] o.s.c.openfeign.FeignClientFactoryBean   | For &#x27;bpm-server&#x27; URL not provided. Will try picking an instance via load-balancing.</span><br></pre></td></tr></table></figure><h3 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h3><p>接上文，那个接口确实用到了调用其他服务的内容，如果不是Feign的问题，会不会是使用其他服务时，找服务太久？</p><p>由于正在做的项目只是拿Nacos作为服务注册和发现中心而不是配置管理中心，而且配置存储用的是内置数据库，因此我将对应的数据文件夹改了名字，找不到数据的Nacos会重新初始化一个。</p><p>然而不是这个的问题，此举无效。</p><h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>最后我将怀疑的目光投向了Redis，虽然不知道为什么它那里会卡十几分钟，但这个服务用到Redis的地方很少，先禁用掉，再重启一次。</p><p>没用！</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>这个时候已经和这个神奇的问题对抗大半个上午了，活儿一点没干，我的心情也变得焦虑起来，心想直接启动不用调试模式启动应该至少会快一些吧，不管了，先把开发任务完成，慢一些就慢一些吧。</p><p>结果竟然很快就启动了。带着这份关键词，我很快搜到了很不可思议的原因——我debug的时候随手打在方法名上面的断点，竟然是罪魁祸首！</p><p>助我解决问题的文章：<a href="https://cloud.tencent.com/developer/article/2405396">IDEA DEBUG 启动慢，启动卡死，本地IDEA环境，千万千万不要在方法上打断点！太坑了！-腾讯云开发者社区-腾讯云</a></p><p>我之前还真没想过，断点的位置竟然也能造成这种问题，还以为在方法名上和在方法内部一样。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 解决方案 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Git提交敏感信息后如何撤回</title>
       <link href="/posts/git_amend_commited_info_2/"/>
       <url>/posts/git_amend_commited_info_2/</url>

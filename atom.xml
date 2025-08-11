@@ -6,7 +6,7 @@
   <link href="https://yxchangingself.xyz/atom.xml" rel="self"/>
   
   <link href="https://yxchangingself.xyz/"/>
-  <updated>2025-05-13T11:57:00.000Z</updated>
+  <updated>2025-08-11T13:00:50.000Z</updated>
   <id>https://yxchangingself.xyz/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IDEA方法断点导致项目启动缓慢</title>
+    <link href="https://yxchangingself.xyz/posts/idea-method-breakpoint/"/>
+    <id>https://yxchangingself.xyz/posts/idea-method-breakpoint/</id>
+    <published>2025-08-11T13:00:50.000Z</published>
+    <updated>2025-08-11T13:00:50.000Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;前几天遇到一个Springboot微服务项目启动缓慢的问题，表现很奇怪，其他服务都正常启动，最多也就耗时两分钟，某个服务启动得特别慢，甚至用了半小时。&lt;/p&gt;
+&lt;p&gt;启动后，涉及该服务的某个接口响应也很慢，甚至超过30秒，然而对应的sql语句在数据库中执行是秒出结果。&lt;/p&gt;
+&lt;p&gt;它以前并不会这么慢，最近也没有什么特殊的代码改动。一开始以为是环境和中间件的问题，排查了很久发现竟然发现是方法断点的问题！&lt;/p&gt;
+&lt;p&gt;找出问题耗费了我一个上午，记录一下。助我解决问题的文章：&lt;a href=&quot;https://cloud.tencent.com/developer/article/2405396&quot;&gt;IDEA DEBUG 启动慢，启动卡死，本地IDEA环境，千万千万不要在方法上打断点！太坑了！-腾讯云开发者社区-腾讯云&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="解决方案" scheme="https://yxchangingself.xyz/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+    <category term="IDEA" scheme="https://yxchangingself.xyz/tags/IDEA/"/>
+    
+  </entry>
   
   <entry>
     <title>Git提交敏感信息后如何撤回</title>
@@ -462,24 +484,6 @@
     <category term="java" scheme="https://yxchangingself.xyz/tags/java/"/>
     
     <category term="maven" scheme="https://yxchangingself.xyz/tags/maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【自我管理系统】任务管理系统v200423</title>
-    <link href="https://yxchangingself.xyz/posts/self-management-task-manage-v200423/"/>
-    <id>https://yxchangingself.xyz/posts/self-management-task-manage-v200423/</id>
-    <published>2020-04-23T15:02:27.000Z</published>
-    <updated>2020-04-23T15:02:27.000Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;梳理我现有的任务管理系统，以做出改进。&lt;/p&gt;
-&lt;p&gt;目前这个系统我并没有非常严格地在执行，因为没有养成这个习惯，但是我能够感受到它是有用的。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日志随笔" scheme="https://yxchangingself.xyz/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/"/>
-    
     
   </entry>
   
